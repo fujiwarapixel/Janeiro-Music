@@ -127,8 +127,8 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            grid-template-columns: 1.15fr 0.85fr; /* Un poco más de espacio a la imagen */
+            gap: 50px;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
@@ -182,17 +182,17 @@
             position: relative;
         }
 
-        /* LOGO LIMPIO (SIN BORDES NEGROS) */
+        /* LOGO MÁS GRANDE Y LIMPIO */
         .hero-product-logo {
-            width: 220px;
+            width: 320px; /* Aumentado de 220px a 320px */
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(230, 30, 77, 0.2));
+            filter: drop-shadow(0 0 30px rgba(230, 30, 77, 0.25));
             transition: all 0.3s ease;
         }
         .hero-product-logo:hover { 
             transform: scale(1.05); 
-            filter: drop-shadow(0 0 30px rgba(230, 30, 77, 0.4));
+            filter: drop-shadow(0 0 40px rgba(230, 30, 77, 0.5));
         }
 
         /* Video Section (Elevator Pitch) */
@@ -284,13 +284,8 @@
         
         .info-list { list-style: none; }
         .info-list li { 
-            color: var(--text-muted); 
-            font-size: 1rem; 
-            margin-bottom: 18px; 
-            display: flex; 
-            align-items: flex-start; 
-            gap: 15px; 
-            line-height: 1.6;
+            color: var(--text-muted); font-size: 1rem; margin-bottom: 18px; 
+            display: flex; align-items: flex-start; gap: 15px; line-height: 1.6;
         }
         .info-list li i { margin-top: 6px; font-size: 0.85rem; flex-shrink: 0;}
         .text-red i { color: var(--primary); }
@@ -329,21 +324,48 @@
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ACOMODO MEJORADO DEL TEXTO DEL PROTOTIPO */
+        /* ACOMODO MEJORADO Y ESTRUCTURADO DEL TEXTO DEL PROTOTIPO */
         .proto-info {
-            background: rgba(0,0,0,0.4); padding: 30px; border-radius: 16px;
-            width: 100%; flex-grow: 1; display: flex; flex-direction: column;
+            background: #111115; /* Fondo un poco más oscuro para contraste */
+            padding: 30px; 
+            border-radius: 16px;
+            width: 100%; flex-grow: 1; 
+            display: flex; flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .proto-info h4 { color: var(--primary); font-size: 1.2rem; margin-bottom: 15px; }
-        .proto-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; text-align: justify; line-height: 1.6; }
-        .proto-info ul { list-style: none; margin-top: auto; }
+        .proto-info h4 { 
+            color: var(--primary); 
+            font-size: 1.3rem; 
+            margin-bottom: 12px; 
+            border-bottom: 2px solid rgba(230, 30, 77, 0.3); 
+            padding-bottom: 10px; 
+        }
+        .proto-info > p { 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            margin-bottom: 25px; 
+            text-align: left; /* Texto alineado a la izquierda para mejor lectura */
+            line-height: 1.7; 
+        }
+        
+        /* Lista estructurada en bloques */
+        .proto-info ul { list-style: none; margin-top: auto; display: flex; flex-direction: column; gap: 15px; }
         .proto-info ul li { 
-            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; 
-            display: flex; gap: 15px; align-items: flex-start; line-height: 1.5;
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex; 
+            gap: 15px; 
+            align-items: flex-start; 
+            line-height: 1.5;
+            border-left: 3px solid var(--border-gray);
+            transition: background 0.3s;
         }
-        .proto-info ul li i { color: var(--border-gray); margin-top: 5px; flex-shrink: 0; font-size: 1rem;}
+        .proto-info ul li:hover { background: rgba(255,255,255,0.06); border-left-color: var(--primary); }
+        .proto-info ul li i { color: var(--primary); margin-top: 4px; flex-shrink: 0; font-size: 1.1rem;}
         .proto-info ul li div { flex: 1; }
-        .proto-info ul li div strong { color: var(--secondary); display: block; margin-bottom: 4px; font-size: 1rem;}
+        .proto-info ul li div strong { color: var(--secondary); display: block; margin-bottom: 6px; font-size: 1rem;}
+        .proto-info ul li div span { color: var(--text-muted); font-size: 0.9rem; }
 
         /* ================= ODS 12 ================= */
         .ods-banner {
@@ -550,7 +572,7 @@
                 <a href="#solucion" class="btn" style="margin-top: 10px;">Descubre cómo funciona</a>
             </div>
             
-            <!-- LOGO SIN BORDES (Transparente) -->
+            <!-- LOGO MÁS GRANDE -->
             <div class="hero-image-content">
                 <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
             </div>
@@ -630,10 +652,29 @@
                 <div class="proto-info">
                     <h4>El Cerebro (Backend)</h4>
                     <p>Desarrollado en Python con el framework FastAPI, este programa es el núcleo del ecosistema. Se ejecuta en tu computadora y se encarga de escanear tus carpetas locales. Extrae metadatos precisos e indexa todo en milisegundos para que la búsqueda sea instantánea.</p>
+                    
                     <ul>
-                        <li><i class="fa-solid fa-microchip"></i> <div><strong>Procesamiento veloz:</strong> Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</div></li>
-                        <li><i class="fa-solid fa-image"></i> <div><strong>Metadatos y Carátulas:</strong> Analiza los tags ID3 (título, artista, álbum) y extrae las imágenes incrustadas en los archivos MP3/FLAC.</div></li>
-                        <li><i class="fa-solid fa-lock"></i> <div><strong>Servido seguro:</strong> Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</div></li>
+                        <li>
+                            <i class="fa-solid fa-microchip"></i> 
+                            <div>
+                                <strong>Procesamiento veloz:</strong>
+                                <span>Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-image"></i> 
+                            <div>
+                                <strong>Metadatos y Carátulas:</strong>
+                                <span>Analiza los tags ID3 (título, artista, álbum) y extrae las imágenes incrustadas en los archivos MP3/FLAC.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-lock"></i> 
+                            <div>
+                                <strong>Servido seguro:</strong>
+                                <span>Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -648,10 +689,29 @@
                 <div class="proto-info">
                     <h4>La Interfaz (Frontend)</h4>
                     <p>Construida con Flutter para Android (y eventualmente iOS), ofrece una experiencia de usuario fluida, oscura y moderna. Se conecta a tu servidor mediante su dirección IP o escaneando un Código QR generado por el servidor.</p>
+                    
                     <ul>
-                        <li><i class="fa-solid fa-list"></i> <div><strong>Gestión de cola:</strong> Agrega canciones, crea listas de reproducción y administra la cola de reproducción actual.</div></li>
-                        <li><i class="fa-solid fa-heart"></i> <div><strong>Favoritos y búsqueda:</strong> Marca tus canciones favoritas y busca por título, artista o álbum en tu biblioteca.</div></li>
-                        <li><i class="fa-solid fa-download"></i> <div><strong>Modo Offline:</strong> Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</div></li>
+                        <li>
+                            <i class="fa-solid fa-list"></i> 
+                            <div>
+                                <strong>Gestión de cola:</strong>
+                                <span>Agrega canciones, crea listas de reproducción y administra la cola de reproducción actual.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-heart"></i> 
+                            <div>
+                                <strong>Favoritos y búsqueda:</strong>
+                                <span>Marca tus canciones favoritas y busca por título, artista o álbum en tu biblioteca.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-download"></i> 
+                            <div>
+                                <strong>Modo Offline:</strong>
+                                <span>Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -819,18 +879,15 @@
     <!-- FOOTER REDISEÑADO CON LOGO AL CENTRO -->
     <footer>
         <div class="footer-content">
-            <!-- Texto a la izquierda -->
             <div class="footer-brand">
                 <h2>CERRU DE <span>JANEIRO</span> COMPANY</h2>
                 <p>Monta tu server y lleva tu música a tu Cerro. Innovación, privacidad y sostenibilidad en un solo ecosistema musical.</p>
             </div>
             
-            <!-- Logo en el medio -->
             <div class="footer-logo-center">
                 <img src="Files/Logo_Janeiro_Music.png" alt="Janeiro Music Logo">
             </div>
 
-            <!-- Links a la derecha -->
             <div class="footer-links">
                 <h4>Navegación Rápida</h4>
                 <ul>
