@@ -24,6 +24,7 @@
             --secondary: #ffffff;
             --text-muted: #9a9aab;
             --border: rgba(255, 255, 255, 0.08);
+            --gold: #f0c05a;
             --font-main: 'Outfit', sans-serif;
         }
 
@@ -282,14 +283,14 @@
             text-align: center; position: relative; overflow: hidden;
             box-shadow: 0 0 30px rgba(191, 139, 46, 0.15);
         }
-        .ods-logo { font-size: 4rem; color: #f0c05a; margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(240, 192, 90, 0.5)); }
-        .ods-banner h3 { font-size: 2.2rem; margin-bottom: 15px; color: #f0c05a; }
+        .ods-logo { font-size: 4rem; color: var(--gold); margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(240, 192, 90, 0.5)); }
+        .ods-banner h3 { font-size: 2.2rem; margin-bottom: 15px; color: var(--gold); }
         .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.1rem; }
         
         .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 30px; }
         .smart-item { background: rgba(0,0,0,0.5); padding: 25px; border-radius: 16px; border: 1px solid rgba(191, 139, 46, 0.2); transition: 0.3s; }
-        .smart-item:hover { border-color: #f0c05a; transform: translateY(-5px); }
-        .smart-item h4 { color: #f0c05a; margin-bottom: 10px; font-size: 1.1rem; }
+        .smart-item:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .smart-item h4 { color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; }
 
         /* ================= MODELO DE NEGOCIO ================= */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
@@ -299,11 +300,13 @@
         .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
         .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
         .pricing-card ul li i { color: #00ff64; text-shadow: 0 0 10px rgba(0,255,100,0.5); }
-        .highlight { border-color: var(--primary); box-shadow: 0 0 30px rgba(255,0,60,0.15); }
-        .highlight::before {
-            content: 'RECOMENDADO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: white; padding: 6px 16px; border-radius: 12px;
-            font-size: 0.75rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 0 15px var(--primary);
+        
+        /* Resaltado para la tarjeta de inversión */
+        .highlight-gold { border-color: var(--gold); box-shadow: 0 0 30px rgba(240,192,90,0.15); }
+        .highlight-gold::before {
+            content: 'OPORTUNIDAD'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--gold); color: #000; padding: 6px 16px; border-radius: 12px;
+            font-size: 0.75rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 0 15px var(--gold);
         }
 
         /* ================= EQUIPO ================= */
@@ -352,7 +355,7 @@
             .grid-2, .proto-grid, .promo-grid, .smart-grid { grid-template-columns: 1fr; }
             .phone-mockup { width: 240px; height: 500px; }
             section { padding: 80px 5%; }
-            .cursor-dot, .cursor-outline { display: none; } /* Ocultar cursor en móviles */
+            .cursor-dot, .cursor-outline { display: none; }
             * { cursor: auto; }
         }
     </style>
@@ -386,19 +389,14 @@
         <div class="hero-tag">CERRU DE JANEIRO COMPANY ©</div>
         <h1 class="hero-title">LA REVOLUCIÓN<br>ES <span>LOCAL</span></h1>
         
-        <!-- NUEVO ESLOGAN -->
+        <!-- ESLOGAN -->
         <p class="hero-slogan" id="typewriter">
             Monta tu server y lleva tu música a tu <span class="highlight">Cerro</span>.
         </p>
         
         <div class="video-wrapper">
-            <!-- REEMPLAZA ESTO CON TU VIDEO DE YOUTUBE -->
-            <div style="text-align:center; color:#555;">
-                <i class="fa-solid fa-play" style="font-size: 4rem; margin-bottom:20px; opacity:0.5;"></i>
-                <h3>Inserta tu Video Pitch Aquí</h3>
-                <p>Sube tu video a YouTube y pega el iframe</p>
-            </div>
-            <!-- <iframe src="https://www.youtube.com/embed/TU_VIDEO_ID" allowfullscreen></iframe> -->
+            <!-- VIDEO DE YOUTUBE INTEGRADO -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         <a href="#solucion" class="btn"><i class="fa-solid fa-arrow-down"></i> Descubre cómo funciona</a>
@@ -497,50 +495,46 @@
         </div>
     </section>
 
-    <!-- MODELO DE NEGOCIO -->
+    <!-- MODELO DE NEGOCIO / INVERSIÓN -->
     <section id="negocio">
         <div class="section-header reveal">
-            <h2 class="section-title">Modelo de <span>Negocio</span></h2>
-            <p class="section-subtitle">Sostenible, justo y libre de rentas vitalicias.</p>
+            <h2 class="section-title">Apoya e <span>Invierte</span></h2>
+            <p class="section-subtitle">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
         </div>
 
-        <div class="pricing-grid">
+        <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+            
+            <!-- Tarjeta Open Source -->
             <div class="glass-card pricing-card reveal tilt">
-                <h3>Open Source</h3>
+                <h3>Comunidad Open Source</h3>
                 <div class="price">$0 <span>MXN</span></div>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Para siempre.</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Nuestro motor principal es gratuito.</p>
                 <ul>
                     <li><i class="fa-solid fa-check"></i> Servidor local (LAN)</li>
                     <li><i class="fa-solid fa-check"></i> Reproductor de MP3/FLAC</li>
                     <li><i class="fa-solid fa-check"></i> Gestión de metadatos</li>
+                    <li><i class="fa-solid fa-check"></i> Código auditable por la comunidad</li>
                 </ul>
                 <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--primary); box-shadow: none;">Descargar</a>
             </div>
 
-            <div class="glass-card pricing-card highlight reveal tilt" style="transition-delay: 0.2s;">
-                <h3>Licencia Pro</h3>
-                <div class="price">$199 <span>MXN (Único pago)</span></div>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Sin suscripciones mensuales.</p>
+            <!-- Tarjeta de Inversión con Botón -->
+            <div class="glass-card pricing-card highlight-gold reveal tilt" style="transition-delay: 0.2s;">
+                <h3>Oportunidad de Inversión</h3>
+                <div class="price" style="font-size: 2.5rem;">Únete</div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Apoya el desarrollo y crece con nosotros.</p>
                 <ul>
-                    <li><i class="fa-solid fa-check"></i> Todo lo de Open Source</li>
-                    <li><i class="fa-solid fa-check"></i> Conexión Cloudflare (Global)</li>
-                    <li><i class="fa-solid fa-check"></i> Sincronización Multi-servidor</li>
-                    <li><i class="fa-solid fa-check"></i> Herramientas avanzadas para DJs</li>
+                    <li><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> Mercado potencial masivo</li>
+                    <li><i class="fa-solid fa-leaf" style="color: var(--gold);"></i> Tecnología sostenible (ODS 12)</li>
+                    <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos</li>
+                    <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP ya funcional</li>
                 </ul>
-                <a href="#inicio" class="btn" style="width: 100%; justify-content: center;">Obtener Pro</a>
+                <!-- Botón de Inversión -->
+                <a href="https://forms.gle/" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; box-shadow: 0 10px 30px rgba(240, 192, 90, 0.4); font-weight:900;" onclick="alert('¡Gracias por tu interés en Janeiro Music! Por favor, visita nuestro stand físico para conocer más detalles sobre la inversión.')">
+                    <i class="fa-solid fa-handshake"></i> Apoyar Proyecto
+                </a>
             </div>
 
-            <div class="glass-card pricing-card reveal tilt" style="transition-delay: 0.4s;">
-                <h3>Inversión</h3>
-                <div class="price">$300 <span>MXN/mes</span></div>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Costos operativos estimados.</p>
-                <ul>
-                    <li><i class="fa-solid fa-bolt" style="color: #f0c05a;"></i> Electricidad (Servidor local)</li>
-                    <li><i class="fa-solid fa-wifi" style="color: #f0c05a;"></i> Internet (Desarrollo)</li>
-                    <li><i class="fa-solid fa-code" style="color: #f0c05a;"></i> Python/FastAPI/Flutter (Gratis)</li>
-                    <li><i class="fa-brands fa-google-play" style="color: #f0c05a;"></i> Publicación: $124 USD (Año 1)</li>
-                </ul>
-            </div>
         </div>
     </section>
 
@@ -651,7 +645,6 @@
                 cursorDot.style.left = `${posX}px`;
                 cursorDot.style.top = `${posY}px`;
                 
-                // Animación de retraso para el outline
                 cursorOutline.animate({
                     left: `${posX}px`,
                     top: `${posY}px`
@@ -689,7 +682,7 @@
                     const y = e.clientY - rect.top;
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -10; // Máximo 10 grados
+                    const rotateX = ((y - centerY) / centerY) * -10; 
                     const rotateY = ((x - centerX) / centerX) * 10;
 
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
