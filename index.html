@@ -17,14 +17,13 @@
     <style>
         /* ================= VARIABLES ================= */
         :root {
-            --bg-base: #030303;
-            --bg-surface: rgba(18, 18, 22, 0.65);
-            --primary: #ff003c;
-            --primary-glow: rgba(255, 0, 60, 0.6);
+            --bg-base: #0a0a0c;
+            --bg-surface: #141418;
+            --primary: #d90429; /* Rojo más elegante, menos neón */
             --secondary: #ffffff;
             --text-muted: #9a9aab;
-            --border: rgba(255, 255, 255, 0.08);
-            --gold: #f0c05a;
+            --border: rgba(255, 255, 255, 0.1);
+            --gold: #d4af37;
             --font-main: 'Outfit', sans-serif;
         }
 
@@ -34,7 +33,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: var(--font-main);
-            cursor: none; /* Ocultamos el cursor normal */
+            cursor: none;
         }
 
         html { scroll-behavior: smooth; }
@@ -52,30 +51,16 @@
             z-index: 9999;
             pointer-events: none;
         }
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background-color: var(--primary);
-        }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--primary); }
         .cursor-outline {
             width: 40px; height: 40px;
-            border: 1px solid rgba(255, 0, 60, 0.4);
+            border: 1px solid rgba(217, 4, 41, 0.4);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
         .cursor-outline.hovered {
             width: 60px; height: 60px;
-            background-color: rgba(255, 0, 60, 0.1);
+            background-color: rgba(217, 4, 41, 0.1);
             border-color: var(--primary);
-        }
-
-        /* Textura de Ruido (Noise) */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-            opacity: 0.04;
-            z-index: 9998;
-            pointer-events: none;
         }
 
         body {
@@ -85,24 +70,18 @@
             line-height: 1.6;
         }
 
-        /* Background Gradients Animados */
+        /* Background Gradients más sutiles */
         .bg-glow {
             position: fixed;
-            width: 800px; height: 800px;
+            width: 600px; height: 600px;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(120px);
             z-index: -1;
-            opacity: 0.25;
+            opacity: 0.08; /* Antes era 0.25, ahora es mucho más sutil */
             pointer-events: none;
-            animation: pulse 10s infinite alternate;
         }
-        .glow-top { top: -300px; right: -200px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); }
-        .glow-bottom { bottom: -300px; left: -200px; background: radial-gradient(circle, #0044ff 0%, transparent 70%); animation-delay: -5s; }
-
-        @keyframes pulse {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.2) translate(50px, 50px); }
-        }
+        .glow-top { top: -300px; right: -200px; background: var(--primary); }
+        .glow-bottom { bottom: -300px; left: -200px; background: #1e3a8a; }
 
         /* ================= NAVBAR ================= */
         nav {
@@ -111,28 +90,21 @@
             width: 90%; max-width: 1200px;
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 30px;
-            background: rgba(10, 10, 12, 0.7);
+            background: rgba(20, 20, 24, 0.8);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border); border-radius: 100px;
             z-index: 1000;
         }
 
-        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; }
-        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
+        .logo img { height: 40px; width: auto; object-fit: contain; }
 
         .nav-links { display: flex; gap: 30px; }
         .nav-links a {
             color: var(--text-muted); text-decoration: none;
             font-size: 0.9rem; font-weight: 600;
-            transition: color 0.3s; position: relative;
+            transition: color 0.3s;
         }
         .nav-links a:hover { color: var(--secondary); }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0%; height: 2px;
-            bottom: -5px; left: 0; background: var(--primary);
-            transition: width 0.3s; box-shadow: 0 0 8px var(--primary);
-        }
-        .nav-links a:hover::after { width: 100%; }
 
         /* ================= HERO SECTION ================= */
         header {
@@ -142,227 +114,187 @@
         }
 
         .hero-tag {
-            background: rgba(255, 0, 60, 0.1); color: var(--primary);
+            background: rgba(255, 255, 255, 0.05); color: var(--text-muted);
             padding: 8px 16px; border-radius: 20px;
             font-size: 0.8rem; font-weight: 800; letter-spacing: 2px;
-            margin-bottom: 20px; border: 1px solid rgba(255, 0, 60, 0.3);
-            box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
+            margin-bottom: 20px; border: 1px solid var(--border);
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 900; line-height: 1.05; margin-bottom: 15px;
             letter-spacing: -2px; text-transform: uppercase;
         }
-        .hero-title span {
-            background: linear-gradient(90deg, #fff, var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px var(--primary-glow));
-        }
+        .hero-title span { color: var(--primary); }
 
-        /* Eslogan Oficial con animación */
         .hero-slogan {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--secondary); font-weight: 600;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: var(--secondary); font-weight: 400;
             margin-bottom: 40px; min-height: 40px;
         }
-        .hero-slogan .highlight {
-            color: var(--primary); text-shadow: 0 0 10px var(--primary-glow);
-        }
+        .hero-slogan .highlight { color: var(--primary); font-weight: 700; }
 
         /* Video Cinematic */
         .video-wrapper {
             width: 100%; max-width: 900px; aspect-ratio: 16 / 9;
-            background: #000; border-radius: 24px;
+            background: #000; border-radius: 20px;
             border: 1px solid var(--border);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(255, 0, 60, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             position: relative; overflow: hidden; margin-bottom: 50px;
-            display: flex; justify-content: center; align-items: center;
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         .btn {
             background: var(--primary); color: white;
-            padding: 18px 45px; border-radius: 50px;
-            font-weight: 800; font-size: 1.1rem; text-decoration: none;
-            transition: all 0.3s; box-shadow: 0 10px 30px var(--primary-glow);
-            border: none; display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 40px; border-radius: 50px;
+            font-weight: 700; font-size: 1rem; text-decoration: none;
+            transition: all 0.3s; border: none; display: inline-flex; align-items: center; gap: 10px;
         }
-        .btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px var(--primary-glow); background: #ff1a50;
-        }
+        .btn:hover { background: #b00020; transform: translateY(-2px); }
 
-        /* ================= MARQUEE (CINTA INFINITA) ================= */
+        /* ================= MARQUEE (CINTA INFINITA ELEGANTE) ================= */
         .marquee-container {
-            width: 100vw; overflow: hidden; background: var(--primary);
-            padding: 15px 0; transform: rotate(-2deg); margin: 40px 0;
-            box-shadow: 0 0 30px var(--primary-glow); border-top: 2px solid #fff; border-bottom: 2px solid #fff;
+            width: 100vw; overflow: hidden; background: #111;
+            padding: 15px 0; transform: rotate(-1.5deg); margin: 40px 0;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
             position: relative; z-index: 10;
         }
         .marquee-content {
-            display: flex; white-space: nowrap; animation: scroll 20s linear infinite;
-            font-weight: 900; font-size: 1.5rem; color: #000; letter-spacing: 2px;
+            display: flex; white-space: nowrap; animation: scroll 25s linear infinite;
+            font-weight: 800; font-size: 1.2rem; color: var(--secondary); letter-spacing: 2px;
         }
-        .marquee-content span { margin-right: 30px; display: flex; align-items: center; gap: 10px; }
+        .marquee-content span { margin-right: 40px; display: flex; align-items: center; gap: 12px; color: var(--text-muted); }
+        .marquee-content span i { color: var(--primary); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* ================= SECCIONES ================= */
         section { padding: 100px 10%; position: relative; z-index: 1; }
         .section-header { text-align: center; margin-bottom: 60px; }
-        .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 15px; }
-        .section-title span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+        .section-title { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 15px; }
+        .section-title span { color: var(--primary); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Tarjetas 3D con Glassmorphism */
+        /* Tarjetas Sólidas (Menos Glass) */
         .glass-card {
-            background: var(--bg-surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border); border-radius: 24px; padding: 40px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            position: relative; overflow: hidden;
-            transform-style: preserve-3d;
+            background: var(--bg-surface);
+            border: 1px solid var(--border); border-radius: 20px; padding: 40px;
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
         }
-        .glass-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
-            transform: skewX(-25deg); transition: 0.5s;
-        }
-        .glass-card:hover::before { left: 200%; }
-        .glass-card:hover {
-            border-color: rgba(255, 0, 60, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255, 0, 60, 0.2);
-        }
+        .glass-card:hover { border-color: rgba(255, 255, 255, 0.2); }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
         .icon-box {
-            width: 60px; height: 60px; border-radius: 16px;
+            width: 50px; height: 50px; border-radius: 12px;
             display: flex; justify-content: center; align-items: center;
-            font-size: 1.5rem; margin-bottom: 25px; transform: translateZ(20px);
+            font-size: 1.2rem; margin-bottom: 25px;
         }
-        .icon-red { background: rgba(255, 0, 60, 0.1); color: var(--primary); border: 1px solid rgba(255, 0, 60, 0.3); box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
-        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.3); box-shadow: 0 0 15px rgba(0, 255, 100, 0.2); }
+        .icon-red { background: rgba(217, 4, 41, 0.1); color: var(--primary); }
+        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; }
 
-        .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; transform: translateZ(15px); }
-        .glass-card p { color: var(--text-muted); font-size: 1.05rem; transform: translateZ(10px); }
+        .glass-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .glass-card p { color: var(--text-muted); font-size: 1rem; }
 
         /* ================= PROTOTIPO (3D MOCKUPS) ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         
         .laptop-mockup {
-            width: 100%; position: relative; border: 14px solid #111; border-bottom: none;
-            border-radius: 24px 24px 0 0; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            background: #000; transition: transform 0.5s;
+            width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
+            border-radius: 20px 20px 0 0; background: #000;
         }
-        .laptop-mockup:hover { transform: scale(1.02) translateY(-10px); }
         .laptop-mockup::after {
-            content: ''; position: absolute; bottom: -22px; left: -6%; width: 112%; height: 22px;
-            background: linear-gradient(to bottom, #333, #111); border-radius: 0 0 24px 24px;
-            border-bottom: 3px solid #000;
+            content: ''; position: absolute; bottom: -18px; left: -5%; width: 110%; height: 18px;
+            background: #111; border-radius: 0 0 20px 20px; border-bottom: 2px solid #000;
         }
-        .laptop-mockup img { width: 100%; display: block; border-radius: 10px 10px 0 0; }
+        .laptop-mockup img { width: 100%; display: block; border-radius: 8px 8px 0 0; }
 
         .phone-mockup {
-            width: 280px; height: 580px; border: 12px solid #111; border-radius: 45px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.05);
+            width: 260px; height: 540px; border: 10px solid #1a1a1a; border-radius: 40px;
             background: #000; margin: 0 auto; position: relative; overflow: hidden;
-            transition: transform 0.5s;
         }
-        .phone-mockup:hover { transform: scale(1.02) translateY(-10px); }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 130px; height: 28px; background: #111;
-            border-radius: 0 0 20px 20px; z-index: 10;
+            width: 120px; height: 25px; background: #1a1a1a;
+            border-radius: 0 0 15px 15px; z-index: 10;
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
         /* ================= ODS 12 ================= */
         .ods-banner {
-            background: linear-gradient(135deg, rgba(191, 139, 46, 0.1), rgba(0,0,0,0.5));
-            border: 1px solid rgba(191, 139, 46, 0.4); border-radius: 24px; padding: 60px;
-            text-align: center; position: relative; overflow: hidden;
-            box-shadow: 0 0 30px rgba(191, 139, 46, 0.15);
+            background: #181818;
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; padding: 50px;
+            text-align: center;
         }
-        .ods-logo { font-size: 4rem; color: var(--gold); margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(240, 192, 90, 0.5)); }
-        .ods-banner h3 { font-size: 2.2rem; margin-bottom: 15px; color: var(--gold); }
-        .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.1rem; }
+        .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
+        .ods-banner h3 { font-size: 2rem; margin-bottom: 15px; color: var(--gold); }
+        .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); }
         
         .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 30px; }
-        .smart-item { background: rgba(0,0,0,0.5); padding: 25px; border-radius: 16px; border: 1px solid rgba(191, 139, 46, 0.2); transition: 0.3s; }
-        .smart-item:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .smart-item h4 { color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; }
+        .smart-item { background: #101012; padding: 20px; border-radius: 12px; border: 1px solid var(--border); }
+        .smart-item h4 { color: var(--gold); margin-bottom: 10px; font-size: 1rem; }
 
         /* ================= MODELO DE NEGOCIO ================= */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .pricing-card { text-align: center; padding: 50px 30px; }
-        .price { font-size: 3.5rem; font-weight: 900; color: var(--secondary); margin: 20px 0; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
-        .price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; text-shadow: none; }
+        .pricing-card { text-align: center; padding: 40px 30px; }
+        .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
         .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
-        .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
-        .pricing-card ul li i { color: #00ff64; text-shadow: 0 0 10px rgba(0,255,100,0.5); }
+        .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .pricing-card ul li i { color: #00ff64; }
         
-        /* Resaltado para la tarjeta de inversión */
-        .highlight-gold { border-color: var(--gold); box-shadow: 0 0 30px rgba(240,192,90,0.15); }
-        .highlight-gold::before {
-            content: 'OPORTUNIDAD'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--gold); color: #000; padding: 6px 16px; border-radius: 12px;
-            font-size: 0.75rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 0 15px var(--gold);
-        }
+        /* Tarjeta de Inversión sin franja */
+        .highlight-gold { border-color: rgba(212, 175, 55, 0.5); background: #1a1814; }
 
         /* ================= EQUIPO ================= */
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .team-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .team-img {
-            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
-            border: 3px solid var(--border); margin-bottom: 20px; transition: all 0.4s;
-            filter: grayscale(100%);
-        }
-        .team-card:hover .team-img { border-color: var(--primary); transform: scale(1.1) rotate(5deg); filter: grayscale(0%); box-shadow: 0 0 25px var(--primary-glow); }
         
-        /* Estilos de los nombres del equipo */
-        .team-alias { font-size: 1.4rem; font-weight: 900; color: var(--secondary); margin-bottom: 5px; line-height: 1.2; }
-        .team-realname { font-size: 0.9rem; color: var(--primary); font-weight: 700; margin-bottom: 15px; }
+        .team-img {
+            width: 140px; height: 140px; border-radius: 50%; 
+            object-fit: cover; /* Asegura que la imagen llene el círculo */
+            border: 2px solid var(--border); margin-bottom: 20px; 
+            transition: border-color 0.3s, transform 0.3s;
+            background-color: #222; /* Fondo por si la imagen tiene transparencia */
+        }
+        .team-card:hover .team-img { border-color: var(--primary); transform: scale(1.05); }
+        
+        .team-alias { font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 5px; line-height: 1.2; }
+        .team-realname { font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 15px; }
         .team-role { 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px;
-            padding: 4px 12px; color: var(--secondary); font-size: 0.8rem; font-weight: 800; 
-            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; 
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px;
+            padding: 4px 12px; color: var(--secondary); font-size: 0.75rem; font-weight: 700; 
+            letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 15px; 
         }
 
         /* ================= MATERIAL PROMOCIONAL ================= */
         .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .promo-img { width: 100%; border-radius: 16px; border: 1px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; }
-        .promo-img:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
+        .promo-img { width: 100%; border-radius: 12px; border: 1px solid var(--border); }
 
         /* ================= FOOTER ================= */
         footer {
-            text-align: center; padding: 80px 20px 40px; border-top: 1px solid var(--border);
-            background: linear-gradient(to top, #08080a, var(--bg-base));
+            text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--border);
+            background: #050505;
         }
-        .footer-logo { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
-        .footer-logo span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
+        .footer-logo img { height: 50px; margin-bottom: 15px; }
 
         /* ================= BOTÓN SCROLL TOP ================= */
         #scrollTop {
             position: fixed; bottom: 30px; right: 30px;
-            width: 50px; height: 50px; border-radius: 50%;
-            background: var(--primary); color: white; border: none;
-            font-size: 1.5rem; box-shadow: 0 5px 20px var(--primary-glow);
-            opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: var(--bg-surface); color: white; border: 1px solid var(--border);
+            font-size: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
         }
         #scrollTop.show { opacity: 1; visibility: visible; }
-        #scrollTop:hover { transform: translateY(-5px) scale(1.1); background: #ff1a50; }
-
-        /* ================= ANIMACIONES SCROLL ================= */
-        .reveal { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        #scrollTop:hover { background: var(--primary); border-color: var(--primary); }
 
         /* ================= RESPONSIVE ================= */
         @media (max-width: 900px) {
             nav { width: 100%; top: 0; border-radius: 0; padding: 15px 20px; }
             .nav-links { display: none; }
             .grid-2, .proto-grid, .promo-grid, .smart-grid { grid-template-columns: 1fr; }
-            .phone-mockup { width: 240px; height: 500px; }
-            section { padding: 80px 5%; }
+            .phone-mockup { width: 220px; height: 450px; }
+            section { padding: 60px 5%; }
             .cursor-dot, .cursor-outline { display: none; }
             * { cursor: auto; }
         }
@@ -380,7 +312,10 @@
 
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">JANEIRO<span>MUSIC</span></div>
+        <!-- LOGO AGREGADO AQUÍ -->
+        <div class="logo">
+            <img src="Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
+        </div>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#solucion">Solución</a>
@@ -393,21 +328,20 @@
     </nav>
 
     <!-- HERO -->
-    <header id="inicio" class="reveal">
+    <header id="inicio">
         <div class="hero-tag">CERRU DE JANEIRO COMPANY ©</div>
-        <h1 class="hero-title">LA REVOLUCIÓN<br>ES <span>LOCAL</span></h1>
+        <!-- TÍTULO CAMBIADO AQUÍ -->
+        <h1 class="hero-title">JANEIRO <span>MUSIC</span></h1>
         
-        <!-- ESLOGAN -->
         <p class="hero-slogan" id="typewriter">
             Monta tu server y lleva tu música a tu <span class="highlight">Cerro</span>.
         </p>
         
         <div class="video-wrapper">
-            <!-- VIDEO DE YOUTUBE INTEGRADO -->
             <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
-        <a href="#solucion" class="btn"><i class="fa-solid fa-arrow-down"></i> Descubre cómo funciona</a>
+        <a href="#solucion" class="btn">Descubre cómo funciona</a>
     </header>
 
     <!-- CINTA INFINITA -->
@@ -456,7 +390,6 @@
             <div class="reveal tilt">
                 <h3 style="margin-bottom: 15px; text-align: center;">Servidor (Python + FastAPI)</h3>
                 <div class="laptop-mockup">
-                    <!-- CAMBIA ESTA IMAGEN POR TU CAPTURA DEL SERVIDOR -->
                     <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Servidor">
                 </div>
                 <p style="color: var(--text-muted); margin-top: 30px; text-align: center;">Escanea carpetas, extrae metadatos (título, álbum, carátula) y sirve los archivos a la red.</p>
@@ -466,7 +399,6 @@
                 <h3 style="margin-bottom: 15px; text-align: center;">App Móvil (Flutter)</h3>
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
-                    <!-- CAMBIA ESTA IMAGEN POR TU CAPTURA DE LA APP -->
                     <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80" alt="App">
                 </div>
                 <p style="color: var(--text-muted); margin-top: 20px; text-align: center;">Interfaz fluida. Conéctate vía LAN, VPN o QR. Descarga para uso offline.</p>
@@ -512,7 +444,6 @@
 
         <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
             
-            <!-- Tarjeta Open Source -->
             <div class="glass-card pricing-card reveal tilt">
                 <h3>Comunidad Open Source</h3>
                 <div class="price">$0 <span>MXN</span></div>
@@ -523,10 +454,10 @@
                     <li><i class="fa-solid fa-check"></i> Gestión de metadatos</li>
                     <li><i class="fa-solid fa-check"></i> Código auditable por la comunidad</li>
                 </ul>
-                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--primary); box-shadow: none;">Descargar</a>
+                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--border); box-shadow: none;">Descargar</a>
             </div>
 
-            <!-- Tarjeta de Inversión con Botón -->
+            <!-- Tarjeta de Inversión (Sin la franja roja/dorada) -->
             <div class="glass-card pricing-card highlight-gold reveal tilt" style="transition-delay: 0.2s;">
                 <h3>Oportunidad de Inversión</h3>
                 <div class="price" style="font-size: 2.5rem;">Únete</div>
@@ -537,8 +468,7 @@
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos</li>
                     <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP ya funcional</li>
                 </ul>
-                <!-- Botón de Inversión -->
-                <a href="https://forms.gle/" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; box-shadow: 0 10px 30px rgba(240, 192, 90, 0.4); font-weight:900;" onclick="alert('¡Gracias por tu interés en Janeiro Music! Por favor, visita nuestro stand físico para conocer más detalles sobre la inversión.')">
+                <a href="https://forms.gle/" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800;" onclick="alert('¡Gracias por tu interés en Janeiro Music! Por favor, visita nuestro stand físico para conocer más detalles sobre la inversión.')">
                     <i class="fa-solid fa-handshake"></i> Apoyar Proyecto
                 </a>
             </div>
@@ -556,7 +486,8 @@
         <div class="team-grid">
             <!-- Pedro -->
             <div class="glass-card team-card reveal tilt">
-                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Pedro" alt="Pedro" class="team-img">
+                <!-- IMAGEN AGREGADA -->
+                <img src="Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
                 <div class="team-alias">Pedrouski el Pixelouski</div>
                 <div class="team-realname">Pedro Miguel Godínez Rodríguez - AL07164060</div>
                 <div class="team-role">Líder de Desarrollo Técnico</div>
@@ -565,7 +496,8 @@
 
             <!-- Leonardo -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.1s;">
-                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Leonardo" alt="Leonardo" class="team-img">
+                <!-- IMAGEN AGREGADA -->
+                <img src="Leito_dicaprinchi.png" alt="Leonardo" class="team-img">
                 <div class="team-alias">Leito dicaprinchi</div>
                 <div class="team-realname">Leonardo Martínez González - AL07184261</div>
                 <div class="team-role">Ayudante de Desarrollo</div>
@@ -574,7 +506,8 @@
 
             <!-- Issac -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.2s;">
-                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Issac" alt="Issac" class="team-img">
+                <!-- IMAGEN AGREGADA -->
+                <img src="Issacini_Gonzales.png" alt="Issac" class="team-img">
                 <div class="team-alias">Issacini Gonzales.</div>
                 <div class="team-realname">Issac Rodrigo Ordaz de León - AL07134283</div>
                 <div class="team-role">Líder de Equipo y Coordinador</div>
@@ -583,25 +516,26 @@
 
             <!-- Angel -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.3s;">
-                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Angel" alt="Angel" class="team-img">
+                <!-- IMAGEN AGREGADA -->
+                <img src="Tobyas_Willson.png" alt="Angel" class="team-img">
                 <div class="team-alias">Tobyas Willson</div>
                 <div class="team-realname">Ángel Bernardo Tovar Martínez - AL07162353</div>
                 <div class="team-role">Diseñador Gráfico Principal</div>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Hizo el diseño de Janeiro Music, permitiendo presentar el producto de forma atractiva.</p>
             </div>
 
-            <!-- Adrian -->
+            <!-- Adrian (Placeholder temporal, no me diste la imagen) -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.4s;">
-                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Adrian" alt="Adrian" class="team-img">
+                <img src="https://via.placeholder.com/150/1a1a1e/ffffff?text=Adrian" alt="Adrian" class="team-img">
                 <div class="team-alias">El Adriana Pequeña</div>
                 <div class="team-realname">Adrián Jiménez Flores - AL07134668</div>
                 <div class="team-role">Probador del Producto (QA)</div>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Verifica los errores del programa en el ámbito público y da retroalimentación.</p>
             </div>
 
-            <!-- Nicolas -->
+            <!-- Nicolas (Placeholder temporal, no me diste la imagen) -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.5s;">
-                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Nicolas" alt="Nicolas" class="team-img">
+                <img src="https://via.placeholder.com/150/1a1a1e/ffffff?text=Nicolas" alt="Nicolas" class="team-img">
                 <div class="team-alias">A Costilla</div>
                 <div class="team-realname">Nicolás Acosta Galaviz - AL07183711</div>
                 <div class="team-role">Ayudante de Presentaciones</div>
@@ -620,21 +554,24 @@
         <div class="promo-grid">
             <div class="glass-card reveal tilt">
                 <h3 style="margin-bottom: 20px; text-align: center;">Póster Oficial</h3>
-                <img src="https://via.placeholder.com/600x800/1a1a1e/ff003c?text=AQUI+VA+TU+POSTER" alt="Póster" class="promo-img">
+                <img src="https://via.placeholder.com/600x800/1a1a1e/ffffff?text=AQUI+VA+TU+POSTER" alt="Póster" class="promo-img">
             </div>
             <div class="glass-card reveal tilt" style="transition-delay: 0.2s;">
                 <h3 style="margin-bottom: 20px; text-align: center;">Tríptico Informativo</h3>
-                <img src="https://via.placeholder.com/600x400/1a1a1e/ff003c?text=AQUI+VA+TU+TRIPTICO" alt="Tríptico" class="promo-img">
+                <img src="https://via.placeholder.com/600x400/1a1a1e/ffffff?text=AQUI+VA+TU+TRIPTICO" alt="Tríptico" class="promo-img">
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-logo">JANEIRO<span>MUSIC</span></div>
+        <!-- LOGO EN FOOTER -->
+        <div class="footer-logo">
+            <img src="Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
+        </div>
         <p>Monta tu server y lleva tu música a tu Cerro.</p>
         <br>
-        <p>Cerru de Janeiro Company© 2026 | Habilidades y Valores III</p>
+        <p style="color: #666; font-size: 0.9rem;">Cerru de Janeiro Company© 2026 | Habilidades y Valores III</p>
     </footer>
 
     <!-- Botón Scroll Top -->
@@ -707,10 +644,10 @@
                     const y = e.clientY - rect.top;
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -10; 
-                    const rotateY = ((x - centerX) / centerX) * 10;
+                    const rotateX = ((y - centerY) / centerY) * -5; // Reducido para que sea más sutil
+                    const rotateY = ((x - centerX) / centerX) * 5;
 
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
                 });
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
