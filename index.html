@@ -17,22 +17,18 @@
     <style>
         /* ================= VARIABLES ================= */
         :root {
-            --bg-base: #0a0a0c;
-            --bg-surface: #141418;
+            --bg-base: #09090b; /* Fondo casi negro */
+            --bg-card: #141417; /* Fondo de tarjetas (un poco más claro) */
+            --bg-hover: #1c1c21;
             --primary: #e61e4d; 
+            --primary-hover: #ff3366;
             --secondary: #ffffff;
             --text-muted: #9a9aab;
-            
-            --border-red: rgba(230, 30, 77, 0.7);
-            --border-gray: rgba(255, 255, 255, 0.15);
-            --border-green: rgba(34, 197, 94, 0.7);
-            
-            --box-shadow-red: 0 0 20px rgba(230, 30, 77, 0.4);
-            --box-shadow-green: 0 0 20px rgba(34, 197, 94, 0.4);
-            --box-shadow-gray: 0 0 20px rgba(255, 255, 255, 0.1);
-            
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --border-active: rgba(230, 30, 77, 0.4);
             --gold: #d4af37;
             --font-main: 'Outfit', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         /* ================= RESET ================= */
@@ -47,23 +43,22 @@
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-base); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
         body {
             background-color: var(--bg-base);
             color: var(--secondary);
             overflow-x: hidden;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* FONDO CON ILUMINACIÓN AMBIENTAL MEJORADA */
-        .bg-gradient {
+        /* Fondo con resplandor sutil */
+        .bg-glow {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: 
-                radial-gradient(ellipse at 50% -20%, rgba(230, 30, 77, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 120%, rgba(30, 58, 138, 0.15) 0%, transparent 60%),
-                #0a0a0c;
+            background: radial-gradient(circle at 50% -10%, rgba(230, 30, 77, 0.1) 0%, transparent 60%);
             z-index: -1;
             pointer-events: none;
         }
@@ -75,19 +70,18 @@
             width: 90%; max-width: 1200px;
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 30px;
-            background: rgba(20, 20, 24, 0.85);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-red); border-radius: 100px;
-            box-shadow: 0 0 15px rgba(230, 30, 77, 0.15);
+            background: rgba(20, 20, 23, 0.8);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
+        
+        nav:hover { border-color: var(--border-active); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
 
         .company-name {
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: var(--secondary);
-            letter-spacing: 1px;
+            font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px;
         }
         .company-name span { color: var(--primary); }
 
@@ -95,15 +89,9 @@
         .nav-links a {
             color: var(--text-muted); text-decoration: none;
             font-size: 0.9rem; font-weight: 600;
-            transition: color 0.3s; position: relative;
+            transition: color 0.3s;
         }
         .nav-links a:hover { color: var(--secondary); }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0%; height: 2px;
-            bottom: -4px; left: 0; background: var(--primary);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
 
         .menu-toggle {
             display: none; font-size: 1.5rem; color: var(--secondary);
@@ -111,9 +99,9 @@
         }
         .mobile-menu {
             display: none; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
-            width: 90%; background: var(--bg-surface); border: 1px solid var(--border-red);
+            width: 90%; background: var(--bg-card); border: 1px solid var(--border-subtle);
             border-radius: 20px; flex-direction: column; padding: 20px;
-            gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(230, 30, 77, 0.2); z-index: 999;
+            gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); z-index: 999;
         }
         .mobile-menu.active { display: flex; }
         .mobile-menu a {
@@ -146,13 +134,13 @@
             display: inline-block;
             background: rgba(230, 30, 77, 0.1);
             color: var(--primary);
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 800;
             letter-spacing: 1px;
             margin-bottom: 20px;
-            border: 1px solid var(--border-red);
+            border: 1px solid var(--border-active);
         }
 
         .hero-title {
@@ -163,11 +151,11 @@
         .hero-title span { color: var(--primary); }
 
         .hero-slogan {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            font-weight: 700;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 600;
             color: var(--secondary);
             margin-bottom: 25px;
-            border-left: 4px solid var(--primary);
+            border-left: 3px solid var(--primary);
             padding-left: 15px;
         }
 
@@ -176,7 +164,6 @@
             color: var(--text-muted); font-weight: 400;
             line-height: 1.7;
             margin-bottom: 30px;
-            text-align: justify;
         }
         .hero-intro strong { color: var(--secondary); font-weight: 600; }
 
@@ -187,22 +174,22 @@
             position: relative;
         }
 
-        /* LOGO CON BORDES REDONDEADOS */
+        /* LOGO ESTILO APP ICON */
         .hero-product-logo {
-            width: 320px;
+            width: 300px;
             height: auto;
             object-fit: contain;
-            border-radius: 40px;
-            border: 2px solid var(--border-red);
-            padding: 10px;
-            background: rgba(20, 20, 24, 0.6);
-            box-shadow: 0 0 30px rgba(230, 30, 77, 0.2);
-            transition: all 0.3s ease;
+            border-radius: 35px;
+            border: 1px solid var(--border-subtle);
+            padding: 15px;
+            background: var(--bg-card);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(230, 30, 77, 0.15);
+            transition: var(--transition);
         }
         .hero-product-logo:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 0 40px rgba(230, 30, 77, 0.5);
-            border-color: var(--primary);
+            transform: translateY(-5px); 
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(230, 30, 77, 0.3);
+            border-color: var(--border-active);
         }
 
         /* Video Section */
@@ -223,9 +210,9 @@
         .video-wrapper {
             width: 100%; aspect-ratio: 16 / 9;
             background: #000; border-radius: 24px;
-            border: 1px solid var(--border-red);
+            border: 1px solid var(--border-subtle);
             position: relative; overflow: hidden; margin-bottom: 40px;
-            box-shadow: 0 0 15px rgba(230, 30, 77, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
@@ -233,163 +220,124 @@
             background: var(--primary); color: white;
             padding: 16px 40px; border-radius: 50px;
             font-weight: 700; font-size: 1rem; text-decoration: none;
-            transition: all 0.2s ease; border: 1px solid transparent; 
+            transition: var(--transition); border: none; 
             display: inline-flex; align-items: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(230, 30, 77, 0.3);
+            box-shadow: 0 8px 20px rgba(230, 30, 77, 0.3);
         }
-        .btn:hover { background: #c91842; box-shadow: 0 6px 20px rgba(230, 30, 77, 0.4); }
-        .btn:active { transform: scale(0.96); }
+        .btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 12px 25px rgba(230, 30, 77, 0.4); }
 
         /* ================= CINTA INFINITA ================= */
         .marquee-container {
             width: 100vw; overflow: hidden; background: #111;
             padding: 15px 0; transform: rotate(-1.5deg); margin: 40px 0;
-            border-top: 1px solid var(--border-red); border-bottom: 1px solid var(--border-red);
-            box-shadow: 0 0 15px rgba(230, 30, 77, 0.15);
+            border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
             position: relative; z-index: 10;
         }
         .marquee-content {
             display: flex; white-space: nowrap; animation: scroll 25s linear infinite;
-            font-weight: 800; font-size: 1.2rem; color: var(--secondary); letter-spacing: 2px;
+            font-weight: 800; font-size: 1.1rem; color: var(--text-muted); letter-spacing: 2px;
         }
-        .marquee-content span { margin-right: 40px; display: flex; align-items: center; gap: 12px; color: var(--text-muted); }
+        .marquee-content span { margin-right: 40px; display: flex; align-items: center; gap: 12px; }
         .marquee-content span i { color: var(--primary); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* ================= SECCIONES ================= */
         section { padding: 100px 10%; position: relative; z-index: 1; }
         .section-header { text-align: center; margin-bottom: 60px; }
-        .section-title { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 15px; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 15px; }
         .section-title span { color: var(--primary); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; text-align: center; }
 
-        /* ================= TARJETAS ESTÁTICAS CON BORDE NEÓN ================= */
-        .glass-card {
-            background: linear-gradient(145deg, rgba(28,28,34,1) 0%, rgba(20,20,24,1) 100%);
-            border: 1px solid var(--border-red); 
+        /* ================= TARJETAS ESTILO APP ================= */
+        .app-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
             border-radius: 24px; padding: 40px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
             position: relative;
             height: 100%;
-            /* Se eliminó transform para que no se muevan */
         }
-        /* Al pasar el mouse, el borde se ilumina pero el cuadro no se mueve */
-        .glass-card:hover { 
-            box-shadow: var(--box-shadow-red); 
-            border-color: var(--primary);
+        .app-card:hover { 
+            border-color: var(--border-active);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(230, 30, 77, 0.1);
+            background: var(--bg-hover);
         }
 
-        .border-green { border-color: var(--border-green); }
-        .border-green:hover { box-shadow: var(--box-shadow-green); border-color: #4ade80; }
-        .border-gray { border-color: var(--border-gray); }
-        .border-gray:hover { box-shadow: var(--box-shadow-gray); border-color: #fff; }
+        .app-card.border-green:hover { 
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 197, 94, 0.1);
+        }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
-        /* TÍTULOS AL LADO DE LOS ICONOS */
         .card-header-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            display: flex; align-items: center; gap: 15px; margin-bottom: 25px;
         }
-        .card-header-row .icon-box {
-            margin-bottom: 0;
-        }
-        .card-header-row h3 {
-            font-size: 1.6rem;
-            margin-bottom: 0;
-            line-height: 1.2;
-        }
+        .card-header-row h3 { font-size: 1.5rem; margin-bottom: 0; font-weight: 700; }
 
         .icon-box {
-            width: 55px; height: 55px; border-radius: 16px;
+            width: 50px; height: 50px; border-radius: 14px;
             display: flex; justify-content: center; align-items: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
+            font-size: 1.3rem; flex-shrink: 0;
         }
-        .icon-red { background: rgba(230, 30, 77, 0.1); color: var(--primary); border: 1px solid var(--border-red); }
-        .icon-green { background: rgba(34, 197, 94, 0.1); color: var(--border-green); border: 1px solid var(--border-green); }
+        .icon-red { background: rgba(230, 30, 77, 0.15); color: var(--primary); }
+        .icon-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
 
-        .glass-card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; text-align: justify; }
+        .app-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 20px; text-align: justify; }
         
-        .info-list { list-style: none; }
-        .info-list li { 
-            color: var(--text-muted); font-size: 1rem; margin-bottom: 18px; 
+        .app-list { list-style: none; }
+        .app-list li { 
+            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; 
             display: flex; align-items: flex-start; gap: 15px; line-height: 1.6;
         }
-        .info-list li i { margin-top: 6px; font-size: 0.85rem; flex-shrink: 0;}
-        .text-red i { color: var(--primary); }
-        .text-green i { color: var(--border-green); }
-        .info-list li div strong { color: var(--secondary); font-weight: 700; display: block; margin-bottom: 5px; font-size: 1.05rem; }
+        .app-list li i { margin-top: 5px; font-size: 0.8rem; flex-shrink: 0;}
+        .app-list li strong { color: var(--secondary); font-weight: 600; display: block; margin-bottom: 4px; font-size: 1rem; }
 
-        /* ================= PROTOTIPO (ESTÁTICO) ================= */
+        /* ================= PROTOTIPO ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
         
         .proto-card {
-            background: var(--bg-surface);
+            background: var(--bg-card);
             border-radius: 24px; padding: 30px;
-            border: 1px solid var(--border-gray);
-            display: flex; flex-direction: column;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-            /* Se eliminó transform para que no se muevan */
+            border: 1px solid var(--border-subtle);
+            display: flex; flex-direction: column; height: 100%;
+            transition: var(--transition);
         }
-        .proto-card:hover { border-color: var(--border-red); box-shadow: 0 0 20px rgba(230, 30, 77, 0.15); }
-        
-        .proto-card > h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--secondary); text-align: center; }
+        .proto-card:hover { border-color: var(--border-active); background: var(--bg-hover); }
+        .proto-card > h3 { font-size: 1.4rem; margin-bottom: 20px; text-align: center; font-weight: 700; }
 
         .laptop-mockup {
-            width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
-            border-radius: 20px 20px 0 0; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.6); 
-            margin-bottom: 25px; 
+            width: 100%; position: relative; border: 12px solid #111; border-bottom: none;
+            border-radius: 20px 20px 0 0; background: #000; 
+            margin-bottom: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
         .laptop-mockup::after {
             content: ''; position: absolute; bottom: -18px; left: -5%; width: 110%; height: 18px;
-            background: #111; border-radius: 0 0 20px 20px; border-bottom: 2px solid #000;
+            background: #222; border-radius: 0 0 20px 20px;
         }
         .laptop-mockup img { width: 100%; display: block; border-radius: 8px 8px 0 0; }
 
         .phone-mockup {
-            width: 100%; max-width: 220px; aspect-ratio: 9/19; border: 10px solid #1a1a1a; border-radius: 40px;
-            background: #000; margin: 0 auto 25px; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            width: 100%; max-width: 220px; aspect-ratio: 9/19; border: 10px solid #111; border-radius: 40px;
+            background: #000; margin: 0 auto 25px; position: relative; overflow: hidden; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
         }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 20px; background: #1a1a1a; border-radius: 0 0 15px 15px; z-index: 10;
+            width: 100px; height: 20px; background: #111; border-radius: 0 0 15px 15px; z-index: 10;
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
         .proto-info {
-            background: #111115; 
-            padding: 25px; 
-            border-radius: 16px;
-            width: 100%; flex-grow: 1; 
-            display: flex; flex-direction: column;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.3); padding: 25px; border-radius: 16px;
+            width: 100%; flex-grow: 1; display: flex; flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.03);
         }
-        .proto-info h4 { 
-            color: var(--primary); 
-            font-size: 1.2rem; 
-            margin-bottom: 12px; 
-            border-bottom: 1px solid rgba(230, 30, 77, 0.3); 
-            padding-bottom: 8px; 
-        }
-        .proto-info > p { 
-            color: var(--text-muted); 
-            font-size: 0.95rem; 
-            margin-bottom: 20px; 
-            text-align: justify; 
-            line-height: 1.6; 
-        }
+        .proto-info h4 { color: var(--primary); font-size: 1.1rem; margin-bottom: 12px; font-weight: 700;}
+        .proto-info > p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; text-align: justify; line-height: 1.6;}
         
         .proto-info ul { list-style: none; margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
-        .proto-info ul li { 
-            display: flex; 
-            gap: 12px; 
-            align-items: flex-start; 
-            line-height: 1.5;
-        }
+        .proto-info ul li { display: flex; gap: 12px; align-items: flex-start; }
         .proto-info ul li i { color: var(--primary); margin-top: 5px; flex-shrink: 0; font-size: 0.9rem;}
         .proto-info ul li div { flex: 1; }
         .proto-info ul li div strong { color: var(--secondary); display: inline; font-weight: 600; font-size: 0.95rem;}
@@ -397,78 +345,62 @@
 
         /* ================= ODS 12 ================= */
         .ods-banner {
-            background: linear-gradient(145deg, #1a1814, #141418);
-            border: 1px solid var(--gold); border-radius: 24px; padding: 50px;
-            text-align: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            background: linear-gradient(145deg, #16140f, var(--bg-card));
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 24px; padding: 50px;
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
-        .ods-banner h3 { font-size: 2rem; margin-bottom: 20px; color: var(--gold); }
-        .ods-banner p { max-width: 900px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.05rem; text-align: justify; line-height: 1.7; }
+        .ods-banner h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--gold); font-weight: 700;}
+        .ods-banner p { max-width: 900px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1rem; text-align: justify; line-height: 1.7; }
         
-        .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; text-align: left; margin-top: 40px; }
-        .smart-item { background: rgba(0,0,0,0.5); padding: 30px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.3); border-top: 4px solid var(--gold); transition: transform 0.2s;}
-        .smart-item:hover { transform: translateY(-5px); }
-        .smart-item h4 { color: var(--gold); margin-bottom: 15px; font-size: 1.2rem; }
-        .smart-item p { font-size: 0.95rem; text-align: left; }
+        .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 40px; }
+        .smart-item { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.15); transition: transform 0.2s;}
+        .smart-item:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.4);}
+        .smart-item h4 { color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; font-weight: 700;}
+        .smart-item p { font-size: 0.95rem; text-align: left; margin: 0;}
 
-        /* ================= MODELO DE NEGOCIO MEJORADO ================= */
+        /* ================= MODELO DE NEGOCIO ================= */
         .business-model-info {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-left: 4px solid var(--primary);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 40px;
-            text-align: left;
-            width: 100%;
+            background: rgba(230, 30, 77, 0.05);
+            border: 1px solid rgba(230, 30, 77, 0.15);
+            border-radius: 20px; padding: 30px; margin-bottom: 40px;
+            text-align: left; width: 100%;
         }
-        .business-model-info h4 {
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-        }
-        .business-model-info p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
+        .business-model-info h4 { color: var(--primary); font-size: 1.3rem; margin-bottom: 15px; font-weight: 700;}
+        .business-model-info p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
         .business-model-info p:last-child { margin-bottom: 0; }
 
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .pricing-card { text-align: center; padding: 50px 40px; display: flex; flex-direction: column;}
         .price { font-size: 3.5rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
-        .price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
         
-        /* Lista de costos más limpia */
-        .cost-list { list-style: none; text-align: left; margin-bottom: 30px; flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px;}
-        .cost-list li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; text-align: left; font-size: 0.95rem;}
+        .cost-list { list-style: none; text-align: left; margin-bottom: 30px; flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 16px;}
+        .cost-list li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem;}
         .cost-list li:last-child { margin-bottom: 0;}
         .cost-list li i { color: var(--primary); margin-top: 4px; width: 20px; text-align: center;}
         .cost-list li strong { color: var(--secondary); display: block; margin-bottom: 2px;}
 
-        .highlight-gold { border-color: rgba(212, 175, 55, 0.7); background: linear-gradient(145deg, #1a1814, #141418); }
-        .highlight-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.25); }
+        .highlight-gold { border-color: rgba(212, 175, 55, 0.3); background: linear-gradient(145deg, #16140f, var(--bg-card)); }
+        .highlight-gold:hover { border-color: rgba(212, 175, 55, 0.6); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.1); }
 
         /* ================= EQUIPO ================= */
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .team-card { text-align: center; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s ease;}
-        .team-card:active { transform: scale(0.98); }
+        .team-card { text-align: center; display: flex; flex-direction: column; align-items: center;}
         
         .team-img-link {
             position: relative; display: block; margin-bottom: 20px; border-radius: 50%;
-            transition: transform 0.3s; width: 150px; height: 150px;
+            transition: transform 0.3s; width: 130px; height: 130px;
         }
         .team-img {
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--border-gray); transition: border-color 0.3s;
+            border: 2px solid var(--border-subtle); transition: border-color 0.3s;
             background-color: #222; display: block;
         }
         .team-img-link::after {
             content: '\f16d'; font-family: 'Font Awesome 6 Brands';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); color: white; font-size: 3.5rem;
+            background: rgba(0, 0, 0, 0.8); color: white; font-size: 3rem;
             display: flex; justify-content: center; align-items: center;
             border-radius: 50%; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
         }
@@ -476,66 +408,56 @@
         .team-img-link:hover .team-img { border-color: var(--primary); }
         .team-img-link:hover { transform: scale(1.05); }
         
-        .team-alias { font-size: 1.4rem; font-weight: 800; color: var(--secondary); margin-bottom: 5px; }
-        .team-realname { font-size: 0.9rem; color: var(--primary); font-weight: 600; margin-bottom: 15px; }
+        .team-alias { font-size: 1.2rem; font-weight: 700; color: var(--secondary); margin-bottom: 5px; }
+        .team-realname { font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 15px; }
         .team-role { 
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border-gray); border-radius: 8px;
-            padding: 6px 14px; color: var(--secondary); font-size: 0.75rem; font-weight: 700; 
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); border-radius: 8px;
+            padding: 5px 12px; color: var(--text-muted); font-size: 0.7rem; font-weight: 700; 
             letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 15px; 
         }
-        .team-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; text-align: center; }
+        .team-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; text-align: center; }
 
         /* ================= MATERIAL PROMOCIONAL ================= */
         .promo-single { display: flex; justify-content: center; width: 100%; }
         .promo-img { 
-            width: 100%; max-width: 650px; 
-            height: auto; object-fit: contain; 
-            border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            width: 100%; max-width: 600px; height: auto; object-fit: contain; 
+            border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
         /* ================= FOOTER ================= */
         footer {
-            background: #050505;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: #050505; border-top: 1px solid var(--border-subtle);
             padding: 60px 10% 30px;
-            position: relative;
-            z-index: 1;
         }
         
         .footer-content {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 40px;
-            align-items: center;
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 40px; max-width: 1200px; margin: 0 auto 40px; align-items: center;
         }
 
-        .footer-brand h2 { font-size: 1.6rem; font-weight: 900; color: var(--secondary); margin-bottom: 10px; }
+        .footer-brand h2 { font-size: 1.4rem; font-weight: 800; color: var(--secondary); margin-bottom: 10px; }
         .footer-brand h2 span { color: var(--primary); }
-        .footer-brand p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+        .footer-brand p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
         
-        .footer-logo-center img { width: 120px; height: auto; opacity: 0.9; transition: transform 0.3s; }
-        .footer-logo-center img:hover { transform: scale(1.1); }
+        .footer-logo-center img { width: 100px; height: auto; opacity: 0.8; transition: transform 0.3s; }
+        .footer-logo-center img:hover { transform: scale(1.1); opacity: 1;}
 
-        .footer-links h4 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 15px; }
+        .footer-links h4 { font-size: 1rem; color: var(--secondary); margin-bottom: 15px; }
         .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; transition: color 0.3s; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
         .footer-links a:hover { color: var(--primary); }
         
         .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: #666;
-            font-size: 0.85rem;
+            text-align: center; padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+            color: #555; font-size: 0.8rem;
         }
 
         /* ================= BOTÓN SCROLL TOP ================= */
         #scrollTop {
             position: fixed; bottom: 30px; right: 30px;
             width: 45px; height: 45px; border-radius: 50%;
-            background: var(--bg-surface); color: white; border: 1px solid var(--border-red);
+            background: var(--bg-card); color: white; border: 1px solid var(--border-subtle);
             font-size: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
         }
         #scrollTop.show { opacity: 1; visibility: visible; }
@@ -560,24 +482,22 @@
             nav { width: 95%; top: 10px; padding: 12px 20px; }
             .nav-links { display: none; }
             .menu-toggle { display: block; }
-            .company-name { font-size: 0.95rem; }
             
             section { padding: 60px 5%; }
             .grid-2, .proto-grid, .smart-grid { grid-template-columns: 1fr; }
             
-            .glass-card { padding: 30px 20px; }
+            .app-card { padding: 30px 20px; }
             .hero-title { font-size: 2.5rem; }
-            .video-wrapper { border-radius: 12px; }
             
             .team-grid { grid-template-columns: 1fr; } 
-            .team-img-link { width: 130px; height: 130px; }
+            .team-img-link { width: 120px; height: 120px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fondo mejorado -->
-    <div class="bg-gradient"></div>
+    <!-- Fondo con resplandor sutil -->
+    <div class="bg-glow"></div>
 
     <!-- NAVBAR -->
     <nav>
@@ -647,7 +567,7 @@
         </div>
     </div>
 
-    <!-- PROBLEMA Y SOLUCIÓN (ESTÁTICOS CON BORDE ILUMINADO) -->
+    <!-- PROBLEMA Y SOLUCIÓN (Estilo App) -->
     <section id="solucion">
         <div class="section-header reveal">
             <h2 class="section-title">El Problema y Nuestra <span>Solución</span></h2>
@@ -655,37 +575,37 @@
         </div>
         
         <div class="grid-2">
-            <div class="glass-card reveal">
+            <div class="app-card reveal">
                 <div class="card-header-row">
                     <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
                     <h3>El Modelo Roto</h3>
                 </div>
                 <p>Las plataformas actuales (Spotify, Apple Music) presentan varios problemas críticos para el usuario y el planeta:</p>
-                <ul class="info-list text-red">
-                    <li><i class="fa-solid fa-circle"></i> <div><strong>Suscripciones infinitas:</strong> Pagas mes tras mes sin poseer absolutamente nada. Si dejas de pagar, pierdes tu biblioteca y todo el historial.</div></li>
-                    <li><i class="fa-solid fa-circle"></i> <div><strong>Dependencia de internet:</strong> Sin red móvil o Wi-Fi, no hay música. Estás atado a la cobertura de tu zona, al consumo de datos y a posibles cargos extra.</div></li>
-                    <li><i class="fa-solid fa-circle"></i> <div><strong>Impacto ambiental masivo:</strong> Los gigantes centros de datos consumen energía eléctrica 24/7 solo para almacenar canciones, transmitirlas y generar algoritmos. Esto contribuye enormemente a la huella de carbono global.</div></li>
-                    <li><i class="fa-solid fa-circle"></i> <div><strong>Reproductores obsoletos:</strong> Los reproductores locales tradicionales batallan para leer formatos modernos y a menudo fallan al organizar metadatos complejos o mostrar carátulas.</div></li>
+                <ul class="app-list">
+                    <li><i class="fa-solid fa-circle" style="color: var(--primary);"></i> <div><strong>Suscripciones infinitas:</strong> Pagas mes tras mes sin poseer absolutamente nada. Si dejas de pagar, pierdes tu biblioteca y todo el historial.</div></li>
+                    <li><i class="fa-solid fa-circle" style="color: var(--primary);"></i> <div><strong>Dependencia de internet:</strong> Sin red móvil o Wi-Fi, no hay música. Estás atado a la cobertura de tu zona, al consumo de datos y a posibles cargos extra.</div></li>
+                    <li><i class="fa-solid fa-circle" style="color: var(--primary);"></i> <div><strong>Impacto ambiental masivo:</strong> Los gigantes centros de datos consumen energía eléctrica 24/7 solo para almacenar canciones, transmitirlas y generar algoritmos. Esto contribuye enormemente a la huella de carbono global.</div></li>
+                    <li><i class="fa-solid fa-circle" style="color: var(--primary);"></i> <div><strong>Reproductores obsoletos:</strong> Los reproductores locales tradicionales batallan para leer formatos modernos y a menudo fallan al organizar metadatos complejos o mostrar carátulas.</div></li>
                 </ul>
             </div>
             
-            <div class="glass-card border-green reveal">
+            <div class="app-card border-green reveal">
                 <div class="card-header-row">
                     <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
                     <h3>Tu Propio Ecosistema</h3>
                 </div>
                 <p>Janeiro Music ofrece una alternativa descentralizada, libre, privada y sostenible:</p>
-                <ul class="info-list text-green">
-                    <li><i class="fa-solid fa-check"></i> <div><strong>Servidor local inteligente:</strong> Instalas un programa ligero en tu PC. Escanea y organiza toda tu música automáticamente, detectando títulos, artistas y portadas sin que muevas un dedo.</div></li>
-                    <li><i class="fa-solid fa-check"></i> <div><strong>Control absoluto:</strong> Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor (ahorrando energía y siendo amigable con el planeta). Tu música no depende de un servidor central, está en tu casa.</div></li>
-                    <li><i class="fa-solid fa-check"></i> <div><strong>Acceso Móvil Multiplataforma:</strong> Tu app se conecta a tu servidor vía red local (LAN), VPN o código QR. Reproduce en streaming y descarga tus archivos para escucharlos offline donde quieras.</div></li>
-                    <li><i class="fa-solid fa-check"></i> <div><strong>Pago único y justo:</strong> Olvídate de las rentas vitalicias. Apoyas el desarrollo del proyecto una vez y el software es tuyo para siempre, con actualizaciones incluidas.</div></li>
+                <ul class="app-list">
+                    <li><i class="fa-solid fa-check" style="color: #4ade80;"></i> <div><strong>Servidor local inteligente:</strong> Instalas un programa ligero en tu PC. Escanea y organiza toda tu música automáticamente, detectando títulos, artistas y portadas sin que muevas un dedo.</div></li>
+                    <li><i class="fa-solid fa-check" style="color: #4ade80;"></i> <div><strong>Control absoluto:</strong> Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor (ahorrando energía y siendo amigable con el planeta). Tu música no depende de un servidor central, está en tu casa.</div></li>
+                    <li><i class="fa-solid fa-check" style="color: #4ade80;"></i> <div><strong>Acceso Móvil Multiplataforma:</strong> Tu app se conecta a tu servidor vía red local (LAN), VPN o código QR. Reproduce en streaming y descarga tus archivos para escucharlos offline donde quieras.</div></li>
+                    <li><i class="fa-solid fa-check" style="color: #4ade80;"></i> <div><strong>Pago único y justo:</strong> Olvídate de las rentas vitalicias. Apoyas el desarrollo del proyecto una vez y el software es tuyo para siempre, con actualizaciones incluidas.</div></li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- PROTOTIPO (ESTÁTICOS CON BORDE ILUMINADO) -->
+    <!-- PROTOTIPO (Estilo App) -->
     <section id="prototipo">
         <div class="section-header reveal">
             <h2 class="section-title">El <span>Prototipo</span></h2>
@@ -704,34 +624,10 @@
                     <p>Desarrollado en Python con el framework FastAPI, este programa actúa como el núcleo de todo el ecosistema. Se ejecuta en tu computadora local, escaneando de forma asíncrona todas tus carpetas de música, extrayendo metadatos precisos (título, artista, álbum y carátulas), y generando un índice de búsqueda ultra rápido. Esto permite que la app móvil encuentre y reproduzca cualquier canción en milisegundos, sin importar el tamaño de tu biblioteca.</p>
                     
                     <ul>
-                        <li>
-                            <i class="fa-solid fa-microchip"></i> 
-                            <div>
-                                <strong>Procesamiento veloz:</strong>
-                                <span> Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-image"></i> 
-                            <div>
-                                <strong>Metadatos y Carátulas:</strong>
-                                <span> Analiza los tags ID3 (título, artista, álbum) y extrae las imágenes incrustadas en los archivos MP3/FLAC.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-lock"></i> 
-                            <div>
-                                <strong>Servido seguro:</strong>
-                                <span> Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-desktop"></i> 
-                            <div>
-                                <strong>Interfaz Gráfica:</strong>
-                                <span> Incluye un panel de control visual para gestionar las carpetas escaneadas, ver estadísticas de uso y monitorear conexiones.</span>
-                            </div>
-                        </li>
+                        <li><i class="fa-solid fa-microchip"></i> <div><strong>Procesamiento veloz:</strong> <span> Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span></div></li>
+                        <li><i class="fa-solid fa-image"></i> <div><strong>Metadatos y Carátulas:</strong> <span> Analiza los tags ID3 (título, artista, álbum) y extrae las imágenes incrustadas en los archivos MP3/FLAC.</span></div></li>
+                        <li><i class="fa-solid fa-lock"></i> <div><strong>Servido seguro:</strong> <span> Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span></div></li>
+                        <li><i class="fa-solid fa-desktop"></i> <div><strong>Interfaz Gráfica:</strong> <span> Incluye un panel de control visual para gestionar las carpetas escaneadas, ver estadísticas de uso y monitorear conexiones.</span></div></li>
                     </ul>
                 </div>
             </div>
@@ -748,34 +644,10 @@
                     <p>Construida con Flutter para Android (y eventualmente iOS), ofrece una experiencia de usuario fluida, oscura y moderna. Se conecta a tu servidor mediante su dirección IP o escaneando un Código QR generado por el servidor.</p>
                     
                     <ul>
-                        <li>
-                            <i class="fa-solid fa-list"></i> 
-                            <div>
-                                <strong>Gestión de cola:</strong>
-                                <span> Agrega canciones, crea listas de reproducción y administra la cola de reproducción actual.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-heart"></i> 
-                            <div>
-                                <strong>Favoritos y búsqueda:</strong>
-                                <span> Marca tus canciones favoritas y busca por título, artista o álbum en tu biblioteca.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-download"></i> 
-                            <div>
-                                <strong>Modo Offline:</strong>
-                                <span> Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</span>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-sliders"></i> 
-                            <div>
-                                <strong>Personalización y UI:</strong>
-                                <span> Interfaz adaptativa con modo oscuro, colores dinámicos extraídos de las portadas y controles intuitivos.</span>
-                            </div>
-                        </li>
+                        <li><i class="fa-solid fa-list"></i> <div><strong>Gestión de cola:</strong> <span> Agrega canciones, crea listas de reproducción y administra la cola de reproducción actual.</span></div></li>
+                        <li><i class="fa-solid fa-heart"></i> <div><strong>Favoritos y búsqueda:</strong> <span> Marca tus canciones favoritas y busca por título, artista o álbum en tu biblioteca.</span></div></li>
+                        <li><i class="fa-solid fa-download"></i> <div><strong>Modo Offline:</strong> <span> Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</span></div></li>
+                        <li><i class="fa-solid fa-sliders"></i> <div><strong>Personalización y UI:</strong> <span> Interfaz adaptativa con modo oscuro, colores dinámicos extraídos de las portadas y controles intuitivos.</span></div></li>
                     </ul>
                 </div>
             </div>
@@ -811,7 +683,7 @@
         </div>
     </section>
 
-    <!-- MODELO DE NEGOCIO / INVERSIÓN (TARJETA MEJORADA) -->
+    <!-- MODELO DE NEGOCIO / INVERSIÓN -->
     <section id="negocio">
         <div class="section-header reveal">
             <h2 class="section-title">Apoya e <span>Invierte</span></h2>
@@ -827,46 +699,22 @@
 
         <div class="pricing-grid">
             
-            <!-- Tarjeta 1: Modelo y Costos (Diseño mejorado) -->
-            <div class="glass-card pricing-card reveal">
+            <!-- Tarjeta 1: Modelo y Costos -->
+            <div class="app-card pricing-card reveal">
                 <h3>Nuestro Modelo</h3>
                 <div class="price">$0 <span>/ suscripción</span></div>
                 <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El software base es gratuito y open source. Cero rentas vitalicias.</p>
                 
                 <ul class="cost-list">
-                    <li>
-                        <i class="fa-solid fa-server"></i> 
-                        <div>
-                            <strong>Costo Inicial:</strong>
-                            Prácticamente $0 MXN (usamos PCs propias/recicladas).
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-wifi"></i> 
-                        <div>
-                            <strong>Mantenimiento:</strong>
-                            ~$300 MXN/mes (Luz e Internet).
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-code"></i> 
-                        <div>
-                            <strong>Software:</strong>
-                            $0 MXN (Python, FastAPI, Flutter, Android Studio).
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fa-brands fa-google-play"></i> 
-                        <div>
-                            <strong>Publicación:</strong>
-                            $25 USD único (Google) + $99 USD/año (Apple).
-                        </div>
-                    </li>
+                    <li><i class="fa-solid fa-server"></i> <div><strong>Costo Inicial:</strong> Prácticamente $0 MXN (usamos PCs propias/recicladas).</div></li>
+                    <li><i class="fa-solid fa-wifi"></i> <div><strong>Mantenimiento:</strong> ~$300 MXN/mes (Luz e Internet).</div></li>
+                    <li><i class="fa-solid fa-code"></i> <div><strong>Software:</strong> $0 MXN (Python, FastAPI, Flutter, Android Studio).</div></li>
+                    <li><i class="fa-brands fa-google-play"></i> <div><strong>Publicación:</strong> $25 USD único (Google) + $99 USD/año (Apple).</div></li>
                 </ul>
             </div>
 
             <!-- Tarjeta 2: Inversión -->
-            <div class="glass-card pricing-card highlight-gold reveal">
+            <div class="app-card pricing-card highlight-gold reveal">
                 <h3>Oportunidad Estratégica</h3>
                 <div class="price" style="font-size: 2.5rem;">Únete</div>
                 <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
@@ -876,7 +724,7 @@
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos gracias a la arquitectura descentralizada.</li>
                     <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP (Prototipo Mínimo Viable) 100% funcional.</li>
                 </ul>
-                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">
+                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800; box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
                 </a>
             </div>
@@ -893,7 +741,7 @@
 
         <div class="team-grid">
             <!-- Pedro -->
-            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
+            <div class="app-card team-card reveal">
                 <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" class="team-img-link">
                     <img src="Files/Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
                 </a>
@@ -904,7 +752,7 @@
             </div>
 
             <!-- Leonardo -->
-            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
+            <div class="app-card team-card reveal">
                 <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" class="team-img-link">
                     <img src="Files/Leito_dicaprinchi.png" alt="Leonardo" class="team-img">
                 </a>
@@ -915,7 +763,7 @@
             </div>
 
             <!-- Issac -->
-            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
+            <div class="app-card team-card reveal">
                 <a href="https://www.instagram.com/treck23_98/" target="_blank" class="team-img-link">
                     <img src="Files/Issacini_Gonzales.png" alt="Issac" class="team-img">
                 </a>
@@ -926,7 +774,7 @@
             </div>
 
             <!-- Angel -->
-            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
+            <div class="app-card team-card reveal">
                 <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" class="team-img-link">
                     <img src="Files/Tobyas_Willson.png" alt="Angel" class="team-img">
                 </a>
@@ -937,7 +785,7 @@
             </div>
 
             <!-- Adrian -->
-            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
+            <div class="app-card team-card reveal">
                 <a href="https://www.instagram.com/ajf1_5/" target="_blank" class="team-img-link">
                     <img src="Files/El_Adriana_Pequeña.jpg" alt="Adrian" class="team-img">
                 </a>
@@ -948,7 +796,7 @@
             </div>
 
             <!-- Nicolas -->
-            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
+            <div class="app-card team-card reveal">
                 <a href="https://www.instagram.com/acostanicolasg/" target="_blank" class="team-img-link">
                     <img src="Files/A_Costilla.jpg" alt="Nicolas" class="team-img">
                 </a>
