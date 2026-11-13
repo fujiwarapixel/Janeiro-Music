@@ -19,12 +19,15 @@
         :root {
             --bg-base: #0a0a0c;
             --bg-surface: #141418;
-            --bg-surface-hover: #1c1c22;
-            --primary: #e61e4d; /* Rojo Janeiro más vibrante */
+            --primary: #e61e4d; 
             --secondary: #ffffff;
             --text-muted: #9a9aab;
             --border-color: rgba(255, 255, 255, 0.08);
-            --border-neon: rgba(230, 30, 77, 0.6); /* Neón equilibrado */
+            
+            /* Contorno Mejorado: Borde sólido vibrante + Sombra sutil */
+            --border-neon: #e61e4d; 
+            --box-shadow-neon: 0 0 15px rgba(230, 30, 77, 0.2);
+            
             --gold: #d4af37;
             --font-main: 'Outfit', sans-serif;
         }
@@ -50,6 +53,15 @@
             line-height: 1.6;
         }
 
+        /* Fondo de gradiente estático muy sutil para dar profundidad */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 0%, rgba(230, 30, 77, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
         /* ================= NAVBAR ================= */
         nav {
             position: fixed;
@@ -60,6 +72,7 @@
             background: rgba(20, 20, 24, 0.85);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-neon); border-radius: 100px;
+            box-shadow: var(--box-shadow-neon);
             z-index: 1000;
             transition: all 0.3s ease;
         }
@@ -90,7 +103,7 @@
             display: none; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
             width: 90%; background: var(--bg-surface); border: 1px solid var(--border-neon);
             border-radius: 20px; flex-direction: column; padding: 20px;
-            gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 999;
+            gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), var(--box-shadow-neon); z-index: 999;
         }
         .mobile-menu.active { display: flex; }
         .mobile-menu a {
@@ -100,41 +113,64 @@
         }
         .mobile-menu a:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
 
-        /* ================= HERO SECTION ================= */
+        /* ================= HERO SECTION (INTRO + VIDEO) ================= */
         header {
             min-height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 140px 20px 60px; position: relative;
         }
 
-        .hero-tag {
-            background: rgba(230, 30, 77, 0.1); color: var(--primary);
-            padding: 8px 20px; border-radius: 20px;
-            font-size: 0.8rem; font-weight: 800; letter-spacing: 2px;
-            margin-bottom: 25px; border: 1px solid var(--border-neon);
+        /* Logo Grande de Producto */
+        .hero-product-logo {
+            width: 180px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 20px rgba(230, 30, 77, 0.4));
+            transition: transform 0.3s;
         }
+        .hero-product-logo:hover { transform: scale(1.05); }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 900; line-height: 1.05; margin-bottom: 20px;
-            letter-spacing: -2px; text-transform: uppercase;
+            letter-spacing: -1px; text-transform: uppercase;
         }
         .hero-title span { color: var(--primary); }
 
-        .hero-slogan {
-            font-size: clamp(1.2rem, 4vw, 1.6rem);
+        /* Introducción del Proyecto */
+        .hero-intro {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
             color: var(--text-muted); font-weight: 400;
-            margin-bottom: 50px;
+            max-width: 800px; margin: 0 auto 40px auto;
+            line-height: 1.6;
         }
-        .hero-slogan .highlight { color: var(--secondary); font-weight: 700; }
+        .hero-intro strong { color: var(--secondary); font-weight: 600; }
 
-        /* Video */
+        .hero-slogan {
+            display: inline-block;
+            background: rgba(230, 30, 77, 0.1);
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            border: 1px solid var(--border-neon);
+        }
+
+        /* Video (Elevator Pitch) */
+        .video-section-title {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
         .video-wrapper {
             width: 100%; max-width: 900px; aspect-ratio: 16 / 9;
             background: #000; border-radius: 24px;
             border: 1px solid var(--border-neon);
             position: relative; overflow: hidden; margin-bottom: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            box-shadow: var(--box-shadow-neon);
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
@@ -143,14 +179,16 @@
             padding: 16px 40px; border-radius: 50px;
             font-weight: 700; font-size: 1rem; text-decoration: none;
             transition: all 0.3s; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(230, 30, 77, 0.3);
         }
-        .btn:hover { background: #c91842; transform: translateY(-2px); }
+        .btn:hover { background: #c91842; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230, 30, 77, 0.4); }
 
         /* ================= CINTA INFINITA ================= */
         .marquee-container {
             width: 100vw; overflow: hidden; background: #111;
             padding: 15px 0; transform: rotate(-1.5deg); margin: 40px 0;
-            border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-neon); border-bottom: 1px solid var(--border-neon);
+            box-shadow: var(--box-shadow-neon);
             position: relative; z-index: 10;
         }
         .marquee-content {
@@ -168,16 +206,16 @@
         .section-title span { color: var(--primary); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Tarjetas (Neón Equilibrado) */
+        /* Tarjetas (Diseño de Contorno Mejorado) */
         .glass-card {
             background: linear-gradient(145deg, rgba(28,28,34,1) 0%, rgba(20,20,24,1) 100%);
-            border: 1px solid var(--border-neon); border-radius: 24px; padding: 40px;
+            border: 1px solid var(--border-neon); 
+            border-radius: 24px; padding: 40px;
             transition: all 0.3s ease;
             position: relative;
         }
         .glass-card:hover { 
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(230, 30, 77, 0.15); /* Brillo sutil */
+            box-shadow: 0 0 25px rgba(230, 30, 77, 0.25); 
             transform: translateY(-5px);
         }
 
@@ -201,6 +239,7 @@
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
             border-radius: 20px 20px 0 0; background: #000;
             border: 1px solid var(--border-neon);
+            box-shadow: var(--box-shadow-neon);
         }
         .laptop-mockup::after {
             content: ''; position: absolute; bottom: -18px; left: -5%; width: 110%; height: 18px;
@@ -212,6 +251,7 @@
             width: 100%; max-width: 260px; aspect-ratio: 9/19; border: 10px solid #1a1a1a; border-radius: 40px;
             background: #000; margin: 0 auto; position: relative; overflow: hidden;
             border: 1px solid var(--border-neon);
+            box-shadow: var(--box-shadow-neon);
         }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -223,15 +263,16 @@
         /* ================= ODS 12 ================= */
         .ods-banner {
             background: linear-gradient(145deg, #1a1814, #141418);
-            border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 24px; padding: 50px;
+            border: 1px solid var(--gold); border-radius: 24px; padding: 50px;
             text-align: center;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
         }
         .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
         .ods-banner h3 { font-size: 2rem; margin-bottom: 15px; color: var(--gold); }
         .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); }
         
         .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 30px; }
-        .smart-item { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .smart-item { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.3); }
         .smart-item h4 { color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; }
 
         /* ================= MODELO DE NEGOCIO ================= */
@@ -244,7 +285,7 @@
         .pricing-card ul li i { color: #00ff64; }
         
         .highlight-gold { border-color: rgba(212, 175, 55, 0.7); background: linear-gradient(145deg, #1a1814, #141418); }
-        .highlight-gold:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); }
+        .highlight-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.25); }
 
         /* ================= EQUIPO (Grid 3x2) ================= */
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -269,7 +310,7 @@
         }
         
         .team-img-link:hover::after { opacity: 1; }
-        .team-img-link:hover .team-img { border-color: var(--primary); }
+        .team-img-link:hover .team-img { border-color: var(--primary); box-shadow: 0 0 15px rgba(230, 30, 77, 0.4); }
         .team-img-link:hover { transform: scale(1.05); }
         
         .team-alias { font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 5px; }
@@ -288,6 +329,7 @@
         footer {
             text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--border-neon);
             background: #050505;
+            box-shadow: 0 -10px 30px rgba(230, 30, 77, 0.1);
         }
         .footer-logo img { height: 45px; margin-bottom: 15px; }
 
@@ -299,7 +341,7 @@
             font-size: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
         }
         #scrollTop.show { opacity: 1; visibility: visible; }
-        #scrollTop:hover { background: var(--primary); border-color: var(--primary); }
+        #scrollTop:hover { background: var(--primary); border-color: var(--primary); box-shadow: var(--box-shadow-neon); }
 
         /* ================= RESPONSIVE (MÓVILES) ================= */
         @media (max-width: 1024px) {
@@ -311,11 +353,14 @@
             .nav-links { display: none; }
             .menu-toggle { display: block; }
             
+            header { padding: 120px 20px 40px; }
+            .hero-product-logo { width: 140px; }
+            
             section { padding: 60px 5%; }
             .grid-2, .proto-grid, .promo-grid, .smart-grid { grid-template-columns: 1fr; }
             
             .glass-card { padding: 30px 20px; }
-            .hero-title { font-size: 2.8rem; }
+            .hero-title { font-size: 2.5rem; }
             .video-wrapper { border-radius: 12px; }
             .phone-mockup { max-width: 220px; }
             
@@ -325,6 +370,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Gradiente de fondo sutil -->
+    <div class="bg-gradient"></div>
 
     <!-- NAVBAR -->
     <nav>
@@ -356,14 +404,27 @@
         <a href="#material">Material</a>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO / INICIO -->
     <header id="inicio">
-        <div class="hero-tag">CERRU DE JANEIRO COMPANY ©</div>
+        
+        <!-- Logo del Producto -->
+        <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
+        
+        <!-- Título -->
         <h1 class="hero-title">JANEIRO <span>MUSIC</span></h1>
         
-        <p class="hero-slogan" id="typewriter">
-            Monta tu server y lleva tu música a tu <span class="highlight">Cerro</span>.
+        <!-- Introducción al Proyecto -->
+        <p class="hero-intro">
+            Bienvenidos a la revolución de la música independiente. <strong>Janeiro Music</strong> es un ecosistema descentralizado que combina un servidor local potente con una aplicación móvil intuitiva. Nuestro objetivo es devolverle al usuario el control total de su biblioteca musical, eliminando las suscripciones costosas y la dependencia de la nube corporativa. Tú eres el dueño, tú pones las reglas.
         </p>
+
+        <!-- Eslogan -->
+        <div class="hero-slogan">
+            Monta tu server y lleva tu música a tu Cerro.
+        </div>
+
+        <!-- Elevator Pitch -->
+        <h2 class="video-section-title">Conoce nuestro Elevator Pitch</h2>
         
         <div class="video-wrapper">
             <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -495,7 +556,7 @@
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos</li>
                     <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP ya funcional</li>
                 </ul>
-                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800;">
+                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
                 </a>
             </div>
@@ -621,7 +682,6 @@
 
             menuToggle.addEventListener('click', () => {
                 mobileMenu.classList.toggle('active');
-                // Cambiar icono a X cuando esté abierto
                 const icon = menuToggle.querySelector('i');
                 if(mobileMenu.classList.contains('active')) {
                     icon.classList.remove('fa-bars');
@@ -632,7 +692,6 @@
                 }
             });
 
-            // Cerrar menú al hacer clic en un enlace
             const mobileLinks = mobileMenu.querySelectorAll('a');
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
