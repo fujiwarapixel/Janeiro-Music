@@ -310,15 +310,23 @@
         }
 
         /* ================= EQUIPO ================= */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .team-card { text-align: center; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .team-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
         .team-img {
             width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
             border: 3px solid var(--border); margin-bottom: 20px; transition: all 0.4s;
             filter: grayscale(100%);
         }
         .team-card:hover .team-img { border-color: var(--primary); transform: scale(1.1) rotate(5deg); filter: grayscale(0%); box-shadow: 0 0 25px var(--primary-glow); }
-        .team-role { color: var(--primary); font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; display: block; text-shadow: 0 0 10px var(--primary-glow); }
+        
+        /* Estilos de los nombres del equipo */
+        .team-alias { font-size: 1.4rem; font-weight: 900; color: var(--secondary); margin-bottom: 5px; line-height: 1.2; }
+        .team-realname { font-size: 0.9rem; color: var(--primary); font-weight: 700; margin-bottom: 15px; }
+        .team-role { 
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px;
+            padding: 4px 12px; color: var(--secondary); font-size: 0.8rem; font-weight: 800; 
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; 
+        }
 
         /* ================= MATERIAL PROMOCIONAL ================= */
         .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -546,41 +554,58 @@
         </div>
 
         <div class="team-grid">
+            <!-- Pedro -->
             <div class="glass-card team-card reveal tilt">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Pedro" alt="Pedro" class="team-img">
-                <h3>Pedro M. Godínez</h3>
-                <span class="team-role">Líder de Desarrollo Técnico</span>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Arquitecto backend, supervisor y creador del núcleo del producto.</p>
+                <div class="team-alias">Pedrouski el Pixelouski</div>
+                <div class="team-realname">Pedro Miguel Godínez Rodríguez - AL07164060</div>
+                <div class="team-role">Líder de Desarrollo Técnico</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Encargado del desarrollo óptimo del producto, supervisor y desarrollador del mismo.</p>
             </div>
+
+            <!-- Leonardo -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.1s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Leonardo" alt="Leonardo" class="team-img">
-                <h3>Leonardo Martínez</h3>
-                <span class="team-role">Desarrollo de Soporte</span>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante directo en el desarrollo técnico y depuración de errores.</p>
+                <div class="team-alias">Leito dicaprinchi</div>
+                <div class="team-realname">Leonardo Martínez González - AL07184261</div>
+                <div class="team-role">Ayudante de Desarrollo</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante principal del líder técnico, siguiendo órdenes y apoyando en el desarrollo.</p>
             </div>
+
+            <!-- Issac -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.2s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Issac" alt="Issac" class="team-img">
-                <h3>Issac R. Ordaz</h3>
-                <span class="team-role">Líder de Equipo</span>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Coordinador general, estructura el proyecto y es la voz principal.</p>
+                <div class="team-alias">Issacini Gonzales.</div>
+                <div class="team-realname">Issac Rodrigo Ordaz de León - AL07134283</div>
+                <div class="team-role">Líder de Equipo y Coordinador</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Supervisa el progreso, coordina acciones del grupo y es la voz principal del equipo.</p>
             </div>
+
+            <!-- Angel -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.3s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Angel" alt="Angel" class="team-img">
-                <h3>Ángel B. Tovar</h3>
-                <span class="team-role">Diseño e Identidad</span>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Creador de la identidad visual, UI/UX y material promocional.</p>
+                <div class="team-alias">Tobyas Willson</div>
+                <div class="team-realname">Ángel Bernardo Tovar Martínez - AL07162353</div>
+                <div class="team-role">Diseñador Gráfico Principal</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Hizo el diseño de Janeiro Music, permitiendo presentar el producto de forma atractiva.</p>
             </div>
+
+            <!-- Adrian -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.4s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Adrian" alt="Adrian" class="team-img">
-                <h3>Adrián Jiménez</h3>
-                <span class="team-role">QA & Testing</span>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Encargado de pruebas, feedback y análisis de la competencia.</p>
+                <div class="team-alias">El Adriana Pequeña</div>
+                <div class="team-realname">Adrián Jiménez Flores - AL07134668</div>
+                <div class="team-role">Probador del Producto (QA)</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Verifica los errores del programa en el ámbito público y da retroalimentación.</p>
             </div>
+
+            <!-- Nicolas -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.5s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Nicolas" alt="Nicolas" class="team-img">
-                <h3>Nicolás Acosta</h3>
-                <span class="team-role">Comunicación</span>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Estructuración de información y presentaciones de impacto.</p>
+                <div class="team-alias">A Costilla</div>
+                <div class="team-realname">Nicolás Acosta Galaviz - AL07183711</div>
+                <div class="team-role">Ayudante de Presentaciones</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante en la creación de las presentaciones, aportando información importante del producto.</p>
             </div>
         </div>
     </section>
