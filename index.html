@@ -80,7 +80,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Nombre de la empresa en texto en lugar de logo */
         .company-name {
             font-weight: 800;
             font-size: 1.1rem;
@@ -130,7 +129,6 @@
             text-align: center; padding: 140px 20px 60px; position: relative;
         }
 
-        /* Logo Grande de Producto */
         .hero-product-logo {
             width: 160px;
             margin-bottom: 20px;
@@ -158,9 +156,8 @@
             border: 1px solid var(--border-red);
         }
 
-        /* Introducción del Proyecto */
         .hero-intro-container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto 50px auto;
             padding: 0 20px;
         }
@@ -168,10 +165,11 @@
             font-size: clamp(1rem, 2vw, 1.15rem);
             color: var(--text-muted); font-weight: 400;
             line-height: 1.8;
+            text-align: justify;
+            text-align-last: center;
         }
         .hero-intro strong { color: var(--secondary); font-weight: 600; }
 
-        /* Video (Elevator Pitch) */
         .video-section-title {
             margin-bottom: 20px;
             font-size: 1.4rem;
@@ -218,7 +216,7 @@
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-title { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 15px; }
         .section-title span { color: var(--primary); }
-        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; text-align: center; }
 
         /* Tarjeta Base (Contorno Rojo) */
         .glass-card {
@@ -227,17 +225,13 @@
             border-radius: 24px; padding: 40px;
             transition: all 0.3s ease;
             position: relative;
+            height: 100%; /* Para que todas tengan la misma altura */
         }
-        .glass-card:hover { 
-            box-shadow: var(--box-shadow-red); 
-            transform: translateY(-5px);
-        }
+        .glass-card:hover { box-shadow: var(--box-shadow-red); transform: translateY(-5px); }
 
-        /* Contorno Gris para Prototipo y Material */
         .border-gray { border-color: var(--border-gray); }
         .border-gray:hover { box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); }
         
-        /* Contorno Verde para Ecosistema */
         .border-green { border-color: var(--border-green); }
         .border-green:hover { box-shadow: var(--box-shadow-green); }
 
@@ -251,16 +245,31 @@
         .icon-red { background: rgba(230, 30, 77, 0.1); color: var(--primary); border: 1px solid var(--border-red); }
         .icon-green { background: rgba(34, 197, 94, 0.1); color: var(--border-green); border: 1px solid var(--border-green); }
 
-        .glass-card h3 { font-size: 1.6rem; margin-bottom: 15px; }
-        .glass-card p { color: var(--text-muted); font-size: 1rem; }
+        .glass-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .glass-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 15px; text-align: justify; }
+        
+        /* Listas en tarjetas */
+        .info-list { list-style: none; margin-top: 15px; }
+        .info-list li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .info-list li i { color: var(--primary); margin-top: 5px; font-size: 0.8rem; }
 
         /* ================= PROTOTIPO ================= */
-        .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
         
+        .proto-text-box {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 3px solid var(--border-gray);
+        }
+        .proto-text-box h4 { color: var(--secondary); font-size: 1.1rem; margin-bottom: 8px; }
+        .proto-text-box p { color: var(--text-muted); font-size: 0.9rem; }
+
         .laptop-mockup {
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
             border-radius: 20px 20px 0 0; background: #000;
-            border: 1px solid var(--border-gray); /* Contorno Gris */
+            border: 1px solid var(--border-gray); 
             box-shadow: 0 0 20px rgba(0,0,0,0.6);
         }
         .laptop-mockup::after {
@@ -272,7 +281,7 @@
         .phone-mockup {
             width: 100%; max-width: 260px; aspect-ratio: 9/19; border: 10px solid #1a1a1a; border-radius: 40px;
             background: #000; margin: 0 auto; position: relative; overflow: hidden;
-            border: 1px solid var(--border-gray); /* Contorno Gris */
+            border: 1px solid var(--border-gray); 
             box-shadow: 0 0 20px rgba(0,0,0,0.6);
         }
         .phone-notch {
@@ -291,11 +300,12 @@
         }
         .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
         .ods-banner h3 { font-size: 2rem; margin-bottom: 15px; color: var(--gold); }
-        .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); }
+        .ods-banner p { max-width: 850px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.05rem; text-align: justify; }
         
         .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 30px; }
         .smart-item { background: rgba(0,0,0,0.4); padding: 25px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.3); }
         .smart-item h4 { color: var(--gold); margin-bottom: 10px; font-size: 1.1rem; }
+        .smart-item p { font-size: 0.95rem; }
 
         /* ================= MODELO DE NEGOCIO ================= */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
@@ -303,21 +313,15 @@
         .price { font-size: 3.5rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
         .price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; }
         .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
-        .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
-        .pricing-card ul li i { color: #00ff64; }
+        .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 10px; text-align: left;}
+        .pricing-card ul li i { color: #00ff64; margin-top: 5px; }
         
         .highlight-gold { border-color: rgba(212, 175, 55, 0.7); background: linear-gradient(145deg, #1a1814, #141418); }
         .highlight-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.25); }
 
         /* ================= EQUIPO ================= */
-        .team-logo-container {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .team-logo-container img {
-            height: 80px;
-            opacity: 0.8;
-        }
+        .team-logo-container { text-align: center; margin-bottom: 40px; }
+        .team-logo-container img { height: 80px; opacity: 0.8; }
 
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .team-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
@@ -328,7 +332,7 @@
         }
         .team-img {
             width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--border-gray); /* Contorno Gris Integrantes */
+            border: 2px solid var(--border-gray);
             transition: border-color 0.3s;
             background-color: #222; display: block;
         }
@@ -354,8 +358,9 @@
         }
 
         /* ================= MATERIAL PROMOCIONAL ================= */
-        .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .promo-img { width: 100%; border-radius: 12px; border: 1px solid var(--border-gray); }
+        .promo-single { display: flex; justify-content: center; }
+        .promo-card { max-width: 800px; width: 100%; text-align: center; }
+        .promo-img { width: 100%; max-height: 600px; object-fit: contain; border-radius: 12px; border: 1px solid var(--border-gray); margin-top: 20px;}
 
         /* ================= FOOTER ================= */
         footer {
@@ -389,7 +394,7 @@
             .hero-product-logo { width: 130px; }
             
             section { padding: 60px 5%; }
-            .grid-2, .proto-grid, .promo-grid, .smart-grid { grid-template-columns: 1fr; }
+            .grid-2, .proto-grid, .smart-grid { grid-template-columns: 1fr; }
             
             .glass-card { padding: 30px 20px; }
             .hero-title { font-size: 2.5rem; }
@@ -408,10 +413,8 @@
 
     <!-- NAVBAR -->
     <nav>
-        <!-- Nombre de la empresa en texto -->
         <div class="company-name">CERRU DE <span>JANEIRO</span> COMPANY</div>
         
-        <!-- Menú Desktop -->
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#solucion">Solución</a>
@@ -421,7 +424,6 @@
             <a href="#equipo">Equipo</a>
             <a href="#material">Material</a>
         </div>
-        <!-- Botón Hamburguesa -->
         <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
     </nav>
 
@@ -438,26 +440,20 @@
 
     <!-- HERO / INICIO -->
     <header id="inicio">
-        
-        <!-- Logo del Producto -->
         <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
         
-        <!-- Título -->
         <h1 class="hero-title">JANEIRO <span>MUSIC</span></h1>
         
-        <!-- Eslogan -->
         <div class="hero-slogan">
             Monta tu server y lleva tu música a tu Cerro.
         </div>
 
-        <!-- Introducción al Proyecto -->
         <div class="hero-intro-container">
             <p class="hero-intro">
-                Bienvenidos a la revolución de la música independiente. <strong>Janeiro Music</strong> es un ecosistema descentralizado que combina un servidor local potente con una aplicación móvil intuitiva. Nuestro objetivo es devolverle al usuario el control total de su biblioteca musical, eliminando las suscripciones costosas y la dependencia de la nube corporativa. Tú eres el dueño, tú pones las reglas.
+                Bienvenidos a la revolución de la música independiente. <strong>Janeiro Music</strong> es un ecosistema descentralizado que combina un servidor local potente con una aplicación móvil intuitiva. Nuestro objetivo es devolverle al usuario el control total de su biblioteca musical, eliminando las suscripciones costosas y la dependencia de la nube corporativa. Tú eres el dueño, tú pones las reglas. Te invitamos a ver nuestro pitch y descubrir cómo estamos cambiando las reglas del juego.
             </p>
         </div>
 
-        <!-- Elevator Pitch -->
         <h2 class="video-section-title">Conoce nuestro Elevator Pitch</h2>
         
         <div class="video-wrapper">
@@ -493,13 +489,25 @@
             <div class="glass-card reveal tilt">
                 <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <h3>El Modelo Roto</h3>
-                <p>Las plataformas actuales te obligan a pagar suscripciones mensuales de por vida. No eres dueño de nada, dependes de internet y enormes centros de datos consumen energía masiva. Además, los reproductores tradicionales batallan con metadatos complejos.</p>
+                <p>Las plataformas actuales (Spotify, Apple Music) presentan varios problemas críticos para el usuario y el planeta:</p>
+                <ul class="info-list">
+                    <li><i class="fa-solid fa-circle"></i> <strong>Suscripciones infinitas:</strong> Pagas mes tras mes sin poseer absolutamente nada. Si dejas de pagar, pierdes tu música.</li>
+                    <li><i class="fa-solid fa-circle"></i> <strong>Dependencia de internet:</strong> Sin red, no hay música. Estás atado a la cobertura y al consumo de datos.</li>
+                    <li><i class="fa-solid fa-circle"></i> <strong>Impacto ambiental:</strong> Los gigantes centros de datos consumen energía masiva 24/7 solo para transmitir canciones.</li>
+                    <li><i class="fa-solid fa-circle"></i> <strong>Reproductores obsoletos:</strong> Los reproductores locales tradicionales fallan al organizar metadatos complejos y carátulas.</li>
+                </ul>
             </div>
             <!-- Tarjeta Verde -->
             <div class="glass-card border-green reveal tilt" style="transition-delay: 0.2s;">
                 <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
                 <h3>Tu Propio Ecosistema</h3>
-                <p>Janeiro Music es un ecosistema descentralizado. Instalas nuestro servidor ligero en tu PC (o en un dispositivo reciclado) y tu app móvil se conecta a él. Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor. Pago único, control total.</p>
+                <p>Janeiro Music ofrece una alternativa descentralizada, libre y sostenible:</p>
+                <ul class="info-list" style="--primary: var(--border-green);">
+                    <li><i class="fa-solid fa-check"></i> <strong>Servidor local:</strong> Instalas un programa ligero en tu PC. Escanea y organiza toda tu música automáticamente.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Control total:</strong> Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor (ahorrando energía).</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Acceso Móvil:</strong> Tu app se conecta a tu servidor vía LAN, VPN o QR. Reproduce y descarga para offline.</li>
+                    <li><i class="fa-solid fa-check"></i> <strong>Pago único:</strong> Olvídate de las rentas. Apoyas el proyecto una vez y es tuyo para siempre.</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -517,7 +525,10 @@
                 <div class="laptop-mockup">
                     <img src="Files/Prototipo_Server.png" alt="Servidor">
                 </div>
-                <p style="color: var(--text-muted); margin-top: 30px; text-align: center;">Escanea carpetas, extrae metadatos (título, álbum, carátula) y sirve los archivos a la red.</p>
+                <div class="proto-text-box">
+                    <h4>El Cerebro (Backend)</h4>
+                    <p>Desarrollado en Python con FastAPI, este programa escanea tus carpetas locales. Extrae metadatos precisos (título, artista, álbum, carátula) e indexa todo en milisegundos. Sirve los archivos de audio y las imágenes a la red local de forma segura y eficiente.</p>
+                </div>
             </div>
             
             <div class="reveal tilt" style="transition-delay: 0.2s;">
@@ -526,7 +537,10 @@
                     <div class="phone-notch"></div>
                     <img src="Files/Prototipo_App.png" alt="App">
                 </div>
-                <p style="color: var(--text-muted); margin-top: 20px; text-align: center;">Interfaz fluida. Conéctate vía LAN, VPN o QR. Descarga para uso offline.</p>
+                <div class="proto-text-box">
+                    <h4>La Interfaz (Frontend)</h4>
+                    <p>Construida con Flutter, ofrece una experiencia fluida idéntica a las grandes plataformas. Conéctate mediante URL o Código QR. Permite gestionar la cola, buscar, marcar favoritos y descargar archivos al almacenamiento del teléfono para escucharlos sin conexión.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -541,20 +555,20 @@
         <div class="ods-banner reveal tilt">
             <i class="fa-solid fa-infinity ods-logo"></i>
             <h3>ODS 12: Producción y Consumo Responsables</h3>
-            <p>Reducimos la basura electrónica dándole una segunda vida a computadoras viejas. Al usar redes locales, disminuimos el consumo energético de los gigantes centros de datos y reducimos el gasto de datos móviles.</p>
+            <p>En Janeiro Music estamos comprometidos con el planeta. Nuestra arquitectura descentralizada ataca directamente el desperdicio tecnológico. Al no depender de servidores en la nube y permitir que el usuario recicle computadoras viejas como sus propios servidores, evitamos la generación de basura electrónica. Además, al transmitir por red local (LAN) o tener archivos offline, reducimos drásticamente el consumo energético de los gigantes centros de datos y el gasto de datos móviles.</p>
             
             <div class="smart-grid">
                 <div class="smart-item">
                     <h4>Corto Plazo</h4>
-                    <p>Lanzar Beta cerrada a 50 usuarios y obtener feedback de usabilidad.</p>
+                    <p>Lanzar una Beta cerrada a 50 usuarios (principalmente estudiantes) para obtener feedback de usabilidad y corregir errores tempranos.</p>
                 </div>
                 <div class="smart-item">
                     <h4>Mediano Plazo</h4>
-                    <p>Alcanzar 1,000 usuarios activos en México con una retención del 30%.</p>
+                    <p>Alcanzar 1,000 usuarios activos en México y lograr una retención del 30%, introduciendo funciones premium de pago único.</p>
                 </div>
                 <div class="smart-item">
                     <h4>Largo Plazo</h4>
-                    <p>Expandirnos a Latinoamérica y ser la alternativa #1 al streaming rentado.</p>
+                    <p>Expandirnos por toda Latinoamérica, convirtiéndonos en la alternativa #1 al streaming rentado para usuarios que buscan privacidad.</p>
                 </div>
             </div>
         </div>
@@ -567,30 +581,30 @@
             <p class="section-subtitle">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
         </div>
 
-        <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
             
             <div class="glass-card pricing-card reveal tilt">
                 <h3>Comunidad Open Source</h3>
                 <div class="price">$0 <span>MXN</span></div>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Nuestro motor principal es gratuito.</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El núcleo de Janeiro Music es gratuito.</p>
                 <ul>
-                    <li><i class="fa-solid fa-check"></i> Servidor local (LAN)</li>
-                    <li><i class="fa-solid fa-check"></i> Reproductor de MP3/FLAC</li>
-                    <li><i class="fa-solid fa-check"></i> Gestión de metadatos</li>
-                    <li><i class="fa-solid fa-check"></i> Código auditable por la comunidad</li>
+                    <li><i class="fa-solid fa-check"></i> Servidor local vía LAN (Wi-Fi).</li>
+                    <li><i class="fa-solid fa-check"></i> Reproductor local de formatos MP3, FLAC, WAV, OPUS.</li>
+                    <li><i class="fa-solid fa-check"></i> Extracción de metadatos y carátulas.</li>
+                    <li><i class="fa-solid fa-check"></i> Código auditable por la comunidad.</li>
                 </ul>
                 <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--border-red); box-shadow: none;">Descargar</a>
             </div>
 
             <div class="glass-card pricing-card highlight-gold reveal tilt" style="transition-delay: 0.2s;">
-                <h3>Oportunidad de Inversión</h3>
+                <h3>Inversión Estratégica</h3>
                 <div class="price" style="font-size: 2.5rem;">Únete</div>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Apoya el desarrollo y crece con nosotros.</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">Apoya el desarrollo y crece con nosotros.</p>
                 <ul>
-                    <li><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> Mercado potencial masivo</li>
-                    <li><i class="fa-solid fa-leaf" style="color: var(--gold);"></i> Tecnología sostenible (ODS 12)</li>
-                    <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos</li>
-                    <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP ya funcional</li>
+                    <li><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> Mercado potencial masivo: millones cansados de suscripciones.</li>
+                    <li><i class="fa-solid fa-leaf" style="color: var(--gold);"></i> Tecnología sostenible y economía circular (ODS 12).</li>
+                    <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos (descentralizado).</li>
+                    <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP (Prototipo Mínimo Viable) ya funcional.</li>
                 </ul>
                 <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
@@ -607,7 +621,6 @@
             <p class="section-subtitle">El talento humano detrás del código. (Haz clic en sus fotos para ver sus redes)</p>
         </div>
 
-        <!-- Logo de Cerru de Janeiro en la sección de equipo -->
         <div class="team-logo-container reveal">
             <img src="Files/Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
         </div>
@@ -621,7 +634,7 @@
                 <div class="team-alias">Pedrouski el Pixelouski</div>
                 <div class="team-realname">Pedro Miguel Godínez Rodríguez - AL07164060</div>
                 <div class="team-role">Líder de Desarrollo Técnico</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Encargado del desarrollo óptimo del producto, supervisor y desarrollador del mismo.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Encargado del desarrollo óptimo del producto, supervisor y desarrollador del mismo. Elimina los errores que sufre el producto y permite el cumplimiento del objetivo.</p>
             </div>
 
             <!-- Leonardo -->
@@ -632,7 +645,7 @@
                 <div class="team-alias">Leito dicaprinchi</div>
                 <div class="team-realname">Leonardo Martínez González - AL07184261</div>
                 <div class="team-role">Ayudante de Desarrollo</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante principal del líder técnico, siguiendo órdenes y apoyando en el desarrollo.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Ayudante principal del líder técnico. Sigue las órdenes encomendadas y apoya en la programación y depuración de errores del sistema.</p>
             </div>
 
             <!-- Issac -->
@@ -643,7 +656,7 @@
                 <div class="team-alias">Issacini Gonzales.</div>
                 <div class="team-realname">Issac Rodrigo Ordaz de León - AL07134283</div>
                 <div class="team-role">Líder de Equipo y Coordinador</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Supervisa el progreso, coordina acciones del grupo y es la voz principal del equipo.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Supervisa el progreso general, coordina las acciones del grupo y es la voz principal del equipo. Encargado del acomodo y distribución del trabajo.</p>
             </div>
 
             <!-- Angel -->
@@ -654,7 +667,7 @@
                 <div class="team-alias">Tobyas Willson</div>
                 <div class="team-realname">Ángel Bernardo Tovar Martínez - AL07162353</div>
                 <div class="team-role">Diseñador Gráfico Principal</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Hizo el diseño de Janeiro Music, permitiendo presentar el producto de forma atractiva.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Hizo el diseño e identidad visual de Janeiro Music. Se encarga de que el producto tenga una presentación atractiva y profesional para el usuario.</p>
             </div>
 
             <!-- Adrian -->
@@ -665,7 +678,7 @@
                 <div class="team-alias">El Adriana Pequeña</div>
                 <div class="team-realname">Adrián Jiménez Flores - AL07134668</div>
                 <div class="team-role">Probador del Producto (QA)</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Verifica los errores del programa en el ámbito público y da retroalimentación.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Verifica que el programa funcione sin errores en el ámbito público. Analiza la competencia (Spotify/Apple) para dar retroalimentación precisa sobre el producto.</p>
             </div>
 
             <!-- Nicolas -->
@@ -676,7 +689,7 @@
                 <div class="team-alias">A Costilla</div>
                 <div class="team-realname">Nicolás Acosta Galaviz - AL07183711</div>
                 <div class="team-role">Ayudante de Presentaciones</div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante en la creación de las presentaciones, aportando información importante del producto.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Ayudante principal en la creación de las presentaciones. Aporta información crucial sobre el producto y resuelve dudas, bajo la supervisión del líder.</p>
             </div>
         </div>
     </section>
@@ -685,17 +698,15 @@
     <section id="material">
         <div class="section-header reveal">
             <h2 class="section-title">Material <span>Promocional</span></h2>
-            <p class="section-subtitle">Nuestra presencia física en la feria (Póster y Tríptico).</p>
+            <p class="section-subtitle">Póster oficial de presentación para la feria.</p>
         </div>
         
-        <div class="promo-grid">
-            <div class="glass-card reveal tilt border-gray" style="border: 1px solid var(--border-gray);">
-                <h3 style="margin-bottom: 20px; text-align: center;">Póster Oficial</h3>
-                <img src="https://via.placeholder.com/600x800/1a1a1e/ffffff?text=AQUI+VA+TU+POSTER" alt="Póster" class="promo-img">
-            </div>
-            <div class="glass-card reveal tilt border-gray" style="transition-delay: 0.2s; border: 1px solid var(--border-gray);">
-                <h3 style="margin-bottom: 20px; text-align: center;">Tríptico Informativo</h3>
-                <img src="https://via.placeholder.com/600x400/1a1a1e/ffffff?text=AQUI+VA+TU+TRIPTICO" alt="Tríptico" class="promo-img">
+        <div class="promo-single">
+            <!-- Contenedor del Póster con contorno gris -->
+            <div class="glass-card promo-card reveal tilt" style="border: 1px solid var(--border-gray);">
+                <h3 style="text-align: center; color: var(--secondary);">Póster Informativo</h3>
+                <!-- Ruta de la imagen del póster actualizada según tu captura -->
+                <img src="Files/Poster.png" alt="Póster Oficial Janeiro Music" class="promo-img">
             </div>
         </div>
     </section>
