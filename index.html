@@ -99,6 +99,8 @@
 
         .company-name {
             font-weight: 900; font-size: 1rem; letter-spacing: 1px;
+            white-space: nowrap; /* Evita que el texto se corte */
+            overflow: visible;
         }
         .company-name span { color: var(--primary); }
 
@@ -288,7 +290,6 @@
         .unified-card {
             background: var(--bg-glass); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            /* Borde visible por defecto */
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 28px; padding: 45px;
             transition: var(--transition);
@@ -297,7 +298,6 @@
             overflow: hidden;
         }
         
-        /* Efecto Hover Neón (El borde se ilumina y engrosa) */
         .unified-card:hover { 
             border-color: var(--card-glow);
             box-shadow: 
@@ -306,7 +306,6 @@
                 inset 0 0 20px var(--card-bg);
         }
 
-        /* Variaciones de Color */
         .card-red { --card-glow: var(--primary); --card-bg: rgba(255, 10, 64, 0.08); }
         .card-green { --card-glow: var(--green); --card-bg: rgba(34, 197, 94, 0.08); }
         .card-blue { --card-glow: var(--blue); --card-bg: rgba(59, 130, 246, 0.08); }
@@ -390,7 +389,7 @@
         .ods-banner {
             background: var(--bg-glass); 
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Borde visible */
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 32px; padding: 60px;
             text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             transition: var(--transition);
@@ -735,7 +734,7 @@
                 </div>
                 <div class="proto-info" style="border-color: rgba(59, 130, 246, 0.2);">
                     <h4 style="color: var(--blue);">El Cerebro (Backend)</h4>
-                    <p>Desarrollado en Python con el framework FastAPI, este programa actúa como el núcleo de todo el ecosistema. Se ejecuta en tu computadora local, escaneando de forma asíncrona todas tus carpetas de música, extrayendo metadatos precisos (título, artista, álbum y carátulas), y generando un índice de búsqueda ultra rápido. Además, maneja la seguridad y los permisos, asegurando que todo funcione a la perfección incluso con bibliotecas gigantes. La arquitectura está diseñada para ser escalable, ligera y fácil de instalar en cualquier sistema operativo.</p>
+                    <p>Desarrollado en Python con el framework FastAPI, este programa actúa como el núcleo de todo el ecosistema. Se ejecuta en tu computadora local, escaneando de forma asíncrona todas tus carpetas de música, extrayendo metadatos precisos (título, artista, álbum y carátulas), y generando un índice de búsqueda ultra rápido. Además, maneja la seguridad y los permisos, asegurando que todo funcione a la perfección incluso con bibliotecas gigantes.</p>
                     
                     <ul>
                         <li><i class="fa-solid fa-microchip" style="color: var(--blue);"></i> <div><strong>Procesamiento veloz:</strong> <span> Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span></div></li>
@@ -836,7 +835,7 @@
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos gracias a la arquitectura descentralizada.</li>
                     <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP (Prototipo Mínimo Viable) 100% funcional.</li>
                 </ul>
-                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:900; box-shadow: 0 10px 25px rgba(252, 226, 124, 0.2);">
+                <a href="https://discord.gg/JYf9JdC5T" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:900; box-shadow: 0 10px 25px rgba(252, 226, 124, 0.2);">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
                 </a>
             </div>
