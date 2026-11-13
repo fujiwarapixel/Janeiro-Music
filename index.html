@@ -55,10 +55,13 @@
             line-height: 1.6;
         }
 
+        /* FONDO MEJORADO CON MÁS PROFUNDIDAD */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle at 50% 0%, rgba(230, 30, 77, 0.05) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(230, 30, 77, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%);
             z-index: -1;
             pointer-events: none;
         }
@@ -127,7 +130,7 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr; /* Un poco más de espacio a la imagen */
+            grid-template-columns: 1.15fr 0.85fr;
             gap: 50px;
             align-items: center;
             max-width: 1200px;
@@ -182,9 +185,8 @@
             position: relative;
         }
 
-        /* LOGO MÁS GRANDE Y LIMPIO */
         .hero-product-logo {
-            width: 320px; /* Aumentado de 220px a 320px */
+            width: 320px;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 30px rgba(230, 30, 77, 0.25));
@@ -195,7 +197,7 @@
             filter: drop-shadow(0 0 40px rgba(230, 30, 77, 0.5));
         }
 
-        /* Video Section (Elevator Pitch) */
+        /* Video Section */
         .video-section-container {
             max-width: 1000px;
             margin: 60px auto 0;
@@ -262,7 +264,7 @@
             position: relative;
             height: 100%;
         }
-        .glass-card:hover { box-shadow: var(--box-shadow-red); transform: translateY(-5px); }
+        .glass-card:hover { box-shadow: var(--box-shadow-red); transform: translateY(-3px); }
 
         .border-green { border-color: var(--border-green); }
         .border-green:hover { box-shadow: var(--box-shadow-green); }
@@ -271,15 +273,31 @@
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
+        /* TÍTULOS AL LADO DE LOS ICONOS */
+        .card-header-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .card-header-row .icon-box {
+            margin-bottom: 0; /* Quitamos el margen inferior ya que ahora está en fila */
+        }
+        .card-header-row h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
         .icon-box {
             width: 55px; height: 55px; border-radius: 16px;
             display: flex; justify-content: center; align-items: center;
-            font-size: 1.4rem; margin-bottom: 25px;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
         .icon-red { background: rgba(230, 30, 77, 0.1); color: var(--primary); border: 1px solid var(--border-red); }
         .icon-green { background: rgba(34, 197, 94, 0.1); color: var(--border-green); border: 1px solid var(--border-green); }
 
-        .glass-card h3 { font-size: 1.6rem; margin-bottom: 20px; }
         .glass-card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; text-align: justify; }
         
         .info-list { list-style: none; }
@@ -292,21 +310,25 @@
         .text-green i { color: var(--border-green); }
         .info-list li div strong { color: var(--secondary); font-weight: 700; display: block; margin-bottom: 5px; font-size: 1.05rem; }
 
-        /* ================= PROTOTIPO ================= */
+        /* ================= PROTOTIPO (SIN ESPACIOS VACÍOS) ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
+        
         .proto-card {
             background: var(--bg-surface);
             border-radius: 24px; padding: 30px;
             border: 1px solid var(--border-gray);
-            display: flex; flex-direction: column; height: 100%;
+            display: flex; flex-direction: column;
             transition: all 0.3s ease;
+            height: 100%;
         }
         .proto-card:hover { border-color: var(--border-red); box-shadow: var(--box-shadow-red); }
-        .proto-card h3 { font-size: 1.5rem; margin-bottom: 25px; color: var(--secondary); text-align: center; }
+        
+        .proto-card > h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--secondary); text-align: center; }
 
         .laptop-mockup {
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
-            border-radius: 20px 20px 0 0; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.6); margin-bottom: 30px;
+            border-radius: 20px 20px 0 0; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.6); 
+            margin-bottom: 25px; /* Reducido el margen para evitar espacio vacío */
         }
         .laptop-mockup::after {
             content: ''; position: absolute; bottom: -18px; left: -5%; width: 110%; height: 18px;
@@ -315,8 +337,8 @@
         .laptop-mockup img { width: 100%; display: block; border-radius: 8px 8px 0 0; }
 
         .phone-mockup {
-            width: 100%; max-width: 240px; aspect-ratio: 9/19; border: 10px solid #1a1a1a; border-radius: 40px;
-            background: #000; margin: 0 auto 30px; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            width: 100%; max-width: 220px; aspect-ratio: 9/19; border: 10px solid #1a1a1a; border-radius: 40px;
+            background: #000; margin: 0 auto 25px; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.6);
         }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -324,10 +346,10 @@
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ACOMODO MEJORADO Y ESTRUCTURADO DEL TEXTO DEL PROTOTIPO */
+        /* CAJA DE TEXTO DEL CEREBRO ORDENADA */
         .proto-info {
-            background: #111115; /* Fondo un poco más oscuro para contraste */
-            padding: 30px; 
+            background: #111115; 
+            padding: 25px; 
             border-radius: 16px;
             width: 100%; flex-grow: 1; 
             display: flex; flex-direction: column;
@@ -335,37 +357,30 @@
         }
         .proto-info h4 { 
             color: var(--primary); 
-            font-size: 1.3rem; 
+            font-size: 1.2rem; 
             margin-bottom: 12px; 
-            border-bottom: 2px solid rgba(230, 30, 77, 0.3); 
-            padding-bottom: 10px; 
+            border-bottom: 1px solid rgba(230, 30, 77, 0.3); 
+            padding-bottom: 8px; 
         }
         .proto-info > p { 
             color: var(--text-muted); 
             font-size: 0.95rem; 
-            margin-bottom: 25px; 
-            text-align: left; /* Texto alineado a la izquierda para mejor lectura */
-            line-height: 1.7; 
+            margin-bottom: 20px; 
+            text-align: justify; 
+            line-height: 1.6; 
         }
         
-        /* Lista estructurada en bloques */
-        .proto-info ul { list-style: none; margin-top: auto; display: flex; flex-direction: column; gap: 15px; }
+        .proto-info ul { list-style: none; margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
         .proto-info ul li { 
-            background: rgba(255,255,255,0.03);
-            padding: 15px;
-            border-radius: 10px;
             display: flex; 
-            gap: 15px; 
+            gap: 12px; 
             align-items: flex-start; 
             line-height: 1.5;
-            border-left: 3px solid var(--border-gray);
-            transition: background 0.3s;
         }
-        .proto-info ul li:hover { background: rgba(255,255,255,0.06); border-left-color: var(--primary); }
-        .proto-info ul li i { color: var(--primary); margin-top: 4px; flex-shrink: 0; font-size: 1.1rem;}
+        .proto-info ul li i { color: var(--primary); margin-top: 5px; flex-shrink: 0; font-size: 0.9rem;}
         .proto-info ul li div { flex: 1; }
-        .proto-info ul li div strong { color: var(--secondary); display: block; margin-bottom: 6px; font-size: 1rem;}
-        .proto-info ul li div span { color: var(--text-muted); font-size: 0.9rem; }
+        .proto-info ul li div strong { color: var(--secondary); display: inline; font-weight: 600; font-size: 0.95rem;}
+        .proto-info ul li div span { color: var(--text-muted); font-size: 0.95rem; }
 
         /* ================= ODS 12 ================= */
         .ods-banner {
@@ -394,6 +409,30 @@
         
         .highlight-gold { border-color: rgba(212, 175, 55, 0.7); background: linear-gradient(145deg, #1a1814, #141418); }
         .highlight-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.25); }
+
+        /* CUADRO DE INFORMACIÓN DEL MODELO DE NEGOCIO */
+        .business-model-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .business-model-box h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        .business-model-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        .business-model-box p:last-child { margin-bottom: 0; }
 
         /* ================= EQUIPO ================= */
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -429,14 +468,15 @@
         }
         .team-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; text-align: center; }
 
-        /* ================= MATERIAL PROMOCIONAL ================= */
+        /* ================= MATERIAL PROMOCIONAL (PÓSTER MÁS PEQUEÑO) ================= */
         .promo-single { display: flex; justify-content: center; width: 100%; }
         .promo-img { 
-            width: 100%; max-width: 900px; height: auto; object-fit: contain; 
+            width: 100%; max-width: 650px; /* Reducido de 900px a 650px */
+            height: auto; object-fit: contain; 
             border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
-        /* ================= FOOTER REDISEÑADO ================= */
+        /* ================= FOOTER ================= */
         footer {
             background: #050505;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -447,7 +487,7 @@
         
         .footer-content {
             display: grid;
-            grid-template-columns: 1fr auto 1fr; /* 3 columnas: Texto - Logo - Links */
+            grid-template-columns: 1fr auto 1fr;
             gap: 40px;
             max-width: 1200px;
             margin: 0 auto 40px;
@@ -458,7 +498,6 @@
         .footer-brand h2 span { color: var(--primary); }
         .footer-brand p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
         
-        /* Logo en el centro del footer */
         .footer-logo-center {
             display: flex;
             justify-content: center;
@@ -530,6 +569,7 @@
 </head>
 <body>
 
+    <!-- Fondo mejorado -->
     <div class="bg-gradient"></div>
 
     <!-- NAVBAR -->
@@ -572,7 +612,6 @@
                 <a href="#solucion" class="btn" style="margin-top: 10px;">Descubre cómo funciona</a>
             </div>
             
-            <!-- LOGO MÁS GRANDE -->
             <div class="hero-image-content">
                 <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
             </div>
@@ -601,7 +640,7 @@
         </div>
     </div>
 
-    <!-- PROBLEMA Y SOLUCIÓN -->
+    <!-- PROBLEMA Y SOLUCIÓN (Títulos al lado de iconos) -->
     <section id="solucion">
         <div class="section-header reveal">
             <h2 class="section-title">El Problema y Nuestra <span>Solución</span></h2>
@@ -610,8 +649,10 @@
         
         <div class="grid-2">
             <div class="glass-card reveal tilt">
-                <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                <h3>El Modelo Roto</h3>
+                <div class="card-header-row">
+                    <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <h3>El Modelo Roto</h3>
+                </div>
                 <p>Las plataformas actuales (Spotify, Apple Music) presentan varios problemas críticos para el usuario y el planeta:</p>
                 <ul class="info-list text-red">
                     <li><i class="fa-solid fa-circle"></i> <div><strong>Suscripciones infinitas:</strong> Pagas mes tras mes sin poseer absolutamente nada. Si dejas de pagar, pierdes tu biblioteca y todo el historial.</div></li>
@@ -622,8 +663,10 @@
             </div>
             
             <div class="glass-card border-green reveal tilt" style="transition-delay: 0.2s;">
-                <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
-                <h3>Tu Propio Ecosistema</h3>
+                <div class="card-header-row">
+                    <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
+                    <h3>Tu Propio Ecosistema</h3>
+                </div>
                 <p>Janeiro Music ofrece una alternativa descentralizada, libre, privada y sostenible:</p>
                 <ul class="info-list text-green">
                     <li><i class="fa-solid fa-check"></i> <div><strong>Servidor local inteligente:</strong> Instalas un programa ligero en tu PC. Escanea y organiza toda tu música automáticamente, detectando títulos, artistas y portadas sin que muevas un dedo.</div></li>
@@ -635,7 +678,7 @@
         </div>
     </section>
 
-    <!-- PROTOTIPO -->
+    <!-- PROTOTIPO (Eliminado espacio vacío y ordenado) -->
     <section id="prototipo">
         <div class="section-header reveal">
             <h2 class="section-title">El <span>Prototipo</span></h2>
@@ -658,21 +701,21 @@
                             <i class="fa-solid fa-microchip"></i> 
                             <div>
                                 <strong>Procesamiento veloz:</strong>
-                                <span>Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span>
+                                <span> Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span>
                             </div>
                         </li>
                         <li>
                             <i class="fa-solid fa-image"></i> 
                             <div>
                                 <strong>Metadatos y Carátulas:</strong>
-                                <span>Analiza los tags ID3 (título, artista, álbum) y extrae las imágenes incrustadas en los archivos MP3/FLAC.</span>
+                                <span> Analiza los tags ID3 (título, artista, álbum) y extrae las imágenes incrustadas en los archivos MP3/FLAC.</span>
                             </div>
                         </li>
                         <li>
                             <i class="fa-solid fa-lock"></i> 
                             <div>
                                 <strong>Servido seguro:</strong>
-                                <span>Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span>
+                                <span> Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span>
                             </div>
                         </li>
                     </ul>
@@ -695,21 +738,21 @@
                             <i class="fa-solid fa-list"></i> 
                             <div>
                                 <strong>Gestión de cola:</strong>
-                                <span>Agrega canciones, crea listas de reproducción y administra la cola de reproducción actual.</span>
+                                <span> Agrega canciones, crea listas de reproducción y administra la cola de reproducción actual.</span>
                             </div>
                         </li>
                         <li>
                             <i class="fa-solid fa-heart"></i> 
                             <div>
                                 <strong>Favoritos y búsqueda:</strong>
-                                <span>Marca tus canciones favoritas y busca por título, artista o álbum en tu biblioteca.</span>
+                                <span> Marca tus canciones favoritas y busca por título, artista o álbum en tu biblioteca.</span>
                             </div>
                         </li>
                         <li>
                             <i class="fa-solid fa-download"></i> 
                             <div>
                                 <strong>Modo Offline:</strong>
-                                <span>Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</span>
+                                <span> Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</span>
                             </div>
                         </li>
                     </ul>
@@ -747,11 +790,11 @@
         </div>
     </section>
 
-    <!-- MODELO DE NEGOCIO / INVERSIÓN -->
+    <!-- MODELO DE NEGOCIO / INVERSIÓN (Con cuadro explicativo) -->
     <section id="negocio">
         <div class="section-header reveal">
             <h2 class="section-title">Apoya e <span>Invierte</span></h2>
-            <p class="section-subtitle">Modelo de negocio: Código Abierto y Freemium con pago único. Cero rentas vitalicias.</p>
+            <p class="section-subtitle">Nuestro modelo está diseñado para ser justo, sostenible y accesible para todos.</p>
         </div>
 
         <div class="pricing-grid">
@@ -760,7 +803,15 @@
             <div class="glass-card pricing-card reveal tilt">
                 <h3>Nuestro Modelo</h3>
                 <div class="price">$0 <span>/ suscripción</span></div>
-                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El software base es gratuito y open source. Nos sostenemos mediante el apoyo voluntario y una licencia de valor agregado de pago único para funciones pro (como Cloudflare o multi-servidor).</p>
+                
+                <!-- CUADRO DE INFORMACIÓN EXPLICATIVO -->
+                <div class="business-model-box">
+                    <h4>¿Cómo funciona nuestro modelo?</h4>
+                    <p><strong>Código Abierto:</strong> El núcleo de Janeiro Music es gratuito. Creemos en el software libre y en darle el poder al usuario sin cobrarle por lo básico.</p>
+                    <p><strong>Freemium:</strong> Ofrecemos funciones avanzadas (como sincronización multi-servidor o conexión Cloudflare) mediante una licencia de pago único. Nada de rentas mensuales de por vida.</p>
+                    <p><strong>Sostenibilidad:</strong> Nos sostenemos con donaciones voluntarias y la licencia Pro. Al ser descentralizado, no gastamos millones en servidores en la nube.</p>
+                </div>
+
                 <ul>
                     <li><i class="fa-solid fa-server"></i> <strong style="color:var(--secondary);">Costo Inicial:</strong> Prácticamente $0 MXN (usamos PCs propias/recicladas).</li>
                     <li><i class="fa-solid fa-wifi"></i> <strong style="color:var(--secondary);">Mantenimiento:</strong> ~$300 MXN/mes (Luz e Internet).</li>
@@ -864,7 +915,7 @@
         </div>
     </section>
 
-    <!-- MATERIAL PROMOCIONAL -->
+    <!-- MATERIAL PROMOCIONAL (Póster un poco más pequeño) -->
     <section id="material">
         <div class="section-header reveal">
             <h2 class="section-title">Material <span>Promocional</span></h2>
@@ -876,7 +927,7 @@
         </div>
     </section>
 
-    <!-- FOOTER REDISEÑADO CON LOGO AL CENTRO -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
@@ -965,7 +1016,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // 4. Efecto 3D Tilt en Tarjetas (Solo en Desktop)
+            // 4. Efecto 3D Tilt muy sutil (Casi nada de movimiento)
             const tiltCards = document.querySelectorAll('.tilt');
             if(window.innerWidth > 900) {
                 tiltCards.forEach(card => {
@@ -975,10 +1026,11 @@
                         const y = e.clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
-                        const rotateX = ((y - centerY) / centerY) * -4; 
-                        const rotateY = ((x - centerX) / centerX) * 4;
+                        // Reducido a 2 grados máximos para que sea casi imperceptible
+                        const rotateX = ((y - centerY) / centerY) * -2; 
+                        const rotateY = ((x - centerX) / centerX) * 2;
 
-                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.005, 1.005, 1.005)`;
                     });
                     card.addEventListener('mouseleave', () => {
                         card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
