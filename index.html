@@ -21,22 +21,22 @@
             --bg-glass: rgba(20, 20, 25, 0.6); 
             
             --primary: #ff0a40; 
-            --primary-glow: rgba(255, 10, 64, 0.5);
+            --primary-glow: rgba(255, 10, 64, 0.6);
             
             --green: #22c55e;
-            --green-glow: rgba(34, 197, 94, 0.5);
+            --green-glow: rgba(34, 197, 94, 0.6);
             
             --blue: #3b82f6;
-            --blue-glow: rgba(59, 130, 246, 0.5);
+            --blue-glow: rgba(59, 130, 246, 0.6);
             
             --gold: #fce27c;
-            --gold-glow: rgba(252, 226, 124, 0.5);
+            --gold-glow: rgba(252, 226, 124, 0.6);
             
             --purple: #a855f7;
-            --purple-glow: rgba(168, 85, 247, 0.5);
+            --purple-glow: rgba(168, 85, 247, 0.6);
             
             --gray: #9ca3af;
-            --gray-glow: rgba(156, 163, 175, 0.4);
+            --gray-glow: rgba(156, 163, 175, 0.5);
             
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
@@ -97,9 +97,12 @@
         
         nav:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
 
+        /* CORRECCIÓN: El texto no se corta */
         .company-name {
-            font-weight: 900; font-size: 1rem; letter-spacing: 1px;
-            white-space: nowrap; /* Evita que el texto se corte */
+            font-weight: 900; 
+            font-size: 1rem; 
+            letter-spacing: 1px;
+            white-space: nowrap; 
             overflow: visible;
         }
         .company-name span { color: var(--primary); }
@@ -205,16 +208,12 @@
             padding: 15px;
             background: rgba(20, 20, 25, 0.8);
             backdrop-filter: blur(20px);
-            box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.6),
-                0 0 60px rgba(255, 10, 64, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 60px rgba(255, 10, 64, 0.1);
             transition: var(--transition);
         }
         .hero-product-logo:hover { 
             transform: translateY(-10px) scale(1.02); 
-            box-shadow: 
-                0 40px 80px rgba(0, 0, 0, 0.8),
-                0 0 80px rgba(255, 10, 64, 0.2);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 80px rgba(255, 10, 64, 0.2);
             border-color: rgba(255, 10, 64, 0.3);
         }
 
@@ -286,18 +285,20 @@
         .section-title span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; text-align: center; }
 
-        /* ================= TARJETAS UNIFICADAS (GLASS NEÓN) ================= */
+        /* ================= DISEÑO UNIFICADO DE CUADROS ================= */
         .unified-card {
             background: var(--bg-glass); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 28px; padding: 45px;
+            border-radius: 28px; 
+            padding: 45px;
             transition: var(--transition);
             position: relative;
             height: 100%;
             overflow: hidden;
         }
         
+        /* Efecto Neón al interactuar */
         .unified-card:hover { 
             border-color: var(--card-glow);
             box-shadow: 
@@ -306,12 +307,13 @@
                 inset 0 0 20px var(--card-bg);
         }
 
-        .card-red { --card-glow: var(--primary); --card-bg: rgba(255, 10, 64, 0.08); }
-        .card-green { --card-glow: var(--green); --card-bg: rgba(34, 197, 94, 0.08); }
-        .card-blue { --card-glow: var(--blue); --card-bg: rgba(59, 130, 246, 0.08); }
-        .card-gold { --card-glow: var(--gold); --card-bg: rgba(252, 226, 124, 0.08); }
-        .card-purple { --card-glow: var(--purple); --card-bg: rgba(168, 85, 247, 0.08); }
-        .card-gray { --card-glow: var(--gray); --card-bg: rgba(156, 163, 175, 0.08); }
+        /* Clases de color para cada cuadro */
+        .card-red { --card-glow: var(--primary); --card-bg: rgba(255, 10, 64, 0.1); }
+        .card-green { --card-glow: var(--green); --card-bg: rgba(34, 197, 94, 0.1); }
+        .card-blue { --card-glow: var(--blue); --card-bg: rgba(59, 130, 246, 0.1); }
+        .card-gold { --card-glow: var(--gold); --card-bg: rgba(252, 226, 124, 0.1); }
+        .card-purple { --card-glow: var(--purple); --card-bg: rgba(168, 85, 247, 0.1); }
+        .card-gray { --card-glow: var(--gray); --card-bg: rgba(156, 163, 175, 0.1); }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
@@ -327,11 +329,11 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
         
-        .icon-red { background: rgba(255, 10, 64, 0.1); color: var(--primary); border: 1px solid rgba(255,10,64,0.3); }
-        .icon-green { background: rgba(34, 197, 94, 0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
-        .icon-blue { background: rgba(59, 130, 246, 0.1); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+        .icon-red { background: rgba(255, 10, 64, 0.15); color: var(--primary); border: 1px solid rgba(255,10,64,0.3); }
+        .icon-green { background: rgba(34, 197, 94, 0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+        .icon-blue { background: rgba(59, 130, 246, 0.15); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
 
-        .unified-card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 25px; }
+        .unified-card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 25px; line-height: 1.7; }
         
         .app-list { list-style: none; }
         .app-list li { 
@@ -344,9 +346,7 @@
         /* ================= PROTOTIPO ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
         
-        .proto-card-offset {
-            padding-top: 20px; 
-        }
+        .proto-card-offset { padding-top: 20px; }
         
         .laptop-mockup {
             width: 100%; position: relative; border: 14px solid #151515; border-bottom: none;
@@ -394,7 +394,7 @@
             text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             transition: var(--transition);
             --card-glow: var(--gold);
-            --card-bg: rgba(252, 226, 124, 0.08);
+            --card-bg: rgba(252, 226, 124, 0.1);
         }
         .ods-banner:hover { 
             border-color: var(--card-glow); 
@@ -432,24 +432,6 @@
         .cost-list li:last-child { margin-bottom: 0;}
         .cost-list li i { margin-top: 5px; width: 20px; text-align: center; font-size: 1.1rem;}
         .cost-list li strong { color: var(--text-main); display: block; margin-bottom: 4px; font-size: 1rem;}
-
-        .card-green-model {
-            border-color: rgba(34, 197, 94, 0.3);
-            background: linear-gradient(145deg, rgba(34, 197, 94, 0.08), var(--bg-glass));
-        }
-        .card-green-model:hover {
-            border-color: rgba(34, 197, 94, 0.8);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(34, 197, 94, 0.2);
-        }
-
-        .highlight-gold { 
-            border-color: rgba(252, 226, 124, 0.3); 
-            background: linear-gradient(145deg, rgba(252, 226, 124, 0.08), var(--bg-glass)); 
-        }
-        .highlight-gold:hover { 
-            border-color: rgba(252, 226, 124, 0.9); 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(252, 226, 124, 0.2); 
-        }
 
         /* ================= EQUIPO ================= */
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -494,7 +476,7 @@
         }
         .promo-img:hover { transform: scale(1.02); }
 
-        /* ================= FOOTER MEJORADO ================= */
+        /* ================= FOOTER ================= */
         footer {
             background: #020203; 
             border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -688,6 +670,7 @@
         </div>
         
         <div class="grid-2">
+            <!-- Cuadro Rojo -->
             <div class="unified-card card-red reveal">
                 <div class="card-header-row">
                     <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -702,6 +685,7 @@
                 </ul>
             </div>
             
+            <!-- Cuadro Verde -->
             <div class="unified-card card-green reveal" style="transition-delay: 0.2s;">
                 <div class="card-header-row">
                     <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
@@ -726,7 +710,7 @@
         </div>
         
         <div class="proto-grid">
-            <!-- Servidor: Azul (Con ajuste de alineación) -->
+            <!-- Cuadro Azul (Servidor) -->
             <div class="unified-card card-blue proto-card-offset reveal">
                 <h3 style="margin-bottom: 25px; text-align: center; font-weight: 800;">Servidor (Python + FastAPI)</h3>
                 <div class="laptop-mockup">
@@ -745,7 +729,7 @@
                 </div>
             </div>
             
-            <!-- App: Morado -->
+            <!-- Cuadro Morado (App) -->
             <div class="unified-card card-purple reveal" style="transition-delay: 0.2s;">
                 <h3 style="margin-bottom: 25px; text-align: center; font-weight: 800;">App Móvil (Flutter)</h3>
                 <div class="phone-mockup">
@@ -774,6 +758,7 @@
             <p class="section-subtitle">Innovación alineada con la sostenibilidad global y el cuidado del medio ambiente.</p>
         </div>
 
+        <!-- Cuadro Dorado -->
         <div class="ods-banner reveal">
             <i class="fa-solid fa-infinity ods-logo"></i>
             <h3>ODS 12: Producción y Consumo Responsables</h3>
@@ -812,7 +797,8 @@
 
         <div class="pricing-grid">
             
-            <div class="unified-card card-green-model pricing-card reveal">
+            <!-- Cuadro Verde (Nuestro Modelo) -->
+            <div class="unified-card card-green pricing-card reveal">
                 <h3>Nuestro Modelo</h3>
                 <div class="price">$0 <span>costo de suscripción</span></div>
                 <p style="color: var(--text-muted); margin-bottom: 25px; text-align: center;">El software base es gratuito y open source. Cero rentas vitalicias.</p>
@@ -825,7 +811,8 @@
                 </ul>
             </div>
 
-            <div class="unified-card highlight-gold pricing-card reveal" style="transition-delay: 0.2s;">
+            <!-- Cuadro Dorado (Inversión) -->
+            <div class="unified-card card-gold pricing-card reveal" style="transition-delay: 0.2s;">
                 <h3 style="color: var(--gold);">Oportunidad Estratégica</h3>
                 <div class="price" style="font-size: 2.5rem; margin-bottom: 25px;">Únete</div>
                 <p style="color: var(--text-muted); margin-bottom: 25px; text-align: center;">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
@@ -851,7 +838,7 @@
         </div>
 
         <div class="team-grid">
-            <!-- Pedro -->
+            <!-- Integrante 1: Rojo -->
             <div class="unified-card card-red team-card reveal">
                 <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" class="team-img-link">
                     <img src="Files/Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
@@ -862,7 +849,7 @@
                 <p class="team-desc">Encargado del desarrollo óptimo del producto, supervisor y desarrollador del mismo. Elimina los errores que sufre el producto y permite el cumplimiento del objetivo.</p>
             </div>
 
-            <!-- Leonardo -->
+            <!-- Integrante 2: Azul -->
             <div class="unified-card card-blue team-card reveal" style="transition-delay: 0.1s;">
                 <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" class="team-img-link">
                     <img src="Files/Leito_dicaprinchi.png" alt="Leonardo" class="team-img">
@@ -873,7 +860,7 @@
                 <p class="team-desc">Ayudante principal del líder técnico. Sigue las órdenes encomendadas y apoya en la programación y depuración de errores del sistema.</p>
             </div>
 
-            <!-- Issac -->
+            <!-- Integrante 3: Morado -->
             <div class="unified-card card-purple team-card reveal" style="transition-delay: 0.2s;">
                 <a href="https://www.instagram.com/treck23_98/" target="_blank" class="team-img-link">
                     <img src="Files/Issacini_Gonzales.png" alt="Issac" class="team-img">
@@ -884,7 +871,7 @@
                 <p class="team-desc">Supervisa el progreso general, coordina las acciones del grupo y es la voz principal del equipo. Encargado del acomodo y distribución del trabajo.</p>
             </div>
 
-            <!-- Angel -->
+            <!-- Integrante 4: Verde -->
             <div class="unified-card card-green team-card reveal" style="transition-delay: 0.3s;">
                 <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" class="team-img-link">
                     <img src="Files/Tobyas_Willson.png" alt="Angel" class="team-img">
@@ -895,7 +882,7 @@
                 <p class="team-desc">Hizo el diseño e identidad visual de Janeiro Music. Se encarga de que el producto tenga una presentación atractiva y profesional para el usuario.</p>
             </div>
 
-            <!-- Adrian -->
+            <!-- Integrante 5: Gris -->
             <div class="unified-card card-gray team-card reveal" style="transition-delay: 0.4s;">
                 <a href="https://www.instagram.com/ajf1_5/" target="_blank" class="team-img-link">
                     <img src="Files/El_Adriana_Pequeña.jpg" alt="Adrian" class="team-img">
@@ -906,7 +893,7 @@
                 <p class="team-desc">Verifica que el programa funcione sin errores en el ámbito público. Analiza la competencia (Spotify/Apple) para dar retroalimentación precisa sobre el producto.</p>
             </div>
 
-            <!-- Nicolas -->
+            <!-- Integrante 6: Rojo -->
             <div class="unified-card card-red team-card reveal" style="transition-delay: 0.5s;">
                 <a href="https://www.instagram.com/acostanicolasg/" target="_blank" class="team-img-link">
                     <img src="Files/A_Costilla.jpg" alt="Nicolas" class="team-img">
