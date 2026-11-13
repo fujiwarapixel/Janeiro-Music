@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janeiro Music | El Futuro es Local</title>
-    <meta name="description" content="Janeiro Music: Tu música, tu servidor, tu control. Proyecto para la Feria ACT NOW 2026.">
+    <title>Janeiro Music | Feria ACT NOW 2026</title>
+    <meta name="description" content="Monta tu server y lleva tu música a tu Cerro. Proyecto de Cerru de Janeiro Company.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,29 +17,65 @@
     <style>
         /* ================= VARIABLES ================= */
         :root {
-            --bg-base: #050505;
-            --bg-surface: rgba(20, 20, 25, 0.7);
+            --bg-base: #030303;
+            --bg-surface: rgba(18, 18, 22, 0.65);
             --primary: #ff003c;
-            --primary-glow: rgba(255, 0, 60, 0.5);
+            --primary-glow: rgba(255, 0, 60, 0.6);
             --secondary: #ffffff;
-            --text-muted: #888899;
+            --text-muted: #9a9aab;
             --border: rgba(255, 255, 255, 0.08);
             --font-main: 'Outfit', sans-serif;
         }
 
-        /* ================= RESET & SCROLLBAR ================= */
+        /* ================= RESET & CURSOR ================= */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
             font-family: var(--font-main);
+            cursor: none; /* Ocultamos el cursor normal */
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-base); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #cc0030; }
+
+        /* Cursor Personalizado */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: var(--primary);
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 1px solid rgba(255, 0, 60, 0.4);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+        .cursor-outline.hovered {
+            width: 60px; height: 60px;
+            background-color: rgba(255, 0, 60, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* Textura de Ruido (Noise) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+            opacity: 0.04;
+            z-index: 9998;
+            pointer-events: none;
+        }
 
         body {
             background-color: var(--bg-base);
@@ -48,305 +84,265 @@
             line-height: 1.6;
         }
 
-        /* Background Gradients */
+        /* Background Gradients Animados */
         .bg-glow {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
+            width: 800px; height: 800px;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(100px);
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.25;
             pointer-events: none;
+            animation: pulse 10s infinite alternate;
         }
-        .glow-top { top: -200px; right: -100px; }
-        .glow-bottom { bottom: -200px; left: -100px; background: radial-gradient(circle, rgba(0, 150, 255, 0.3) 0%, transparent 60%); }
+        .glow-top { top: -300px; right: -200px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); }
+        .glow-bottom { bottom: -300px; left: -200px; background: radial-gradient(circle, #0044ff 0%, transparent 70%); animation-delay: -5s; }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(50px, 50px); }
+        }
 
         /* ================= NAVBAR ================= */
         nav {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px;
+            display: flex; justify-content: space-between; align-items: center;
             padding: 15px 30px;
-            background: rgba(10, 10, 12, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 100px;
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 100px;
             z-index: 1000;
-            transition: all 0.3s ease;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-        .logo span { color: var(--primary); }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); }
 
         .nav-links { display: flex; gap: 30px; }
         .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: color 0.3s;
-            position: relative;
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.9rem; font-weight: 600;
+            transition: color 0.3s; position: relative;
         }
         .nav-links a:hover { color: var(--secondary); }
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--primary);
-            transition: width 0.3s;
+            content: ''; position: absolute; width: 0%; height: 2px;
+            bottom: -5px; left: 0; background: var(--primary);
+            transition: width 0.3s; box-shadow: 0 0 8px var(--primary);
         }
         .nav-links a:hover::after { width: 100%; }
 
         /* ================= HERO SECTION ================= */
         header {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 20px 60px;
-            position: relative;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 120px 20px 60px; position: relative;
         }
 
         .hero-tag {
-            background: rgba(255, 0, 60, 0.1);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 0, 60, 0.3);
+            background: rgba(255, 0, 60, 0.1); color: var(--primary);
+            padding: 8px 16px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 800; letter-spacing: 2px;
+            margin-bottom: 20px; border: 1px solid rgba(255, 0, 60, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 900; line-height: 1.05; margin-bottom: 15px;
+            letter-spacing: -2px; text-transform: uppercase;
         }
         .hero-title span {
             background: linear-gradient(90deg, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px var(--primary-glow));
         }
 
+        /* Eslogan Oficial con animación */
         .hero-slogan {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 40px;
-            font-weight: 300;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--secondary); font-weight: 600;
+            margin-bottom: 40px; min-height: 40px;
+        }
+        .hero-slogan .highlight {
+            color: var(--primary); text-shadow: 0 0 10px var(--primary-glow);
         }
 
-        /* Video Container Estilo Apple */
+        /* Video Cinematic */
         .video-wrapper {
-            width: 100%;
-            max-width: 900px;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            border-radius: 24px;
+            width: 100%; max-width: 900px; aspect-ratio: 16 / 9;
+            background: #000; border-radius: 24px;
             border: 1px solid var(--border);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 0, 60, 0.1);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(255, 0, 60, 0.15);
+            position: relative; overflow: hidden; margin-bottom: 50px;
+            display: flex; justify-content: center; align-items: center;
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
-        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
         .btn {
-            background: var(--primary);
-            color: white;
-            padding: 18px 45px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px var(--primary-glow);
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            background: var(--primary); color: white;
+            padding: 18px 45px; border-radius: 50px;
+            font-weight: 800; font-size: 1.1rem; text-decoration: none;
+            transition: all 0.3s; box-shadow: 0 10px 30px var(--primary-glow);
+            border: none; display: inline-flex; align-items: center; gap: 10px;
         }
         .btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px var(--primary-glow);
-            background: #ff1a50;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px var(--primary-glow); background: #ff1a50;
         }
 
-        /* ================= GLOBAL SECTION STYLES ================= */
-        section { padding: 100px 10%; position: relative; z-index: 1; }
-        
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
+        /* ================= MARQUEE (CINTA INFINITA) ================= */
+        .marquee-container {
+            width: 100vw; overflow: hidden; background: var(--primary);
+            padding: 15px 0; transform: rotate(-2deg); margin: 40px 0;
+            box-shadow: 0 0 30px var(--primary-glow); border-top: 2px solid #fff; border-bottom: 2px solid #fff;
+            position: relative; z-index: 10;
         }
-        .section-title span { color: var(--primary); }
+        .marquee-content {
+            display: flex; white-space: nowrap; animation: scroll 20s linear infinite;
+            font-weight: 900; font-size: 1.5rem; color: #000; letter-spacing: 2px;
+        }
+        .marquee-content span { margin-right: 30px; display: flex; align-items: center; gap: 10px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ================= SECCIONES ================= */
+        section { padding: 100px 10%; position: relative; z-index: 1; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 15px; }
+        .section-title span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Glassmorphism Cards */
+        /* Tarjetas 3D con Glassmorphism */
         .glass-card {
-            background: var(--bg-surface);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 40px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border); border-radius: 24px; padding: 40px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            position: relative; overflow: hidden;
+            transform-style: preserve-3d;
         }
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg); transition: 0.5s;
+        }
+        .glass-card:hover::before { left: 200%; }
         .glass-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 0, 60, 0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border-color: rgba(255, 0, 60, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(255, 0, 60, 0.2);
         }
 
-        /* ================= PROBLEM & SOLUTION ================= */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
         .icon-box {
-            width: 60px; height: 60px;
-            border-radius: 16px;
+            width: 60px; height: 60px; border-radius: 16px;
             display: flex; justify-content: center; align-items: center;
-            font-size: 1.5rem; margin-bottom: 25px;
+            font-size: 1.5rem; margin-bottom: 25px; transform: translateZ(20px);
         }
-        .icon-red { background: rgba(255, 0, 60, 0.1); color: var(--primary); border: 1px solid rgba(255, 0, 60, 0.2); }
-        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.2); }
+        .icon-red { background: rgba(255, 0, 60, 0.1); color: var(--primary); border: 1px solid rgba(255, 0, 60, 0.3); box-shadow: 0 0 15px rgba(255, 0, 60, 0.2); }
+        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.3); box-shadow: 0 0 15px rgba(0, 255, 100, 0.2); }
 
-        .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-        .glass-card p { color: var(--text-muted); font-size: 1.05rem; }
+        .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; transform: translateZ(15px); }
+        .glass-card p { color: var(--text-muted); font-size: 1.05rem; transform: translateZ(10px); }
 
-        /* ================= PROTOTYPE (CSS MOCKUPS) ================= */
+        /* ================= PROTOTIPO (3D MOCKUPS) ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         
-        /* CSS Laptop Mockup */
         .laptop-mockup {
-            width: 100%; position: relative;
-            border: 12px solid #222; border-bottom: none;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            background: #000;
+            width: 100%; position: relative; border: 14px solid #111; border-bottom: none;
+            border-radius: 24px 24px 0 0; box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            background: #000; transition: transform 0.5s;
         }
+        .laptop-mockup:hover { transform: scale(1.02) translateY(-10px); }
         .laptop-mockup::after {
-            content: ''; position: absolute; bottom: -20px; left: -5%; width: 110%; height: 20px;
-            background: #444; border-radius: 0 0 20px 20px;
-            border-bottom: 2px solid #111;
+            content: ''; position: absolute; bottom: -22px; left: -6%; width: 112%; height: 22px;
+            background: linear-gradient(to bottom, #333, #111); border-radius: 0 0 24px 24px;
+            border-bottom: 3px solid #000;
         }
-        .laptop-mockup img { width: 100%; display: block; border-radius: 8px 8px 0 0; }
+        .laptop-mockup img { width: 100%; display: block; border-radius: 10px 10px 0 0; }
 
-        /* CSS Phone Mockup */
         .phone-mockup {
-            width: 280px; height: 580px;
-            border: 12px solid #222; border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            background: #000; margin: 0 auto;
-            position: relative; overflow: hidden;
+            width: 280px; height: 580px; border: 12px solid #111; border-radius: 45px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.05);
+            background: #000; margin: 0 auto; position: relative; overflow: hidden;
+            transition: transform 0.5s;
         }
+        .phone-mockup:hover { transform: scale(1.02) translateY(-10px); }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 120px; height: 25px; background: #222;
-            border-radius: 0 0 15px 15px; z-index: 10;
+            width: 130px; height: 28px; background: #111;
+            border-radius: 0 0 20px 20px; z-index: 10;
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
         /* ================= ODS 12 ================= */
         .ods-banner {
-            background: linear-gradient(135deg, rgba(191, 139, 46, 0.15), rgba(0,0,0,0));
-            border: 1px solid rgba(191, 139, 46, 0.4);
-            border-radius: 24px; padding: 50px; text-align: center;
-            position: relative; overflow: hidden;
+            background: linear-gradient(135deg, rgba(191, 139, 46, 0.1), rgba(0,0,0,0.5));
+            border: 1px solid rgba(191, 139, 46, 0.4); border-radius: 24px; padding: 60px;
+            text-align: center; position: relative; overflow: hidden;
+            box-shadow: 0 0 30px rgba(191, 139, 46, 0.15);
         }
-        .ods-logo {
-            font-size: 3rem; color: #bf8b2e; margin-bottom: 20px;
-        }
-        .ods-banner h3 { font-size: 2rem; margin-bottom: 15px; color: #f0c05a; }
+        .ods-logo { font-size: 4rem; color: #f0c05a; margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(240, 192, 90, 0.5)); }
+        .ods-banner h3 { font-size: 2.2rem; margin-bottom: 15px; color: #f0c05a; }
         .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.1rem; }
         
         .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 30px; }
-        .smart-item { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 16px; border: 1px solid var(--border); }
-        .smart-item h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; }
-        .smart-item p { font-size: 0.95rem; margin: 0; }
+        .smart-item { background: rgba(0,0,0,0.5); padding: 25px; border-radius: 16px; border: 1px solid rgba(191, 139, 46, 0.2); transition: 0.3s; }
+        .smart-item:hover { border-color: #f0c05a; transform: translateY(-5px); }
+        .smart-item h4 { color: #f0c05a; margin-bottom: 10px; font-size: 1.1rem; }
 
-        /* ================= BUSINESS MODEL ================= */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        /* ================= MODELO DE NEGOCIO ================= */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .pricing-card { text-align: center; padding: 50px 30px; }
-        .price { font-size: 3rem; font-weight: 900; color: var(--secondary); margin: 20px 0; }
-        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .price { font-size: 3.5rem; font-weight: 900; color: var(--secondary); margin: 20px 0; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; text-shadow: none; }
         .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
-        .pricing-card ul li { margin-bottom: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
-        .pricing-card ul li i { color: #00ff64; }
-        .highlight { border-color: var(--primary); position: relative; }
+        .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+        .pricing-card ul li i { color: #00ff64; text-shadow: 0 0 10px rgba(0,255,100,0.5); }
+        .highlight { border-color: var(--primary); box-shadow: 0 0 30px rgba(255,0,60,0.15); }
         .highlight::before {
             content: 'RECOMENDADO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: white; padding: 4px 12px; border-radius: 10px;
-            font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;
+            background: var(--primary); color: white; padding: 6px 16px; border-radius: 12px;
+            font-size: 0.75rem; font-weight: 900; letter-spacing: 1px; box-shadow: 0 0 15px var(--primary);
         }
 
-        /* ================= TEAM ================= */
+        /* ================= EQUIPO ================= */
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
         .team-card { text-align: center; }
         .team-img {
-            width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
-            border: 3px solid var(--border); margin-bottom: 20px;
-            transition: all 0.3s;
+            width: 140px; height: 140px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--border); margin-bottom: 20px; transition: all 0.4s;
+            filter: grayscale(100%);
         }
-        .team-card:hover .team-img { border-color: var(--primary); transform: scale(1.05); }
-        .team-role { color: var(--primary); font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .team-card:hover .team-img { border-color: var(--primary); transform: scale(1.1) rotate(5deg); filter: grayscale(0%); box-shadow: 0 0 25px var(--primary-glow); }
+        .team-role { color: var(--primary); font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; display: block; text-shadow: 0 0 10px var(--primary-glow); }
 
-        /* ================= PROMO MATERIAL ================= */
+        /* ================= MATERIAL PROMOCIONAL ================= */
         .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .promo-img {
-            width: 100%; border-radius: 16px; border: 1px solid var(--border);
-            transition: transform 0.3s;
-        }
-        .promo-img:hover { transform: scale(1.02); }
+        .promo-img { width: 100%; border-radius: 16px; border: 1px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; }
+        .promo-img:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
 
         /* ================= FOOTER ================= */
         footer {
-            text-align: center; padding: 60px 20px 40px;
-            border-top: 1px solid var(--border);
-            background: #08080a;
+            text-align: center; padding: 80px 20px 40px; border-top: 1px solid var(--border);
+            background: linear-gradient(to top, #08080a, var(--bg-base));
         }
-        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
-        .footer-logo span { color: var(--primary); }
-        footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; }
+        .footer-logo { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
+        .footer-logo span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
 
-        /* ================= ANIMATIONS (SCROLL REVEAL) ================= */
-        .reveal {
-            opacity: 0; transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        /* ================= BOTÓN SCROLL TOP ================= */
+        #scrollTop {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--primary); color: white; border: none;
+            font-size: 1.5rem; box-shadow: 0 5px 20px var(--primary-glow);
+            opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
         }
+        #scrollTop.show { opacity: 1; visibility: visible; }
+        #scrollTop:hover { transform: translateY(-5px) scale(1.1); background: #ff1a50; }
+
+        /* ================= ANIMACIONES SCROLL ================= */
+        .reveal { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* ================= RESPONSIVE ================= */
@@ -356,10 +352,16 @@
             .grid-2, .proto-grid, .promo-grid, .smart-grid { grid-template-columns: 1fr; }
             .phone-mockup { width: 240px; height: 500px; }
             section { padding: 80px 5%; }
+            .cursor-dot, .cursor-outline { display: none; } /* Ocultar cursor en móviles */
+            * { cursor: auto; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Cursor Personalizado -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <!-- Efectos de fondo -->
     <div class="bg-glow glow-top"></div>
@@ -381,9 +383,13 @@
 
     <!-- HERO -->
     <header id="inicio" class="reveal">
-        <div class="hero-tag">Feria ACT NOW 2026</div>
+        <div class="hero-tag">CERRU DE JANEIRO COMPANY ©</div>
         <h1 class="hero-title">LA REVOLUCIÓN<br>ES <span>LOCAL</span></h1>
-        <p class="hero-slogan">Devuélvele el control al usuario. Tu propia biblioteca musical, sin suscripciones, sin límites, sin depender de la nube.</p>
+        
+        <!-- NUEVO ESLOGAN -->
+        <p class="hero-slogan" id="typewriter">
+            Monta tu server y lleva tu música a tu <span class="highlight">Cerro</span>.
+        </p>
         
         <div class="video-wrapper">
             <!-- REEMPLAZA ESTO CON TU VIDEO DE YOUTUBE -->
@@ -398,6 +404,20 @@
         <a href="#solucion" class="btn"><i class="fa-solid fa-arrow-down"></i> Descubre cómo funciona</a>
     </header>
 
+    <!-- CINTA INFINITA -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span><i class="fa-solid fa-bolt"></i> SIN SUSCRIPCIONES</span>
+            <span><i class="fa-solid fa-music"></i> TU MÚSICA, TUS REGLAS</span>
+            <span><i class="fa-solid fa-server"></i> SERVIDOR PROPIO</span>
+            <span><i class="fa-solid fa-infinity"></i> JANEIRO MUSIC 2026</span>
+            <span><i class="fa-solid fa-bolt"></i> SIN SUSCRIPCIONES</span>
+            <span><i class="fa-solid fa-music"></i> TU MÚSICA, TUS REGLAS</span>
+            <span><i class="fa-solid fa-server"></i> SERVIDOR PROPIO</span>
+            <span><i class="fa-solid fa-infinity"></i> JANEIRO MUSIC 2026</span>
+        </div>
+    </div>
+
     <!-- PROBLEMA Y SOLUCIÓN -->
     <section id="solucion">
         <div class="section-header reveal">
@@ -406,12 +426,12 @@
         </div>
         
         <div class="grid-2">
-            <div class="glass-card reveal">
+            <div class="glass-card reveal tilt">
                 <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
                 <h3>El Modelo Roto</h3>
                 <p>Las plataformas actuales te obligan a pagar suscripciones mensuales de por vida. No eres dueño de nada, dependes de internet y enormes centros de datos consumen energía masiva. Además, los reproductores tradicionales batallan con metadatos complejos.</p>
             </div>
-            <div class="glass-card reveal" style="transition-delay: 0.2s;">
+            <div class="glass-card reveal tilt" style="transition-delay: 0.2s;">
                 <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
                 <h3>Tu Propio Ecosistema</h3>
                 <p>Janeiro Music es un ecosistema descentralizado. Instalas nuestro servidor ligero en tu PC (o en un dispositivo reciclado) y tu app móvil se conecta a él. Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor. Pago único, control total.</p>
@@ -427,7 +447,7 @@
         </div>
         
         <div class="proto-grid">
-            <div class="reveal">
+            <div class="reveal tilt">
                 <h3 style="margin-bottom: 15px; text-align: center;">Servidor (Python + FastAPI)</h3>
                 <div class="laptop-mockup">
                     <!-- CAMBIA ESTA IMAGEN POR TU CAPTURA DEL SERVIDOR -->
@@ -436,7 +456,7 @@
                 <p style="color: var(--text-muted); margin-top: 30px; text-align: center;">Escanea carpetas, extrae metadatos (título, álbum, carátula) y sirve los archivos a la red.</p>
             </div>
             
-            <div class="reveal" style="transition-delay: 0.2s;">
+            <div class="reveal tilt" style="transition-delay: 0.2s;">
                 <h3 style="margin-bottom: 15px; text-align: center;">App Móvil (Flutter)</h3>
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
@@ -455,7 +475,7 @@
             <p class="section-subtitle">Innovación alineada con la sostenibilidad global.</p>
         </div>
 
-        <div class="ods-banner reveal">
+        <div class="ods-banner reveal tilt">
             <i class="fa-solid fa-infinity ods-logo"></i>
             <h3>ODS 12: Producción y Consumo Responsables</h3>
             <p>Reducimos la basura electrónica dándole una segunda vida a computadoras viejas. Al usar redes locales, disminuimos el consumo energético de los gigantes centros de datos y reducimos el gasto de datos móviles.</p>
@@ -485,7 +505,7 @@
         </div>
 
         <div class="pricing-grid">
-            <div class="glass-card pricing-card reveal">
+            <div class="glass-card pricing-card reveal tilt">
                 <h3>Open Source</h3>
                 <div class="price">$0 <span>MXN</span></div>
                 <p style="color: var(--text-muted); margin-bottom: 20px;">Para siempre.</p>
@@ -494,10 +514,10 @@
                     <li><i class="fa-solid fa-check"></i> Reproductor de MP3/FLAC</li>
                     <li><i class="fa-solid fa-check"></i> Gestión de metadatos</li>
                 </ul>
-                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--primary);">Descargar</a>
+                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--primary); box-shadow: none;">Descargar</a>
             </div>
 
-            <div class="glass-card pricing-card highlight reveal" style="transition-delay: 0.2s;">
+            <div class="glass-card pricing-card highlight reveal tilt" style="transition-delay: 0.2s;">
                 <h3>Licencia Pro</h3>
                 <div class="price">$199 <span>MXN (Único pago)</span></div>
                 <p style="color: var(--text-muted); margin-bottom: 20px;">Sin suscripciones mensuales.</p>
@@ -510,7 +530,7 @@
                 <a href="#inicio" class="btn" style="width: 100%; justify-content: center;">Obtener Pro</a>
             </div>
 
-            <div class="glass-card pricing-card reveal" style="transition-delay: 0.4s;">
+            <div class="glass-card pricing-card reveal tilt" style="transition-delay: 0.4s;">
                 <h3>Inversión</h3>
                 <div class="price">$300 <span>MXN/mes</span></div>
                 <p style="color: var(--text-muted); margin-bottom: 20px;">Costos operativos estimados.</p>
@@ -532,37 +552,37 @@
         </div>
 
         <div class="team-grid">
-            <div class="glass-card team-card reveal">
+            <div class="glass-card team-card reveal tilt">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Pedro" alt="Pedro" class="team-img">
                 <h3>Pedro M. Godínez</h3>
                 <span class="team-role">Líder de Desarrollo Técnico</span>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Arquitecto backend, supervisor y creador del núcleo del producto.</p>
             </div>
-            <div class="glass-card team-card reveal" style="transition-delay: 0.1s;">
+            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.1s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Leonardo" alt="Leonardo" class="team-img">
                 <h3>Leonardo Martínez</h3>
                 <span class="team-role">Desarrollo de Soporte</span>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante directo en el desarrollo técnico y depuración de errores.</p>
             </div>
-            <div class="glass-card team-card reveal" style="transition-delay: 0.2s;">
+            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.2s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Issac" alt="Issac" class="team-img">
                 <h3>Issac R. Ordaz</h3>
                 <span class="team-role">Líder de Equipo</span>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Coordinador general, estructura el proyecto y es la voz principal.</p>
             </div>
-            <div class="glass-card team-card reveal" style="transition-delay: 0.3s;">
+            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.3s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Angel" alt="Angel" class="team-img">
                 <h3>Ángel B. Tovar</h3>
                 <span class="team-role">Diseño e Identidad</span>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Creador de la identidad visual, UI/UX y material promocional.</p>
             </div>
-            <div class="glass-card team-card reveal" style="transition-delay: 0.4s;">
+            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.4s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Adrian" alt="Adrian" class="team-img">
                 <h3>Adrián Jiménez</h3>
                 <span class="team-role">QA & Testing</span>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Encargado de pruebas, feedback y análisis de la competencia.</p>
             </div>
-            <div class="glass-card team-card reveal" style="transition-delay: 0.5s;">
+            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.5s;">
                 <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Nicolas" alt="Nicolas" class="team-img">
                 <h3>Nicolás Acosta</h3>
                 <span class="team-role">Comunicación</span>
@@ -579,11 +599,11 @@
         </div>
         
         <div class="promo-grid">
-            <div class="glass-card reveal">
+            <div class="glass-card reveal tilt">
                 <h3 style="margin-bottom: 20px; text-align: center;">Póster Oficial</h3>
                 <img src="https://via.placeholder.com/600x800/1a1a1e/ff003c?text=AQUI+VA+TU+POSTER" alt="Póster" class="promo-img">
             </div>
-            <div class="glass-card reveal" style="transition-delay: 0.2s;">
+            <div class="glass-card reveal tilt" style="transition-delay: 0.2s;">
                 <h3 style="margin-bottom: 20px; text-align: center;">Tríptico Informativo</h3>
                 <img src="https://via.placeholder.com/600x400/1a1a1e/ff003c?text=AQUI+VA+TU+TRIPTICO" alt="Tríptico" class="promo-img">
             </div>
@@ -593,19 +613,23 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-logo">JANEIRO<span>MUSIC</span></div>
-        <p>Cerru de Janeiro Company© 2026</p>
-        <p>Habilidades y Valores III: Ser Creativo</p>
+        <p>Monta tu server y lleva tu música a tu Cerro.</p>
+        <br>
+        <p>Cerru de Janeiro Company© 2026 | Habilidades y Valores III</p>
     </footer>
 
-    <!-- SCRIPT PARA ANIMACIONES AL SCROLL -->
+    <!-- Botón Scroll Top -->
+    <button id="scrollTop"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Animación de Scroll (Reveal)
             const reveals = document.querySelectorAll('.reveal');
-
             const revealOnScroll = () => {
                 const windowHeight = window.innerHeight;
                 const elementVisible = 100;
-
                 reveals.forEach((reveal) => {
                     const elementTop = reveal.getBoundingClientRect().top;
                     if (elementTop < windowHeight - elementVisible) {
@@ -613,9 +637,68 @@
                     }
                 });
             };
-
             window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll(); // Trigger once on load
+            revealOnScroll();
+
+            // 2. Cursor Personalizado
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const links = document.querySelectorAll('a, button, .glass-card');
+
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                // Animación de retraso para el outline
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursorOutline.classList.add('hovered');
+                });
+                link.addEventListener('mouseleave', () => {
+                    cursorOutline.classList.remove('hovered');
+                });
+            });
+
+            // 3. Botón Scroll Top
+            const scrollTopBtn = document.getElementById('scrollTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // 4. Efecto 3D Tilt en Tarjetas
+            const tiltCards = document.querySelectorAll('.tilt');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10; // Máximo 10 grados
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                });
+            });
+
         });
     </script>
 </body>
