@@ -3,449 +3,620 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janeiro Music | Feria ACT NOW 2026</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome (Iconos) -->
+    <title>Janeiro Music | El Futuro es Local</title>
+    <meta name="description" content="Janeiro Music: Tu música, tu servidor, tu control. Proyecto para la Feria ACT NOW 2026.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ================= VARIABLES Y RESET ================= */
+        /* ================= VARIABLES ================= */
         :root {
-            --bg-dark: #0a0a0c;
-            --bg-card: #1a1a1e;
-            --primary-red: #ff0033;
-            --primary-red-hover: #cc0029;
-            --text-white: #ffffff;
-            --text-gray: #a0a0a5;
-            --border-color: #2a2a30;
-            --font-main: 'Inter', sans-serif;
+            --bg-base: #050505;
+            --bg-surface: rgba(20, 20, 25, 0.7);
+            --primary: #ff003c;
+            --primary-glow: rgba(255, 0, 60, 0.5);
+            --secondary: #ffffff;
+            --text-muted: #888899;
+            --border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Outfit', sans-serif;
         }
 
+        /* ================= RESET & SCROLLBAR ================= */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
+            font-family: var(--font-main);
         }
 
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #cc0030; }
+
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            line-height: 1.6;
+            background-color: var(--bg-base);
+            color: var(--secondary);
             overflow-x: hidden;
+            line-height: 1.6;
         }
+
+        /* Background Gradients */
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        .glow-top { top: -200px; right: -100px; }
+        .glow-bottom { bottom: -200px; left: -100px; background: radial-gradient(circle, rgba(0, 150, 255, 0.3) 0%, transparent 60%); }
 
         /* ================= NAVBAR ================= */
         nav {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 12, 0.9);
-            backdrop-filter: blur(10px);
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
+            padding: 15px 30px;
+            background: rgba(10, 10, 12, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
             z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 1.5rem;
             font-weight: 900;
-            color: var(--text-white);
             letter-spacing: 1px;
         }
+        .logo span { color: var(--primary); }
 
-        .logo span {
-            color: var(--primary-red);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
+        .nav-links { display: flex; gap: 30px; }
         .nav-links a {
-            color: var(--text-gray);
+            color: var(--text-muted);
             text-decoration: none;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
             transition: color 0.3s;
-            font-size: 14px;
+            position: relative;
         }
-
-        .nav-links a:hover {
-            color: var(--primary-red);
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
         }
+        .nav-links a:hover::after { width: 100%; }
 
-        /* ================= SECCIÓN HERO (INICIO) ================= */
+        /* ================= HERO SECTION ================= */
         header {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            background: radial-gradient(circle at center, #1a1a1e 0%, #0a0a0c 100%);
+            padding: 120px 20px 60px;
             position: relative;
         }
 
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            line-height: 1.1;
-            text-transform: uppercase;
+        .hero-tag {
+            background: rgba(255, 0, 60, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 0, 60, 0.3);
         }
 
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
         .hero-title span {
-            color: var(--primary-red);
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-slogan {
-            font-size: 1.5rem;
-            color: var(--text-gray);
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 600px;
             margin-bottom: 40px;
             font-weight: 300;
         }
 
-        .video-container {
+        /* Video Container Estilo Apple */
+        .video-wrapper {
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             aspect-ratio: 16 / 9;
-            background-color: #000;
-            border-radius: 15px;
-            border: 2px solid var(--border-color);
+            background: #000;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 0, 60, 0.1);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 40px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.1);
         }
-
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             border: none;
         }
 
         .btn {
-            background-color: var(--primary-red);
+            background: var(--primary);
             color: white;
-            padding: 15px 40px;
+            padding: 18px 45px;
             border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1.1rem;
-            transition: transform 0.3s, background-color 0.3s;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px var(--primary-glow);
             border: none;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
-
         .btn:hover {
-            background-color: var(--primary-red-hover);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px var(--primary-glow);
+            background: #ff1a50;
         }
 
-        /* ================= ESTILOS GENERALES DE SECCIONES ================= */
-        section {
-            padding: 100px 10%;
-        }
-
+        /* ================= GLOBAL SECTION STYLES ================= */
+        section { padding: 100px 10%; position: relative; z-index: 1; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
         .section-title {
             font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 20px;
-            text-align: center;
+            margin-bottom: 15px;
         }
+        .section-title span { color: var(--primary); }
+        .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        .section-title span {
-            color: var(--primary-red);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-gray);
-            margin-bottom: 60px;
-            font-size: 1.1rem;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
             padding: 40px;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 0, 60, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-red);
+        /* ================= PROBLEM & SOLUTION ================= */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        .icon-box {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; margin-bottom: 25px;
+        }
+        .icon-red { background: rgba(255, 0, 60, 0.1); color: var(--primary); border: 1px solid rgba(255, 0, 60, 0.2); }
+        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.2); }
+
+        .glass-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .glass-card p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* ================= PROTOTYPE (CSS MOCKUPS) ================= */
+        .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        
+        /* CSS Laptop Mockup */
+        .laptop-mockup {
+            width: 100%; position: relative;
+            border: 12px solid #222; border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #000;
+        }
+        .laptop-mockup::after {
+            content: ''; position: absolute; bottom: -20px; left: -5%; width: 110%; height: 20px;
+            background: #444; border-radius: 0 0 20px 20px;
+            border-bottom: 2px solid #111;
+        }
+        .laptop-mockup img { width: 100%; display: block; border-radius: 8px 8px 0 0; }
+
+        /* CSS Phone Mockup */
+        .phone-mockup {
+            width: 280px; height: 580px;
+            border: 12px solid #222; border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            background: #000; margin: 0 auto;
+            position: relative; overflow: hidden;
+        }
+        .phone-notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 25px; background: #222;
+            border-radius: 0 0 15px 15px; z-index: 10;
+        }
+        .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ================= ODS 12 ================= */
+        .ods-banner {
+            background: linear-gradient(135deg, rgba(191, 139, 46, 0.15), rgba(0,0,0,0));
+            border: 1px solid rgba(191, 139, 46, 0.4);
+            border-radius: 24px; padding: 50px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .ods-logo {
+            font-size: 3rem; color: #bf8b2e; margin-bottom: 20px;
+        }
+        .ods-banner h3 { font-size: 2rem; margin-bottom: 15px; color: #f0c05a; }
+        .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); font-size: 1.1rem; }
+        
+        .smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 30px; }
+        .smart-item { background: rgba(0,0,0,0.4); padding: 20px; border-radius: 16px; border: 1px solid var(--border); }
+        .smart-item h4 { color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; }
+        .smart-item p { font-size: 0.95rem; margin: 0; }
+
+        /* ================= BUSINESS MODEL ================= */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .pricing-card { text-align: center; padding: 50px 30px; }
+        .price { font-size: 3rem; font-weight: 900; color: var(--secondary); margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
+        .pricing-card ul li { margin-bottom: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+        .pricing-card ul li i { color: #00ff64; }
+        .highlight { border-color: var(--primary); position: relative; }
+        .highlight::before {
+            content: 'RECOMENDADO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: white; padding: 4px 12px; border-radius: 10px;
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 1px;
         }
 
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--primary-red);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .card p {
-            color: var(--text-gray);
-        }
-
-        /* ================= PROTOTIPO ================= */
-        .proto-img {
-            width: 100%;
-            border-radius: 15px;
-            border: 1px solid var(--border-color);
-            margin-top: 20px;
-        }
-
-        /* ================= ODS ================= */
-        .ods-badge {
-            display: inline-block;
-            background-color: #bf8b2e; /* Color ODS 12 */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        /* ================= EQUIPO ================= */
-        .team-card {
-            text-align: center;
-            padding: 30px 20px;
-        }
-
+        /* ================= TEAM ================= */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .team-card { text-align: center; }
         .team-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-red);
-            margin-bottom: 15px;
-            background-color: #333;
+            width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--border); margin-bottom: 20px;
+            transition: all 0.3s;
         }
+        .team-card:hover .team-img { border-color: var(--primary); transform: scale(1.05); }
+        .team-role { color: var(--primary); font-size: 0.85rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; display: block; }
 
-        .team-role {
-            color: var(--primary-red);
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+        /* ================= PROMO MATERIAL ================= */
+        .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .promo-img {
+            width: 100%; border-radius: 16px; border: 1px solid var(--border);
+            transition: transform 0.3s;
         }
+        .promo-img:hover { transform: scale(1.02); }
 
         /* ================= FOOTER ================= */
         footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-gray);
-            font-size: 0.9rem;
+            text-align: center; padding: 60px 20px 40px;
+            border-top: 1px solid var(--border);
+            background: #08080a;
         }
+        .footer-logo { font-size: 2rem; font-weight: 900; margin-bottom: 10px; }
+        .footer-logo span { color: var(--primary); }
+        footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px; }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .grid-2 { grid-template-columns: 1fr; }
-            nav { padding: 15px 20px; }
-            .nav-links { display: none; } /* Puedes agregar un menú hamburguesa si lo deseas */
-            section { padding: 60px 5%; }
+        /* ================= ANIMATIONS (SCROLL REVEAL) ================= */
+        .reveal {
+            opacity: 0; transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 900px) {
+            nav { width: 100%; top: 0; border-radius: 0; padding: 15px 20px; }
+            .nav-links { display: none; }
+            .grid-2, .proto-grid, .promo-grid, .smart-grid { grid-template-columns: 1fr; }
+            .phone-mockup { width: 240px; height: 500px; }
+            section { padding: 80px 5%; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Efectos de fondo -->
+    <div class="bg-glow glow-top"></div>
+    <div class="bg-glow glow-bottom"></div>
+
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">JANEIRO <span>MUSIC</span></div>
+        <div class="logo">JANEIRO<span>MUSIC</span></div>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#solucion">Solución</a>
             <a href="#prototipo">Prototipo</a>
-            <a href="#ods">Sostenibilidad</a>
+            <a href="#ods">Impacto</a>
             <a href="#negocio">Inversión</a>
             <a href="#equipo">Equipo</a>
+            <a href="#material">Material</a>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header id="inicio">
-        <h1 class="hero-title">JANEIRO <span>MUSIC</span></h1>
-        <p class="hero-slogan">Tu música, tu servidor, tu control.</p>
+    <!-- HERO -->
+    <header id="inicio" class="reveal">
+        <div class="hero-tag">Feria ACT NOW 2026</div>
+        <h1 class="hero-title">LA REVOLUCIÓN<br>ES <span>LOCAL</span></h1>
+        <p class="hero-slogan">Devuélvele el control al usuario. Tu propia biblioteca musical, sin suscripciones, sin límites, sin depender de la nube.</p>
         
-        <div class="video-container">
-            <!-- REEMPLAZA ESTE IFRAME CON EL ENLACE DE TU VIDEO PROMOCIONAL DE YOUTUBE -->
-            <!-- Ejemplo: <iframe src="https://www.youtube.com/embed/TU_ID_DE_VIDEO" allowfullscreen></iframe> -->
-            <h2 style="color: #555;"><i class="fa-solid fa-play"></i> Reproducir Elevator Pitch (Video 1-2 min)</h2>
+        <div class="video-wrapper">
+            <!-- REEMPLAZA ESTO CON TU VIDEO DE YOUTUBE -->
+            <div style="text-align:center; color:#555;">
+                <i class="fa-solid fa-play" style="font-size: 4rem; margin-bottom:20px; opacity:0.5;"></i>
+                <h3>Inserta tu Video Pitch Aquí</h3>
+                <p>Sube tu video a YouTube y pega el iframe</p>
+            </div>
+            <!-- <iframe src="https://www.youtube.com/embed/TU_VIDEO_ID" allowfullscreen></iframe> -->
         </div>
 
-        <a href="#solucion" class="btn">Conoce el Proyecto</a>
+        <a href="#solucion" class="btn"><i class="fa-solid fa-arrow-down"></i> Descubre cómo funciona</a>
     </header>
 
     <!-- PROBLEMA Y SOLUCIÓN -->
     <section id="solucion">
-        <h2 class="section-title">El Problema y Nuestra <span>Solución</span></h2>
-        <p class="section-subtitle">La industria musical actual te obliga a pagar rentas de por vida. Nosotros te devolvemos el poder.</p>
+        <div class="section-header reveal">
+            <h2 class="section-title">El Problema y Nuestra <span>Solución</span></h2>
+            <p class="section-subtitle">El streaming tradicional nos ha quitado la propiedad de nuestra música. Janeiro Music viene a recuperarla.</p>
+        </div>
         
         <div class="grid-2">
-            <div class="card">
-                <i class="fa-solid fa-triangle-exclamation card-icon"></i>
-                <h3>El Problema</h3>
-                <p>Las plataformas de streaming actuales (Spotify, Apple Music) dependen de servidores externos, consumen datos masivos y te obligan a pagar suscripciones mensuales eternas. Además, no eres dueño de tu música y contribuyes a la basura electrónica al requerir dispositivos siempre nuevos.</p>
+            <div class="glass-card reveal">
+                <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h3>El Modelo Roto</h3>
+                <p>Las plataformas actuales te obligan a pagar suscripciones mensuales de por vida. No eres dueño de nada, dependes de internet y enormes centros de datos consumen energía masiva. Además, los reproductores tradicionales batallan con metadatos complejos.</p>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-lightbulb card-icon"></i>
-                <h3>La Solución: Janeiro Music</h3>
-                <p>Un ecosistema descentralizado (Servidor + App) donde tú eres el dueño. Instalas un servidor ligero en Python en tu computadora (o un dispositivo viejo reciclado), escanea tus carpetas y reproduce tu biblioteca desde tu celular vía red local (LAN) o remota (VPN/Tailscale). Sin pagos mensuales, sin perder calidad.</p>
+            <div class="glass-card reveal" style="transition-delay: 0.2s;">
+                <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
+                <h3>Tu Propio Ecosistema</h3>
+                <p>Janeiro Music es un ecosistema descentralizado. Instalas nuestro servidor ligero en tu PC (o en un dispositivo reciclado) y tu app móvil se conecta a él. Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor. Pago único, control total.</p>
             </div>
         </div>
     </section>
 
     <!-- PROTOTIPO -->
-    <section id="prototipo" style="background-color: #0d0d10;">
-        <h2 class="section-title">El <span>Prototipo</span></h2>
-        <p class="section-subtitle">Funcional, ligero y open-source. Así funciona.</p>
+    <section id="prototipo">
+        <div class="section-header reveal">
+            <h2 class="section-title">El <span>Prototipo</span></h2>
+            <p class="section-subtitle">Dos componentes trabajando en perfecta armonía.</p>
+        </div>
         
-        <div class="grid-2">
-            <div class="card">
-                <h3>1. El Servidor (PC)</h3>
-                <p>Desarrollado en <b>Python y FastAPI</b>. Escanea tus carpetas, extrae metadatos (título, artista, portada) y sirve los archivos. Cuenta con una interfaz gráfica para monitorear logs y conexiones.</p>
-                <!-- REEMPLAZA CON TU CAPTURA DEL SERVIDOR -->
-                <img src="https://via.placeholder.com/600x350/1a1a1e/ff0033?text=Captura+del+Servidor+en+Python" alt="Servidor Python" class="proto-img">
+        <div class="proto-grid">
+            <div class="reveal">
+                <h3 style="margin-bottom: 15px; text-align: center;">Servidor (Python + FastAPI)</h3>
+                <div class="laptop-mockup">
+                    <!-- CAMBIA ESTA IMAGEN POR TU CAPTURA DEL SERVIDOR -->
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Servidor">
+                </div>
+                <p style="color: var(--text-muted); margin-top: 30px; text-align: center;">Escanea carpetas, extrae metadatos (título, álbum, carátula) y sirve los archivos a la red.</p>
             </div>
-            <div class="card">
-                <h3>2. La Aplicación Móvil</h3>
-                <p>Desarrollada en <b>Flutter</b>. Se conecta a tu servidor mediante una URL o Código QR. Tiene reproductor, cola, favoritos y sistema de caché para guardar música offline.</p>
-                <!-- REEMPLAZA CON TU CAPTURA DE LA APP -->
-                <img src="https://via.placeholder.com/600x350/1a1a1e/ff0033?text=Captura+de+la+App+Flutter" alt="App Móvil" class="proto-img">
+            
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <h3 style="margin-bottom: 15px; text-align: center;">App Móvil (Flutter)</h3>
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <!-- CAMBIA ESTA IMAGEN POR TU CAPTURA DE LA APP -->
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=400&q=80" alt="App">
+                </div>
+                <p style="color: var(--text-muted); margin-top: 20px; text-align: center;">Interfaz fluida. Conéctate vía LAN, VPN o QR. Descarga para uso offline.</p>
             </div>
         </div>
     </section>
 
     <!-- ODS Y SOSTENIBILIDAD -->
     <section id="ods">
-        <h2 class="section-title">Sostenibilidad e <span>Impacto</span></h2>
-        <p class="section-subtitle">Nuestro compromiso con el planeta y la economía circular.</p>
-        
-        <div class="card" style="max-width: 800px; margin: 0 auto 40px auto; text-align: center;">
-            <div class="ods-badge">ODS 12: Producción y Consumo Responsables</div>
-            <h3>Reutilización Tecnológica</h3>
-            <p>Janeiro Music reduce la basura electrónica al darle una segunda vida a computadoras antiguas. Asimismo, reduce el consumo energético masivo que generan los centros de datos de streaming al utilizar redes locales (LAN).</p>
-            <br>
-            <p><b>Metas SMART:</b><br>
-            <b>Corto plazo:</b> Lanzar beta cerrada a 50 usuarios en Enero 2027.<br>
-            <b>Mediano plazo:</b> Alcanzar 1,000 usuarios activos en México para finales de 2027.<br>
-            <b>Largo plazo:</b> Expansión a Latinoamérica en 2028.</p>
+        <div class="section-header reveal">
+            <h2 class="section-title">Compromiso <span>ACT NOW</span></h2>
+            <p class="section-subtitle">Innovación alineada con la sostenibilidad global.</p>
+        </div>
+
+        <div class="ods-banner reveal">
+            <i class="fa-solid fa-infinity ods-logo"></i>
+            <h3>ODS 12: Producción y Consumo Responsables</h3>
+            <p>Reducimos la basura electrónica dándole una segunda vida a computadoras viejas. Al usar redes locales, disminuimos el consumo energético de los gigantes centros de datos y reducimos el gasto de datos móviles.</p>
+            
+            <div class="smart-grid">
+                <div class="smart-item">
+                    <h4>Corto Plazo</h4>
+                    <p>Lanzar Beta cerrada a 50 usuarios y obtener feedback de usabilidad.</p>
+                </div>
+                <div class="smart-item">
+                    <h4>Mediano Plazo</h4>
+                    <p>Alcanzar 1,000 usuarios activos en México con una retención del 30%.</p>
+                </div>
+                <div class="smart-item">
+                    <h4>Largo Plazo</h4>
+                    <p>Expandirnos a Latinoamérica y ser la alternativa #1 al streaming rentado.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- MODELO DE NEGOCIO -->
-    <section id="negocio" style="background-color: #0d0d10;">
-        <h2 class="section-title">Modelo de <span>Negocio</span></h2>
-        <p class="section-subtitle">Un modelo justo, sin suscripciones abusivas.</p>
-        
-        <div class="grid-3">
-            <div class="card">
-                <i class="fa-solid fa-gift card-icon"></i>
-                <h3>Versión Base (Gratis)</h3>
-                <p>Uso de red local, reproducción de archivos MP3/FLAC/WAV, gestión de metadatos local. 100% funcional para el usuario promedio.</p>
+    <section id="negocio">
+        <div class="section-header reveal">
+            <h2 class="section-title">Modelo de <span>Negocio</span></h2>
+            <p class="section-subtitle">Sostenible, justo y libre de rentas vitalicias.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="glass-card pricing-card reveal">
+                <h3>Open Source</h3>
+                <div class="price">$0 <span>MXN</span></div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Para siempre.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Servidor local (LAN)</li>
+                    <li><i class="fa-solid fa-check"></i> Reproductor de MP3/FLAC</li>
+                    <li><i class="fa-solid fa-check"></i> Gestión de metadatos</li>
+                </ul>
+                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--primary);">Descargar</a>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-crown card-icon"></i>
-                <h3>Licencia Pro ($199 MXN)</h3>
-                <p><b>Pago único (No suscripción).</b> Incluye herramientas avanzadas: sincronización multi-servidor, conexión Cloudflare para acceso global, herramientas para DJs y coleccionistas.</p>
+
+            <div class="glass-card pricing-card highlight reveal" style="transition-delay: 0.2s;">
+                <h3>Licencia Pro</h3>
+                <div class="price">$199 <span>MXN (Único pago)</span></div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Sin suscripciones mensuales.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Todo lo de Open Source</li>
+                    <li><i class="fa-solid fa-check"></i> Conexión Cloudflare (Global)</li>
+                    <li><i class="fa-solid fa-check"></i> Sincronización Multi-servidor</li>
+                    <li><i class="fa-solid fa-check"></i> Herramientas avanzadas para DJs</li>
+                </ul>
+                <a href="#inicio" class="btn" style="width: 100%; justify-content: center;">Obtener Pro</a>
             </div>
-            <div class="card">
-                <i class="fa-solid fa-hand-holding-dollar card-icon"></i>
-                <h3>Estructura de Costos</h3>
-                <p>Costo inicial del prototipo: ~$15 MXN.<br>
-                Costos de publicación: $25 USD (Google) + $99 USD (Apple).<br>
-                Gastos operativos: Luz e Internet (aprox. $300 MXN).<br>
-                Al no usar la nube, evitamos costos masivos de servidores.</p>
+
+            <div class="glass-card pricing-card reveal" style="transition-delay: 0.4s;">
+                <h3>Inversión</h3>
+                <div class="price">$300 <span>MXN/mes</span></div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Costos operativos estimados.</p>
+                <ul>
+                    <li><i class="fa-solid fa-bolt" style="color: #f0c05a;"></i> Electricidad (Servidor local)</li>
+                    <li><i class="fa-solid fa-wifi" style="color: #f0c05a;"></i> Internet (Desarrollo)</li>
+                    <li><i class="fa-solid fa-code" style="color: #f0c05a;"></i> Python/FastAPI/Flutter (Gratis)</li>
+                    <li><i class="fa-brands fa-google-play" style="color: #f0c05a;"></i> Publicación: $124 USD (Año 1)</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <!-- EQUIPO -->
     <section id="equipo">
-        <h2 class="section-title">El Equipo detrás de <span>Cerru de Janeiro</span></h2>
-        <p class="section-subtitle">Un grupo multidisciplinario unido por la innovación.</p>
-        
-        <div class="grid-3">
-            <!-- Integrante 1 -->
-            <div class="card team-card">
-                <img src="https://via.placeholder.com/150/333333/ffffff?text=Pedro" alt="Pedro" class="team-img">
+        <div class="section-header reveal">
+            <h2 class="section-title">Cerru de <span>Janeiro Company</span></h2>
+            <p class="section-subtitle">El talento humano detrás del código.</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="glass-card team-card reveal">
+                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Pedro" alt="Pedro" class="team-img">
                 <h3>Pedro M. Godínez</h3>
-                <p class="team-role">Líder de Desarrollo Técnico</p>
-                <p>Encargado del desarrollo óptimo del producto, supervisor y creador de la arquitectura backend.</p>
+                <span class="team-role">Líder de Desarrollo Técnico</span>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Arquitecto backend, supervisor y creador del núcleo del producto.</p>
             </div>
-            <!-- Integrante 2 -->
-            <div class="card team-card">
-                <img src="https://via.placeholder.com/150/333333/ffffff?text=Leonardo" alt="Leonardo" class="team-img">
+            <div class="glass-card team-card reveal" style="transition-delay: 0.1s;">
+                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Leonardo" alt="Leonardo" class="team-img">
                 <h3>Leonardo Martínez</h3>
-                <p class="team-role">Ayudante de Desarrollo</p>
-                <p>Apoyo en la programación y seguimiento de órdenes técnicas para completar el producto.</p>
+                <span class="team-role">Desarrollo de Soporte</span>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Ayudante directo en el desarrollo técnico y depuración de errores.</p>
             </div>
-            <!-- Integrante 3 -->
-            <div class="card team-card">
-                <img src="https://via.placeholder.com/150/333333/ffffff?text=Issac" alt="Issac" class="team-img">
+            <div class="glass-card team-card reveal" style="transition-delay: 0.2s;">
+                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Issac" alt="Issac" class="team-img">
                 <h3>Issac R. Ordaz</h3>
-                <p class="team-role">Líder y Coordinador</p>
-                <p>Supervisa el progreso del producto, coordina las acciones del grupo y la voz principal del equipo.</p>
+                <span class="team-role">Líder de Equipo</span>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Coordinador general, estructura el proyecto y es la voz principal.</p>
             </div>
-            <!-- Integrante 4 -->
-            <div class="card team-card">
-                <img src="https://via.placeholder.com/150/333333/ffffff?text=Angel" alt="Angel" class="team-img">
+            <div class="glass-card team-card reveal" style="transition-delay: 0.3s;">
+                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Angel" alt="Angel" class="team-img">
                 <h3>Ángel B. Tovar</h3>
-                <p class="team-role">Diseñador Gráfico</p>
-                <p>Creador de la identidad visual, logotipos y presentaciones del producto.</p>
+                <span class="team-role">Diseño e Identidad</span>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Creador de la identidad visual, UI/UX y material promocional.</p>
             </div>
-            <!-- Integrante 5 -->
-            <div class="card team-card">
-                <img src="https://via.placeholder.com/150/333333/ffffff?text=Adrian" alt="Adrian" class="team-img">
+            <div class="glass-card team-card reveal" style="transition-delay: 0.4s;">
+                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Adrian" alt="Adrian" class="team-img">
                 <h3>Adrián Jiménez</h3>
-                <p class="team-role">Probador del Producto (QA)</p>
-                <p>Encargado de testear el software, encontrar errores y dar retroalimentación basada en la competencia (Spotify, Apple Music).</p>
+                <span class="team-role">QA & Testing</span>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Encargado de pruebas, feedback y análisis de la competencia.</p>
             </div>
-            <!-- Integrante 6 -->
-            <div class="card team-card">
-                <img src="https://via.placeholder.com/150/333333/ffffff?text=Nicolas" alt="Nicolas" class="team-img">
+            <div class="glass-card team-card reveal" style="transition-delay: 0.5s;">
+                <img src="https://via.placeholder.com/150/1a1a1e/ff003c?text=Nicolas" alt="Nicolas" class="team-img">
                 <h3>Nicolás Acosta</h3>
-                <p class="team-role">Ayudante de Presentación</p>
-                <p>Encargado de la información, diseño y montaje de las presentaciones del equipo.</p>
+                <span class="team-role">Comunicación</span>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Estructuración de información y presentaciones de impacto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MATERIAL PROMOCIONAL -->
+    <section id="material">
+        <div class="section-header reveal">
+            <h2 class="section-title">Material <span>Promocional</span></h2>
+            <p class="section-subtitle">Nuestra presencia física en la feria (Póster y Tríptico).</p>
+        </div>
+        
+        <div class="promo-grid">
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 20px; text-align: center;">Póster Oficial</h3>
+                <img src="https://via.placeholder.com/600x800/1a1a1e/ff003c?text=AQUI+VA+TU+POSTER" alt="Póster" class="promo-img">
+            </div>
+            <div class="glass-card reveal" style="transition-delay: 0.2s;">
+                <h3 style="margin-bottom: 20px; text-align: center;">Tríptico Informativo</h3>
+                <img src="https://via.placeholder.com/600x400/1a1a1e/ff003c?text=AQUI+VA+TU+TRIPTICO" alt="Tríptico" class="promo-img">
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <h2>JANEIRO MUSIC</h2>
-        <p>Cerru de Janeiro Company© - Feria ACT NOW 2026</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Habilidades y Valores III: Ser Creativo</p>
+        <div class="footer-logo">JANEIRO<span>MUSIC</span></div>
+        <p>Cerru de Janeiro Company© 2026</p>
+        <p>Habilidades y Valores III: Ser Creativo</p>
     </footer>
 
+    <!-- SCRIPT PARA ANIMACIONES AL SCROLL -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger once on load
+        });
+    </script>
 </body>
 </html>
