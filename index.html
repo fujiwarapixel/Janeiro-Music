@@ -23,7 +23,8 @@
             --secondary: #ffffff;
             --text-muted: #9a9aab;
             --border: rgba(255, 255, 255, 0.1);
-            --border-glow: rgba(217, 4, 41, 0.25); /* Contorno sutil */
+            /* Borde más notorio */
+            --border-glow: rgba(217, 4, 41, 0.5); 
             --gold: #d4af37;
             --font-main: 'Outfit', sans-serif;
         }
@@ -55,12 +56,12 @@
         .cursor-dot { width: 8px; height: 8px; background-color: var(--primary); }
         .cursor-outline {
             width: 40px; height: 40px;
-            border: 1px solid rgba(217, 4, 41, 0.4);
+            border: 1px solid rgba(217, 4, 41, 0.6);
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
         .cursor-outline.hovered {
             width: 60px; height: 60px;
-            background-color: rgba(217, 4, 41, 0.1);
+            background-color: rgba(217, 4, 41, 0.15);
             border-color: var(--primary);
         }
 
@@ -141,7 +142,7 @@
             width: 100%; max-width: 900px; aspect-ratio: 16 / 9;
             background: #000; border-radius: 20px;
             border: 1px solid var(--border-glow);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 15px rgba(217, 4, 41, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(217, 4, 41, 0.2);
             position: relative; overflow: hidden; margin-bottom: 50px;
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
@@ -176,7 +177,7 @@
         .section-title span { color: var(--primary); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Tarjetas con contorno sutil */
+        /* Tarjetas con contorno más notorio */
         .glass-card {
             background: var(--bg-surface);
             border: 1px solid var(--border); border-radius: 20px; padding: 40px;
@@ -185,7 +186,7 @@
         }
         .glass-card:hover { 
             border-color: var(--border-glow); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(217, 4, 41, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(217, 4, 41, 0.1);
         }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -195,8 +196,8 @@
             display: flex; justify-content: center; align-items: center;
             font-size: 1.2rem; margin-bottom: 25px;
         }
-        .icon-red { background: rgba(217, 4, 41, 0.1); color: var(--primary); border: 1px solid rgba(217, 4, 41, 0.2); }
-        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.2); }
+        .icon-red { background: rgba(217, 4, 41, 0.1); color: var(--primary); border: 1px solid var(--border-glow); }
+        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.3); }
 
         .glass-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
         .glass-card p { color: var(--text-muted); font-size: 1rem; }
@@ -207,7 +208,7 @@
         .laptop-mockup {
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
             border-radius: 20px 20px 0 0; background: #000;
-            box-shadow: 0 0 20px rgba(217, 4, 41, 0.1);
+            box-shadow: 0 0 20px rgba(217, 4, 41, 0.15);
         }
         .laptop-mockup::after {
             content: ''; position: absolute; bottom: -18px; left: -5%; width: 110%; height: 18px;
@@ -218,7 +219,7 @@
         .phone-mockup {
             width: 260px; height: 540px; border: 10px solid #1a1a1a; border-radius: 40px;
             background: #000; margin: 0 auto; position: relative; overflow: hidden;
-            box-shadow: 0 0 20px rgba(217, 4, 41, 0.1);
+            box-shadow: 0 0 20px rgba(217, 4, 41, 0.15);
         }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -230,7 +231,7 @@
         /* ================= ODS 12 ================= */
         .ods-banner {
             background: #181818;
-            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 20px; padding: 50px;
             text-align: center; box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
         }
         .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
@@ -252,31 +253,58 @@
         
         /* Tarjeta de Inversión */
         .highlight-gold { 
-            border-color: rgba(212, 175, 55, 0.4); 
+            border-color: rgba(212, 175, 55, 0.5); 
             background: #1a1814; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 15px rgba(212, 175, 55, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(212, 175, 55, 0.1);
         }
-        .highlight-gold:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.2); }
+        .highlight-gold:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.3); }
 
-        /* ================= EQUIPO ================= */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        /* ================= EQUIPO (GRID 3x2) ================= */
+        .team-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+            gap: 30px; 
+        }
         .team-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
         
-        /* Imagen con redirección a Instagram */
+        /* Efecto de Instagram al pasar el mouse */
         .team-img-link {
+            position: relative;
             display: block; margin-bottom: 20px; border-radius: 50%;
             transition: transform 0.3s;
+            width: 140px; height: 140px; /* Tamaño fijo para el contenedor */
         }
         .team-img {
-            width: 140px; height: 140px; border-radius: 50%; 
+            width: 100%; height: 100%; border-radius: 50%; 
             object-fit: cover;
-            border: 2px solid rgba(217, 4, 41, 0.3); 
+            border: 2px solid var(--border-glow); 
             transition: border-color 0.3s, box-shadow 0.3s;
             background-color: #222;
+            display: block;
         }
+        
+        /* Capa oscura con el logo de Instagram */
+        .team-img-link::after {
+            content: '\f16d'; /* Código de FontAwesome para Instagram */
+            font-family: 'Font Awesome 6 Brands';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+            color: white;
+            font-size: 3.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            opacity: 0; /* Oculto por defecto */
+            transition: opacity 0.3s ease;
+            pointer-events: none; /* Para que el clic pase al enlace */
+        }
+        
+        .team-img-link:hover::after { opacity: 1; }
         .team-img-link:hover .team-img { 
             border-color: var(--primary); 
-            box-shadow: 0 0 20px rgba(217, 4, 41, 0.4); /* Contorno brillante al pasar el mouse */
+            box-shadow: 0 0 25px rgba(217, 4, 41, 0.5); 
         }
         .team-img-link:hover { transform: scale(1.05); }
         
@@ -310,6 +338,10 @@
         #scrollTop:hover { background: var(--primary); border-color: var(--primary); }
 
         /* ================= RESPONSIVE ================= */
+        @media (max-width: 1024px) {
+            .team-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columnas en tablets */
+        }
+
         @media (max-width: 900px) {
             nav { width: 100%; top: 0; border-radius: 0; padding: 15px 20px; }
             .nav-links { display: none; }
@@ -318,6 +350,7 @@
             section { padding: 60px 5%; }
             .cursor-dot, .cursor-outline { display: none; }
             * { cursor: auto; }
+            .team-grid { grid-template-columns: 1fr; } /* 1 columna en celulares */
         }
     </style>
 </head>
@@ -357,7 +390,8 @@
         </p>
         
         <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <!-- Video de YouTube sin recomendaciones al final (?rel=0) y usando youtube-nocookie -->
+            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         <a href="#solucion" class="btn">Descubre cómo funciona</a>
@@ -487,7 +521,6 @@
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos</li>
                     <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP ya funcional</li>
                 </ul>
-                <!-- ENLACE A DISCORD -->
                 <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800;">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
                 </a>
@@ -506,7 +539,6 @@
         <div class="team-grid">
             <!-- Pedro -->
             <div class="glass-card team-card reveal tilt">
-                <!-- Enlace a Instagram -->
                 <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" class="team-img-link">
                     <img src="Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
                 </a>
