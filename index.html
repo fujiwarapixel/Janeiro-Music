@@ -127,8 +127,8 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr; 
-            gap: 50px;
+            grid-template-columns: 1.3fr 0.7fr; /* Ajuste para equilibrar el texto con el logo más pequeño */
+            gap: 40px;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
@@ -169,7 +169,7 @@
         .hero-intro {
             font-size: 1.05rem;
             color: var(--text-muted); font-weight: 400;
-            line-height: 1.8;
+            line-height: 1.7;
             margin-bottom: 30px;
             text-align: justify;
         }
@@ -182,21 +182,21 @@
             position: relative;
         }
 
-        /* LOGO CIRCULAR */
+        /* LOGO CIRCULAR (MÁS PEQUEÑO) */
         .hero-product-logo {
-            width: 280px;
-            height: 280px;
+            width: 200px; /* Reducido de 280px a 200px */
+            height: 200px;
             object-fit: contain;
             border-radius: 50%;
             background: rgba(20, 20, 24, 0.8);
-            padding: 20px;
+            padding: 15px;
             border: 2px solid var(--border-gray);
-            box-shadow: 0 0 40px rgba(230, 30, 77, 0.2);
+            box-shadow: 0 0 30px rgba(230, 30, 77, 0.15);
             transition: all 0.3s ease;
         }
         .hero-product-logo:hover { 
             transform: scale(1.05); 
-            box-shadow: 0 0 50px rgba(230, 30, 77, 0.4);
+            box-shadow: 0 0 40px rgba(230, 30, 77, 0.3);
             border-color: var(--border-red);
         }
 
@@ -233,7 +233,7 @@
             box-shadow: 0 4px 15px rgba(230, 30, 77, 0.3);
         }
         .btn:hover { background: #c91842; box-shadow: 0 6px 20px rgba(230, 30, 77, 0.4); }
-        .btn:active { transform: scale(0.96); } /* Efecto táctil */
+        .btn:active { transform: scale(0.96); }
 
         /* ================= CINTA INFINITA ================= */
         .marquee-container {
@@ -287,27 +287,34 @@
         .glass-card h3 { font-size: 1.6rem; margin-bottom: 20px; }
         .glass-card p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 20px; text-align: justify; }
         
+        /* ACOMODO DE LISTAS MEJORADO */
         .info-list { list-style: none; }
         .info-list li { 
             color: var(--text-muted); 
             font-size: 1rem; 
-            margin-bottom: 20px; 
+            margin-bottom: 18px; 
             display: flex; 
             align-items: flex-start; 
-            gap: 12px; 
-            line-height: 1.5;
+            gap: 15px; 
+            line-height: 1.6;
         }
-        .info-list li i { margin-top: 6px; font-size: 0.85rem; }
+        .info-list li i { margin-top: 6px; font-size: 0.85rem; flex-shrink: 0;}
         .text-red i { color: var(--primary); }
         .text-green i { color: var(--border-green); }
-        .info-list li strong { color: var(--secondary); font-weight: 600; display: block; margin-bottom: 4px;}
+        .info-list li div strong { 
+            color: var(--secondary); 
+            font-weight: 700; 
+            display: block; 
+            margin-bottom: 5px; 
+            font-size: 1.05rem;
+        }
 
         /* ================= PROTOTIPO (PAREJO Y MEJORADO) ================= */
         .proto-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 40px; 
-            align-items: stretch; /* Hace que las columnas midan lo mismo */
+            align-items: stretch; 
         }
         
         .proto-card {
@@ -316,8 +323,8 @@
             padding: 30px;
             border: 1px solid var(--border-gray);
             display: flex;
-            flex-direction: column; /* Para empujar el contenido hacia abajo */
-            height: 100%; /* Para igualar la altura */
+            flex-direction: column;
+            height: 100%;
             transition: all 0.3s ease;
         }
         .proto-card:hover {
@@ -325,7 +332,7 @@
             box-shadow: var(--box-shadow-red);
         }
         
-        .proto-card h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--secondary); text-align: center; }
+        .proto-card h3 { font-size: 1.5rem; margin-bottom: 25px; color: var(--secondary); text-align: center; }
 
         .laptop-mockup {
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
@@ -351,25 +358,24 @@
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* La caja de info crece para rellenar el espacio */
         .proto-info {
             background: rgba(0,0,0,0.4);
-            padding: 25px;
+            padding: 30px;
             border-radius: 16px;
             width: 100%;
-            flex-grow: 1; /* Hace que ocupe todo el espacio disponible */
+            flex-grow: 1; 
             display: flex;
             flex-direction: column;
         }
         .proto-info h4 { color: var(--primary); font-size: 1.2rem; margin-bottom: 15px; }
-        .proto-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; text-align: justify; line-height: 1.6; }
+        .proto-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; text-align: justify; line-height: 1.6; }
         .proto-info ul { list-style: none; margin-top: auto; }
         .proto-info ul li { 
-            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; 
-            display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
+            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; 
+            display: flex; gap: 12px; align-items: flex-start; line-height: 1.5;
         }
-        .proto-info ul li i { color: var(--border-gray); margin-top: 5px;}
-        .proto-info ul li strong { color: var(--secondary); }
+        .proto-info ul li i { color: var(--border-gray); margin-top: 5px; flex-shrink: 0;}
+        .proto-info ul li div strong { color: var(--secondary); display: block; margin-bottom: 3px;}
 
         /* ================= ODS 12 ================= */
         .ods-banner {
@@ -440,17 +446,16 @@
         }
         .team-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; text-align: center; }
 
-        /* ================= MATERIAL PROMOCIONAL ================= */
-        .promo-single { display: flex; justify-content: center; }
-        .promo-card { max-width: 900px; width: 100%; text-align: center; padding: 40px; }
-        .promo-card h3 { font-size: 1.8rem; margin-bottom: 30px; color: var(--secondary); }
+        /* ================= MATERIAL PROMOCIONAL (SIN CUADRO) ================= */
+        .promo-single { display: flex; justify-content: center; width: 100%; }
         .promo-img { 
             width: 100%; 
-            max-height: 800px; 
+            max-width: 900px; /* Ancho máximo para el póster */
+            height: auto;
             object-fit: contain; 
             border-radius: 12px; 
-            border: 1px solid var(--border-gray); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            /* Se quitó el borde y el fondo para que no tenga líneas extra */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
 
         /* ================= FOOTER ================= */
@@ -503,7 +508,7 @@
             .hero-text-content { text-align: center; }
             .hero-slogan { border-left: none; padding-left: 0; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; }
             .hero-intro { text-align: center; }
-            .hero-product-logo { margin-top: 30px; width: 220px; height: 220px; }
+            .hero-product-logo { margin-top: 30px; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
             .footer-brand p { margin: 0 auto; }
         }
@@ -571,7 +576,7 @@
                 <a href="#solucion" class="btn" style="margin-top: 10px;">Descubre cómo funciona</a>
             </div>
             
-            <!-- Columna Derecha: Icono de la App (CIRCULAR) -->
+            <!-- Columna Derecha: Icono de la App (MÁS PEQUEÑO) -->
             <div class="hero-image-content">
                 <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
             </div>
@@ -613,8 +618,8 @@
                 <h3>El Modelo Roto</h3>
                 <p>Las plataformas actuales (Spotify, Apple Music) presentan varios problemas críticos para el usuario y el planeta:</p>
                 <ul class="info-list text-red">
-                    <li><i class="fa-solid fa-circle"></i> <div><strong>Suscripciones infinitas:</strong> Pagas mes tras mes sin poseer absolutamente nada. Si dejas de pagar, pierdes tu biblioteca y todo el historial de recomendaciones.</div></li>
-                    <li><i class="fa-solid fa-circle"></i> <div><strong>Dependencia de internet:</strong> Sin red móvil o Wi-Fi, no hay música. Estás atado a la cobertura de tu zona, al consumo de datos y a posibles cargos extra por exceder tu plan.</div></li>
+                    <li><i class="fa-solid fa-circle"></i> <div><strong>Suscripciones infinitas:</strong> Pagas mes tras mes sin poseer absolutamente nada. Si dejas de pagar, pierdes tu biblioteca y todo el historial.</div></li>
+                    <li><i class="fa-solid fa-circle"></i> <div><strong>Dependencia de internet:</strong> Sin red móvil o Wi-Fi, no hay música. Estás atado a la cobertura de tu zona, al consumo de datos y a posibles cargos extra.</div></li>
                     <li><i class="fa-solid fa-circle"></i> <div><strong>Impacto ambiental masivo:</strong> Los gigantes centros de datos consumen energía eléctrica 24/7 solo para almacenar canciones, transmitirlas y generar algoritmos. Esto contribuye enormemente a la huella de carbono global.</div></li>
                     <li><i class="fa-solid fa-circle"></i> <div><strong>Reproductores obsoletos:</strong> Los reproductores locales tradicionales batallan para leer formatos modernos y a menudo fallan al organizar metadatos complejos o mostrar carátulas.</div></li>
                 </ul>
@@ -712,33 +717,34 @@
     <section id="negocio">
         <div class="section-header reveal">
             <h2 class="section-title">Apoya e <span>Invierte</span></h2>
-            <p class="section-subtitle">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
+            <p class="section-subtitle">Modelo de negocio: Código Abierto y Freemium con pago único. Cero rentas vitalicias.</p>
         </div>
 
         <div class="pricing-grid">
             
+            <!-- Tarjeta 1: Modelo y Costos -->
             <div class="glass-card pricing-card reveal tilt">
-                <h3>Comunidad Open Source</h3>
-                <div class="price">$0 <span>MXN</span></div>
-                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El núcleo de Janeiro Music es gratuito.</p>
+                <h3>Nuestro Modelo</h3>
+                <div class="price">$0 <span>/ suscripción</span></div>
+                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El software base es gratuito y open source. Nos sostenemos mediante el apoyo voluntario y una licencia de valor agregado de pago único para funciones pro (como Cloudflare o multi-servidor).</p>
                 <ul>
-                    <li><i class="fa-solid fa-check"></i> Servidor local vía LAN (Wi-Fi).</li>
-                    <li><i class="fa-solid fa-check"></i> Reproductor local de formatos MP3, FLAC, WAV, OPUS.</li>
-                    <li><i class="fa-solid fa-check"></i> Extracción de metadatos y carátulas.</li>
-                    <li><i class="fa-solid fa-check"></i> Código auditable por la comunidad.</li>
+                    <li><i class="fa-solid fa-server"></i> <strong style="color:var(--secondary);">Costo Inicial:</strong> Prácticamente $0 MXN (usamos PCs propias/recicladas).</li>
+                    <li><i class="fa-solid fa-wifi"></i> <strong style="color:var(--secondary);">Mantenimiento:</strong> ~$300 MXN/mes (Luz e Internet).</li>
+                    <li><i class="fa-solid fa-code"></i> <strong style="color:var(--secondary);">Software:</strong> $0 MXN (Python, FastAPI, Flutter, Android Studio).</li>
+                    <li><i class="fa-brands fa-google-play"></i> <strong style="color:var(--secondary);">Publicación:</strong> $25 USD único (Google) + $99 USD/año (Apple).</li>
                 </ul>
-                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--border-red); box-shadow: none;">Descargar</a>
             </div>
 
+            <!-- Tarjeta 2: Inversión -->
             <div class="glass-card pricing-card highlight-gold reveal tilt" style="transition-delay: 0.2s;">
-                <h3>Inversión Estratégica</h3>
+                <h3>Oportunidad Estratégica</h3>
                 <div class="price" style="font-size: 2.5rem;">Únete</div>
-                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">Apoya el desarrollo y crece con nosotros.</p>
+                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
                 <ul>
-                    <li><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> Mercado potencial masivo: millones cansados de suscripciones.</li>
-                    <li><i class="fa-solid fa-leaf" style="color: var(--gold);"></i> Tecnología sostenible y economía circular (ODS 12).</li>
-                    <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos (descentralizado).</li>
-                    <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP (Prototipo Mínimo Viable) ya funcional.</li>
+                    <li><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> Mercado potencial masivo: millones de usuarios cansados de las suscripciones.</li>
+                    <li><i class="fa-solid fa-leaf" style="color: var(--gold);"></i> Alineado con la economía circular y los ODS 12.</li>
+                    <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos gracias a la arquitectura descentralizada.</li>
+                    <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP (Prototipo Mínimo Viable) 100% funcional.</li>
                 </ul>
                 <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
@@ -824,18 +830,16 @@
         </div>
     </section>
 
-    <!-- MATERIAL PROMOCIONAL -->
+    <!-- MATERIAL PROMOCIONAL (PÓSTER LIBRE) -->
     <section id="material">
         <div class="section-header reveal">
             <h2 class="section-title">Material <span>Promocional</span></h2>
             <p class="section-subtitle">Póster oficial de presentación para la feria.</p>
         </div>
         
-        <div class="promo-single">
-            <div class="glass-card promo-card reveal tilt" style="border: 1px solid var(--border-gray);">
-                <h3>Póster Informativo</h3>
-                <img src="Files/Poster.png" alt="Póster Oficial Janeiro Music" class="promo-img">
-            </div>
+        <div class="promo-single reveal tilt">
+            <!-- Imagen suelta sin contenedor, sin borde, sin fondo de tarjeta -->
+            <img src="Files/Poster.png" alt="Póster Oficial Janeiro Music" class="promo-img">
         </div>
     </section>
 
@@ -933,7 +937,7 @@
                         const y = e.clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
-                        const rotateX = ((y - centerY) / centerY) * -4; // Reducido para que sea más sutil
+                        const rotateX = ((y - centerY) / centerY) * -4; 
                         const rotateY = ((x - centerX) / centerX) * 4;
 
                         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
