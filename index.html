@@ -18,25 +18,25 @@
         /* ================= VARIABLES ================= */
         :root {
             --bg-base: #050507;
-            --bg-glass: rgba(20, 20, 25, 0.6); /* Fondo gris con transparencia */
+            --bg-glass: rgba(20, 20, 25, 0.6); 
             
             --primary: #ff0a40; 
-            --primary-glow: rgba(255, 10, 64, 0.4);
+            --primary-glow: rgba(255, 10, 64, 0.5);
             
             --green: #22c55e;
-            --green-glow: rgba(34, 197, 94, 0.4);
+            --green-glow: rgba(34, 197, 94, 0.5);
             
             --blue: #3b82f6;
-            --blue-glow: rgba(59, 130, 246, 0.4);
+            --blue-glow: rgba(59, 130, 246, 0.5);
             
             --gold: #fce27c;
-            --gold-glow: rgba(252, 226, 124, 0.4);
+            --gold-glow: rgba(252, 226, 124, 0.5);
             
             --purple: #a855f7;
-            --purple-glow: rgba(168, 85, 247, 0.4);
+            --purple-glow: rgba(168, 85, 247, 0.5);
             
             --gray: #9ca3af;
-            --gray-glow: rgba(156, 163, 175, 0.3);
+            --gray-glow: rgba(156, 163, 175, 0.4);
             
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
@@ -286,9 +286,10 @@
 
         /* ================= TARJETAS UNIFICADAS (GLASS NEÓN) ================= */
         .unified-card {
-            background: var(--bg-glass); /* Fondo gris con transparencia */
+            background: var(--bg-glass); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            /* Borde visible por defecto */
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 28px; padding: 45px;
             transition: var(--transition);
             position: relative;
@@ -296,7 +297,7 @@
             overflow: hidden;
         }
         
-        /* Efecto Hover Neón */
+        /* Efecto Hover Neón (El borde se ilumina y engrosa) */
         .unified-card:hover { 
             border-color: var(--card-glow);
             box-shadow: 
@@ -306,12 +307,12 @@
         }
 
         /* Variaciones de Color */
-        .card-red { --card-glow: var(--primary-glow); --card-bg: rgba(255, 10, 64, 0.05); }
-        .card-green { --card-glow: var(--green-glow); --card-bg: rgba(34, 197, 94, 0.05); }
-        .card-blue { --card-glow: var(--blue-glow); --card-bg: rgba(59, 130, 246, 0.05); }
-        .card-gold { --card-glow: var(--gold-glow); --card-bg: rgba(252, 226, 124, 0.05); }
-        .card-purple { --card-glow: var(--purple-glow); --card-bg: rgba(168, 85, 247, 0.05); }
-        .card-gray { --card-glow: var(--gray-glow); --card-bg: rgba(156, 163, 175, 0.05); }
+        .card-red { --card-glow: var(--primary); --card-bg: rgba(255, 10, 64, 0.08); }
+        .card-green { --card-glow: var(--green); --card-bg: rgba(34, 197, 94, 0.08); }
+        .card-blue { --card-glow: var(--blue); --card-bg: rgba(59, 130, 246, 0.08); }
+        .card-gold { --card-glow: var(--gold); --card-bg: rgba(252, 226, 124, 0.08); }
+        .card-purple { --card-glow: var(--purple); --card-bg: rgba(168, 85, 247, 0.08); }
+        .card-gray { --card-glow: var(--gray); --card-bg: rgba(156, 163, 175, 0.08); }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
@@ -344,9 +345,8 @@
         /* ================= PROTOTIPO ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
         
-        /* Ajuste para bajar la imagen y el texto del servidor */
         .proto-card-offset {
-            padding-top: 20px; /* Baja un poco el contenido del servidor */
+            padding-top: 20px; 
         }
         
         .laptop-mockup {
@@ -388,14 +388,14 @@
 
         /* ================= ODS 12 ================= */
         .ods-banner {
-            background: var(--bg-glass); /* Fondo gris transparente */
+            background: var(--bg-glass); 
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Borde visible */
             border-radius: 32px; padding: 60px;
             text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             transition: var(--transition);
-            --card-glow: var(--gold-glow);
-            --card-bg: rgba(252, 226, 124, 0.05);
+            --card-glow: var(--gold);
+            --card-bg: rgba(252, 226, 124, 0.08);
         }
         .ods-banner:hover { 
             border-color: var(--card-glow); 
@@ -412,7 +412,6 @@
         .smart-item p { font-size: 0.95rem; margin: 0;}
 
         /* ================= MODELO DE NEGOCIO ================= */
-        /* Cuadro informativo con color azul tecnológico (no rojo) */
         .business-model-info {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.02));
             border: 1px solid rgba(59, 130, 246, 0.3);
@@ -435,7 +434,6 @@
         .cost-list li i { margin-top: 5px; width: 20px; text-align: center; font-size: 1.1rem;}
         .cost-list li strong { color: var(--text-main); display: block; margin-bottom: 4px; font-size: 1rem;}
 
-        /* Tarjeta verde (Nuestro Modelo) */
         .card-green-model {
             border-color: rgba(34, 197, 94, 0.3);
             background: linear-gradient(145deg, rgba(34, 197, 94, 0.08), var(--bg-glass));
@@ -445,7 +443,6 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(34, 197, 94, 0.2);
         }
 
-        /* Tarjeta dorada (Inversión) */
         .highlight-gold { 
             border-color: rgba(252, 226, 124, 0.3); 
             background: linear-gradient(145deg, rgba(252, 226, 124, 0.08), var(--bg-glass)); 
@@ -530,7 +527,6 @@
             margin-bottom: 20px;
         }
         
-        /* Logo de Cerru de Janeiro en el centro */
         .footer-logo-center img { 
             width: 160px; 
             height: auto; 
@@ -739,7 +735,7 @@
                 </div>
                 <div class="proto-info" style="border-color: rgba(59, 130, 246, 0.2);">
                     <h4 style="color: var(--blue);">El Cerebro (Backend)</h4>
-                    <p>Desarrollado en Python con el framework FastAPI, este programa actúa como el núcleo de todo el ecosistema. Se ejecuta en tu computadora local, escaneando de forma asíncrona todas tus carpetas de música, extrayendo metadatos precisos (título, artista, álbum y carátulas), y generando un índice de búsqueda ultra rápido. Además, maneja la seguridad y los permisos, asegurando que todo funcione a la perfección incluso con bibliotecas gigantes.</p>
+                    <p>Desarrollado en Python con el framework FastAPI, este programa actúa como el núcleo de todo el ecosistema. Se ejecuta en tu computadora local, escaneando de forma asíncrona todas tus carpetas de música, extrayendo metadatos precisos (título, artista, álbum y carátulas), y generando un índice de búsqueda ultra rápido. Además, maneja la seguridad y los permisos, asegurando que todo funcione a la perfección incluso con bibliotecas gigantes. La arquitectura está diseñada para ser escalable, ligera y fácil de instalar en cualquier sistema operativo.</p>
                     
                     <ul>
                         <li><i class="fa-solid fa-microchip" style="color: var(--blue);"></i> <div><strong>Procesamiento veloz:</strong> <span> Utiliza hilos de ejecución para escanear miles de archivos sin colapsar tu PC.</span></div></li>
@@ -808,7 +804,6 @@
             <p class="section-subtitle">Nuestro modelo está diseñado para ser justo, sostenible y accesible para todos.</p>
         </div>
 
-        <!-- Cuadro Informativo (Azul) -->
         <div class="business-model-info reveal">
             <h4><i class="fa-solid fa-circle-info"></i> ¿Cómo funciona nuestro modelo?</h4>
             <p><strong>Código Abierto:</strong> El núcleo de Janeiro Music es gratuito. Creemos en el software libre y en darle el poder al usuario sin cobrarle por lo básico.</p>
@@ -818,7 +813,6 @@
 
         <div class="pricing-grid">
             
-            <!-- Tarjeta 1: Modelo y Costos (Verde) -->
             <div class="unified-card card-green-model pricing-card reveal">
                 <h3>Nuestro Modelo</h3>
                 <div class="price">$0 <span>costo de suscripción</span></div>
@@ -832,7 +826,6 @@
                 </ul>
             </div>
 
-            <!-- Tarjeta 2: Inversión (Dorado) -->
             <div class="unified-card highlight-gold pricing-card reveal" style="transition-delay: 0.2s;">
                 <h3 style="color: var(--gold);">Oportunidad Estratégica</h3>
                 <div class="price" style="font-size: 2.5rem; margin-bottom: 25px;">Únete</div>
@@ -939,7 +932,7 @@
         </div>
     </section>
 
-    <!-- FOOTER MEJORADO CON LOGO DE CERRU DE JANEIRO -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
@@ -947,7 +940,6 @@
                 <p>Monta tu server y lleva tu música a tu Cerro. Innovación, privacidad y sostenibilidad en un solo ecosistema musical.</p>
             </div>
             
-            <!-- Logo de Cerru de Janeiro en el centro -->
             <div class="footer-logo-center">
                 <img src="Files/Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
             </div>
