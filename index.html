@@ -55,7 +55,7 @@
             line-height: 1.6;
         }
 
-        /* FONDO MEJORADO CON MÁS PROFUNDIDAD */
+        /* FONDO CON GRADIENTES SUTILES */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -185,16 +185,22 @@
             position: relative;
         }
 
+        /* LOGO CON BORDES REDONDEADOS Y BRILLO */
         .hero-product-logo {
             width: 320px;
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 30px rgba(230, 30, 77, 0.25));
+            border-radius: 40px; /* Bordes redondeados */
+            border: 2px solid var(--border-red); /* Borde neón */
+            padding: 10px;
+            background: rgba(20, 20, 24, 0.6);
+            box-shadow: 0 0 30px rgba(230, 30, 77, 0.2);
             transition: all 0.3s ease;
         }
         .hero-product-logo:hover { 
             transform: scale(1.05); 
-            filter: drop-shadow(0 0 40px rgba(230, 30, 77, 0.5));
+            box-shadow: 0 0 40px rgba(230, 30, 77, 0.5);
+            border-color: var(--primary);
         }
 
         /* Video Section */
@@ -281,7 +287,7 @@
             margin-bottom: 25px;
         }
         .card-header-row .icon-box {
-            margin-bottom: 0; /* Quitamos el margen inferior ya que ahora está en fila */
+            margin-bottom: 0;
         }
         .card-header-row h3 {
             font-size: 1.6rem;
@@ -328,7 +334,7 @@
         .laptop-mockup {
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
             border-radius: 20px 20px 0 0; background: #000; box-shadow: 0 0 20px rgba(0,0,0,0.6); 
-            margin-bottom: 25px; /* Reducido el margen para evitar espacio vacío */
+            margin-bottom: 25px; 
         }
         .laptop-mockup::after {
             content: ''; position: absolute; bottom: -18px; left: -5%; width: 110%; height: 18px;
@@ -382,11 +388,12 @@
         .proto-info ul li div strong { color: var(--secondary); display: inline; font-weight: 600; font-size: 0.95rem;}
         .proto-info ul li div span { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* ================= ODS 12 ================= */
+        /* ================= ODS 12 (ESTÁTICO) ================= */
         .ods-banner {
             background: linear-gradient(145deg, #1a1814, #141418);
             border: 1px solid var(--gold); border-radius: 24px; padding: 50px;
             text-align: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            /* Se quitó la clase tilt para que no se mueva */
         }
         .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
         .ods-banner h3 { font-size: 2rem; margin-bottom: 20px; color: var(--gold); }
@@ -399,6 +406,32 @@
         .smart-item p { font-size: 0.95rem; text-align: left; }
 
         /* ================= MODELO DE NEGOCIO ================= */
+        
+        /* Cuadro informativo ancho (Afuera de las tarjetas) */
+        .business-model-info {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: left;
+            width: 100%;
+        }
+        .business-model-info h4 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        .business-model-info p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        .business-model-info p:last-child { margin-bottom: 0; }
+
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .pricing-card { text-align: center; padding: 50px 40px; display: flex; flex-direction: column;}
         .price { font-size: 3.5rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
@@ -409,30 +442,6 @@
         
         .highlight-gold { border-color: rgba(212, 175, 55, 0.7); background: linear-gradient(145deg, #1a1814, #141418); }
         .highlight-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.25); }
-
-        /* CUADRO DE INFORMACIÓN DEL MODELO DE NEGOCIO */
-        .business-model-box {
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-left: 4px solid var(--primary);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        .business-model-box h4 {
-            color: var(--primary);
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-        }
-        .business-model-box p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
-        .business-model-box p:last-child { margin-bottom: 0; }
 
         /* ================= EQUIPO ================= */
         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -468,10 +477,10 @@
         }
         .team-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; text-align: center; }
 
-        /* ================= MATERIAL PROMOCIONAL (PÓSTER MÁS PEQUEÑO) ================= */
+        /* ================= MATERIAL PROMOCIONAL ================= */
         .promo-single { display: flex; justify-content: center; width: 100%; }
         .promo-img { 
-            width: 100%; max-width: 650px; /* Reducido de 900px a 650px */
+            width: 100%; max-width: 650px; 
             height: auto; object-fit: contain; 
             border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
@@ -612,6 +621,7 @@
                 <a href="#solucion" class="btn" style="margin-top: 10px;">Descubre cómo funciona</a>
             </div>
             
+            <!-- LOGO CON BORDES REDONDEADOS -->
             <div class="hero-image-content">
                 <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
             </div>
@@ -640,7 +650,7 @@
         </div>
     </div>
 
-    <!-- PROBLEMA Y SOLUCIÓN (Títulos al lado de iconos) -->
+    <!-- PROBLEMA Y SOLUCIÓN -->
     <section id="solucion">
         <div class="section-header reveal">
             <h2 class="section-title">El Problema y Nuestra <span>Solución</span></h2>
@@ -678,7 +688,7 @@
         </div>
     </section>
 
-    <!-- PROTOTIPO (Eliminado espacio vacío y ordenado) -->
+    <!-- PROTOTIPO -->
     <section id="prototipo">
         <div class="section-header reveal">
             <h2 class="section-title">El <span>Prototipo</span></h2>
@@ -718,6 +728,14 @@
                                 <span> Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span>
                             </div>
                         </li>
+                        <!-- NUEVO PUNTO AGREGADO PARA BALANCEAR -->
+                        <li>
+                            <i class="fa-solid fa-desktop"></i> 
+                            <div>
+                                <strong>Interfaz Gráfica:</strong>
+                                <span> Incluye un panel de control visual para gestionar las carpetas escaneadas, ver estadísticas de uso y monitorear conexiones.</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -755,20 +773,28 @@
                                 <span> Descarga archivos al almacenamiento de tu teléfono para escucharlos sin consumir datos ni depender de la conexión.</span>
                             </div>
                         </li>
+                        <li>
+                            <i class="fa-solid fa-sliders"></i> 
+                            <div>
+                                <strong>Personalización y UI:</strong>
+                                <span> Interfaz adaptativa con modo oscuro, colores dinámicos extraídos de las portadas y controles intuitivos.</span>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ODS Y SOSTENIBILIDAD -->
+    <!-- ODS Y SOSTENIBILIDAD (ESTÁTICO) -->
     <section id="ods">
         <div class="section-header reveal">
             <h2 class="section-title">Compromiso <span>ACT NOW</span></h2>
             <p class="section-subtitle">Innovación alineada con la sostenibilidad global y el cuidado del medio ambiente.</p>
         </div>
 
-        <div class="ods-banner reveal tilt">
+        <!-- Quitado el "tilt" para que no se mueva -->
+        <div class="ods-banner reveal">
             <i class="fa-solid fa-infinity ods-logo"></i>
             <h3>ODS 12: Producción y Consumo Responsables</h3>
             <p>En Janeiro Music estamos comprometidos con el planeta. Nuestra arquitectura descentralizada ataca directamente el desperdicio tecnológico. Al no depender de servidores en la nube y permitir que el usuario recicle computadoras viejas como sus propios servidores, evitamos la generación de basura electrónica. Además, al transmitir por red local (LAN) o tener archivos offline, reducimos drásticamente el consumo energético de los gigantes centros de datos y el gasto de datos móviles, promoviendo un consumo digital responsable y consciente.</p>
@@ -790,11 +816,19 @@
         </div>
     </section>
 
-    <!-- MODELO DE NEGOCIO / INVERSIÓN (Con cuadro explicativo) -->
+    <!-- MODELO DE NEGOCIO / INVERSIÓN -->
     <section id="negocio">
         <div class="section-header reveal">
             <h2 class="section-title">Apoya e <span>Invierte</span></h2>
             <p class="section-subtitle">Nuestro modelo está diseñado para ser justo, sostenible y accesible para todos.</p>
+        </div>
+
+        <!-- CUADRO INFORMATIVO AFUERA ARRIBA DE LAS TARJETAS -->
+        <div class="business-model-info reveal">
+            <h4><i class="fa-solid fa-circle-info"></i> ¿Cómo funciona nuestro modelo?</h4>
+            <p><strong>Código Abierto:</strong> El núcleo de Janeiro Music es gratuito. Creemos en el software libre y en darle el poder al usuario sin cobrarle por lo básico.</p>
+            <p><strong>Freemium:</strong> Ofrecemos funciones avanzadas (como sincronización multi-servidor o conexión Cloudflare) mediante una licencia de pago único. Nada de rentas mensuales de por vida.</p>
+            <p><strong>Sostenibilidad:</strong> Nos sostenemos con donaciones voluntarias y la licencia Pro. Al ser descentralizado, no gastamos millones en servidores en la nube.</p>
         </div>
 
         <div class="pricing-grid">
@@ -803,15 +837,8 @@
             <div class="glass-card pricing-card reveal tilt">
                 <h3>Nuestro Modelo</h3>
                 <div class="price">$0 <span>/ suscripción</span></div>
+                <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El software base es gratuito y open source. Cero rentas vitalicias.</p>
                 
-                <!-- CUADRO DE INFORMACIÓN EXPLICATIVO -->
-                <div class="business-model-box">
-                    <h4>¿Cómo funciona nuestro modelo?</h4>
-                    <p><strong>Código Abierto:</strong> El núcleo de Janeiro Music es gratuito. Creemos en el software libre y en darle el poder al usuario sin cobrarle por lo básico.</p>
-                    <p><strong>Freemium:</strong> Ofrecemos funciones avanzadas (como sincronización multi-servidor o conexión Cloudflare) mediante una licencia de pago único. Nada de rentas mensuales de por vida.</p>
-                    <p><strong>Sostenibilidad:</strong> Nos sostenemos con donaciones voluntarias y la licencia Pro. Al ser descentralizado, no gastamos millones en servidores en la nube.</p>
-                </div>
-
                 <ul>
                     <li><i class="fa-solid fa-server"></i> <strong style="color:var(--secondary);">Costo Inicial:</strong> Prácticamente $0 MXN (usamos PCs propias/recicladas).</li>
                     <li><i class="fa-solid fa-wifi"></i> <strong style="color:var(--secondary);">Mantenimiento:</strong> ~$300 MXN/mes (Luz e Internet).</li>
@@ -915,7 +942,7 @@
         </div>
     </section>
 
-    <!-- MATERIAL PROMOCIONAL (Póster un poco más pequeño) -->
+    <!-- MATERIAL PROMOCIONAL -->
     <section id="material">
         <div class="section-header reveal">
             <h2 class="section-title">Material <span>Promocional</span></h2>
@@ -1016,7 +1043,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // 4. Efecto 3D Tilt muy sutil (Casi nada de movimiento)
+            // 4. Efecto 3D Tilt sutil
             const tiltCards = document.querySelectorAll('.tilt');
             if(window.innerWidth > 900) {
                 tiltCards.forEach(card => {
@@ -1026,7 +1053,6 @@
                         const y = e.clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
-                        // Reducido a 2 grados máximos para que sea casi imperceptible
                         const rotateX = ((y - centerY) / centerY) * -2; 
                         const rotateY = ((x - centerX) / centerX) * 2;
 
