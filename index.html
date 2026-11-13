@@ -24,9 +24,8 @@
             --text-muted: #9a9aab;
             --border: rgba(255, 255, 255, 0.1);
             
-            /* Contorno Neón Rojo Más Fuerte */
-            --border-glow: rgba(217, 4, 41, 0.8); 
-            --box-shadow-glow: 0 0 15px rgba(217, 4, 41, 0.4), inset 0 0 10px rgba(217, 4, 41, 0.2);
+            /* Borde rojo sólido (Brillo reducido) */
+            --border-glow: rgba(217, 4, 41, 0.7); 
             
             --gold: #d4af37;
             --font-main: 'Outfit', sans-serif;
@@ -59,8 +58,7 @@
         .cursor-dot { width: 8px; height: 8px; background-color: var(--primary); }
         .cursor-outline {
             width: 40px; height: 40px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 10px var(--primary);
+            border: 1px solid var(--primary); /* Brillo quitado */
             transition: width 0.2s, height 0.2s, background-color 0.2s;
         }
         .cursor-outline.hovered {
@@ -83,7 +81,7 @@
             border-radius: 50%;
             filter: blur(120px);
             z-index: -1;
-            opacity: 0.1;
+            opacity: 0.08; /* Brillo de fondo reducido */
             pointer-events: none;
         }
         .glow-top { top: -300px; right: -200px; background: var(--primary); }
@@ -98,8 +96,7 @@
             padding: 15px 30px;
             background: rgba(20, 20, 24, 0.9);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 2px solid var(--border-glow); border-radius: 100px;
-            box-shadow: var(--box-shadow-glow);
+            border: 1px solid var(--border-glow); border-radius: 100px; /* Borde normal */
             z-index: 1000;
         }
 
@@ -111,7 +108,7 @@
             font-size: 0.9rem; font-weight: 600;
             transition: color 0.3s;
         }
-        .nav-links a:hover { color: var(--secondary); text-shadow: 0 0 8px var(--primary); }
+        .nav-links a:hover { color: var(--secondary); }
 
         /* ================= HERO SECTION ================= */
         header {
@@ -132,7 +129,7 @@
             font-weight: 900; line-height: 1.05; margin-bottom: 15px;
             letter-spacing: -2px; text-transform: uppercase;
         }
-        .hero-title span { color: var(--primary); text-shadow: 0 0 20px var(--border-glow); }
+        .hero-title span { color: var(--primary); }
 
         .hero-slogan {
             font-size: clamp(1.2rem, 4vw, 1.6rem);
@@ -145,8 +142,7 @@
         .video-wrapper {
             width: 100%; max-width: 900px; aspect-ratio: 16 / 9;
             background: #000; border-radius: 20px;
-            border: 2px solid var(--border-glow);
-            box-shadow: var(--box-shadow-glow);
+            border: 1px solid var(--border-glow);
             position: relative; overflow: hidden; margin-bottom: 50px;
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
@@ -155,10 +151,9 @@
             background: var(--primary); color: white;
             padding: 16px 40px; border-radius: 50px;
             font-weight: 700; font-size: 1rem; text-decoration: none;
-            transition: all 0.3s; border: 2px solid transparent; display: inline-flex; align-items: center; gap: 10px;
-            box-shadow: 0 0 15px rgba(217, 4, 41, 0.5);
+            transition: all 0.3s; border: 1px solid transparent; display: inline-flex; align-items: center; gap: 10px;
         }
-        .btn:hover { background: #b00020; transform: translateY(-2px); border-color: #fff; box-shadow: 0 0 25px rgba(217, 4, 41, 0.8); }
+        .btn:hover { background: #b00020; transform: translateY(-2px); border-color: rgba(255,255,255,0.2); }
 
         /* ================= MARQUEE (CINTA INFINITA) ================= */
         .marquee-container {
@@ -172,26 +167,25 @@
             font-weight: 800; font-size: 1.2rem; color: var(--secondary); letter-spacing: 2px;
         }
         .marquee-content span { margin-right: 40px; display: flex; align-items: center; gap: 12px; color: var(--text-muted); }
-        .marquee-content span i { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        .marquee-content span i { color: var(--primary); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* ================= SECCIONES ================= */
         section { padding: 100px 10%; position: relative; z-index: 1; }
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-title { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 15px; }
-        .section-title span { color: var(--primary); text-shadow: 0 0 15px var(--border-glow); }
+        .section-title span { color: var(--primary); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
-        /* Tarjetas con contorno Neón Fuerte */
+        /* Tarjetas (Borde rojo sólido) */
         .glass-card {
             background: var(--bg-surface);
-            border: 2px solid var(--border-glow); border-radius: 20px; padding: 40px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-glow); border-radius: 20px; padding: 40px;
+            transition: border-color 0.3s, transform 0.3s;
             position: relative;
-            box-shadow: var(--box-shadow-glow);
         }
         .glass-card:hover { 
-            box-shadow: 0 0 25px rgba(217, 4, 41, 0.6), inset 0 0 15px rgba(217, 4, 41, 0.3);
+            border-color: var(--primary); 
         }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -201,8 +195,8 @@
             display: flex; justify-content: center; align-items: center;
             font-size: 1.2rem; margin-bottom: 25px;
         }
-        .icon-red { background: rgba(217, 4, 41, 0.2); color: var(--primary); border: 1px solid var(--primary); box-shadow: 0 0 10px var(--border-glow); }
-        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid rgba(0, 255, 100, 0.5); box-shadow: 0 0 10px rgba(0,255,100,0.3); }
+        .icon-red { background: rgba(217, 4, 41, 0.1); color: var(--primary); border: 1px solid var(--primary); }
+        .icon-green { background: rgba(0, 255, 100, 0.1); color: #00ff64; border: 1px solid #00ff64; }
 
         .glass-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
         .glass-card p { color: var(--text-muted); font-size: 1rem; }
@@ -213,7 +207,7 @@
         .laptop-mockup {
             width: 100%; position: relative; border: 12px solid #1a1a1a; border-bottom: none;
             border-radius: 20px 20px 0 0; background: #000;
-            box-shadow: 0 0 25px rgba(217, 4, 41, 0.3);
+            border: 1px solid var(--border-glow);
             transition: transform 0.3s;
         }
         .laptop-mockup:hover { transform: scale(1.02); }
@@ -226,7 +220,7 @@
         .phone-mockup {
             width: 100%; max-width: 280px; aspect-ratio: 9/19; border: 10px solid #1a1a1a; border-radius: 40px;
             background: #000; margin: 0 auto; position: relative; overflow: hidden;
-            box-shadow: 0 0 25px rgba(217, 4, 41, 0.3);
+            border: 1px solid var(--border-glow);
             transition: transform 0.3s;
         }
         .phone-mockup:hover { transform: scale(1.05); }
@@ -240,10 +234,10 @@
         /* ================= ODS 12 ================= */
         .ods-banner {
             background: #181818;
-            border: 2px solid rgba(212, 175, 55, 0.7); border-radius: 20px; padding: 50px;
-            text-align: center; box-shadow: 0 0 25px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.6); border-radius: 20px; padding: 50px;
+            text-align: center;
         }
-        .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
         .ods-banner h3 { font-size: 2rem; margin-bottom: 15px; color: var(--gold); }
         .ods-banner p { max-width: 800px; margin: 0 auto 30px; color: var(--text-muted); }
         
@@ -254,19 +248,18 @@
         /* ================= MODELO DE NEGOCIO ================= */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .pricing-card { text-align: center; padding: 40px 30px; }
-        .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; text-shadow: none; }
+        .price { font-size: 3rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
         .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; }
         .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
-        .pricing-card ul li i { color: #00ff64; text-shadow: 0 0 8px rgba(0,255,100,0.4); }
+        .pricing-card ul li i { color: #00ff64; }
         
         /* Tarjeta de Inversión */
         .highlight-gold { 
-            border-color: rgba(212, 175, 55, 0.8); 
+            border-color: rgba(212, 175, 55, 0.6); 
             background: #1a1814; 
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.1);
         }
-        .highlight-gold:hover { border-color: var(--gold); box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.2); }
+        .highlight-gold:hover { border-color: var(--gold); }
 
         /* ================= EQUIPO (GRID 3x2) ================= */
         .team-grid { 
@@ -286,11 +279,10 @@
         .team-img {
             width: 100%; height: 100%; border-radius: 50%; 
             object-fit: cover;
-            border: 3px solid var(--border-glow); 
-            transition: border-color 0.3s, box-shadow 0.3s;
+            border: 2px solid var(--border-glow); 
+            transition: border-color 0.3s;
             background-color: #222;
             display: block;
-            box-shadow: 0 0 10px rgba(217, 4, 41, 0.3);
         }
         
         /* Overlay de Instagram */
@@ -309,13 +301,11 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
-            text-shadow: 0 0 15px var(--primary);
         }
         
         .team-img-link:hover::after { opacity: 1; }
         .team-img-link:hover .team-img { 
             border-color: var(--primary); 
-            box-shadow: 0 0 25px rgba(217, 4, 41, 0.8); 
         }
         .team-img-link:hover { transform: scale(1.05); }
         
@@ -333,22 +323,20 @@
 
         /* ================= FOOTER ================= */
         footer {
-            text-align: center; padding: 60px 20px 40px; border-top: 2px solid var(--border-glow);
+            text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--border-glow);
             background: #050505;
-            box-shadow: 0 -5px 20px rgba(217, 4, 41, 0.1);
         }
-        .footer-logo img { height: 50px; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(217, 4, 41, 0.5)); }
+        .footer-logo img { height: 50px; margin-bottom: 15px; }
 
         /* ================= BOTÓN SCROLL TOP ================= */
         #scrollTop {
             position: fixed; bottom: 30px; right: 30px;
             width: 45px; height: 45px; border-radius: 50%;
-            background: var(--bg-surface); color: white; border: 2px solid var(--border-glow);
+            background: var(--bg-surface); color: white; border: 1px solid var(--border-glow);
             font-size: 1.2rem; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
-            box-shadow: 0 0 15px rgba(217, 4, 41, 0.4);
         }
         #scrollTop.show { opacity: 1; visibility: visible; }
-        #scrollTop:hover { background: var(--primary); border-color: var(--primary); box-shadow: 0 0 25px rgba(217, 4, 41, 0.8); }
+        #scrollTop:hover { background: var(--primary); border-color: var(--primary); }
 
         /* ================= RESPONSIVE (OPTIMIZADO PARA MÓVILES) ================= */
         @media (max-width: 1024px) {
@@ -369,13 +357,9 @@
             .glass-card { padding: 25px; }
             .hero-title { font-size: 2.8rem; }
             
-            /* Ajustes del video para celular */
             .video-wrapper { border-radius: 12px; margin-bottom: 30px; }
-            
-            /* Ajustes del teléfono mockup */
             .phone-mockup { max-width: 220px; }
             
-            /* Equipo a 1 columna en celular */
             .team-grid { grid-template-columns: 1fr; } 
             .team-img-link { width: 120px; height: 120px; }
             
@@ -397,8 +381,8 @@
     <!-- NAVBAR -->
     <nav>
         <div class="logo">
-            <!-- LOGO ACTUALIZADO -->
-            <img src="/Files/Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
+            <!-- RUTA CORREGIDA -->
+            <img src="Files/Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
         </div>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
@@ -421,14 +405,13 @@
         </p>
         
         <div class="video-wrapper">
-            <!-- Video de YouTube sin recomendaciones al final (?rel=0) -->
             <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
 
         <a href="#solucion" class="btn">Descubre cómo funciona</a>
     </header>
 
-    <!-- CINTA INFINITA (Intacta) -->
+    <!-- CINTA INFINITA -->
     <div class="marquee-container">
         <div class="marquee-content">
             <span><i class="fa-solid fa-bolt"></i> SIN SUSCRIPCIONES</span>
@@ -474,8 +457,8 @@
             <div class="reveal tilt">
                 <h3 style="margin-bottom: 15px; text-align: center;">Servidor (Python + FastAPI)</h3>
                 <div class="laptop-mockup">
-                    <!-- IMAGEN PROTOTIPO SERVER -->
-                    <img src="/Files/Prototipo_Server.png" alt="Servidor">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/Prototipo_Server.png" alt="Servidor">
                 </div>
                 <p style="color: var(--text-muted); margin-top: 30px; text-align: center;">Escanea carpetas, extrae metadatos (título, álbum, carátula) y sirve los archivos a la red.</p>
             </div>
@@ -484,8 +467,8 @@
                 <h3 style="margin-bottom: 15px; text-align: center;">App Móvil (Flutter)</h3>
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
-                    <!-- IMAGEN PROTOTIPO APP -->
-                    <img src="/Files/Prototipo_App.png" alt="App">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/Prototipo_App.png" alt="App">
                 </div>
                 <p style="color: var(--text-muted); margin-top: 20px; text-align: center;">Interfaz fluida. Conéctate vía LAN, VPN o QR. Descarga para uso offline.</p>
             </div>
@@ -540,10 +523,9 @@
                     <li><i class="fa-solid fa-check"></i> Gestión de metadatos</li>
                     <li><i class="fa-solid fa-check"></i> Código auditable por la comunidad</li>
                 </ul>
-                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 2px solid var(--border-glow); box-shadow: none;">Descargar</a>
+                <a href="#inicio" class="btn" style="width: 100%; justify-content: center; background: transparent; border: 1px solid var(--border-glow); box-shadow: none;">Descargar</a>
             </div>
 
-            <!-- Tarjeta de Inversión con enlace a Discord -->
             <div class="glass-card pricing-card highlight-gold reveal tilt" style="transition-delay: 0.2s;">
                 <h3>Oportunidad de Inversión</h3>
                 <div class="price" style="font-size: 2.5rem;">Únete</div>
@@ -554,7 +536,7 @@
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos</li>
                     <li><i class="fa-solid fa-rocket" style="color: var(--gold);"></i> Producto MVP ya funcional</li>
                 </ul>
-                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);">
+                <a href="https://discord.gg/WX4H992gQ" target="_blank" class="btn" style="width: 100%; justify-content: center; background: var(--gold); color: #000; font-weight:800;">
                     <i class="fa-brands fa-discord"></i> Contactar por Discord
                 </a>
             </div>
@@ -573,7 +555,8 @@
             <!-- Pedro -->
             <div class="glass-card team-card reveal tilt">
                 <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" class="team-img-link">
-                    <img src="/Files/Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
                 </a>
                 <div class="team-alias">Pedrouski el Pixelouski</div>
                 <div class="team-realname">Pedro Miguel Godínez Rodríguez - AL07164060</div>
@@ -584,7 +567,8 @@
             <!-- Leonardo -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.1s;">
                 <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" class="team-img-link">
-                    <img src="/Files/Leito_dicaprinchi.png" alt="Leonardo" class="team-img">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/Leito_dicaprinchi.png" alt="Leonardo" class="team-img">
                 </a>
                 <div class="team-alias">Leito dicaprinchi</div>
                 <div class="team-realname">Leonardo Martínez González - AL07184261</div>
@@ -595,7 +579,8 @@
             <!-- Issac -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.2s;">
                 <a href="https://www.instagram.com/treck23_98/" target="_blank" class="team-img-link">
-                    <img src="/Files/Issacini_Gonzales.png" alt="Issac" class="team-img">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/Issacini_Gonzales.png" alt="Issac" class="team-img">
                 </a>
                 <div class="team-alias">Issacini Gonzales.</div>
                 <div class="team-realname">Issac Rodrigo Ordaz de León - AL07134283</div>
@@ -606,7 +591,8 @@
             <!-- Angel -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.3s;">
                 <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" class="team-img-link">
-                    <img src="/Files/Tobyas_Willson.png" alt="Angel" class="team-img">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/Tobyas_Willson.png" alt="Angel" class="team-img">
                 </a>
                 <div class="team-alias">Tobyas Willson</div>
                 <div class="team-realname">Ángel Bernardo Tovar Martínez - AL07162353</div>
@@ -617,7 +603,8 @@
             <!-- Adrian -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.4s;">
                 <a href="https://www.instagram.com/ajf1_5/" target="_blank" class="team-img-link">
-                    <img src="/Files/El_Adriana_Pequeña.jpg" alt="Adrian" class="team-img">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/El_Adriana_Pequeña.jpg" alt="Adrian" class="team-img">
                 </a>
                 <div class="team-alias">El Adriana Pequeña</div>
                 <div class="team-realname">Adrián Jiménez Flores - AL07134668</div>
@@ -628,7 +615,8 @@
             <!-- Nicolas -->
             <div class="glass-card team-card reveal tilt" style="transition-delay: 0.5s;">
                 <a href="https://www.instagram.com/acostanicolasg/" target="_blank" class="team-img-link">
-                    <img src="/Files/A_Costilla.jpg" alt="Nicolas" class="team-img">
+                    <!-- RUTA CORREGIDA -->
+                    <img src="Files/A_Costilla.jpg" alt="Nicolas" class="team-img">
                 </a>
                 <div class="team-alias">A Costilla</div>
                 <div class="team-realname">Nicolás Acosta Galaviz - AL07183711</div>
@@ -660,8 +648,8 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-logo">
-            <!-- LOGO ACTUALIZADO -->
-            <img src="/Files/Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
+            <!-- RUTA CORREGIDA -->
+            <img src="Files/Logo_Cerru_de_Janeiro_Company.png" alt="Cerru de Janeiro Company">
         </div>
         <p>Monta tu server y lleva tu música a tu Cerro.</p>
         <br>
