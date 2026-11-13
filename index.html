@@ -97,10 +97,10 @@
         
         nav:hover { border-color: rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
 
-        /* CORRECCIÓN: El texto no se corta */
+        /* CORRECCIÓN: El texto no se corta y se adapta */
         .company-name {
             font-weight: 900; 
-            font-size: 1rem; 
+            font-size: clamp(0.7rem, 2vw, 0.9rem); /* Tamaño adaptativo */
             letter-spacing: 1px;
             white-space: nowrap; 
             overflow: visible;
@@ -285,10 +285,11 @@
         .section-title span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; text-align: center; }
 
-        /* ================= DISEÑO UNIFICADO DE CUADROS ================= */
+        /* ================= DISEÑO UNIFICADO DE CUADROS (CORRECCIÓN) ================= */
         .unified-card {
             background: var(--bg-glass); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            /* Borde gris visible por defecto */
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 28px; 
             padding: 45px;
@@ -596,7 +597,7 @@
 
     <!-- NAVBAR -->
     <nav>
-        <div class="company-name">CERRU DE <span>JANEIRO</span> CO.</div>
+        <div class="company-name">CERRU DE <span>JANEIRO</span> COMPANY</div>
         
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
@@ -922,7 +923,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <h2>CERRU DE <span>JANEIRO</span> CO.</h2>
+                <h2>CERRU DE <span>JANEIRO</span> COMPANY</h2>
                 <p>Monta tu server y lleva tu música a tu Cerro. Innovación, privacidad y sostenibilidad en un solo ecosistema musical.</p>
             </div>
             
