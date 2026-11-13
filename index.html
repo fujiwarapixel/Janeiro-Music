@@ -27,8 +27,9 @@
             --border-gray: rgba(255, 255, 255, 0.15);
             --border-green: rgba(34, 197, 94, 0.7);
             
-            --box-shadow-red: 0 0 15px rgba(230, 30, 77, 0.2);
-            --box-shadow-green: 0 0 15px rgba(34, 197, 94, 0.15);
+            --box-shadow-red: 0 0 20px rgba(230, 30, 77, 0.4);
+            --box-shadow-green: 0 0 20px rgba(34, 197, 94, 0.4);
+            --box-shadow-gray: 0 0 20px rgba(255, 255, 255, 0.1);
             
             --gold: #d4af37;
             --font-main: 'Outfit', sans-serif;
@@ -55,13 +56,14 @@
             line-height: 1.6;
         }
 
-        /* FONDO CON GRADIENTES SUTILES */
+        /* FONDO CON ILUMINACIÓN AMBIENTAL MEJORADA */
         .bg-gradient {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: 
-                radial-gradient(circle at 15% 20%, rgba(230, 30, 77, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%);
+                radial-gradient(ellipse at 50% -20%, rgba(230, 30, 77, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 120%, rgba(30, 58, 138, 0.15) 0%, transparent 60%),
+                #0a0a0c;
             z-index: -1;
             pointer-events: none;
         }
@@ -76,7 +78,7 @@
             background: rgba(20, 20, 24, 0.85);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-red); border-radius: 100px;
-            box-shadow: var(--box-shadow-red);
+            box-shadow: 0 0 15px rgba(230, 30, 77, 0.15);
             z-index: 1000;
             transition: all 0.3s ease;
         }
@@ -111,7 +113,7 @@
             display: none; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
             width: 90%; background: var(--bg-surface); border: 1px solid var(--border-red);
             border-radius: 20px; flex-direction: column; padding: 20px;
-            gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), var(--box-shadow-red); z-index: 999;
+            gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(230, 30, 77, 0.2); z-index: 999;
         }
         .mobile-menu.active { display: flex; }
         .mobile-menu a {
@@ -185,13 +187,13 @@
             position: relative;
         }
 
-        /* LOGO CON BORDES REDONDEADOS Y BRILLO */
+        /* LOGO CON BORDES REDONDEADOS */
         .hero-product-logo {
             width: 320px;
             height: auto;
             object-fit: contain;
-            border-radius: 40px; /* Bordes redondeados */
-            border: 2px solid var(--border-red); /* Borde neón */
+            border-radius: 40px;
+            border: 2px solid var(--border-red);
             padding: 10px;
             background: rgba(20, 20, 24, 0.6);
             box-shadow: 0 0 30px rgba(230, 30, 77, 0.2);
@@ -223,7 +225,7 @@
             background: #000; border-radius: 24px;
             border: 1px solid var(--border-red);
             position: relative; overflow: hidden; margin-bottom: 40px;
-            box-shadow: var(--box-shadow-red);
+            box-shadow: 0 0 15px rgba(230, 30, 77, 0.15);
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
@@ -243,7 +245,7 @@
             width: 100vw; overflow: hidden; background: #111;
             padding: 15px 0; transform: rotate(-1.5deg); margin: 40px 0;
             border-top: 1px solid var(--border-red); border-bottom: 1px solid var(--border-red);
-            box-shadow: var(--box-shadow-red);
+            box-shadow: 0 0 15px rgba(230, 30, 77, 0.15);
             position: relative; z-index: 10;
         }
         .marquee-content {
@@ -261,21 +263,26 @@
         .section-title span { color: var(--primary); }
         .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; text-align: center; }
 
-        /* ================= TARJETAS GENERALES ================= */
+        /* ================= TARJETAS ESTÁTICAS CON BORDE NEÓN ================= */
         .glass-card {
             background: linear-gradient(145deg, rgba(28,28,34,1) 0%, rgba(20,20,24,1) 100%);
             border: 1px solid var(--border-red); 
             border-radius: 24px; padding: 40px;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             height: 100%;
+            /* Se eliminó transform para que no se muevan */
         }
-        .glass-card:hover { box-shadow: var(--box-shadow-red); transform: translateY(-3px); }
+        /* Al pasar el mouse, el borde se ilumina pero el cuadro no se mueve */
+        .glass-card:hover { 
+            box-shadow: var(--box-shadow-red); 
+            border-color: var(--primary);
+        }
 
         .border-green { border-color: var(--border-green); }
-        .border-green:hover { box-shadow: var(--box-shadow-green); }
+        .border-green:hover { box-shadow: var(--box-shadow-green); border-color: #4ade80; }
         .border-gray { border-color: var(--border-gray); }
-        .border-gray:hover { box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); }
+        .border-gray:hover { box-shadow: var(--box-shadow-gray); border-color: #fff; }
 
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         
@@ -316,7 +323,7 @@
         .text-green i { color: var(--border-green); }
         .info-list li div strong { color: var(--secondary); font-weight: 700; display: block; margin-bottom: 5px; font-size: 1.05rem; }
 
-        /* ================= PROTOTIPO (SIN ESPACIOS VACÍOS) ================= */
+        /* ================= PROTOTIPO (ESTÁTICO) ================= */
         .proto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
         
         .proto-card {
@@ -324,10 +331,11 @@
             border-radius: 24px; padding: 30px;
             border: 1px solid var(--border-gray);
             display: flex; flex-direction: column;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
+            /* Se eliminó transform para que no se muevan */
         }
-        .proto-card:hover { border-color: var(--border-red); box-shadow: var(--box-shadow-red); }
+        .proto-card:hover { border-color: var(--border-red); box-shadow: 0 0 20px rgba(230, 30, 77, 0.15); }
         
         .proto-card > h3 { font-size: 1.5rem; margin-bottom: 20px; color: var(--secondary); text-align: center; }
 
@@ -352,7 +360,6 @@
         }
         .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* CAJA DE TEXTO DEL CEREBRO ORDENADA */
         .proto-info {
             background: #111115; 
             padding: 25px; 
@@ -388,12 +395,11 @@
         .proto-info ul li div strong { color: var(--secondary); display: inline; font-weight: 600; font-size: 0.95rem;}
         .proto-info ul li div span { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* ================= ODS 12 (ESTÁTICO) ================= */
+        /* ================= ODS 12 ================= */
         .ods-banner {
             background: linear-gradient(145deg, #1a1814, #141418);
             border: 1px solid var(--gold); border-radius: 24px; padding: 50px;
             text-align: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
-            /* Se quitó la clase tilt para que no se mueva */
         }
         .ods-logo { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
         .ods-banner h3 { font-size: 2rem; margin-bottom: 20px; color: var(--gold); }
@@ -405,9 +411,7 @@
         .smart-item h4 { color: var(--gold); margin-bottom: 15px; font-size: 1.2rem; }
         .smart-item p { font-size: 0.95rem; text-align: left; }
 
-        /* ================= MODELO DE NEGOCIO ================= */
-        
-        /* Cuadro informativo ancho (Afuera de las tarjetas) */
+        /* ================= MODELO DE NEGOCIO MEJORADO ================= */
         .business-model-info {
             background: rgba(0,0,0,0.4);
             border: 1px solid rgba(255,255,255,0.1);
@@ -436,10 +440,14 @@
         .pricing-card { text-align: center; padding: 50px 40px; display: flex; flex-direction: column;}
         .price { font-size: 3.5rem; font-weight: 800; color: var(--secondary); margin: 20px 0; }
         .price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; }
-        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 30px; flex-grow: 1;}
-        .pricing-card ul li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 10px; text-align: left;}
-        .pricing-card ul li i { color: #00ff64; margin-top: 5px; }
         
+        /* Lista de costos más limpia */
+        .cost-list { list-style: none; text-align: left; margin-bottom: 30px; flex-grow: 1; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px;}
+        .cost-list li { margin-bottom: 15px; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px; text-align: left; font-size: 0.95rem;}
+        .cost-list li:last-child { margin-bottom: 0;}
+        .cost-list li i { color: var(--primary); margin-top: 4px; width: 20px; text-align: center;}
+        .cost-list li strong { color: var(--secondary); display: block; margin-bottom: 2px;}
+
         .highlight-gold { border-color: rgba(212, 175, 55, 0.7); background: linear-gradient(145deg, #1a1814, #141418); }
         .highlight-gold:hover { box-shadow: 0 0 25px rgba(212, 175, 55, 0.25); }
 
@@ -507,17 +515,7 @@
         .footer-brand h2 span { color: var(--primary); }
         .footer-brand p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
         
-        .footer-logo-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .footer-logo-center img {
-            width: 120px;
-            height: auto;
-            opacity: 0.9;
-            transition: transform 0.3s;
-        }
+        .footer-logo-center img { width: 120px; height: auto; opacity: 0.9; transition: transform 0.3s; }
         .footer-logo-center img:hover { transform: scale(1.1); }
 
         .footer-links h4 { font-size: 1.1rem; color: var(--secondary); margin-bottom: 15px; }
@@ -621,7 +619,6 @@
                 <a href="#solucion" class="btn" style="margin-top: 10px;">Descubre cómo funciona</a>
             </div>
             
-            <!-- LOGO CON BORDES REDONDEADOS -->
             <div class="hero-image-content">
                 <img src="Files/Logo_Janeiro_Music.png" alt="Logo Janeiro Music" class="hero-product-logo">
             </div>
@@ -650,7 +647,7 @@
         </div>
     </div>
 
-    <!-- PROBLEMA Y SOLUCIÓN -->
+    <!-- PROBLEMA Y SOLUCIÓN (ESTÁTICOS CON BORDE ILUMINADO) -->
     <section id="solucion">
         <div class="section-header reveal">
             <h2 class="section-title">El Problema y Nuestra <span>Solución</span></h2>
@@ -658,7 +655,7 @@
         </div>
         
         <div class="grid-2">
-            <div class="glass-card reveal tilt">
+            <div class="glass-card reveal">
                 <div class="card-header-row">
                     <div class="icon-box icon-red"><i class="fa-solid fa-triangle-exclamation"></i></div>
                     <h3>El Modelo Roto</h3>
@@ -672,7 +669,7 @@
                 </ul>
             </div>
             
-            <div class="glass-card border-green reveal tilt" style="transition-delay: 0.2s;">
+            <div class="glass-card border-green reveal">
                 <div class="card-header-row">
                     <div class="icon-box icon-green"><i class="fa-solid fa-rocket"></i></div>
                     <h3>Tu Propio Ecosistema</h3>
@@ -688,7 +685,7 @@
         </div>
     </section>
 
-    <!-- PROTOTIPO -->
+    <!-- PROTOTIPO (ESTÁTICOS CON BORDE ILUMINADO) -->
     <section id="prototipo">
         <div class="section-header reveal">
             <h2 class="section-title">El <span>Prototipo</span></h2>
@@ -697,14 +694,14 @@
         
         <div class="proto-grid">
             <!-- Servidor -->
-            <div class="proto-card reveal tilt">
+            <div class="proto-card reveal">
                 <h3>Servidor (Python + FastAPI)</h3>
                 <div class="laptop-mockup">
                     <img src="Files/Prototipo_Server.png" alt="Servidor">
                 </div>
                 <div class="proto-info">
                     <h4>El Cerebro (Backend)</h4>
-                    <p>Desarrollado en Python con el framework FastAPI, este programa es el núcleo del ecosistema. Se ejecuta en tu computadora y se encarga de escanear tus carpetas locales. Extrae metadatos precisos e indexa todo en milisegundos para que la búsqueda sea instantánea.</p>
+                    <p>Desarrollado en Python con el framework FastAPI, este programa actúa como el núcleo de todo el ecosistema. Se ejecuta en tu computadora local, escaneando de forma asíncrona todas tus carpetas de música, extrayendo metadatos precisos (título, artista, álbum y carátulas), y generando un índice de búsqueda ultra rápido. Esto permite que la app móvil encuentre y reproduzca cualquier canción en milisegundos, sin importar el tamaño de tu biblioteca.</p>
                     
                     <ul>
                         <li>
@@ -728,7 +725,6 @@
                                 <span> Sirve los archivos de audio e imágenes a tu red local, asegurando que solo dispositivos autorizados puedan acceder.</span>
                             </div>
                         </li>
-                        <!-- NUEVO PUNTO AGREGADO PARA BALANCEAR -->
                         <li>
                             <i class="fa-solid fa-desktop"></i> 
                             <div>
@@ -741,7 +737,7 @@
             </div>
             
             <!-- App -->
-            <div class="proto-card reveal tilt" style="transition-delay: 0.2s;">
+            <div class="proto-card reveal">
                 <h3>App Móvil (Flutter)</h3>
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
@@ -786,14 +782,13 @@
         </div>
     </section>
 
-    <!-- ODS Y SOSTENIBILIDAD (ESTÁTICO) -->
+    <!-- ODS Y SOSTENIBILIDAD -->
     <section id="ods">
         <div class="section-header reveal">
             <h2 class="section-title">Compromiso <span>ACT NOW</span></h2>
             <p class="section-subtitle">Innovación alineada con la sostenibilidad global y el cuidado del medio ambiente.</p>
         </div>
 
-        <!-- Quitado el "tilt" para que no se mueva -->
         <div class="ods-banner reveal">
             <i class="fa-solid fa-infinity ods-logo"></i>
             <h3>ODS 12: Producción y Consumo Responsables</h3>
@@ -816,14 +811,13 @@
         </div>
     </section>
 
-    <!-- MODELO DE NEGOCIO / INVERSIÓN -->
+    <!-- MODELO DE NEGOCIO / INVERSIÓN (TARJETA MEJORADA) -->
     <section id="negocio">
         <div class="section-header reveal">
             <h2 class="section-title">Apoya e <span>Invierte</span></h2>
             <p class="section-subtitle">Nuestro modelo está diseñado para ser justo, sostenible y accesible para todos.</p>
         </div>
 
-        <!-- CUADRO INFORMATIVO AFUERA ARRIBA DE LAS TARJETAS -->
         <div class="business-model-info reveal">
             <h4><i class="fa-solid fa-circle-info"></i> ¿Cómo funciona nuestro modelo?</h4>
             <p><strong>Código Abierto:</strong> El núcleo de Janeiro Music es gratuito. Creemos en el software libre y en darle el poder al usuario sin cobrarle por lo básico.</p>
@@ -833,26 +827,50 @@
 
         <div class="pricing-grid">
             
-            <!-- Tarjeta 1: Modelo y Costos -->
-            <div class="glass-card pricing-card reveal tilt">
+            <!-- Tarjeta 1: Modelo y Costos (Diseño mejorado) -->
+            <div class="glass-card pricing-card reveal">
                 <h3>Nuestro Modelo</h3>
                 <div class="price">$0 <span>/ suscripción</span></div>
                 <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">El software base es gratuito y open source. Cero rentas vitalicias.</p>
                 
-                <ul>
-                    <li><i class="fa-solid fa-server"></i> <strong style="color:var(--secondary);">Costo Inicial:</strong> Prácticamente $0 MXN (usamos PCs propias/recicladas).</li>
-                    <li><i class="fa-solid fa-wifi"></i> <strong style="color:var(--secondary);">Mantenimiento:</strong> ~$300 MXN/mes (Luz e Internet).</li>
-                    <li><i class="fa-solid fa-code"></i> <strong style="color:var(--secondary);">Software:</strong> $0 MXN (Python, FastAPI, Flutter, Android Studio).</li>
-                    <li><i class="fa-brands fa-google-play"></i> <strong style="color:var(--secondary);">Publicación:</strong> $25 USD único (Google) + $99 USD/año (Apple).</li>
+                <ul class="cost-list">
+                    <li>
+                        <i class="fa-solid fa-server"></i> 
+                        <div>
+                            <strong>Costo Inicial:</strong>
+                            Prácticamente $0 MXN (usamos PCs propias/recicladas).
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-wifi"></i> 
+                        <div>
+                            <strong>Mantenimiento:</strong>
+                            ~$300 MXN/mes (Luz e Internet).
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-code"></i> 
+                        <div>
+                            <strong>Software:</strong>
+                            $0 MXN (Python, FastAPI, Flutter, Android Studio).
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-brands fa-google-play"></i> 
+                        <div>
+                            <strong>Publicación:</strong>
+                            $25 USD único (Google) + $99 USD/año (Apple).
+                        </div>
+                    </li>
                 </ul>
             </div>
 
             <!-- Tarjeta 2: Inversión -->
-            <div class="glass-card pricing-card highlight-gold reveal tilt" style="transition-delay: 0.2s;">
+            <div class="glass-card pricing-card highlight-gold reveal">
                 <h3>Oportunidad Estratégica</h3>
                 <div class="price" style="font-size: 2.5rem;">Únete</div>
                 <p style="color: var(--text-muted); margin-bottom: 20px; text-align: center;">Un modelo sostenible, libre de rentas vitalicias y con alto potencial de crecimiento.</p>
-                <ul>
+                <ul class="cost-list" style="background: transparent; padding: 0;">
                     <li><i class="fa-solid fa-chart-line" style="color: var(--gold);"></i> Mercado potencial masivo: millones de usuarios cansados de las suscripciones.</li>
                     <li><i class="fa-solid fa-leaf" style="color: var(--gold);"></i> Alineado con la economía circular y los ODS 12.</li>
                     <li><i class="fa-solid fa-hand-holding-dollar" style="color: var(--gold);"></i> Costos operativos mínimos gracias a la arquitectura descentralizada.</li>
@@ -875,7 +893,7 @@
 
         <div class="team-grid">
             <!-- Pedro -->
-            <div class="glass-card team-card reveal tilt" style="border: 1px solid var(--border-gray);">
+            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
                 <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" class="team-img-link">
                     <img src="Files/Pedrouski_el_Pixelouski.png" alt="Pedro" class="team-img">
                 </a>
@@ -886,7 +904,7 @@
             </div>
 
             <!-- Leonardo -->
-            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.1s; border: 1px solid var(--border-gray);">
+            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
                 <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" class="team-img-link">
                     <img src="Files/Leito_dicaprinchi.png" alt="Leonardo" class="team-img">
                 </a>
@@ -897,7 +915,7 @@
             </div>
 
             <!-- Issac -->
-            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.2s; border: 1px solid var(--border-gray);">
+            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
                 <a href="https://www.instagram.com/treck23_98/" target="_blank" class="team-img-link">
                     <img src="Files/Issacini_Gonzales.png" alt="Issac" class="team-img">
                 </a>
@@ -908,7 +926,7 @@
             </div>
 
             <!-- Angel -->
-            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.3s; border: 1px solid var(--border-gray);">
+            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
                 <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" class="team-img-link">
                     <img src="Files/Tobyas_Willson.png" alt="Angel" class="team-img">
                 </a>
@@ -919,7 +937,7 @@
             </div>
 
             <!-- Adrian -->
-            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.4s; border: 1px solid var(--border-gray);">
+            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
                 <a href="https://www.instagram.com/ajf1_5/" target="_blank" class="team-img-link">
                     <img src="Files/El_Adriana_Pequeña.jpg" alt="Adrian" class="team-img">
                 </a>
@@ -930,7 +948,7 @@
             </div>
 
             <!-- Nicolas -->
-            <div class="glass-card team-card reveal tilt" style="transition-delay: 0.5s; border: 1px solid var(--border-gray);">
+            <div class="glass-card team-card reveal" style="border: 1px solid var(--border-gray);">
                 <a href="https://www.instagram.com/acostanicolasg/" target="_blank" class="team-img-link">
                     <img src="Files/A_Costilla.jpg" alt="Nicolas" class="team-img">
                 </a>
@@ -949,7 +967,7 @@
             <p class="section-subtitle">Póster oficial de presentación para la feria.</p>
         </div>
         
-        <div class="promo-single reveal tilt">
+        <div class="promo-single reveal">
             <img src="Files/Poster.png" alt="Póster Oficial Janeiro Music" class="promo-img">
         </div>
     </section>
@@ -1042,28 +1060,6 @@
             scrollTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-
-            // 4. Efecto 3D Tilt sutil
-            const tiltCards = document.querySelectorAll('.tilt');
-            if(window.innerWidth > 900) {
-                tiltCards.forEach(card => {
-                    card.addEventListener('mousemove', (e) => {
-                        const rect = card.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const centerX = rect.width / 2;
-                        const centerY = rect.height / 2;
-                        const rotateX = ((y - centerY) / centerY) * -2; 
-                        const rotateY = ((x - centerX) / centerX) * 2;
-
-                        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.005, 1.005, 1.005)`;
-                    });
-                    card.addEventListener('mouseleave', () => {
-                        card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
-                    });
-                });
-            }
-
         });
     </script>
 </body>
