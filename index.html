@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 /* ============================================================
-   SISTEMA DE DISEÑO
+   SISTEMA DE DISEÑO — HoYoverse dark + paleta multicolor
    ============================================================ */
 :root {
   --bg: #08080b;
@@ -23,13 +23,19 @@
   --text: #f5f5f7;
   --text-mid: #a1a1a8;
   --text-low: #6e6e78;
-  --accent: #ff0a40;
-  --accent-hover: #e60039;
-  --accent-glow: rgba(255, 10, 64, 0.15);
+  --red: #ff0a40;
+  --red-hover: #e60039;
+  --red-glow: rgba(255,10,64,0.15);
   --green: #22c55e;
+  --green-glow: rgba(34,197,94,0.15);
   --blue: #3b82f6;
+  --blue-glow: rgba(59,130,246,0.15);
   --purple: #a855f7;
+  --purple-glow: rgba(168,85,247,0.15);
   --gold: #fce27c;
+  --gold-glow: rgba(252,226,124,0.15);
+  --orange: #f97316;
+  --cyan: #06b6d4;
   --discord: #5865f2;
   --radius-sm: 10px;
   --radius: 16px;
@@ -41,16 +47,12 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg); color: var(--text);
+  font-family: var(--sans); font-size: 15px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--red); color: #fff; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: #27272f; border-radius: 10px; border: 2px solid var(--bg); }
@@ -61,28 +63,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 code, pre { font-family: var(--mono); }
 
 /* ============================================================
-   ANIMACIÓN DE ENTRADA
+   ANIMACIÓN REVEAL
    ============================================================ */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1), transform .7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal.delay-1 { transition-delay: 0.08s; }
 .reveal.delay-2 { transition-delay: 0.16s; }
-.reveal.delay-3 { transition-delay: 0.24s; }
 
 /* ============================================================
    NAVBAR
    ============================================================ */
 .nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: 64px;
   background: rgba(8, 8, 11, 0.72);
   backdrop-filter: saturate(180%) blur(24px);
@@ -90,64 +82,34 @@ code, pre { font-family: var(--mono); }
   border-bottom: 1px solid var(--border);
 }
 .nav-inner {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  gap: 32px;
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+  height: 100%; display: flex; align-items: center; gap: 32px;
 }
 .nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: -0.3px;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 15px; letter-spacing: -0.3px; flex-shrink: 0;
 }
 .nav-brand img { width: 28px; height: 28px; border-radius: 8px; }
-.nav-brand .brand-text span { color: var(--accent); }
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  flex: 1;
-  justify-content: center;
-}
+.nav-brand span { color: var(--red); }
+.nav-links { display: flex; align-items: center; gap: 2px; flex: 1; justify-content: center; }
 .nav-links a {
-  color: var(--text-mid);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 7px 13px;
-  border-radius: 8px;
-  transition: color .15s, background .15s;
-  white-space: nowrap;
+  color: var(--text-mid); font-size: 13px; font-weight: 500;
+  padding: 7px 13px; border-radius: 8px;
+  transition: color .15s, background .15s; white-space: nowrap;
 }
 .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 .nav-links a.active { color: var(--text); background: rgba(255,255,255,0.06); }
 .nav-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .btn-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 16px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 12.5px;
-  font-weight: 700;
-  border-radius: 9px;
-  transition: background .15s, transform .15s;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 16px; background: var(--red); color: #fff;
+  font-size: 12.5px; font-weight: 700; border-radius: 9px;
+  transition: background .15s, transform .15s; white-space: nowrap;
 }
-.btn-nav:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn-nav:hover { background: var(--red-hover); transform: translateY(-1px); }
 .menu-toggle {
-  display: none;
-  width: 38px; height: 38px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  font-size: 14px;
+  display: none; width: 38px; height: 38px;
+  border: 1px solid var(--border); border-radius: 9px; font-size: 14px;
 }
 
 /* ============================================================
@@ -161,23 +123,21 @@ code, pre { font-family: var(--mono); }
    TIPOGRAFÍA
    ============================================================ */
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-low);
-  margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-low); margin-bottom: 20px;
 }
 .eyebrow .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--accent);
+  width: 6px; height: 6px; border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
 }
+.eyebrow.red .dot { background: var(--red); color: var(--red); }
+.eyebrow.green .dot { background: var(--green); color: var(--green); }
+.eyebrow.blue .dot { background: var(--blue); color: var(--blue); }
+.eyebrow.purple .dot { background: var(--purple); color: var(--purple); }
+.eyebrow.gold .dot { background: var(--gold); color: var(--gold); }
+.eyebrow.cyan .dot { background: var(--cyan); color: var(--cyan); }
 h1, h2, h3, h4 { letter-spacing: -0.03em; line-height: 1.1; font-weight: 800; }
 h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); letter-spacing: -0.045em; line-height: 1.02; font-weight: 900; }
 h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
@@ -191,22 +151,14 @@ p { color: var(--text-mid); }
    BOTONES
    ============================================================ */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border-radius: var(--radius-sm);
-  font-size: 13.5px;
-  font-weight: 600;
-  border: 1px solid transparent;
-  transition: all .15s;
-  white-space: nowrap;
-  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px 22px; border-radius: var(--radius-sm);
+  font-size: 13.5px; font-weight: 600; border: 1px solid transparent;
+  transition: all .15s; white-space: nowrap; cursor: pointer;
 }
 .btn i { font-size: 11px; }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 12px 32px -8px rgba(255,10,64,0.4); }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-hover); transform: translateY(-1px); box-shadow: 0 12px 32px -8px rgba(255,10,64,0.4); }
 .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-hi); }
 .btn-ghost:hover { border-color: #3f3f4a; background: rgba(255,255,255,0.03); }
 .btn-lg { padding: 14px 26px; font-size: 14px; }
@@ -215,33 +167,19 @@ p { color: var(--text-mid); }
    HERO
    ============================================================ */
 .hero {
-  position: relative;
-  min-height: calc(100vh - 64px);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: 80px 0;
+  position: relative; min-height: calc(100vh - 64px);
+  display: flex; align-items: center; overflow: hidden; padding: 80px 0;
 }
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
+.hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 .hero-bg::before {
-  content: '';
-  position: absolute;
-  top: 45%; left: 50%;
-  transform: translate(-50%, -50%);
+  content: ''; position: absolute;
+  top: 45%; left: 50%; transform: translate(-50%, -50%);
   width: 1400px; height: 1400px;
-  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 45%);
-  pointer-events: none;
-  animation: heroPulse 8s ease-in-out infinite;
+  background: radial-gradient(circle, var(--red-glow) 0%, transparent 45%);
+  pointer-events: none; animation: heroPulse 8s ease-in-out infinite;
 }
 .hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+  content: ''; position: absolute; inset: 0;
   background-image:
     linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
@@ -255,8 +193,7 @@ p { color: var(--text-mid); }
   50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
 }
 .hero-vinyl {
-  position: absolute;
-  top: 50%; left: 50%;
+  position: absolute; top: 50%; left: 50%;
   width: 760px; height: 760px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
@@ -264,26 +201,18 @@ p { color: var(--text-mid); }
     radial-gradient(circle at center, #1a0a10 0%, #0a0507 12%, #08080b 13%),
     conic-gradient(from 0deg, #0a0a0e, #121218, #0a0a0e, #121218, #0a0a0e);
   border: 1px solid rgba(255,255,255,0.03);
-  z-index: 0;
-  opacity: 0.42;
-  animation: vinylSpin 80s linear infinite;
-  pointer-events: none;
+  z-index: 0; opacity: 0.42;
+  animation: vinylSpin 80s linear infinite; pointer-events: none;
 }
 .hero-vinyl::before {
-  content: '';
-  position: absolute;
-  inset: 25%;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.04);
+  content: ''; position: absolute; inset: 25%;
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.04);
 }
 .hero-vinyl::after {
-  content: '';
-  position: absolute;
-  inset: 40%;
+  content: ''; position: absolute; inset: 40%;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--accent) 0%, #7a001d 40%, #1a0010 70%);
-  opacity: 0.35;
-  box-shadow: 0 0 80px 20px rgba(255,10,64,0.12);
+  background: radial-gradient(circle, var(--red) 0%, #7a001d 40%, #1a0010 70%);
+  opacity: 0.35; box-shadow: 0 0 80px 20px rgba(255,10,64,0.12);
 }
 @keyframes vinylSpin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
@@ -292,65 +221,43 @@ p { color: var(--text-mid); }
 .hero > .container { position: relative; z-index: 2; }
 .hero-content { text-align: center; max-width: 900px; margin: 0 auto; }
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-flex; align-items: center; gap: 10px;
   padding: 6px 14px;
   background: rgba(255,10,64,0.08);
   border: 1px solid rgba(255,10,64,0.22);
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 32px;
+  border-radius: 100px; font-size: 12px; font-weight: 500;
+  color: var(--text); margin-bottom: 32px;
 }
-.hero-badge i { color: var(--accent); font-size: 11px; }
+.hero-badge i { color: var(--red); font-size: 11px; }
 .hero-title {
   font-size: clamp(3rem, 7vw, 5.5rem);
-  letter-spacing: -0.05em;
-  line-height: 0.98;
-  font-weight: 900;
+  letter-spacing: -0.05em; line-height: 0.98; font-weight: 900;
   margin-bottom: 24px;
 }
 .hero-title .accent-block {
-  display: block;
-  color: var(--accent);
+  display: block; color: var(--red);
   text-shadow: 0 0 80px rgba(255,10,64,0.35);
 }
 .hero-slogan {
   font-size: clamp(1.1rem, 1.8vw, 1.35rem);
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 20px;
-  letter-spacing: -0.01em;
+  font-weight: 500; color: var(--text);
+  margin-bottom: 20px; letter-spacing: -0.01em;
 }
 .hero-desc {
-  font-size: 1.02rem;
-  line-height: 1.7;
-  color: var(--text-mid);
-  max-width: 640px;
-  margin: 0 auto 40px;
+  font-size: 1.02rem; line-height: 1.7; color: var(--text-mid);
+  max-width: 640px; margin: 0 auto 40px;
 }
 .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .hero-scroll {
-  position: absolute;
-  bottom: 32px; left: 50%;
+  position: absolute; bottom: 32px; left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-low);
-  font-size: 11px;
-  font-family: var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  z-index: 2;
-  animation: scrollBounce 2s ease-in-out infinite;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-low); font-size: 11px;
+  font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+  z-index: 2; animation: scrollBounce 2s ease-in-out infinite;
 }
 .hero-scroll .line {
-  width: 1px;
-  height: 32px;
+  width: 1px; height: 32px;
   background: linear-gradient(to bottom, var(--text-low), transparent);
 }
 @keyframes scrollBounce {
@@ -364,151 +271,122 @@ p { color: var(--text-mid); }
 .tech-strip {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  background: var(--bg-elev);
-  padding: 22px 0;
+  background: var(--bg-elev); padding: 22px 0;
 }
 .tech-strip-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
 }
 .tech-label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-low);
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-low);
 }
 .tech-items { display: flex; gap: 36px; flex-wrap: wrap; }
 .tech-items span {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-mid);
-  letter-spacing: -0.01em;
+  font-size: 13px; font-weight: 700;
+  color: var(--text-mid); letter-spacing: -0.01em;
 }
 
 /* ============================================================
    SECCIONES
    ============================================================ */
 .section { padding: 120px 0; }
-.section-tight { padding: 80px 0; }
 .section-head { max-width: 720px; margin-bottom: 64px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 .section-head h2 { margin-bottom: 18px; }
 .section-head p { font-size: 1.02rem; line-height: 1.7; }
 
 /* ============================================================
-   FEATURE GRID
+   FEATURE GRID — con variedad de color
    ============================================================ */
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .feature-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 32px;
   transition: border-color .2s, transform .2s;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
-.feature-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+.feature-card:hover { transform: translateY(-3px); }
+.feature-card.card-red { border-color: rgba(255,10,64,0.18); }
+.feature-card.card-red:hover { border-color: rgba(255,10,64,0.4); }
+.feature-card.card-green { border-color: rgba(34,197,94,0.18); }
+.feature-card.card-green:hover { border-color: rgba(34,197,94,0.4); }
+.feature-card.card-blue { border-color: rgba(59,130,246,0.18); }
+.feature-card.card-blue:hover { border-color: rgba(59,130,246,0.4); }
+.feature-card.card-purple { border-color: rgba(168,85,247,0.18); }
+.feature-card.card-purple:hover { border-color: rgba(168,85,247,0.4); }
+.feature-card.card-gold { border-color: rgba(252,226,124,0.18); }
+.feature-card.card-gold:hover { border-color: rgba(252,226,124,0.4); }
+.feature-card.card-cyan { border-color: rgba(6,182,212,0.18); }
+.feature-card.card-cyan:hover { border-color: rgba(6,182,212,0.4); }
 .feature-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
 }
 .feature-icon {
-  width: 44px; height: 44px;
-  border-radius: 12px;
-  background: rgba(255,10,64,0.10);
-  border: 1px solid rgba(255,10,64,0.22);
-  color: var(--accent);
+  width: 44px; height: 44px; border-radius: 12px;
   display: grid; place-items: center;
-  font-size: 16px;
-  margin-bottom: 22px;
+  font-size: 16px; margin-bottom: 22px;
 }
-.feature-icon.green { background: rgba(34,197,94,0.10); border-color: rgba(34,197,94,0.22); color: var(--green); }
-.feature-icon.blue { background: rgba(59,130,246,0.10); border-color: rgba(59,130,246,0.22); color: var(--blue); }
-.feature-icon.purple { background: rgba(168,85,247,0.10); border-color: rgba(168,85,247,0.22); color: var(--purple); }
-.feature-icon.gold { background: rgba(252,226,124,0.10); border-color: rgba(252,226,124,0.22); color: var(--gold); }
+.feature-icon.red { background: rgba(255,10,64,0.10); border: 1px solid rgba(255,10,64,0.22); color: var(--red); }
+.feature-icon.green { background: rgba(34,197,94,0.10); border: 1px solid rgba(34,197,94,0.22); color: var(--green); }
+.feature-icon.blue { background: rgba(59,130,246,0.10); border: 1px solid rgba(59,130,246,0.22); color: var(--blue); }
+.feature-icon.purple { background: rgba(168,85,247,0.10); border: 1px solid rgba(168,85,247,0.22); color: var(--purple); }
+.feature-icon.gold { background: rgba(252,226,124,0.10); border: 1px solid rgba(252,226,124,0.22); color: var(--gold); }
+.feature-icon.cyan { background: rgba(6,182,212,0.10); border: 1px solid rgba(6,182,212,0.22); color: var(--cyan); }
 .feature-card h3 { margin-bottom: 10px; font-size: 1.05rem; }
 .feature-card p { font-size: 0.92rem; line-height: 1.65; color: var(--text-mid); }
 
 /* ============================================================
    SPLIT
    ============================================================ */
-.split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 .split-img {
   border-radius: var(--radius-xl);
   border: 1px solid var(--border-hi);
   background: var(--bg-elev);
-  padding: 40px;
-  display: grid;
-  place-items: center;
-  min-height: 400px;
-  position: relative;
-  overflow: hidden;
+  padding: 40px; display: grid; place-items: center;
+  min-height: 400px; position: relative; overflow: hidden;
 }
 .split-img::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 30%, var(--accent-glow) 0%, transparent 60%);
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 30%, var(--red-glow) 0%, transparent 60%);
   pointer-events: none;
 }
+.split-img.split-img-green::before { background: radial-gradient(circle at 30% 30%, var(--green-glow) 0%, transparent 60%); }
+.split-img.split-img-blue::before { background: radial-gradient(circle at 30% 30%, var(--blue-glow) 0%, transparent 60%); }
 .split-img img {
-  max-height: 460px;
-  width: auto;
-  border-radius: var(--radius);
-  position: relative;
-  z-index: 1;
+  max-height: 460px; width: auto;
+  border-radius: var(--radius); position: relative; z-index: 1;
 }
 .split h2 { margin-bottom: 20px; }
 .split p { font-size: 0.98rem; margin-bottom: 16px; line-height: 1.7; }
 
 /* ============================================================
-   STATS
+   STATS — colores variados
    ============================================================ */
 .stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   background: var(--bg-elev);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.stat {
-  padding: 56px 24px;
-  text-align: center;
-  border-right: 1px solid var(--border);
-}
+.stat { padding: 56px 24px; text-align: center; border-right: 1px solid var(--border); }
 .stat:last-child { border-right: none; }
 .stat-value {
-  font-size: 2.6rem;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-bottom: 12px;
-  color: var(--text);
+  font-size: 2.6rem; font-weight: 900;
+  letter-spacing: -0.04em; line-height: 1; margin-bottom: 12px;
 }
-.stat-value .unit { color: var(--accent); font-size: 1.4rem; margin-left: 4px; }
+.stat:nth-child(1) .stat-value { color: var(--red); }
+.stat:nth-child(2) .stat-value { color: var(--green); }
+.stat:nth-child(3) .stat-value { color: var(--blue); }
+.stat:nth-child(4) .stat-value { color: var(--gold); }
+.stat-value .unit { font-size: 1.4rem; margin-left: 4px; opacity: 0.85; }
 .stat-label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-low);
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-low);
 }
 
 /* ============================================================
@@ -518,26 +396,19 @@ p { color: var(--text-mid); }
   background: linear-gradient(135deg, rgba(252,226,124,0.06) 0%, rgba(252,226,124,0.01) 60%, transparent 100%);
   border: 1px solid rgba(252,226,124,0.18);
   border-radius: var(--radius-xl);
-  padding: 80px 56px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 80px 56px; text-align: center;
+  position: relative; overflow: hidden;
 }
 .ods-banner::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: 50%;
-  transform: translateX(-50%);
+  content: ''; position: absolute;
+  top: -50%; left: 50%; transform: translateX(-50%);
   width: 800px; height: 400px;
   background: radial-gradient(ellipse, rgba(252,226,124,0.15) 0%, transparent 60%);
   pointer-events: none;
 }
 .ods-banner > * { position: relative; z-index: 1; }
 .ods-icon {
-  font-size: 3rem;
-  color: var(--gold);
-  margin-bottom: 28px;
-  display: block;
+  font-size: 3rem; color: var(--gold); margin-bottom: 28px; display: block;
   filter: drop-shadow(0 0 40px rgba(252,226,124,0.4));
 }
 .ods-banner h2 { color: var(--gold); margin-bottom: 20px; }
@@ -546,26 +417,24 @@ p { color: var(--text-mid); }
 /* ============================================================
    SMART
    ============================================================ */
-.smart-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+.smart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .smart-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 32px;
 }
+.smart-card:nth-child(1) { border-color: rgba(255,10,64,0.18); }
+.smart-card:nth-child(2) { border-color: rgba(59,130,246,0.18); }
+.smart-card:nth-child(3) { border-color: rgba(168,85,247,0.18); }
 .smart-card .time {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-  font-weight: 500;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 16px; font-weight: 500;
 }
+.smart-card:nth-child(1) .time { color: var(--red); }
+.smart-card:nth-child(2) .time { color: var(--blue); }
+.smart-card:nth-child(3) .time { color: var(--purple); }
 .smart-card h4 { margin-bottom: 12px; color: var(--text); font-size: 1.05rem; }
 .smart-card p { font-size: 0.92rem; line-height: 1.7; }
 
@@ -576,84 +445,49 @@ p { color: var(--text-mid); }
   background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: 64px 40px;
-  margin-bottom: 40px;
-  overflow: hidden;
+  padding: 64px 40px; margin-bottom: 40px; overflow: hidden;
 }
 .gallery-header { text-align: center; margin-bottom: 48px; }
 .gallery-header h3 { font-size: 1.5rem; margin-bottom: 10px; }
 .gallery-header p { font-size: 0.94rem; }
 .gallery-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 64px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: center;
+  gap: 64px; flex-wrap: wrap;
 }
 
 /* ============================================================
-   MARCO DE TELÉFONO (más grande + oculta la barra de estado)
+   MARCO DE TELÉFONO (solo esquinas redondeadas)
    ============================================================ */
 .phone-frame {
-  width: 360px;
-  height: 740px;
+  width: 340px; height: 700px;
   background: #0a0a0d;
-  border-radius: 48px;
-  border: 8px solid #1c1c22;
+  border-radius: 52px;
+  border: 9px solid #1c1c22;
   box-shadow:
     0 60px 120px -30px rgba(0,0,0,0.95),
     0 0 0 1px rgba(255,255,255,0.04),
     inset 0 0 0 1px rgba(0,0,0,0.5);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.phone-frame::before {
-  /* Notch */
-  content: '';
-  position: absolute;
-  top: 10px; left: 50%; transform: translateX(-50%);
-  width: 100px; height: 24px;
-  background: #1c1c22;
-  border-radius: 14px;
-  z-index: 4;
-}
-.phone-frame::after {
-  /* Cubierta de la barra de estado — oculta hora y batería */
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 46px;
-  background: linear-gradient(to bottom, #0a0a0d 0%, #0a0a0d 68%, transparent 100%);
-  z-index: 3;
-  pointer-events: none;
-  border-radius: 42px 42px 0 0;
+  position: relative; overflow: hidden; flex-shrink: 0;
 }
 .phone-frame img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  border-radius: 40px;
-  z-index: 1;
-  transition: opacity .3s ease;
-  display: block;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center center;
+  border-radius: 44px; z-index: 1;
+  transition: opacity .3s ease; display: block;
 }
 
 /* ============================================================
-   MARCO DE SERVIDOR (borde simple, sin forma de laptop)
+   MARCO DE SERVIDOR — sin límite de tamaño, ocupa todo el ancho
    ============================================================ */
 .server-frame {
   width: 100%;
-  max-width: 760px;
   background: #0a0a0d;
-  border-radius: 20px;
-  border: 6px solid #1c1c22;
+  border-radius: 22px;
+  border: 2px solid var(--border-hi);
   box-shadow:
-    0 60px 120px -30px rgba(0,0,0,0.95),
-    0 0 0 1px rgba(255,255,255,0.04);
+    0 50px 100px -25px rgba(0,0,0,0.85),
+    0 0 0 1px rgba(255,255,255,0.03);
   overflow: hidden;
   margin: 0 auto;
   position: relative;
@@ -661,9 +495,11 @@ p { color: var(--text-mid); }
 .server-frame img {
   width: 100%;
   aspect-ratio: 16/10;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  border-radius: 20px;
   transition: opacity .3s ease;
+  background: #0a0a0d;
 }
 
 /* ============================================================
@@ -675,7 +511,7 @@ p { color: var(--text-mid); }
   gap: 10px;
   justify-content: center;
 }
-.thumb-strip.server { grid-template-columns: repeat(6, 92px); }
+.thumb-strip.server { grid-template-columns: repeat(6, 110px); }
 .thumb {
   aspect-ratio: 9/17;
   border-radius: 10px;
@@ -689,45 +525,38 @@ p { color: var(--text-mid); }
 .thumb.server-thumb { aspect-ratio: 16/10; border-radius: 8px; }
 .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
 .thumb:hover { transform: translateY(-3px); }
-.thumb.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(255,10,64,0.3); }
+.thumb.active { border-color: var(--red); box-shadow: 0 0 20px rgba(255,10,64,0.3); }
+/* Thumb activo por OS */
+.thumb.server-thumb.active[data-os="arch"] { border-color: var(--orange); box-shadow: 0 0 20px rgba(249,115,22,0.3); }
+.thumb.server-thumb.active[data-os="mac"] { border-color: #f5f5f7; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+.thumb.server-thumb.active[data-os="windows"] { border-color: var(--blue); box-shadow: 0 0 20px rgba(59,130,246,0.3); }
 
 /* ============================================================
    CONTROLES DE CARRUSEL
    ============================================================ */
 .gallery-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 36px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 36px;
 }
 .gc-btn {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 1px solid var(--border-hi);
-  color: var(--text);
-  display: grid; place-items: center;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--surface); border: 1px solid var(--border-hi);
+  color: var(--text); display: grid; place-items: center;
   font-size: 13px;
   transition: background .15s, border-color .15s, transform .15s;
 }
 .gc-btn:hover { background: var(--surface-hi); border-color: #3f3f4a; transform: scale(1.05); }
 .gc-counter {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--text-mid);
-  min-width: 70px;
-  text-align: center;
+  font-family: var(--mono); font-size: 12px; color: var(--text-mid);
+  min-width: 70px; text-align: center;
 }
 .gc-counter strong { color: var(--text); }
 
 /* ============================================================
-   TABS DE SERVIDOR
+   TABS DE SERVIDOR — cada OS con su color
    ============================================================ */
 .server-tabs {
-  display: flex;
-  gap: 4px;
-  padding: 4px;
+  display: flex; gap: 4px; padding: 4px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -735,24 +564,28 @@ p { color: var(--text-mid); }
   width: fit-content;
 }
 .server-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  border-radius: 8px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--text-mid);
-  transition: all .15s;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 8px;
+  font-size: 12.5px; font-weight: 500;
+  color: var(--text-mid); transition: all .15s; white-space: nowrap;
 }
 .server-tab:hover { color: var(--text); }
-.server-tab.active {
-  background: var(--bg);
-  color: var(--text);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
-}
 .server-tab i { font-size: 14px; }
+.server-tab[data-os="arch"].active {
+  background: var(--bg); color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(249,115,22,0.4);
+}
+.server-tab[data-os="arch"].active i { color: var(--orange); }
+.server-tab[data-os="mac"].active {
+  background: var(--bg); color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(245,245,247,0.4);
+}
+.server-tab[data-os="mac"].active i { color: #f5f5f7; }
+.server-tab[data-os="windows"].active {
+  background: var(--bg); color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(59,130,246,0.4);
+}
+.server-tab[data-os="windows"].active i { color: var(--blue); }
 
 /* ============================================================
    CONTENT BLOCKS
@@ -764,20 +597,12 @@ p { color: var(--text-mid); }
 .content p { margin-bottom: 16px; line-height: 1.7; }
 .content ul { list-style: none; padding: 0; margin-bottom: 20px; }
 .content ul li {
-  position: relative;
-  padding-left: 22px;
-  margin-bottom: 12px;
-  color: var(--text-mid);
-  font-size: 0.94rem;
-  line-height: 1.65;
+  position: relative; padding-left: 22px; margin-bottom: 12px;
+  color: var(--text-mid); font-size: 0.94rem; line-height: 1.65;
 }
 .content ul li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 10px;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--red);
 }
 .content ul li strong { color: var(--text); font-weight: 600; }
 
@@ -785,140 +610,99 @@ p { color: var(--text-mid); }
    SPEC GRID
    ============================================================ */
 .spec-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 24px 0;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 12px; margin: 24px 0;
 }
 .spec {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 24px;
 }
 .spec-label {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-low);
-  margin-bottom: 8px;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-low); margin-bottom: 8px;
 }
-.spec-value {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-}
+.spec-value { font-size: 14px; font-weight: 600; color: var(--text); }
 
 /* ============================================================
    DESCARGAS
    ============================================================ */
 .dl-block { margin-bottom: 80px; }
 .dl-block-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; margin-bottom: 32px; flex-wrap: wrap;
 }
 .dl-block-head h2 { font-size: 1.6rem; margin-bottom: 8px; }
 .dl-block-head p { font-size: 0.95rem; max-width: 560px; }
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--mono);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border-radius: 6px;
+  font-size: 11px; font-weight: 600;
+  font-family: var(--mono); letter-spacing: 0.02em; white-space: nowrap;
 }
 .badge.green { background: rgba(34,197,94,0.10); color: var(--green); border: 1px solid rgba(34,197,94,0.22); }
 .badge.blue { background: rgba(59,130,246,0.10); color: var(--blue); border: 1px solid rgba(59,130,246,0.22); }
-.dl-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
+.dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .dl-grid.two { grid-template-columns: 1fr 1fr; }
 .dl-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  display: flex; flex-direction: column;
   transition: border-color .15s, transform .15s;
 }
 .dl-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
 .dl-os {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 15px;
-  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 15px; margin-bottom: 6px;
 }
-.dl-os i { font-size: 18px; color: var(--text-mid); }
+.dl-os i { font-size: 18px; }
+.dl-os.arch i { color: var(--orange); }
+.dl-os.windows i { color: var(--blue); }
+.dl-os.mac i { color: #f5f5f7; }
+.dl-os.android i { color: var(--green); }
 .dl-arch {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text-low);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 18px;
+  font-family: var(--mono); font-size: 11px; color: var(--text-low);
+  letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 18px;
 }
 .dl-meta {
-  font-size: 0.85rem;
-  color: var(--text-mid);
-  line-height: 1.7;
-  margin-bottom: 22px;
-  flex-grow: 1;
+  font-size: 0.85rem; color: var(--text-mid);
+  line-height: 1.7; margin-bottom: 22px; flex-grow: 1;
 }
 .dl-meta code {
-  font-family: var(--mono);
-  font-size: 0.85em;
+  font-family: var(--mono); font-size: 0.85em;
   background: rgba(255,255,255,0.05);
-  padding: 2px 7px;
-  border-radius: 4px;
-  color: var(--text);
+  padding: 2px 7px; border-radius: 4px; color: var(--text);
 }
 .dl-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 16px;
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 12px 16px;
   background: var(--surface-hi);
   border: 1px solid var(--border-hi);
-  border-radius: 10px;
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 600;
-  transition: all .15s;
-  cursor: pointer;
+  border-radius: 10px; color: var(--text);
+  font-size: 13px; font-weight: 600;
+  transition: all .15s; cursor: pointer;
 }
 .dl-btn:hover { background: var(--border-hi); border-color: #3f3f4a; }
 .dl-btn i { font-size: 12px; color: var(--text-low); }
-.dl-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.dl-btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.dl-btn.primary { color: #fff; }
+.dl-btn.primary.green { background: var(--green); border-color: var(--green); }
+.dl-btn.primary.green:hover { background: #16a34a; border-color: #16a34a; }
+.dl-btn.primary.orange { background: var(--orange); border-color: var(--orange); }
+.dl-btn.primary.orange:hover { background: #ea580c; border-color: #ea580c; }
+.dl-btn.primary.blue { background: var(--blue); border-color: var(--blue); }
+.dl-btn.primary.blue:hover { background: #2563eb; border-color: #2563eb; }
+.dl-btn.primary.mac { background: #f5f5f7; border-color: #f5f5f7; color: #000; }
+.dl-btn.primary.mac:hover { background: #e5e5e7; border-color: #e5e5e7; }
+.dl-btn.primary.mac i { color: rgba(0,0,0,0.6); }
 .dl-btn.primary i { color: rgba(255,255,255,0.8); }
 
 .notice {
-  display: flex;
-  gap: 14px;
-  padding: 16px 20px;
+  display: flex; gap: 14px; padding: 16px 20px;
   background: rgba(59,130,246,0.04);
   border: 1px solid rgba(59,130,246,0.18);
   border-left: 3px solid var(--blue);
-  border-radius: 10px;
-  font-size: 0.88rem;
-  color: var(--text-mid);
-  margin-top: 20px;
-  line-height: 1.65;
+  border-radius: 10px; font-size: 0.88rem;
+  color: var(--text-mid); margin-top: 20px; line-height: 1.65;
 }
 .notice i { color: var(--blue); flex-shrink: 0; margin-top: 2px; font-size: 15px; }
 .notice strong { color: var(--text); font-weight: 600; }
@@ -926,94 +710,69 @@ p { color: var(--text-mid); }
 /* ============================================================
    EQUIPO
    ============================================================ */
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .team-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px;
   transition: border-color .2s, transform .2s;
 }
-.team-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+.team-card:nth-child(1) { border-color: rgba(255,10,64,0.18); }
+.team-card:nth-child(2) { border-color: rgba(34,197,94,0.18); }
+.team-card:nth-child(3) { border-color: rgba(59,130,246,0.18); }
+.team-card:nth-child(4) { border-color: rgba(168,85,247,0.18); }
+.team-card:nth-child(5) { border-color: rgba(252,226,124,0.18); }
+.team-card:nth-child(6) { border-color: rgba(6,182,212,0.18); }
+.team-card:hover { transform: translateY(-3px); }
 .team-photo {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 22px;
-  background: var(--bg);
-  position: relative;
+  width: 100%; aspect-ratio: 1;
+  border-radius: var(--radius); overflow: hidden;
+  margin-bottom: 22px; background: var(--bg); position: relative;
 }
 .team-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform .4s ease;
-  border-radius: var(--radius);
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .4s ease; border-radius: var(--radius);
 }
 .team-card:hover .team-photo img { transform: scale(1.05); }
 .team-card h3 { font-size: 1.02rem; margin-bottom: 6px; }
 .team-role {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
-  font-weight: 500;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 16px; font-weight: 500;
 }
-.team-desc {
-  font-size: 0.86rem;
-  color: var(--text-mid);
-  line-height: 1.65;
-  margin-bottom: 16px;
-}
+.team-card:nth-child(1) .team-role { color: var(--red); }
+.team-card:nth-child(2) .team-role { color: var(--green); }
+.team-card:nth-child(3) .team-role { color: var(--blue); }
+.team-card:nth-child(4) .team-role { color: var(--purple); }
+.team-card:nth-child(5) .team-role { color: var(--gold); }
+.team-card:nth-child(6) .team-role { color: var(--cyan); }
+.team-desc { font-size: 0.86rem; color: var(--text-mid); line-height: 1.65; margin-bottom: 16px; }
 .team-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 0.78rem;
-  color: var(--text-low);
-  font-family: var(--mono);
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
-  margin-top: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; font-size: 0.78rem; color: var(--text-low);
+  font-family: var(--mono); border-top: 1px solid var(--border);
+  padding-top: 16px; margin-top: 8px;
 }
 .team-meta .matricula { opacity: 0.75; }
 .team-meta .instagram {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-mid);
-  transition: color .15s;
-  font-size: 11px;
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--text-mid); transition: color .15s; font-size: 11px;
 }
-.team-meta .instagram:hover { color: var(--accent); }
+.team-meta .instagram:hover { color: var(--red); }
 .team-meta .instagram i { font-size: 12px; }
 
-/* ============================================================
-   EQUIPO PREVIEW (Home)
-   ============================================================ */
-.team-preview {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-  margin-top: 40px;
-}
+/* Equipo preview (Home) */
+.team-preview { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 40px; }
 .team-avatar {
-  aspect-ratio: 1;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--bg);
-  border: 2px solid var(--border);
-  transition: border-color .2s, transform .2s;
-  cursor: pointer;
+  aspect-ratio: 1; border-radius: 50%; overflow: hidden;
+  background: var(--bg); border: 2px solid var(--border);
+  transition: border-color .2s, transform .2s; cursor: pointer;
 }
-.team-avatar:hover { border-color: var(--accent); transform: translateY(-3px); }
+.team-avatar:nth-child(1):hover { border-color: var(--red); transform: translateY(-3px); }
+.team-avatar:nth-child(2):hover { border-color: var(--green); transform: translateY(-3px); }
+.team-avatar:nth-child(3):hover { border-color: var(--blue); transform: translateY(-3px); }
+.team-avatar:nth-child(4):hover { border-color: var(--purple); transform: translateY(-3px); }
+.team-avatar:nth-child(5):hover { border-color: var(--gold); transform: translateY(-3px); }
+.team-avatar:nth-child(6):hover { border-color: var(--cyan); transform: translateY(-3px); }
 .team-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ============================================================
@@ -1023,20 +782,18 @@ p { color: var(--text-mid); }
   background: linear-gradient(135deg, var(--surface) 0%, #0a0a0d 100%);
   border: 1px solid var(--border-hi);
   border-radius: var(--radius-xl);
-  padding: 80px 48px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  padding: 80px 48px; text-align: center;
+  position: relative; overflow: hidden;
 }
 .cta::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: 50%;
-  transform: translateX(-50%);
+  content: ''; position: absolute;
+  top: -50%; left: 50%; transform: translateX(-50%);
   width: 800px; height: 400px;
   background: radial-gradient(ellipse, rgba(255,10,64,0.14) 0%, transparent 60%);
   pointer-events: none;
 }
+.cta.cta-green::before { background: radial-gradient(ellipse, rgba(34,197,94,0.14) 0%, transparent 60%); }
+.cta.cta-purple::before { background: radial-gradient(ellipse, rgba(168,85,247,0.14) 0%, transparent 60%); }
 .cta > * { position: relative; z-index: 1; }
 .cta h2 { margin-bottom: 16px; }
 .cta p { max-width: 560px; margin: 0 auto 32px; font-size: 1rem; }
@@ -1047,90 +804,61 @@ p { color: var(--text-mid); }
 .discord-card {
   background: linear-gradient(135deg, rgba(88, 101, 242, 0.10) 0%, rgba(88, 101, 242, 0.02) 60%, transparent 100%);
   border: 1px solid rgba(88, 101, 242, 0.25);
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
+  border-radius: var(--radius-lg); padding: 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
 }
 .discord-card-info { display: flex; align-items: center; gap: 20px; }
 .discord-icon {
-  width: 64px; height: 64px;
-  border-radius: 16px;
+  width: 64px; height: 64px; border-radius: 16px;
   background: rgba(88, 101, 242, 0.15);
   border: 1px solid rgba(88, 101, 242, 0.35);
   display: grid; place-items: center;
-  font-size: 28px;
-  color: var(--discord);
-  flex-shrink: 0;
+  font-size: 28px; color: var(--discord); flex-shrink: 0;
 }
 .discord-card-info h3 { font-size: 1.15rem; margin-bottom: 4px; }
 .discord-card-info p { font-size: 0.9rem; }
 .discord-card .btn-discord {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  background: var(--discord);
-  color: #fff;
-  border-radius: var(--radius-sm);
-  font-size: 13px;
-  font-weight: 600;
-  transition: background .15s, transform .15s;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 22px; background: var(--discord); color: #fff;
+  border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  transition: background .15s, transform .15s; white-space: nowrap;
 }
 .discord-card .btn-discord:hover { background: #4752c4; transform: translateY(-1px); }
 
 /* ============================================================
    POSTER
    ============================================================ */
-.poster-block {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 32px;
-  align-items: stretch;
-}
+.poster-block { display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items: stretch; }
 .poster-card {
   border: 1px solid var(--border-hi);
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--bg-elev);
-  padding: 24px;
-  display: grid;
-  place-items: center;
-  min-height: 400px;
+  overflow: hidden; background: var(--bg-elev);
+  padding: 24px; display: grid; place-items: center; min-height: 400px;
 }
 .poster-card img { max-height: 540px; width: auto; border-radius: var(--radius); }
 
 /* ============================================================
    SOCIAL GRID (Contacto)
    ============================================================ */
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 24px;
-}
+.social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
 .social-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
   transition: border-color .15s, transform .15s;
 }
-.social-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+.social-card:nth-child(1):hover { border-color: rgba(255,10,64,0.4); transform: translateY(-2px); }
+.social-card:nth-child(2):hover { border-color: rgba(34,197,94,0.4); transform: translateY(-2px); }
+.social-card:nth-child(3):hover { border-color: rgba(59,130,246,0.4); transform: translateY(-2px); }
+.social-card:nth-child(4):hover { border-color: rgba(168,85,247,0.4); transform: translateY(-2px); }
+.social-card:nth-child(5):hover { border-color: rgba(252,226,124,0.4); transform: translateY(-2px); }
+.social-card:nth-child(6):hover { border-color: rgba(6,182,212,0.4); transform: translateY(-2px); }
 .social-card h4 { font-size: 0.92rem; margin-bottom: 6px; }
 .social-card a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-mid);
-  font-size: 12px;
-  transition: color .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--text-mid); font-size: 12px; transition: color .15s;
 }
-.social-card a:hover { color: var(--accent); }
+.social-card a:hover { color: var(--red); }
 .social-card a i { font-size: 12px; }
 
 /* ============================================================
@@ -1138,34 +866,21 @@ p { color: var(--text-mid); }
    ============================================================ */
 .footer {
   border-top: 1px solid var(--border);
-  padding: 64px 0 32px;
-  margin-top: 40px;
+  padding: 64px 0 32px; margin-top: 40px;
   background: var(--bg-elev);
 }
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
-}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
 .footer-brand img { width: 48px; height: 48px; border-radius: 12px; margin-bottom: 20px; }
 .footer-brand .brand-name {
-  font-weight: 900;
-  font-size: 16px;
-  margin-bottom: 14px;
-  display: block;
-  letter-spacing: -0.3px;
+  font-weight: 900; font-size: 16px; margin-bottom: 14px;
+  display: block; letter-spacing: -0.3px;
 }
-.footer-brand .brand-name span { color: var(--accent); }
+.footer-brand .brand-name span { color: var(--red); }
 .footer-brand p { font-size: 0.88rem; line-height: 1.7; max-width: 340px; color: var(--text-mid); }
 .footer-col h5 {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-low);
-  margin-bottom: 18px;
-  font-weight: 500;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-low); margin-bottom: 18px; font-weight: 500;
 }
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 12px; }
@@ -1173,25 +888,16 @@ p { color: var(--text-mid); }
 .footer-col ul li a:hover { color: var(--text); }
 .footer-bottom {
   border-top: 1px solid var(--border);
-  padding-top: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 0.82rem;
-  color: var(--text-low);
+  padding-top: 28px; display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 16px;
+  font-size: 0.82rem; color: var(--text-low);
 }
 .footer-social { display: flex; gap: 8px; }
 .footer-social a {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  display: grid; place-items: center;
-  font-size: 14px;
-  color: var(--text-mid);
-  transition: all .15s;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  display: grid; place-items: center; font-size: 14px;
+  color: var(--text-mid); transition: all .15s;
 }
 .footer-social a:hover { color: var(--text); border-color: var(--border-hi); transform: translateY(-2px); }
 
@@ -1210,10 +916,11 @@ p { color: var(--text-mid); }
   .poster-block { grid-template-columns: 1fr; }
   .gallery-body { gap: 40px; }
   .thumb-strip { grid-template-columns: repeat(7, 52px); }
-  .thumb-strip.server { grid-template-columns: repeat(6, 68px); }
+  .thumb-strip.server { grid-template-columns: repeat(6, 80px); }
   .social-grid { grid-template-columns: repeat(2, 1fr); }
   .team-preview { grid-template-columns: repeat(3, 1fr); }
-  .phone-frame { width: 320px; height: 660px; }
+  .phone-frame { width: 300px; height: 620px; border-radius: 46px; }
+  .phone-frame img { border-radius: 38px; }
 }
 @media (max-width: 640px) {
   .section { padding: 72px 0; }
@@ -1228,9 +935,10 @@ p { color: var(--text-mid); }
   .hero-actions { flex-direction: column; width: 100%; }
   .hero-actions .btn { width: 100%; }
   .gallery { padding: 48px 20px; }
-  .phone-frame { width: 280px; height: 580px; }
+  .phone-frame { width: 280px; height: 580px; border-radius: 44px; }
+  .phone-frame img { border-radius: 36px; }
   .thumb-strip { grid-template-columns: repeat(5, 46px); }
-  .thumb-strip.server { grid-template-columns: repeat(6, 48px); }
+  .thumb-strip.server { grid-template-columns: repeat(3, 90px); }
   .cta { padding: 48px 24px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .server-tab { padding: 7px 12px; font-size: 11.5px; }
@@ -1251,7 +959,7 @@ p { color: var(--text-mid); }
   <div class="nav-inner">
     <a href="#inicio" class="nav-brand">
       <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Logo_Janeiro_Music.png" alt="Janeiro Music" onerror="this.style.display='none'">
-      <span class="brand-text">Janeiro <span>Music</span></span>
+      Janeiro <span>Music</span>
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#inicio" data-page="inicio">Inicio</a>
@@ -1291,10 +999,9 @@ p { color: var(--text-mid); }
         </h1>
         <p class="hero-slogan">Monta tu server y lleva tu música a tu Cerro.</p>
         <p class="hero-desc">
-          Janeiro Music es una plataforma que permite administrar y escuchar tu propia
-          biblioteca de audio desde tu teléfono. El servidor se ejecuta en tu equipo y
-          la aplicación se conecta a él por red local. Sin suscripciones y sin depender
-          de servicios en la nube.
+          Janeiro Music te permite guardar y escuchar toda tu música desde tu teléfono.
+          El servidor corre en tu computadora y la aplicación se conecta a él por la red
+          de tu casa. Sin pagar mes tras mes y sin depender de internet.
         </p>
         <div class="hero-actions">
           <a href="#producto" class="btn btn-primary btn-lg">Ver el producto <i class="fa-solid fa-arrow-right"></i></a>
@@ -1326,45 +1033,44 @@ p { color: var(--text-mid); }
   <section class="section">
     <div class="container">
       <div class="section-head reveal">
-        <div class="eyebrow"><span class="dot"></span>Qué es Janeiro Music</div>
-        <h2>Una plataforma musical que se ejecuta en tu propio equipo</h2>
+        <div class="eyebrow red"><span class="dot"></span>Qué es Janeiro Music</div>
+        <h2>Una plataforma musical que vive en tu propio equipo</h2>
         <p>
-          Janeiro Music está compuesta por dos programas que se comunican entre sí:
-          un servidor que se instala en tu computadora y una aplicación que se instala
-          en tu teléfono. Juntos permiten escuchar tu biblioteca sin depender de
-          servicios en la nube.
+          Janeiro Music son dos programas que trabajan juntos: un servidor que se instala
+          en tu computadora y una aplicación que se instala en tu teléfono. Con ellos puedes
+          escuchar tu música sin pagar suscripciones ni subir tus archivos a internet.
         </p>
       </div>
       <div class="feature-grid">
-        <div class="feature-card reveal">
-          <div class="feature-icon"><i class="fa-solid fa-server"></i></div>
+        <div class="feature-card card-red reveal">
+          <div class="feature-icon red"><i class="fa-solid fa-server"></i></div>
           <h3>Servidor local</h3>
-          <p>Se instala en tu equipo, indexa tu biblioteca de audio y entrega los archivos a la aplicación por red local.</p>
+          <p>Se instala en tu equipo, ordena tu música y entrega los archivos a la aplicación por la red de tu casa.</p>
         </div>
-        <div class="feature-card reveal delay-1">
+        <div class="feature-card card-green reveal delay-1">
           <div class="feature-icon green"><i class="fa-solid fa-mobile-screen"></i></div>
           <h3>Aplicación móvil</h3>
-          <p>Disponible para Android en formato APK. Se conecta al servidor mediante dirección IP o código QR.</p>
+          <p>Disponible para Android en formato APK. Se conecta al servidor por dirección IP o escaneando un código QR.</p>
         </div>
-        <div class="feature-card reveal delay-2">
+        <div class="feature-card card-blue reveal delay-2">
           <div class="feature-icon blue"><i class="fa-solid fa-shield-halved"></i></div>
-          <h3>Privacidad por diseño</h3>
-          <p>Sin cuentas, sin publicidad y sin telemetría. Tu biblioteca permanece en tu equipo y nadie más la administra.</p>
+          <h3>Privacidad primero</h3>
+          <p>Sin cuentas, sin anuncios y sin rastreo. Tu música se queda en tu equipo y nadie más tiene acceso.</p>
         </div>
-        <div class="feature-card reveal">
+        <div class="feature-card card-purple reveal">
           <div class="feature-icon purple"><i class="fa-solid fa-wifi-slash"></i></div>
-          <h3>Modo sin conexión</h3>
-          <p>Descarga canciones al teléfono y escúchalas sin conexión. La reproducción no depende de la red móvil.</p>
+          <h3>Funciona sin internet</h3>
+          <p>Descarga tus canciones al teléfono y escúchalas donde quieras. No depende de la señal móvil.</p>
         </div>
-        <div class="feature-card reveal delay-1">
+        <div class="feature-card card-gold reveal delay-1">
           <div class="feature-icon gold"><i class="fa-solid fa-infinity"></i></div>
-          <h3>Sin suscripciones</h3>
-          <p>El software base es gratuito. No existen cobros mensuales ni bloqueos por falta de pago.</p>
+          <h3>Sin pagos mensuales</h3>
+          <p>El software es gratuito. No hay cobros cada mes ni bloqueos por no pagar.</p>
         </div>
-        <div class="feature-card reveal delay-2">
-          <div class="feature-icon"><i class="fa-solid fa-code-branch"></i></div>
-          <h3>Código abierto</h3>
-          <p>Servidor y aplicación publicados bajo licencia libre. Cualquier persona puede auditar o adaptar el sistema.</p>
+        <div class="feature-card card-cyan reveal delay-2">
+          <div class="feature-icon cyan"><i class="fa-solid fa-sliders"></i></div>
+          <h3>Control total</h3>
+          <p>Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor. Sin configuraciones complicadas.</p>
         </div>
       </div>
     </div>
@@ -1374,18 +1080,16 @@ p { color: var(--text-mid); }
     <div class="container">
       <div class="split">
         <div class="reveal">
-          <div class="eyebrow"><span class="dot"></span>El problema</div>
-          <h2>Las plataformas actuales no están pensadas para el usuario</h2>
+          <div class="eyebrow red"><span class="dot"></span>El problema</div>
+          <h2>Las plataformas actuales no están pensadas para ti</h2>
           <p>
-            Las plataformas de reproducción más conocidas cobran una suscripción mensual
-            sin ceder la propiedad de los archivos. Si el usuario cancela el pago, pierde
-            el acceso a toda su biblioteca. Además, dependen de la conexión a internet y
-            concentran un alto consumo energético en centros de datos de gran escala.
+            Los servicios de música más conocidos te cobran mes tras mes y no te dejan
+            quedarte con los archivos. Si dejas de pagar, pierdes toda tu música. Además,
+            dependen de internet y gastan mucha energía en grandes centros de datos.
           </p>
           <p>
-            A esto se suma el impacto ambiental: los servidores de streaming operan de
-            forma continua y consumen energía permanente para servir cada reproducción,
-            incluso cuando el usuario ya descargó el contenido.
+            A eso se suma el impacto ambiental: los servidores de streaming trabajan todo
+            el día y consumen energía incluso cuando ya descargaste la canción.
           </p>
         </div>
         <div class="split-img reveal delay-1">
@@ -1398,21 +1102,20 @@ p { color: var(--text-mid); }
   <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
       <div class="split">
-        <div class="split-img reveal">
+        <div class="split-img split-img-green reveal">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/sever_arch-linux_1.webp" alt="Servidor Janeiro Music" loading="lazy">
         </div>
         <div class="reveal delay-1">
-          <div class="eyebrow"><span class="dot"></span>La solución</div>
-          <h2>Un sistema que se ejecuta en tu propio equipo</h2>
+          <div class="eyebrow green"><span class="dot"></span>La solución</div>
+          <h2>Un sistema que corre en tu propia computadora</h2>
           <p>
-            Janeiro Music traslada el servidor a la computadora del usuario. El programa
-            indexa la biblioteca, extrae los metadatos y entrega los archivos a la
-            aplicación por red local. No hay centros de datos operados por la empresa.
+            Janeiro Music pone el servidor en tu equipo. El programa ordena tu música,
+            lee los datos de cada archivo y los entrega a la aplicación por la red local.
+            No hay centros de datos de la empresa.
           </p>
           <p>
-            El modelo es sostenible y sostenido: el software base es gratuito, y las
-            funciones avanzadas se ofrecen mediante una licencia de pago único. El
-            usuario decide qué guardar, cómo organizarlo y cuándo apagar el servidor.
+            El software base es gratuito, y las funciones extra se pagan una sola vez.
+            Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor.
           </p>
           <a href="#producto" class="btn btn-ghost" style="margin-top: 12px;">Ver capturas del producto <i class="fa-solid fa-arrow-right"></i></a>
         </div>
@@ -1445,9 +1148,9 @@ p { color: var(--text-mid); }
         <i class="fa-solid fa-infinity ods-icon"></i>
         <h2>Compromiso con el ODS 12</h2>
         <p>
-          Producción y consumo responsables. La arquitectura descentralizada reduce
-          el consumo energético agregado, prioriza el tráfico por red local y permite
-          reutilizar hardware que de otro modo sería descartado.
+          Producción y consumo responsables. Nuestra arquitectura reduce el gasto de energía,
+          usa la red local en lugar de internet y permite reutilizar equipos viejos que
+          normalmente se tirarían a la basura.
         </p>
         <a href="#sostenibilidad" class="btn btn-ghost">Ver el detalle del compromiso <i class="fa-solid fa-arrow-right"></i></a>
       </div>
@@ -1457,9 +1160,9 @@ p { color: var(--text-mid); }
   <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
       <div class="section-head center reveal">
-        <div class="eyebrow"><span class="dot"></span>El equipo</div>
+        <div class="eyebrow purple"><span class="dot"></span>El equipo</div>
         <h2>Cerru de Janeiro Company</h2>
-        <p>Seis integrantes con funciones definidas en desarrollo, diseño, control de calidad y presentación del proyecto.</p>
+        <p>Seis integrantes con funciones claras en desarrollo, diseño, control de calidad y presentación del proyecto.</p>
       </div>
       <div class="team-preview">
         <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Pedrouski_el_Pixelouski.png" alt="Pedro" loading="lazy"></div>
@@ -1479,9 +1182,7 @@ p { color: var(--text-mid); }
     <div class="container">
       <div class="cta reveal">
         <h2>Descarga Janeiro Music</h2>
-        <p>
-          Aplicación para Android y servidor para Arch Linux, Windows y macOS (AMD).
-        </p>
+        <p>Aplicación para Android y servidor para Arch Linux, Windows y macOS (AMD).</p>
         <a href="#descargas" class="btn btn-primary btn-lg">Ir a descargas <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
@@ -1496,11 +1197,11 @@ p { color: var(--text-mid); }
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
     <div class="section-head reveal" style="max-width: 820px;">
-      <div class="eyebrow"><span class="dot"></span>Producto</div>
+      <div class="eyebrow blue"><span class="dot"></span>Producto</div>
       <h1>Interfaz en acción</h1>
       <p class="lead" style="margin-top: 20px;">
-        Capturas de la aplicación móvil y del servidor en sus tres plataformas
-        compatibles. Los carruseles avanzan automáticamente y permiten navegación manual.
+        Capturas de la aplicación móvil y del servidor en sus tres plataformas.
+        Los carruseles avanzan solos y también puedes moverlos a mano.
       </p>
     </div>
 
@@ -1525,7 +1226,7 @@ p { color: var(--text-mid); }
       </div>
     </div>
 
-    <!-- GALERÍA SERVIDOR -->
+    <!-- GALERÍA SERVIDOR — sin límite de tamaño, colores por OS -->
     <div class="gallery reveal">
       <div class="gallery-header">
         <h3>Servidor de biblioteca</h3>
@@ -1561,64 +1262,62 @@ p { color: var(--text-mid); }
 
     <!-- ARQUITECTURA -->
     <div class="content reveal" style="margin-top: 100px;">
-      <div class="eyebrow"><span class="dot"></span>Arquitectura</div>
+      <div class="eyebrow red"><span class="dot"></span>Arquitectura</div>
       <h2>Servidor de biblioteca</h2>
       <p>
-        El servidor es un programa desarrollado en Python sobre el framework FastAPI.
-        Su función es indexar bibliotecas de audio locales, extraer metadatos y servir
-        los archivos al cliente a través de endpoints REST. El índice se construye de
-        forma asíncrona mediante un pool de hilos que evita bloquear el proceso
-        principal durante el escaneo.
+        El servidor es un programa hecho en Python que usa el marco FastAPI. Su trabajo
+        es leer las carpetas de música de tu equipo, sacar los datos de cada archivo y
+        entregarlos a la aplicación por internet local. El proceso corre en segundo plano
+        para que puedas seguir usando tu computadora sin problemas.
       </p>
       <div class="spec-grid">
         <div class="spec"><div class="spec-label">Lenguaje</div><div class="spec-value">Python</div></div>
         <div class="spec"><div class="spec-label">Framework HTTP</div><div class="spec-value">FastAPI + Uvicorn</div></div>
-        <div class="spec"><div class="spec-label">Indexación</div><div class="spec-value">Asíncrona, multihilo</div></div>
-        <div class="spec"><div class="spec-label">Metadatos</div><div class="spec-value">ID3v2 · Vorbis · MP4</div></div>
+        <div class="spec"><div class="spec-label">Indexación</div><div class="spec-value">En segundo plano</div></div>
+        <div class="spec"><div class="spec-label">Datos leídos</div><div class="spec-value">ID3v2 · Vorbis · MP4</div></div>
         <div class="spec"><div class="spec-label">Acceso remoto</div><div class="spec-value">LAN · VPN · Cloudflare Tunnel</div></div>
-        <div class="spec"><div class="spec-label">Seguridad</div><div class="spec-value">HMAC-SHA256 · QR cifrado</div></div>
+        <div class="spec"><div class="spec-label">Seguridad</div><div class="spec-value">Código QR cifrado</div></div>
       </div>
 
-      <h3>Endpoints principales</h3>
+      <h3>Rutas principales</h3>
       <ul>
-        <li><code class="mono">GET /api/biblioteca</code> — Devuelve el árbol completo de artistas, álbumes y canciones indexadas.</li>
-        <li><code class="mono">GET /api/buscar?q=</code> — Búsqueda por coincidencia en título, artista o álbum.</li>
-        <li><code class="mono">GET /stream/&lt;id&gt;</code> — Servido del archivo de audio con soporte de <code class="mono">Range</code>.</li>
-        <li><code class="mono">GET /api/server/info</code> — Identidad del servidor: nombre y versión.</li>
-        <li><code class="mono">GET /api/library_meta</code> — Firma del índice para invalidación de caché.</li>
+        <li><code class="mono">GET /api/biblioteca</code> — Entrega el árbol completo de artistas, álbumes y canciones.</li>
+        <li><code class="mono">GET /api/buscar?q=</code> — Búsqueda por título, artista o álbum.</li>
+        <li><code class="mono">GET /stream/&lt;id&gt;</code> — Entrega el archivo de audio con soporte para saltar a un punto.</li>
+        <li><code class="mono">GET /api/server/info</code> — Nombre y versión del servidor.</li>
+        <li><code class="mono">GET /api/library_meta</code> — Huella del índice para saber cuándo cambió.</li>
       </ul>
 
       <h2>Aplicación móvil</h2>
       <p>
-        La aplicación está construida en Flutter para Android. Utiliza el motor de audio
+        La aplicación está hecha en Flutter para Android. Usa el motor de audio
         <code class="mono">just_audio</code> y el gestor de estado Riverpod. Se conecta
-        al servidor mediante dirección IP, hostname de red local o código QR generado
-        por el propio servidor.
+        al servidor por dirección IP, nombre de red o escaneando un código QR.
       </p>
       <div class="spec-grid">
         <div class="spec"><div class="spec-label">Framework</div><div class="spec-value">Flutter (Android)</div></div>
         <div class="spec"><div class="spec-label">Gestión de estado</div><div class="spec-value">Riverpod</div></div>
         <div class="spec"><div class="spec-label">Motor de audio</div><div class="spec-value">just_audio</div></div>
         <div class="spec"><div class="spec-label">Almacenamiento local</div><div class="spec-value">SharedPreferences · SQLite</div></div>
-        <div class="spec"><div class="spec-label">Formatos soportados</div><div class="spec-value">MP3 · FLAC · M4A · OGG · WAV</div></div>
+        <div class="spec"><div class="spec-label">Formatos</div><div class="spec-value">MP3 · FLAC · M4A · OGG · WAV</div></div>
         <div class="spec"><div class="spec-label">Distribución</div><div class="spec-value">APK (fuera de tiendas)</div></div>
       </div>
 
       <h3>Funciones principales</h3>
       <ul>
-        <li><strong>Reproducción en cola:</strong> soporte de reproducción aleatoria, repetición y navegación por índice.</li>
-        <li><strong>Caché automático:</strong> descarga anticipada de la siguiente canción, con límite de 512 MB y política de evicción.</li>
-        <li><strong>Descarga manual:</strong> selección explícita de canciones para escucha sin conexión.</li>
-        <li><strong>Listas y favoritos:</strong> almacenamiento local persistente de listas de reproducción.</li>
-        <li><strong>Letras:</strong> obtención desde LRCLIB, Lyrics.ovh o Genius.</li>
-        <li><strong>Colores dinámicos:</strong> extracción del color dominante de las portadas para teñir la interfaz.</li>
-        <li><strong>Control de reproducción:</strong> integración con notificación del sistema y controles de auriculares.</li>
+        <li><strong>Cola de reproducción:</strong> aleatorio, repetición y salto por índice.</li>
+        <li><strong>Caché automático:</strong> descarga la siguiente canción con un tope de 512 MB.</li>
+        <li><strong>Descarga manual:</strong> elige canciones para escuchar sin conexión.</li>
+        <li><strong>Listas y favoritos:</strong> se guardan en tu teléfono.</li>
+        <li><strong>Letras:</strong> desde LRCLIB, Lyrics.ovh o Genius.</li>
+        <li><strong>Colores dinámicos:</strong> la interfaz toma el color de la portada.</li>
+        <li><strong>Controles:</strong> se integra con la notificación del sistema y con los audífonos.</li>
       </ul>
     </div>
 
-    <div class="cta reveal" style="margin-top: 80px;">
+    <div class="cta cta-green reveal" style="margin-top: 80px;">
       <h2>Documentación completa</h2>
-      <p>Los detalles técnicos y las guías de despliegue están disponibles en el repositorio oficial.</p>
+      <p>Los detalles técnicos y las guías de instalación están en el repositorio del proyecto.</p>
       <a href="https://github.com/fujiwarapixel/Janeiro-Music" target="_blank" rel="noopener" class="btn btn-primary">Ver repositorio <i class="fa-brands fa-github"></i></a>
     </div>
 
@@ -1632,11 +1331,11 @@ p { color: var(--text-mid); }
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
     <div class="section-head reveal" style="max-width: 820px;">
-      <div class="eyebrow"><span class="dot"></span>Descargas</div>
+      <div class="eyebrow green"><span class="dot"></span>Descargas</div>
       <h1>Software disponible</h1>
       <p class="lead" style="margin-top: 20px;">
-        Distribuciones oficiales de Janeiro Music. Verifica siempre el origen de
-        los archivos antes de instalarlos.
+        Versiones oficiales de Janeiro Music. Revisa siempre de dónde descargas antes
+        de instalar.
       </p>
     </div>
 
@@ -1645,22 +1344,22 @@ p { color: var(--text-mid); }
       <div class="dl-block-head">
         <div>
           <h2>Aplicación móvil</h2>
-          <p>Cliente Android para la reproducción de la biblioteca servida por Janeiro Music.</p>
+          <p>Aplicación de Android para escuchar la música que entrega tu servidor.</p>
         </div>
         <span class="badge green"><i class="fa-brands fa-android"></i> Android · APK</span>
       </div>
 
       <div class="dl-grid two">
         <div class="dl-card">
-          <div class="dl-os"><i class="fa-brands fa-android" style="color:#22c55e;"></i> Android</div>
+          <div class="dl-os android"><i class="fa-brands fa-android"></i> Android</div>
           <div class="dl-arch">APK universal</div>
           <div class="dl-meta">
-            Distribución <strong>exclusivamente en formato APK</strong>. No disponible en Google Play.
+            Se distribuye <strong>solo como APK</strong>. No está en Google Play.
             <br><br>
-            Firma oficial de Cerru de Janeiro Company. Requiere habilitar la
-            instalación de aplicaciones de origen desconocido en Android.
+            Firmada por Cerru de Janeiro Company. Para instalarla tienes que permitir
+            aplicaciones de origen desconocido en Android.
           </div>
-          <a href="downloads/janeiro-music.apk" class="dl-btn primary" download>
+          <a href="downloads/janeiro-music.apk" class="dl-btn primary green" download>
             <span>Descargar APK</span>
             <i class="fa-solid fa-download"></i>
           </a>
@@ -1670,11 +1369,11 @@ p { color: var(--text-mid); }
           <div class="dl-arch">Sistema</div>
           <div class="dl-meta">
             <ul style="list-style:none;padding:0;margin:0;line-height:1.9;">
-              <li>· Dispositivo Android con acceso a red local</li>
-              <li>· Servidor Janeiro Music en ejecución</li>
-              <li>· Permiso de lectura de audio local (opcional)</li>
-              <li>· No requiere cuenta ni registro</li>
-              <li>· No solicita permisos de ubicación ni contactos</li>
+              <li>· Un Android con acceso a tu red local</li>
+              <li>· Servidor Janeiro Music encendido</li>
+              <li>· Permiso para leer audio local (opcional)</li>
+              <li>· No pide cuenta ni registro</li>
+              <li>· No pide ubicación ni contactos</li>
             </ul>
           </div>
         </div>
@@ -1683,8 +1382,8 @@ p { color: var(--text-mid); }
       <div class="notice">
         <i class="fa-solid fa-circle-exclamation"></i>
         <div>
-          <strong>Nota:</strong> La aplicación se distribuye únicamente como APK fuera de las
-          tiendas oficiales por decisión de política interna del proyecto.
+          <strong>Nota:</strong> La aplicación se reparte solo como APK, fuera de las
+          tiendas oficiales, por decisión del proyecto.
         </div>
       </div>
     </div>
@@ -1694,47 +1393,47 @@ p { color: var(--text-mid); }
       <div class="dl-block-head">
         <div>
           <h2>Servidor de biblioteca</h2>
-          <p>Programa que indexa la colección de audio local y sirve los datos a la aplicación.</p>
+          <p>Programa que ordena tu música y entrega los datos a la aplicación.</p>
         </div>
         <span class="badge blue"><i class="fa-solid fa-server"></i> Servidor · Multiplataforma</span>
       </div>
 
       <div class="dl-grid">
         <div class="dl-card">
-          <div class="dl-os"><i class="fa-brands fa-linux" style="color:#f97316;"></i> Arch Linux</div>
+          <div class="dl-os arch"><i class="fa-brands fa-linux"></i> Arch Linux</div>
           <div class="dl-arch">x86_64</div>
           <div class="dl-meta">
-            Paquete precompilado con dependencias incluidas.<br>
-            Integración con <code>systemd</code>.<br>
-            También disponible vía <code>AUR</code>.
+            Paquete armado con todo lo necesario.<br>
+            Funciona con <code>systemd</code>.<br>
+            También está en <code>AUR</code>.
           </div>
-          <a href="downloads/janeiro-server-arch-linux.pkg.tar.zst" class="dl-btn primary" download>
+          <a href="downloads/janeiro-server-arch-linux.pkg.tar.zst" class="dl-btn primary orange" download>
             <span>Descargar paquete</span>
             <i class="fa-solid fa-download"></i>
           </a>
         </div>
         <div class="dl-card">
-          <div class="dl-os"><i class="fa-brands fa-windows" style="color:#0ea5e9;"></i> Windows</div>
+          <div class="dl-os windows"><i class="fa-brands fa-windows"></i> Windows</div>
           <div class="dl-arch">x64</div>
           <div class="dl-meta">
             Instalador para <strong>Windows 10</strong> y <strong>Windows 11</strong>.<br>
-            Servicio de inicio automático opcional.<br>
-            Binario firmado digitalmente.
+            Puede arrancar solo al encender la PC.<br>
+            Archivo firmado digitalmente.
           </div>
-          <a href="downloads/janeiro-server-windows.zip" class="dl-btn primary" download>
+          <a href="downloads/janeiro-server-windows.zip" class="dl-btn primary blue" download>
             <span>Descargar .zip</span>
             <i class="fa-solid fa-download"></i>
           </a>
         </div>
         <div class="dl-card">
-          <div class="dl-os"><i class="fa-brands fa-apple" style="color:#f5f5f7;"></i> macOS</div>
+          <div class="dl-os mac"><i class="fa-brands fa-apple"></i> macOS</div>
           <div class="dl-arch">AMD (Intel) · x86_64</div>
           <div class="dl-meta">
-            Requiere <strong>macOS 11</strong> (Big Sur) o superior.<br>
-            Arquitectura Intel / AMD x86_64.<br>
-            Apple Silicon requiere Rosetta 2 o compilación desde fuente.
+            Necesitas <strong>macOS 11</strong> (Big Sur) o más nuevo.<br>
+            Para equipos Intel / AMD x86_64.<br>
+            En Apple Silicon hay que usar Rosetta 2 o compilar desde el código.
           </div>
-          <a href="downloads/janeiro-server-macos.dmg" class="dl-btn primary" download>
+          <a href="downloads/janeiro-server-macos.dmg" class="dl-btn primary mac" download>
             <span>Descargar .dmg</span>
             <i class="fa-solid fa-download"></i>
           </a>
@@ -1744,9 +1443,8 @@ p { color: var(--text-mid); }
       <div class="notice">
         <i class="fa-solid fa-circle-exclamation"></i>
         <div>
-          <strong>Nota:</strong> El servidor no incluye dependencias de red externas.
-          Para exponerlo fuera de la red local se recomienda Cloudflare Tunnel, que
-          el sistema soporta de forma nativa.
+          <strong>Nota:</strong> El servidor no abre puertos hacia internet. Si lo quieres
+          usar fuera de tu red, se recomienda Cloudflare Tunnel, que ya viene soportado.
         </div>
       </div>
     </div>
@@ -1754,7 +1452,7 @@ p { color: var(--text-mid); }
     <!-- VERIFICACIÓN -->
     <div class="content reveal">
       <h2>Verificación de integridad</h2>
-      <p>Se recomienda verificar el hash del archivo descargado antes de la instalación:</p>
+      <p>Conviene revisar la huella del archivo antes de instalarlo:</p>
       <div class="spec" style="margin-top: 20px;">
         <div class="spec-label">Linux / macOS</div>
         <div class="spec-value" style="font-family: var(--mono); font-size: 13px; margin-bottom: 20px;">sha256sum archivo-descargado</div>
@@ -1773,12 +1471,11 @@ p { color: var(--text-mid); }
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
     <div class="section-head reveal" style="max-width: 820px;">
-      <div class="eyebrow"><span class="dot"></span>Sostenibilidad</div>
+      <div class="eyebrow gold"><span class="dot"></span>Sostenibilidad</div>
       <h1>Compromiso con el ODS 12</h1>
       <p class="lead" style="margin-top: 20px;">
-        La arquitectura de Janeiro Music reduce el consumo energético asociado a la
-        distribución de medios digitales al eliminar la dependencia de centros de datos
-        de gran escala y priorizar la transmisión por red local.
+        La forma en que Janeiro Music está armado reduce el gasto de energía. No necesitas
+        grandes centros de datos y la mayor parte del tráfico viaja por tu red local.
       </p>
     </div>
 
@@ -1786,21 +1483,20 @@ p { color: var(--text-mid); }
       <i class="fa-solid fa-infinity ods-icon"></i>
       <h2>ODS 12 · Producción y Consumo Responsables</h2>
       <p>
-        El sistema opera sobre infraestructura propiedad del usuario. Al no requerir
-        servidores centrales dedicados ni transmisión continua a través de la red pública,
-        se reduce el consumo energético agregado y se extiende la vida útil de equipos
-        que de otro modo serían descartados.
+        El sistema corre en equipos del usuario. Como no necesita servidores centrales
+        ni estar transmitiendo todo el tiempo por internet, se gasta menos energía y se
+        alarga la vida de computadoras que de otra forma se tirarían.
       </p>
     </div>
 
     <div class="content reveal">
       <h2>Impacto ambiental del modelo</h2>
       <ul>
-        <li><strong>Reutilización de hardware:</strong> el servidor puede ejecutarse en equipos de cómputo con más de una década de antigüedad, evitando la generación de basura electrónica.</li>
-        <li><strong>Transmisión por red local:</strong> el tráfico principal ocurre dentro de la LAN del usuario, sin atravesar centros de datos distribuidos globalmente.</li>
-        <li><strong>Modo sin conexión:</strong> la caché local permite reproducir durante horas sin consumir datos móviles ni energía asociada a la red celular.</li>
-        <li><strong>Ausencia de servidores centrales:</strong> no existen centros de datos operados por la empresa que consuman energía de forma permanente.</li>
-        <li><strong>Sin reproducción por streaming continuo:</strong> cada canción se descarga una vez y se sirve desde el almacenamiento local del dispositivo o del servidor.</li>
+        <li><strong>Reutilización de equipos:</strong> el servidor funciona en computadoras con más de diez años, así que se evita generar basura electrónica.</li>
+        <li><strong>Tráfico por red local:</strong> casi todo pasa dentro de tu casa, sin cruzar centros de datos repartidos por el mundo.</li>
+        <li><strong>Modo sin conexión:</strong> puedes escuchar durante horas sin gastar datos móviles ni energía de la red celular.</li>
+        <li><strong>Sin servidores centrales:</strong> la empresa no opera centros de datos que consuman energía todo el día.</li>
+        <li><strong>Sin streaming continuo:</strong> cada canción se descarga una vez y se sirve desde tu propio almacenamiento.</li>
       </ul>
 
       <h2>Metas SMART</h2>
@@ -1808,26 +1504,26 @@ p { color: var(--text-mid); }
         <div class="smart-card">
           <div class="time">Corto plazo · 6 meses</div>
           <h4>Validación con usuarios</h4>
-          <p>Alcanzar 50 usuarios activos en beta cerrada durante los próximos 6 meses, con una retención semanal superior al 40%, para validar la experiencia de reproducción sin conexión y el flujo de conexión por QR.</p>
+          <p>Llegar a 50 usuarios activos en beta cerrada durante los próximos 6 meses, con una retención semanal mayor al 40%, para validar cómo se siente la reproducción sin conexión y la conexión por QR.</p>
         </div>
         <div class="smart-card">
           <div class="time">Mediano plazo · 2 años</div>
           <h4>Adopción regional</h4>
-          <p>Alcanzar 1,000 usuarios activos mensuales en México durante el segundo año, con una tasa de conversión del 5% a la licencia Pro y una retención del 30%.</p>
+          <p>Llegar a 1,000 usuarios activos al mes en México durante el segundo año, con una conversión del 5% a la licencia Pro y una retención del 30%.</p>
         </div>
         <div class="smart-card">
           <div class="time">Largo plazo · 3 años</div>
           <h4>Expansión regional</h4>
-          <p>Establecer presencia en al menos tres países de Latinoamérica (México, Colombia y Chile) al cierre del tercer año, con una base instalada de 10,000 usuarios y un modelo operativo autosostenible.</p>
+          <p>Tener presencia en al menos tres países de Latinoamérica al cierre del tercer año, con 10,000 usuarios instalados y un modelo que se sostenga solo.</p>
         </div>
       </div>
 
       <h2>Indicadores de seguimiento</h2>
       <div class="spec-grid">
-        <div class="spec"><div class="spec-label">Consumo de datos por usuario</div><div class="spec-value">&lt; 200 MB / mes (promedio)</div></div>
+        <div class="spec"><div class="spec-label">Datos por usuario</div><div class="spec-value">&lt; 200 MB / mes (promedio)</div></div>
         <div class="spec"><div class="spec-label">Equipos reutilizados</div><div class="spec-value">Meta: 1,000 servidores activos</div></div>
-        <div class="spec"><div class="spec-label">Transmisiones desde caché</div><div class="spec-value">&gt; 70% del total</div></div>
-        <div class="spec"><div class="spec-label">Huella de servidores propios</div><div class="spec-value">0 centros de datos operados</div></div>
+        <div class="spec"><div class="spec-label">Reproducciones desde caché</div><div class="spec-value">&gt; 70% del total</div></div>
+        <div class="spec"><div class="spec-label">Centros de datos propios</div><div class="spec-value">0</div></div>
       </div>
     </div>
 
@@ -1841,38 +1537,37 @@ p { color: var(--text-mid); }
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
     <div class="section-head reveal" style="max-width: 820px;">
-      <div class="eyebrow"><span class="dot"></span>Empresa</div>
+      <div class="eyebrow purple"><span class="dot"></span>Empresa</div>
       <h1>Modelo de negocio</h1>
       <p class="lead" style="margin-top: 20px;">
-        Cerru de Janeiro Company opera bajo un modelo mixto de código abierto y
-        licencia comercial para funciones avanzadas. La estructura de costos es mínima
-        gracias a la ausencia de infraestructura centralizada.
+        Cerru de Janeiro Company combina software gratuito con una licencia de pago único
+        para funciones extra. Los costos son mínimos porque no hay infraestructura propia.
       </p>
     </div>
 
     <div class="content reveal">
-      <h2>Principios del modelo</h2>
+      <h2>Cómo funciona el modelo</h2>
       <div class="smart-grid">
         <div class="smart-card">
-          <div class="time">Núcleo</div>
-          <h4>Código abierto</h4>
-          <p>Servidor y aplicación publicados bajo licencia libre. Sin telemetría, sin cuentas obligatorias, sin publicidad. El usuario conserva el control total sobre su instalación.</p>
+          <div class="time">Base</div>
+          <h4>Software gratuito</h4>
+          <p>El servidor y la aplicación son gratuitos. Sin rastreo, sin cuentas obligatorias y sin anuncios. Tú controlas lo que pasa en tu instalación.</p>
         </div>
         <div class="smart-card">
           <div class="time">Sostenibilidad</div>
           <h4>Licencia Pro</h4>
-          <p>Funciones avanzadas disponibles mediante pago único. Sin renta mensual recurrente. El software base permanece gratuito.</p>
+          <p>Funciones avanzadas con pago único. No hay rentas mensuales. El software base sigue siendo gratuito para siempre.</p>
         </div>
         <div class="smart-card">
           <div class="time">Comunidad</div>
           <h4>Donaciones</h4>
-          <p>Canal voluntario de contribución para financiar el desarrollo continuo. Las donaciones no desbloquean funciones adicionales.</p>
+          <p>Canal voluntario para apoyar el desarrollo. Donar no desbloquea funciones: el programa base no cambia.</p>
         </div>
       </div>
 
       <h2>Estructura de costos</h2>
       <div class="spec-grid">
-        <div class="spec"><div class="spec-label">Costo inicial</div><div class="spec-value">Bajo — software de código abierto</div></div>
+        <div class="spec"><div class="spec-label">Costo inicial</div><div class="spec-value">Bajo — software gratuito</div></div>
         <div class="spec"><div class="spec-label">Infraestructura</div><div class="spec-value">$0 — el servidor corre en el equipo del usuario</div></div>
         <div class="spec"><div class="spec-label">Licencias de software</div><div class="spec-value">$0 — Python, FastAPI, Flutter</div></div>
         <div class="spec"><div class="spec-label">Mantenimiento</div><div class="spec-value">Mínimo — dominio y documentación</div></div>
@@ -1880,37 +1575,35 @@ p { color: var(--text-mid); }
         <div class="spec"><div class="spec-label">Modelo operativo</div><div class="spec-value">Descentralizado</div></div>
       </div>
       <p style="margin-top: 20px; font-size: 0.92rem;">
-        El proyecto no incurre en gastos de servidores en la nube porque la operación
-        del servicio recae sobre el equipo de cada usuario. La estructura de costos se
-        limita a la publicación del sitio, el mantenimiento del dominio y la documentación.
+        El proyecto no gasta en servidores en la nube porque el servicio corre en el equipo
+        de cada usuario. Los costos se reducen a mantener el sitio, el dominio y la documentación.
       </p>
 
       <h2>Oportunidad de inversión</h2>
       <div class="split" style="gap: 48px; align-items: start;">
         <div>
           <p>
-            El mercado potencial está conformado por usuarios que buscan alternativas
-            a las suscripciones de streaming: propietarios de bibliotecas digitales,
-            coleccionistas de audio de alta fidelidad, usuarios con conectividad
-            limitada y organizaciones que requieren control sobre sus medios.
+            El mercado son las personas que buscan algo distinto a las suscripciones:
+            quienes tienen su propia biblioteca digital, coleccionistas de audio de alta
+            calidad, usuarios con internet limitado y organizaciones que necesitan control
+            sobre sus archivos.
           </p>
           <p>
-            La arquitectura descentralizada permite escalar la base de usuarios sin
-            incrementar costos operativos, ya que el servicio se ejecuta sobre
-            infraestructura del propio usuario.
+            Como el sistema corre en equipos de los usuarios, se pueden sumar más personas
+            sin aumentar los costos de operación.
           </p>
         </div>
         <div class="spec-grid" style="grid-template-columns: 1fr; margin: 0;">
-          <div class="spec"><div class="spec-label">Producto</div><div class="spec-value">Aplicación y servidor funcionales</div></div>
-          <div class="spec"><div class="spec-label">Diferenciador</div><div class="spec-value">Cero infraestructura centralizada</div></div>
+          <div class="spec"><div class="spec-label">Producto</div><div class="spec-value">Aplicación y servidor funcionando</div></div>
+          <div class="spec"><div class="spec-label">Diferenciador</div><div class="spec-value">Cero infraestructura propia</div></div>
           <div class="spec"><div class="spec-label">Distribución</div><div class="spec-value">APK para Android · servidor multiplataforma</div></div>
         </div>
       </div>
     </div>
 
-    <div class="cta reveal" style="margin-top: 80px;">
+    <div class="cta cta-purple reveal" style="margin-top: 80px;">
       <h2>Contacto para inversionistas</h2>
-      <p>Para consultas sobre la estructura de la empresa, planes de crecimiento o participación, escribir al canal oficial de Discord.</p>
+      <p>Si quieres saber más sobre la empresa, los planes o cómo participar, escríbenos por Discord.</p>
       <a href="https://discord.gg/JYf9JdC5T" target="_blank" rel="noopener" class="btn btn-primary btn-lg"><i class="fa-brands fa-discord"></i> Unirse al Discord</a>
     </div>
 
@@ -1924,11 +1617,11 @@ p { color: var(--text-mid); }
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
     <div class="section-head reveal" style="max-width: 820px;">
-      <div class="eyebrow"><span class="dot"></span>Equipo</div>
+      <div class="eyebrow cyan"><span class="dot"></span>Equipo</div>
       <h1>Cerru de Janeiro Company</h1>
       <p class="lead" style="margin-top: 20px;">
-        Seis integrantes con funciones definidas en desarrollo, diseño, control de calidad
-        y presentación del proyecto.
+        Seis integrantes con funciones claras en desarrollo, diseño, control de calidad y
+        presentación del proyecto.
       </p>
     </div>
 
@@ -1940,7 +1633,7 @@ p { color: var(--text-mid); }
         </div>
         <h3>Pedro Miguel Godínez Rodríguez</h3>
         <div class="team-role">Líder de Desarrollo Técnico</div>
-        <p class="team-desc">Desarrollo del producto, supervisión del código, depuración y aseguramiento del cumplimiento técnico del proyecto.</p>
+        <p class="team-desc">Desarrollo del producto, revisión del código, corrección de errores y cumplimiento técnico del proyecto.</p>
         <div class="team-meta">
           <span class="matricula">AL07164060</span>
           <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @fujiwara_pixel</a>
@@ -1953,7 +1646,7 @@ p { color: var(--text-mid); }
         </div>
         <h3>Leonardo Martínez González</h3>
         <div class="team-role">Ayudante de Desarrollo</div>
-        <p class="team-desc">Apoyo al líder técnico en programación, depuración de errores y pruebas de integración del sistema.</p>
+        <p class="team-desc">Apoyo al líder técnico en programación, corrección de errores y pruebas de integración del sistema.</p>
         <div class="team-meta">
           <span class="matricula">AL07184261</span>
           <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @leonardo_mtz_gzz</a>
@@ -1966,7 +1659,7 @@ p { color: var(--text-mid); }
         </div>
         <h3>Issac Rodrigo Ordaz de León</h3>
         <div class="team-role">Coordinador de Equipo</div>
-        <p class="team-desc">Supervisión del avance general, coordinación de tareas y comunicación externa del proyecto.</p>
+        <p class="team-desc">Revisa el avance general, coordina las tareas y se encarga de la comunicación del proyecto.</p>
         <div class="team-meta">
           <span class="matricula">AL07134283</span>
           <a href="https://www.instagram.com/treck23_98/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @treck23_98</a>
@@ -1979,7 +1672,7 @@ p { color: var(--text-mid); }
         </div>
         <h3>Ángel Bernardo Tovar Martínez</h3>
         <div class="team-role">Diseño Gráfico</div>
-        <p class="team-desc">Identidad visual de la marca, diseño de interfaz y material promocional del proyecto.</p>
+        <p class="team-desc">Identidad visual de la marca, diseño de pantallas y material de difusión del proyecto.</p>
         <div class="team-meta">
           <span class="matricula">AL07162353</span>
           <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @angel_tovar1989</a>
@@ -1992,7 +1685,7 @@ p { color: var(--text-mid); }
         </div>
         <h3>Adrián Jiménez Flores</h3>
         <div class="team-role">Control de Calidad (QA)</div>
-        <p class="team-desc">Pruebas de funcionamiento, análisis de competencia y retroalimentación sobre la experiencia de usuario.</p>
+        <p class="team-desc">Prueba la aplicación, analiza la competencia y da retroalimentación sobre la experiencia de uso.</p>
         <div class="team-meta">
           <span class="matricula">AL07134668</span>
           <a href="https://www.instagram.com/ajf1_5/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @ajf1_5</a>
@@ -2005,7 +1698,7 @@ p { color: var(--text-mid); }
         </div>
         <h3>Nicolás Acosta Galaviz</h3>
         <div class="team-role">Documentación y Presentaciones</div>
-        <p class="team-desc">Elaboración del material de presentación, documentación técnica y apoyo en la exposición pública del proyecto.</p>
+        <p class="team-desc">Arma el material de presentación, la documentación técnica y apoya en la exposición del proyecto.</p>
         <div class="team-meta">
           <span class="matricula">AL07183711</span>
           <a href="https://www.instagram.com/acostanicolasg/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @acostanicolasg</a>
@@ -2024,10 +1717,10 @@ p { color: var(--text-mid); }
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
     <div class="section-head reveal" style="max-width: 820px;">
-      <div class="eyebrow"><span class="dot"></span>Contacto</div>
+      <div class="eyebrow blue"><span class="dot"></span>Contacto</div>
       <h1>Información de la empresa</h1>
       <p class="lead" style="margin-top: 20px;">
-        Canales oficiales para consultas técnicas, comerciales y de inversión.
+        Canales oficiales para dudas técnicas, comerciales y de inversión.
       </p>
     </div>
 
@@ -2036,7 +1729,7 @@ p { color: var(--text-mid); }
         <div class="discord-icon"><i class="fa-brands fa-discord"></i></div>
         <div>
           <h3>Servidor de Discord</h3>
-          <p>Canal oficial de soporte técnico, comunidad y consultas sobre el proyecto.</p>
+          <p>Canal oficial de soporte, comunidad y consultas sobre el proyecto.</p>
         </div>
       </div>
       <a href="https://discord.gg/JYf9JdC5T" target="_blank" rel="noopener" class="btn-discord"><i class="fa-brands fa-discord"></i> Unirse al servidor</a>
@@ -2054,7 +1747,7 @@ p { color: var(--text-mid); }
       </div>
 
       <h2>Redes del equipo</h2>
-      <p>Cada integrante mantiene una cuenta pública de Instagram donde comparte avances del proyecto.</p>
+      <p>Cada integrante tiene una cuenta pública de Instagram donde comparte avances del proyecto.</p>
       <div class="social-grid">
         <div class="social-card">
           <h4>Pedro M. Godínez</h4>
@@ -2170,7 +1863,6 @@ p { color: var(--text-mid); }
     }
     window.scrollTo({ top: 0, behavior: 'auto' });
     document.title = 'Janeiro Music — ' + name.charAt(0).toUpperCase() + name.slice(1);
-    // Reactivar animaciones en la página visible
     setTimeout(() => observeReveals(), 50);
   }
 
@@ -2326,6 +2018,7 @@ p { color: var(--text-mid); }
       list.forEach((img, i) => {
         const btn = document.createElement('button');
         btn.className = 'thumb server-thumb' + (i === serverIdx ? ' active' : '');
+        btn.setAttribute('data-os', currentOS);
         btn.setAttribute('aria-label', 'Captura ' + (i+1));
         btn.innerHTML = `<img src="${GH}${img}" alt="" loading="lazy">`;
         btn.addEventListener('click', () => setServer(i));
