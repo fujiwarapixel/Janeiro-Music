@@ -30,6 +30,7 @@
   --blue: #3b82f6;
   --purple: #a855f7;
   --gold: #fce27c;
+  --discord: #5865f2;
   --radius-sm: 10px;
   --radius: 16px;
   --radius-lg: 24px;
@@ -55,9 +56,25 @@ body {
 ::-webkit-scrollbar-thumb { background: #27272f; border-radius: 10px; border: 2px solid var(--bg); }
 ::-webkit-scrollbar-thumb:hover { background: #3f3f4a; }
 a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; border-radius: var(--radius); }
+img { max-width: 100%; display: block; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 code, pre { font-family: var(--mono); }
+
+/* ============================================================
+   ANIMACIÓN DE ENTRADA
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(0.16, 1, 0.3, 1), transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal.delay-1 { transition-delay: 0.08s; }
+.reveal.delay-2 { transition-delay: 0.16s; }
+.reveal.delay-3 { transition-delay: 0.24s; }
 
 /* ============================================================
    NAVBAR
@@ -71,7 +88,6 @@ code, pre { font-family: var(--mono); }
   backdrop-filter: saturate(180%) blur(24px);
   -webkit-backdrop-filter: saturate(180%) blur(24px);
   border-bottom: 1px solid var(--border);
-  transition: background .3s;
 }
 .nav-inner {
   max-width: 1280px;
@@ -140,7 +156,6 @@ code, pre { font-family: var(--mono); }
 .page { display: none; padding-top: 64px; }
 .page.active { display: block; }
 .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-.container-sm { max-width: 920px; margin: 0 auto; padding: 0 24px; }
 
 /* ============================================================
    TIPOGRAFÍA
@@ -166,12 +181,11 @@ code, pre { font-family: var(--mono); }
 h1, h2, h3, h4 { letter-spacing: -0.03em; line-height: 1.1; font-weight: 800; }
 h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); letter-spacing: -0.045em; line-height: 1.02; font-weight: 900; }
 h2 { font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
-h3 { font-size: 1.2rem; font-weight: 700; }
+h3 { font-size: 1.15rem; font-weight: 700; }
 h4 { font-size: 1rem; font-weight: 700; }
 p { color: var(--text-mid); }
 .lead { font-size: 1.08rem; line-height: 1.7; color: var(--text-mid); }
 .mono { font-family: var(--mono); font-size: 0.85em; color: var(--text-mid); }
-.accent { color: var(--accent); }
 
 /* ============================================================
    BOTONES
@@ -198,7 +212,7 @@ p { color: var(--text-mid); }
 .btn-lg { padding: 14px 26px; font-size: 14px; }
 
 /* ============================================================
-   HERO (HOME)
+   HERO
    ============================================================ */
 .hero {
   position: relative;
@@ -217,7 +231,7 @@ p { color: var(--text-mid); }
 .hero-bg::before {
   content: '';
   position: absolute;
-  top: 50%; left: 50%;
+  top: 45%; left: 50%;
   transform: translate(-50%, -50%);
   width: 1400px; height: 1400px;
   background: radial-gradient(circle, var(--accent-glow) 0%, transparent 45%);
@@ -237,13 +251,13 @@ p { color: var(--text-mid); }
   pointer-events: none;
 }
 @keyframes heroPulse {
-  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
 }
 .hero-vinyl {
   position: absolute;
   top: 50%; left: 50%;
-  width: 720px; height: 720px;
+  width: 760px; height: 760px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background:
@@ -251,8 +265,8 @@ p { color: var(--text-mid); }
     conic-gradient(from 0deg, #0a0a0e, #121218, #0a0a0e, #121218, #0a0a0e);
   border: 1px solid rgba(255,255,255,0.03);
   z-index: 0;
-  opacity: 0.5;
-  animation: vinylSpin 60s linear infinite;
+  opacity: 0.42;
+  animation: vinylSpin 80s linear infinite;
   pointer-events: none;
 }
 .hero-vinyl::before {
@@ -268,8 +282,8 @@ p { color: var(--text-mid); }
   inset: 40%;
   border-radius: 50%;
   background: radial-gradient(circle, var(--accent) 0%, #7a001d 40%, #1a0010 70%);
-  opacity: 0.4;
-  box-shadow: 0 0 60px 20px rgba(255,10,64,0.15);
+  opacity: 0.35;
+  box-shadow: 0 0 80px 20px rgba(255,10,64,0.12);
 }
 @keyframes vinylSpin {
   from { transform: translate(-50%, -50%) rotate(0deg); }
@@ -301,7 +315,7 @@ p { color: var(--text-mid); }
 .hero-title .accent-block {
   display: block;
   color: var(--accent);
-  text-shadow: 0 0 80px rgba(255,10,64,0.4);
+  text-shadow: 0 0 80px rgba(255,10,64,0.35);
 }
 .hero-slogan {
   font-size: clamp(1.1rem, 1.8vw, 1.35rem);
@@ -454,7 +468,13 @@ p { color: var(--text-mid); }
   background: radial-gradient(circle at 30% 30%, var(--accent-glow) 0%, transparent 60%);
   pointer-events: none;
 }
-.split-img img { max-height: 460px; width: auto; border-radius: var(--radius); position: relative; z-index: 1; }
+.split-img img {
+  max-height: 460px;
+  width: auto;
+  border-radius: var(--radius);
+  position: relative;
+  z-index: 1;
+}
 .split h2 { margin-bottom: 20px; }
 .split p { font-size: 0.98rem; margin-bottom: 16px; line-height: 1.7; }
 
@@ -557,12 +577,12 @@ p { color: var(--text-mid); }
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 64px 40px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   overflow: hidden;
 }
 .gallery-header { text-align: center; margin-bottom: 48px; }
-.gallery-header h3 { font-size: 1.4rem; margin-bottom: 8px; }
-.gallery-header p { font-size: 0.92rem; }
+.gallery-header h3 { font-size: 1.5rem; margin-bottom: 10px; }
+.gallery-header p { font-size: 0.94rem; }
 .gallery-body {
   display: flex;
   align-items: center;
@@ -570,15 +590,18 @@ p { color: var(--text-mid); }
   gap: 64px;
   flex-wrap: wrap;
 }
-/* Marco de teléfono */
+
+/* ============================================================
+   MARCO DE TELÉFONO (más grande + oculta la barra de estado)
+   ============================================================ */
 .phone-frame {
-  width: 280px;
-  height: 580px;
+  width: 360px;
+  height: 740px;
   background: #0a0a0d;
   border-radius: 48px;
-  border: 10px solid #1c1c22;
+  border: 8px solid #1c1c22;
   box-shadow:
-    0 50px 100px -20px rgba(0,0,0,0.9),
+    0 60px 120px -30px rgba(0,0,0,0.95),
     0 0 0 1px rgba(255,255,255,0.04),
     inset 0 0 0 1px rgba(0,0,0,0.5);
   position: relative;
@@ -586,38 +609,73 @@ p { color: var(--text-mid); }
   flex-shrink: 0;
 }
 .phone-frame::before {
+  /* Notch */
   content: '';
   position: absolute;
-  top: 14px; left: 50%; transform: translateX(-50%);
+  top: 10px; left: 50%; transform: translateX(-50%);
   width: 100px; height: 24px;
   background: #1c1c22;
   border-radius: 14px;
-  z-index: 3;
+  z-index: 4;
 }
 .phone-frame::after {
+  /* Cubierta de la barra de estado — oculta hora y batería */
   content: '';
   position: absolute;
-  bottom: 8px; left: 50%; transform: translateX(-50%);
-  width: 120px; height: 4px;
-  background: rgba(255,255,255,0.25);
-  border-radius: 4px;
+  top: 0; left: 0; right: 0;
+  height: 46px;
+  background: linear-gradient(to bottom, #0a0a0d 0%, #0a0a0d 68%, transparent 100%);
   z-index: 3;
+  pointer-events: none;
+  border-radius: 42px 42px 0 0;
 }
 .phone-frame img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 38px;
+  object-position: center center;
+  border-radius: 40px;
+  z-index: 1;
+  transition: opacity .3s ease;
+  display: block;
+}
+
+/* ============================================================
+   MARCO DE SERVIDOR (borde simple, sin forma de laptop)
+   ============================================================ */
+.server-frame {
+  width: 100%;
+  max-width: 760px;
+  background: #0a0a0d;
+  border-radius: 20px;
+  border: 6px solid #1c1c22;
+  box-shadow:
+    0 60px 120px -30px rgba(0,0,0,0.95),
+    0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+.server-frame img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  display: block;
   transition: opacity .3s ease;
 }
-/* Thumbnails */
+
+/* ============================================================
+   THUMBNAILS
+   ============================================================ */
 .thumb-strip {
   display: grid;
-  grid-template-columns: repeat(7, 56px);
-  gap: 8px;
+  grid-template-columns: repeat(7, 64px);
+  gap: 10px;
   justify-content: center;
 }
-.thumb-strip.server { grid-template-columns: repeat(6, 84px); }
+.thumb-strip.server { grid-template-columns: repeat(6, 92px); }
 .thumb {
   aspect-ratio: 9/17;
   border-radius: 10px;
@@ -632,7 +690,10 @@ p { color: var(--text-mid); }
 .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
 .thumb:hover { transform: translateY(-3px); }
 .thumb.active { border-color: var(--accent); box-shadow: 0 0 20px rgba(255,10,64,0.3); }
-/* Controles */
+
+/* ============================================================
+   CONTROLES DE CARRUSEL
+   ============================================================ */
 .gallery-controls {
   display: flex;
   align-items: center;
@@ -660,7 +721,9 @@ p { color: var(--text-mid); }
 }
 .gc-counter strong { color: var(--text); }
 
-/* Tabs de servidor */
+/* ============================================================
+   TABS DE SERVIDOR
+   ============================================================ */
 .server-tabs {
   display: flex;
   gap: 4px;
@@ -690,46 +753,6 @@ p { color: var(--text-mid); }
   box-shadow: 0 1px 3px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
 }
 .server-tab i { font-size: 14px; }
-/* Marco de laptop */
-.laptop-frame {
-  width: 100%;
-  max-width: 680px;
-  position: relative;
-  background: #0a0a0d;
-  border-radius: 18px 18px 0 0;
-  border: 12px solid #1c1c22;
-  border-bottom: none;
-  box-shadow: 0 50px 100px -20px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(0,0,0,0.4);
-  overflow: hidden;
-  margin: 0 auto;
-}
-.laptop-frame img {
-  width: 100%;
-  aspect-ratio: 16/10;
-  object-fit: cover;
-  display: block;
-  border-radius: 6px;
-  transition: opacity .3s ease;
-}
-.laptop-base {
-  width: 120%;
-  max-width: 800px;
-  height: 18px;
-  margin: -1px auto 0;
-  margin-left: -10%;
-  background: linear-gradient(to bottom, #1c1c22 0%, #0a0a0d 100%);
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-  position: relative;
-}
-.laptop-base::before {
-  content: '';
-  position: absolute;
-  top: 5px; left: 50%; transform: translateX(-50%);
-  width: 60px; height: 4px;
-  background: rgba(0,0,0,0.6);
-  border-radius: 3px;
-}
 
 /* ============================================================
    CONTENT BLOCKS
@@ -960,7 +983,7 @@ p { color: var(--text-mid); }
   padding-top: 16px;
   margin-top: 8px;
 }
-.team-meta .matricula { opacity: 0.7; }
+.team-meta .matricula { opacity: 0.75; }
 .team-meta .instagram {
   display: inline-flex;
   align-items: center;
@@ -973,25 +996,25 @@ p { color: var(--text-mid); }
 .team-meta .instagram i { font-size: 12px; }
 
 /* ============================================================
-   POSTER / CONTACTO
+   EQUIPO PREVIEW (Home)
    ============================================================ */
-.poster-block {
+.team-preview {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 32px;
-  align-items: stretch;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  margin-top: 40px;
 }
-.poster-card {
-  border: 1px solid var(--border-hi);
-  border-radius: var(--radius-lg);
+.team-avatar {
+  aspect-ratio: 1;
+  border-radius: 50%;
   overflow: hidden;
-  background: var(--bg-elev);
-  padding: 24px;
-  display: grid;
-  place-items: center;
-  min-height: 400px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  transition: border-color .2s, transform .2s;
+  cursor: pointer;
 }
-.poster-card img { max-height: 540px; width: auto; border-radius: var(--radius); }
+.team-avatar:hover { border-color: var(--accent); transform: translateY(-3px); }
+.team-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ============================================================
    CTA
@@ -1040,7 +1063,7 @@ p { color: var(--text-mid); }
   border: 1px solid rgba(88, 101, 242, 0.35);
   display: grid; place-items: center;
   font-size: 28px;
-  color: #5865f2;
+  color: var(--discord);
   flex-shrink: 0;
 }
 .discord-card-info h3 { font-size: 1.15rem; margin-bottom: 4px; }
@@ -1050,7 +1073,7 @@ p { color: var(--text-mid); }
   align-items: center;
   gap: 8px;
   padding: 12px 22px;
-  background: #5865f2;
+  background: var(--discord);
   color: #fff;
   border-radius: var(--radius-sm);
   font-size: 13px;
@@ -1059,6 +1082,56 @@ p { color: var(--text-mid); }
   white-space: nowrap;
 }
 .discord-card .btn-discord:hover { background: #4752c4; transform: translateY(-1px); }
+
+/* ============================================================
+   POSTER
+   ============================================================ */
+.poster-block {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: stretch;
+}
+.poster-card {
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-elev);
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  min-height: 400px;
+}
+.poster-card img { max-height: 540px; width: auto; border-radius: var(--radius); }
+
+/* ============================================================
+   SOCIAL GRID (Contacto)
+   ============================================================ */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+.social-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: border-color .15s, transform .15s;
+}
+.social-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+.social-card h4 { font-size: 0.92rem; margin-bottom: 6px; }
+.social-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-mid);
+  font-size: 12px;
+  transition: color .15s;
+}
+.social-card a:hover { color: var(--accent); }
+.social-card a i { font-size: 12px; }
 
 /* ============================================================
    FOOTER
@@ -1136,12 +1209,15 @@ p { color: var(--text-mid); }
   .footer-brand { grid-column: 1 / -1; }
   .poster-block { grid-template-columns: 1fr; }
   .gallery-body { gap: 40px; }
-  .thumb-strip { grid-template-columns: repeat(7, 46px); }
-  .thumb-strip.server { grid-template-columns: repeat(6, 60px); }
+  .thumb-strip { grid-template-columns: repeat(7, 52px); }
+  .thumb-strip.server { grid-template-columns: repeat(6, 68px); }
+  .social-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-preview { grid-template-columns: repeat(3, 1fr); }
+  .phone-frame { width: 320px; height: 660px; }
 }
 @media (max-width: 640px) {
   .section { padding: 72px 0; }
-  .container, .container-sm, .nav-inner { padding: 0 20px; }
+  .container, .nav-inner { padding: 0 20px; }
   .feature-grid, .smart-grid, .team-grid, .dl-grid, .dl-grid.two, .spec-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: 1fr 1fr; }
   .stat { padding: 40px 16px; }
@@ -1152,15 +1228,17 @@ p { color: var(--text-mid); }
   .hero-actions { flex-direction: column; width: 100%; }
   .hero-actions .btn { width: 100%; }
   .gallery { padding: 48px 20px; }
-  .phone-frame { width: 220px; height: 460px; }
-  .thumb-strip { grid-template-columns: repeat(5, 44px); }
-  .thumb-strip.server { grid-template-columns: repeat(6, 46px); }
+  .phone-frame { width: 280px; height: 580px; }
+  .thumb-strip { grid-template-columns: repeat(5, 46px); }
+  .thumb-strip.server { grid-template-columns: repeat(6, 48px); }
   .cta { padding: 48px 24px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .server-tab { padding: 7px 12px; font-size: 11.5px; }
   .server-tab i { font-size: 12px; }
   .ods-banner { padding: 48px 24px; }
   .discord-card { flex-direction: column; align-items: flex-start; }
+  .social-grid { grid-template-columns: 1fr; }
+  .team-preview { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
 </head>
@@ -1213,9 +1291,10 @@ p { color: var(--text-mid); }
         </h1>
         <p class="hero-slogan">Monta tu server y lleva tu música a tu Cerro.</p>
         <p class="hero-desc">
-          Janeiro Music es una plataforma de reproducción musical que permite administrar
-          y escuchar tu propia biblioteca de audio desde cualquier dispositivo. El servidor
-          se ejecuta en tu equipo y la aplicación móvil se conecta a él por red local.
+          Janeiro Music es una plataforma que permite administrar y escuchar tu propia
+          biblioteca de audio desde tu teléfono. El servidor se ejecuta en tu equipo y
+          la aplicación se conecta a él por red local. Sin suscripciones y sin depender
+          de servicios en la nube.
         </p>
         <div class="hero-actions">
           <a href="#producto" class="btn btn-primary btn-lg">Ver el producto <i class="fa-solid fa-arrow-right"></i></a>
@@ -1238,8 +1317,7 @@ p { color: var(--text-mid); }
           <span>FastAPI</span>
           <span>Flutter</span>
           <span>Riverpod</span>
-          <span>SQLite</span>
-          <span>Cloudflare</span>
+          <span>Cloudflare Tunnel</span>
         </div>
       </div>
     </div>
@@ -1247,42 +1325,43 @@ p { color: var(--text-mid); }
 
   <section class="section">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <div class="eyebrow"><span class="dot"></span>Qué es Janeiro Music</div>
-        <h2>Una plataforma musical que funciona en tu propio equipo</h2>
+        <h2>Una plataforma musical que se ejecuta en tu propio equipo</h2>
         <p>
           Janeiro Music está compuesta por dos programas que se comunican entre sí:
           un servidor que se instala en tu computadora y una aplicación que se instala
-          en tu teléfono. Juntos permiten escuchar tu biblioteca sin depender de servicios en la nube.
+          en tu teléfono. Juntos permiten escuchar tu biblioteca sin depender de
+          servicios en la nube.
         </p>
       </div>
       <div class="feature-grid">
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon"><i class="fa-solid fa-server"></i></div>
           <h3>Servidor local</h3>
           <p>Se instala en tu equipo, indexa tu biblioteca de audio y entrega los archivos a la aplicación por red local.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal delay-1">
           <div class="feature-icon green"><i class="fa-solid fa-mobile-screen"></i></div>
           <h3>Aplicación móvil</h3>
-          <p>Disponible para Android. Se conecta al servidor mediante dirección IP o código QR y reproduce tu música.</p>
+          <p>Disponible para Android en formato APK. Se conecta al servidor mediante dirección IP o código QR.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal delay-2">
           <div class="feature-icon blue"><i class="fa-solid fa-shield-halved"></i></div>
           <h3>Privacidad por diseño</h3>
-          <p>Sin cuentas, sin publicidad, sin telemetría. Tu biblioteca permanece en tu equipo y nadie más la administra.</p>
+          <p>Sin cuentas, sin publicidad y sin telemetría. Tu biblioteca permanece en tu equipo y nadie más la administra.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon purple"><i class="fa-solid fa-wifi-slash"></i></div>
           <h3>Modo sin conexión</h3>
           <p>Descarga canciones al teléfono y escúchalas sin conexión. La reproducción no depende de la red móvil.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal delay-1">
           <div class="feature-icon gold"><i class="fa-solid fa-infinity"></i></div>
           <h3>Sin suscripciones</h3>
           <p>El software base es gratuito. No existen cobros mensuales ni bloqueos por falta de pago.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal delay-2">
           <div class="feature-icon"><i class="fa-solid fa-code-branch"></i></div>
           <h3>Código abierto</h3>
           <p>Servidor y aplicación publicados bajo licencia libre. Cualquier persona puede auditar o adaptar el sistema.</p>
@@ -1294,7 +1373,7 @@ p { color: var(--text-mid); }
   <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
       <div class="split">
-        <div>
+        <div class="reveal">
           <div class="eyebrow"><span class="dot"></span>El problema</div>
           <h2>Las plataformas actuales no están pensadas para el usuario</h2>
           <p>
@@ -1309,7 +1388,7 @@ p { color: var(--text-mid); }
             incluso cuando el usuario ya descargó el contenido.
           </p>
         </div>
-        <div class="split-img">
+        <div class="split-img reveal delay-1">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/app_1.webp" alt="Aplicación Janeiro Music" loading="lazy">
         </div>
       </div>
@@ -1319,10 +1398,10 @@ p { color: var(--text-mid); }
   <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
       <div class="split">
-        <div class="split-img">
+        <div class="split-img reveal">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/sever_arch-linux_1.webp" alt="Servidor Janeiro Music" loading="lazy">
         </div>
-        <div>
+        <div class="reveal delay-1">
           <div class="eyebrow"><span class="dot"></span>La solución</div>
           <h2>Un sistema que se ejecuta en tu propio equipo</h2>
           <p>
@@ -1362,7 +1441,7 @@ p { color: var(--text-mid); }
 
   <section class="section">
     <div class="container">
-      <div class="ods-banner">
+      <div class="ods-banner reveal">
         <i class="fa-solid fa-infinity ods-icon"></i>
         <h2>Compromiso con el ODS 12</h2>
         <p>
@@ -1377,18 +1456,18 @@ p { color: var(--text-mid); }
 
   <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head center reveal">
         <div class="eyebrow"><span class="dot"></span>El equipo</div>
         <h2>Cerru de Janeiro Company</h2>
         <p>Seis integrantes con funciones definidas en desarrollo, diseño, control de calidad y presentación del proyecto.</p>
       </div>
-      <div class="team-grid" style="grid-template-columns: repeat(6, 1fr); gap: 12px;">
-        <div class="team-photo"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Pedrouski_el_Pixelouski.png" alt="Pedro" loading="lazy"></div>
-        <div class="team-photo"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Leito_dicaprinchi.png" alt="Leonardo" loading="lazy"></div>
-        <div class="team-photo"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Issacini_Gonzales.png" alt="Issac" loading="lazy"></div>
-        <div class="team-photo"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Tobyas_Willson.png" alt="Ángel" loading="lazy"></div>
-        <div class="team-photo"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/El_Adriana_Peque%C3%B1a.jpg" alt="Adrián" loading="lazy"></div>
-        <div class="team-photo"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/A_Costilla.jpg" alt="Nicolás" loading="lazy"></div>
+      <div class="team-preview">
+        <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Pedrouski_el_Pixelouski.png" alt="Pedro" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Leito_dicaprinchi.png" alt="Leonardo" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Issacini_Gonzales.png" alt="Issac" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Tobyas_Willson.png" alt="Ángel" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/El_Adriana_Peque%C3%B1a.jpg" alt="Adrián" loading="lazy"></div>
+        <div class="team-avatar"><img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/A_Costilla.jpg" alt="Nicolás" loading="lazy"></div>
       </div>
       <div style="text-align: center; margin-top: 40px;">
         <a href="#equipo" class="btn btn-ghost">Conocer al equipo completo <i class="fa-solid fa-arrow-right"></i></a>
@@ -1398,11 +1477,10 @@ p { color: var(--text-mid); }
 
   <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <div class="cta">
+      <div class="cta reveal">
         <h2>Descarga Janeiro Music</h2>
         <p>
           Aplicación para Android y servidor para Arch Linux, Windows y macOS (AMD).
-          Verificación SHA-256 incluida en cada release.
         </p>
         <a href="#descargas" class="btn btn-primary btn-lg">Ir a descargas <i class="fa-solid fa-arrow-right"></i></a>
       </div>
@@ -1417,17 +1495,17 @@ p { color: var(--text-mid); }
 <main id="page-producto" class="page">
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
-    <div class="section-head" style="max-width: 820px;">
+    <div class="section-head reveal" style="max-width: 820px;">
       <div class="eyebrow"><span class="dot"></span>Producto</div>
       <h1>Interfaz en acción</h1>
       <p class="lead" style="margin-top: 20px;">
-        Capturas de la aplicación móvil y del servidor en sus tres plataformas compatibles.
-        Los carruseles avanzan automáticamente y permiten navegación manual.
+        Capturas de la aplicación móvil y del servidor en sus tres plataformas
+        compatibles. Los carruseles avanzan automáticamente y permiten navegación manual.
       </p>
     </div>
 
     <!-- GALERÍA APP -->
-    <div class="gallery">
+    <div class="gallery reveal">
       <div class="gallery-header">
         <h3>Aplicación móvil</h3>
         <p>14 capturas · Android (APK)</p>
@@ -1448,7 +1526,7 @@ p { color: var(--text-mid); }
     </div>
 
     <!-- GALERÍA SERVIDOR -->
-    <div class="gallery">
+    <div class="gallery reveal">
       <div class="gallery-header">
         <h3>Servidor de biblioteca</h3>
         <p>18 capturas · Arch Linux, macOS y Windows</p>
@@ -1467,10 +1545,9 @@ p { color: var(--text-mid); }
       </div>
 
       <div class="gallery-body" style="flex-direction: column; gap: 32px;">
-        <div class="laptop-frame">
+        <div class="server-frame">
           <img id="serverMain" src="" alt="Servidor">
         </div>
-        <div class="laptop-base"></div>
         <div style="width: 100%;">
           <div class="thumb-strip server" id="serverThumbs"></div>
           <div class="gallery-controls">
@@ -1483,18 +1560,18 @@ p { color: var(--text-mid); }
     </div>
 
     <!-- ARQUITECTURA -->
-    <div class="content" style="margin-top: 100px;">
+    <div class="content reveal" style="margin-top: 100px;">
       <div class="eyebrow"><span class="dot"></span>Arquitectura</div>
       <h2>Servidor de biblioteca</h2>
       <p>
         El servidor es un programa desarrollado en Python sobre el framework FastAPI.
-        Su función es indexar bibliotecas de audio locales, extraer metadatos ID3 y
-        servir los archivos al cliente a través de endpoints REST. El índice se construye
-        de forma asíncrona mediante un pool de hilos que evita bloquear el proceso
+        Su función es indexar bibliotecas de audio locales, extraer metadatos y servir
+        los archivos al cliente a través de endpoints REST. El índice se construye de
+        forma asíncrona mediante un pool de hilos que evita bloquear el proceso
         principal durante el escaneo.
       </p>
       <div class="spec-grid">
-        <div class="spec"><div class="spec-label">Runtime</div><div class="spec-value">Python 3.11+</div></div>
+        <div class="spec"><div class="spec-label">Lenguaje</div><div class="spec-value">Python</div></div>
         <div class="spec"><div class="spec-label">Framework HTTP</div><div class="spec-value">FastAPI + Uvicorn</div></div>
         <div class="spec"><div class="spec-label">Indexación</div><div class="spec-value">Asíncrona, multihilo</div></div>
         <div class="spec"><div class="spec-label">Metadatos</div><div class="spec-value">ID3v2 · Vorbis · MP4</div></div>
@@ -1507,30 +1584,30 @@ p { color: var(--text-mid); }
         <li><code class="mono">GET /api/biblioteca</code> — Devuelve el árbol completo de artistas, álbumes y canciones indexadas.</li>
         <li><code class="mono">GET /api/buscar?q=</code> — Búsqueda por coincidencia en título, artista o álbum.</li>
         <li><code class="mono">GET /stream/&lt;id&gt;</code> — Servido del archivo de audio con soporte de <code class="mono">Range</code>.</li>
-        <li><code class="mono">GET /api/server/info</code> — Identidad del servidor: nombre, versión, icono.</li>
+        <li><code class="mono">GET /api/server/info</code> — Identidad del servidor: nombre y versión.</li>
         <li><code class="mono">GET /api/library_meta</code> — Firma del índice para invalidación de caché.</li>
       </ul>
 
       <h2>Aplicación móvil</h2>
       <p>
-        La aplicación está construida en Flutter para Android (API 26+). Utiliza el motor
-        de audio <code class="mono">just_audio</code> y el gestor de estado Riverpod. La
-        app se conecta al servidor mediante dirección IP, hostname de red local o código
-        QR generado por el propio servidor.
+        La aplicación está construida en Flutter para Android. Utiliza el motor de audio
+        <code class="mono">just_audio</code> y el gestor de estado Riverpod. Se conecta
+        al servidor mediante dirección IP, hostname de red local o código QR generado
+        por el propio servidor.
       </p>
       <div class="spec-grid">
-        <div class="spec"><div class="spec-label">Plataforma</div><div class="spec-value">Android 8.0+ (API 26)</div></div>
-        <div class="spec"><div class="spec-label">Arquitectura</div><div class="spec-value">arm64-v8a</div></div>
-        <div class="spec"><div class="spec-label">Motor de audio</div><div class="spec-value">just_audio</div></div>
+        <div class="spec"><div class="spec-label">Framework</div><div class="spec-value">Flutter (Android)</div></div>
         <div class="spec"><div class="spec-label">Gestión de estado</div><div class="spec-value">Riverpod</div></div>
+        <div class="spec"><div class="spec-label">Motor de audio</div><div class="spec-value">just_audio</div></div>
         <div class="spec"><div class="spec-label">Almacenamiento local</div><div class="spec-value">SharedPreferences · SQLite</div></div>
-        <div class="spec"><div class="spec-label">Tamaño del paquete</div><div class="spec-value">~30 MB</div></div>
+        <div class="spec"><div class="spec-label">Formatos soportados</div><div class="spec-value">MP3 · FLAC · M4A · OGG · WAV</div></div>
+        <div class="spec"><div class="spec-label">Distribución</div><div class="spec-value">APK (fuera de tiendas)</div></div>
       </div>
 
       <h3>Funciones principales</h3>
       <ul>
         <li><strong>Reproducción en cola:</strong> soporte de reproducción aleatoria, repetición y navegación por índice.</li>
-        <li><strong>Caché automático:</strong> descarga anticipada de la siguiente canción, límite de 512 MB con política LRU.</li>
+        <li><strong>Caché automático:</strong> descarga anticipada de la siguiente canción, con límite de 512 MB y política de evicción.</li>
         <li><strong>Descarga manual:</strong> selección explícita de canciones para escucha sin conexión.</li>
         <li><strong>Listas y favoritos:</strong> almacenamiento local persistente de listas de reproducción.</li>
         <li><strong>Letras:</strong> obtención desde LRCLIB, Lyrics.ovh o Genius.</li>
@@ -1539,9 +1616,9 @@ p { color: var(--text-mid); }
       </ul>
     </div>
 
-    <div class="cta" style="margin-top: 80px;">
+    <div class="cta reveal" style="margin-top: 80px;">
       <h2>Documentación completa</h2>
-      <p>Los detalles técnicos, esquemas de la API y guías de despliegue están disponibles en el repositorio oficial.</p>
+      <p>Los detalles técnicos y las guías de despliegue están disponibles en el repositorio oficial.</p>
       <a href="https://github.com/fujiwarapixel/Janeiro-Music" target="_blank" rel="noopener" class="btn btn-primary">Ver repositorio <i class="fa-brands fa-github"></i></a>
     </div>
 
@@ -1554,17 +1631,17 @@ p { color: var(--text-mid); }
 <main id="page-descargas" class="page">
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
-    <div class="section-head" style="max-width: 820px;">
+    <div class="section-head reveal" style="max-width: 820px;">
       <div class="eyebrow"><span class="dot"></span>Descargas</div>
       <h1>Software disponible</h1>
       <p class="lead" style="margin-top: 20px;">
-        Distribuciones oficiales de Janeiro Music. Todos los paquetes se publican con
-        su hash SHA-256 para verificación de integridad.
+        Distribuciones oficiales de Janeiro Music. Verifica siempre el origen de
+        los archivos antes de instalarlos.
       </p>
     </div>
 
     <!-- APP -->
-    <div class="dl-block">
+    <div class="dl-block reveal">
       <div class="dl-block-head">
         <div>
           <h2>Aplicación móvil</h2>
@@ -1576,14 +1653,14 @@ p { color: var(--text-mid); }
       <div class="dl-grid two">
         <div class="dl-card">
           <div class="dl-os"><i class="fa-brands fa-android" style="color:#22c55e;"></i> Android</div>
-          <div class="dl-arch">arm64-v8a · Universal APK</div>
+          <div class="dl-arch">APK universal</div>
           <div class="dl-meta">
-            Versión <code>1.0.0</code> · ~30 MB<br>
-            Requiere <strong>Android 8.0</strong> (API 26) o superior.<br>
-            Firma oficial de Cerru de Janeiro Company.<br>
-            Distribución exclusivamente en APK. No disponible en Google Play por decisión de política interna del proyecto.
+            Distribución <strong>exclusivamente en formato APK</strong>. No disponible en Google Play.
+            <br><br>
+            Firma oficial de Cerru de Janeiro Company. Requiere habilitar la
+            instalación de aplicaciones de origen desconocido en Android.
           </div>
-          <a href="downloads/janeiro-music-1.0.0.apk" class="dl-btn primary" download>
+          <a href="downloads/janeiro-music.apk" class="dl-btn primary" download>
             <span>Descargar APK</span>
             <i class="fa-solid fa-download"></i>
           </a>
@@ -1593,12 +1670,11 @@ p { color: var(--text-mid); }
           <div class="dl-arch">Sistema</div>
           <div class="dl-meta">
             <ul style="list-style:none;padding:0;margin:0;line-height:1.9;">
-              <li>· Android 8.0+ (API 26)</li>
-              <li>· Arquitectura arm64-v8a</li>
-              <li>· ~30 MB de almacenamiento libre</li>
-              <li>· Acceso a red local (LAN) o VPN</li>
+              <li>· Dispositivo Android con acceso a red local</li>
               <li>· Servidor Janeiro Music en ejecución</li>
-              <li>· Permisos: lectura de audio local (opcional)</li>
+              <li>· Permiso de lectura de audio local (opcional)</li>
+              <li>· No requiere cuenta ni registro</li>
+              <li>· No solicita permisos de ubicación ni contactos</li>
             </ul>
           </div>
         </div>
@@ -1607,15 +1683,14 @@ p { color: var(--text-mid); }
       <div class="notice">
         <i class="fa-solid fa-circle-exclamation"></i>
         <div>
-          <strong>Nota:</strong> La instalación requiere habilitar aplicaciones de origen
-          desconocido en Android. El paquete no solicita permisos de ubicación, contactos
-          ni telefonía.
+          <strong>Nota:</strong> La aplicación se distribuye únicamente como APK fuera de las
+          tiendas oficiales por decisión de política interna del proyecto.
         </div>
       </div>
     </div>
 
     <!-- SERVIDOR -->
-    <div class="dl-block">
+    <div class="dl-block reveal">
       <div class="dl-block-head">
         <div>
           <h2>Servidor de biblioteca</h2>
@@ -1630,11 +1705,11 @@ p { color: var(--text-mid); }
           <div class="dl-arch">x86_64</div>
           <div class="dl-meta">
             Paquete precompilado con dependencias incluidas.<br>
-            Disponible en <code>AUR</code> como <code class="mono">janeiro-server</code>.<br>
-            Integración con <code>systemd</code>.
+            Integración con <code>systemd</code>.<br>
+            También disponible vía <code>AUR</code>.
           </div>
-          <a href="downloads/janeiro-server-arch-x86_64.pkg.tar.zst" class="dl-btn primary" download>
-            <span>Descargar .pkg.tar.zst</span>
+          <a href="downloads/janeiro-server-arch-linux.pkg.tar.zst" class="dl-btn primary" download>
+            <span>Descargar paquete</span>
             <i class="fa-solid fa-download"></i>
           </a>
         </div>
@@ -1646,7 +1721,7 @@ p { color: var(--text-mid); }
             Servicio de inicio automático opcional.<br>
             Binario firmado digitalmente.
           </div>
-          <a href="downloads/janeiro-server-windows-x64.zip" class="dl-btn primary" download>
+          <a href="downloads/janeiro-server-windows.zip" class="dl-btn primary" download>
             <span>Descargar .zip</span>
             <i class="fa-solid fa-download"></i>
           </a>
@@ -1659,7 +1734,7 @@ p { color: var(--text-mid); }
             Arquitectura Intel / AMD x86_64.<br>
             Apple Silicon requiere Rosetta 2 o compilación desde fuente.
           </div>
-          <a href="downloads/janeiro-server-macos-amd.dmg" class="dl-btn primary" download>
+          <a href="downloads/janeiro-server-macos.dmg" class="dl-btn primary" download>
             <span>Descargar .dmg</span>
             <i class="fa-solid fa-download"></i>
           </a>
@@ -1677,14 +1752,14 @@ p { color: var(--text-mid); }
     </div>
 
     <!-- VERIFICACIÓN -->
-    <div class="content">
+    <div class="content reveal">
       <h2>Verificación de integridad</h2>
-      <p>Cada paquete incluye su hash SHA-256 en el archivo <code class="mono">SHA256SUMS</code> adjunto a la release. Se recomienda verificarlo antes de la instalación:</p>
+      <p>Se recomienda verificar el hash del archivo descargado antes de la instalación:</p>
       <div class="spec" style="margin-top: 20px;">
         <div class="spec-label">Linux / macOS</div>
-        <div class="spec-value" style="font-family: var(--mono); font-size: 13px; margin-bottom: 20px;">sha256sum -c SHA256SUMS</div>
+        <div class="spec-value" style="font-family: var(--mono); font-size: 13px; margin-bottom: 20px;">sha256sum archivo-descargado</div>
         <div class="spec-label">Windows (PowerShell)</div>
-        <div class="spec-value" style="font-family: var(--mono); font-size: 13px;">Get-FileHash .\janeiro-server-windows-x64.zip -Algorithm SHA256</div>
+        <div class="spec-value" style="font-family: var(--mono); font-size: 13px;">Get-FileHash .\archivo-descargado -Algorithm SHA256</div>
       </div>
     </div>
 
@@ -1697,7 +1772,7 @@ p { color: var(--text-mid); }
 <main id="page-sostenibilidad" class="page">
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
-    <div class="section-head" style="max-width: 820px;">
+    <div class="section-head reveal" style="max-width: 820px;">
       <div class="eyebrow"><span class="dot"></span>Sostenibilidad</div>
       <h1>Compromiso con el ODS 12</h1>
       <p class="lead" style="margin-top: 20px;">
@@ -1707,7 +1782,7 @@ p { color: var(--text-mid); }
       </p>
     </div>
 
-    <div class="ods-banner" style="margin-bottom: 64px;">
+    <div class="ods-banner reveal" style="margin-bottom: 64px;">
       <i class="fa-solid fa-infinity ods-icon"></i>
       <h2>ODS 12 · Producción y Consumo Responsables</h2>
       <p>
@@ -1718,7 +1793,7 @@ p { color: var(--text-mid); }
       </p>
     </div>
 
-    <div class="content">
+    <div class="content reveal">
       <h2>Impacto ambiental del modelo</h2>
       <ul>
         <li><strong>Reutilización de hardware:</strong> el servidor puede ejecutarse en equipos de cómputo con más de una década de antigüedad, evitando la generación de basura electrónica.</li>
@@ -1765,17 +1840,17 @@ p { color: var(--text-mid); }
 <main id="page-empresa" class="page">
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
-    <div class="section-head" style="max-width: 820px;">
+    <div class="section-head reveal" style="max-width: 820px;">
       <div class="eyebrow"><span class="dot"></span>Empresa</div>
       <h1>Modelo de negocio</h1>
       <p class="lead" style="margin-top: 20px;">
-        Cerru de Janeiro Company opera bajo un modelo mixto de código abierto y licencia
-        comercial para funciones avanzadas. La estructura de costos es mínima gracias
-        a la ausencia de infraestructura centralizada.
+        Cerru de Janeiro Company opera bajo un modelo mixto de código abierto y
+        licencia comercial para funciones avanzadas. La estructura de costos es mínima
+        gracias a la ausencia de infraestructura centralizada.
       </p>
     </div>
 
-    <div class="content">
+    <div class="content reveal">
       <h2>Principios del modelo</h2>
       <div class="smart-grid">
         <div class="smart-card">
@@ -1786,28 +1861,28 @@ p { color: var(--text-mid); }
         <div class="smart-card">
           <div class="time">Sostenibilidad</div>
           <h4>Licencia Pro</h4>
-          <p>Funciones avanzadas (sincronización multi-servidor, túneles gestionados, herramientas de biblioteca) disponibles mediante pago único. Sin renta mensual recurrente.</p>
+          <p>Funciones avanzadas disponibles mediante pago único. Sin renta mensual recurrente. El software base permanece gratuito.</p>
         </div>
         <div class="smart-card">
           <div class="time">Comunidad</div>
           <h4>Donaciones</h4>
-          <p>Canal voluntario de contribución para financiar el desarrollo continuo. Las donaciones no desbloquean funciones: el software base permanece gratuito de forma permanente.</p>
+          <p>Canal voluntario de contribución para financiar el desarrollo continuo. Las donaciones no desbloquean funciones adicionales.</p>
         </div>
       </div>
 
       <h2>Estructura de costos</h2>
       <div class="spec-grid">
-        <div class="spec"><div class="spec-label">Costo inicial</div><div class="spec-value">~$0 MXN</div></div>
-        <div class="spec"><div class="spec-label">Mantenimiento mensual</div><div class="spec-value">~$300 MXN (luz + internet)</div></div>
-        <div class="spec"><div class="spec-label">Publicación Play Store</div><div class="spec-value">$25 USD (único)</div></div>
-        <div class="spec"><div class="spec-label">Publicación App Store</div><div class="spec-value">$99 USD / año</div></div>
-        <div class="spec"><div class="spec-label">Software (licencias)</div><div class="spec-value">$0 MXN</div></div>
-        <div class="spec"><div class="spec-label">Infraestructura</div><div class="spec-value">$0 (modelo descentralizado)</div></div>
+        <div class="spec"><div class="spec-label">Costo inicial</div><div class="spec-value">Bajo — software de código abierto</div></div>
+        <div class="spec"><div class="spec-label">Infraestructura</div><div class="spec-value">$0 — el servidor corre en el equipo del usuario</div></div>
+        <div class="spec"><div class="spec-label">Licencias de software</div><div class="spec-value">$0 — Python, FastAPI, Flutter</div></div>
+        <div class="spec"><div class="spec-label">Mantenimiento</div><div class="spec-value">Mínimo — dominio y documentación</div></div>
+        <div class="spec"><div class="spec-label">Distribución</div><div class="spec-value">APK fuera de tiendas</div></div>
+        <div class="spec"><div class="spec-label">Modelo operativo</div><div class="spec-value">Descentralizado</div></div>
       </div>
       <p style="margin-top: 20px; font-size: 0.92rem;">
         El proyecto no incurre en gastos de servidores en la nube porque la operación
         del servicio recae sobre el equipo de cada usuario. La estructura de costos se
-        limita a la publicación en tiendas y al mantenimiento del dominio.
+        limita a la publicación del sitio, el mantenimiento del dominio y la documentación.
       </p>
 
       <h2>Oportunidad de inversión</h2>
@@ -1826,14 +1901,14 @@ p { color: var(--text-mid); }
           </p>
         </div>
         <div class="spec-grid" style="grid-template-columns: 1fr; margin: 0;">
-          <div class="spec"><div class="spec-label">Producto</div><div class="spec-value">MVP funcional en producción</div></div>
-          <div class="spec"><div class="spec-label">Tracción</div><div class="spec-value">Beta cerrada en curso</div></div>
+          <div class="spec"><div class="spec-label">Producto</div><div class="spec-value">Aplicación y servidor funcionales</div></div>
           <div class="spec"><div class="spec-label">Diferenciador</div><div class="spec-value">Cero infraestructura centralizada</div></div>
+          <div class="spec"><div class="spec-label">Distribución</div><div class="spec-value">APK para Android · servidor multiplataforma</div></div>
         </div>
       </div>
     </div>
 
-    <div class="cta" style="margin-top: 80px;">
+    <div class="cta reveal" style="margin-top: 80px;">
       <h2>Contacto para inversionistas</h2>
       <p>Para consultas sobre la estructura de la empresa, planes de crecimiento o participación, escribir al canal oficial de Discord.</p>
       <a href="https://discord.gg/JYf9JdC5T" target="_blank" rel="noopener" class="btn btn-primary btn-lg"><i class="fa-brands fa-discord"></i> Unirse al Discord</a>
@@ -1848,7 +1923,7 @@ p { color: var(--text-mid); }
 <main id="page-equipo" class="page">
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
-    <div class="section-head" style="max-width: 820px;">
+    <div class="section-head reveal" style="max-width: 820px;">
       <div class="eyebrow"><span class="dot"></span>Equipo</div>
       <h1>Cerru de Janeiro Company</h1>
       <p class="lead" style="margin-top: 20px;">
@@ -1859,7 +1934,7 @@ p { color: var(--text-mid); }
 
     <div class="team-grid">
 
-      <div class="team-card">
+      <div class="team-card reveal">
         <div class="team-photo">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Pedrouski_el_Pixelouski.png" alt="Pedro Miguel Godínez Rodríguez" loading="lazy">
         </div>
@@ -1872,7 +1947,7 @@ p { color: var(--text-mid); }
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card reveal delay-1">
         <div class="team-photo">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Leito_dicaprinchi.png" alt="Leonardo Martínez González" loading="lazy">
         </div>
@@ -1885,7 +1960,7 @@ p { color: var(--text-mid); }
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card reveal delay-2">
         <div class="team-photo">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Issacini_Gonzales.png" alt="Issac Rodrigo Ordaz de León" loading="lazy">
         </div>
@@ -1898,7 +1973,7 @@ p { color: var(--text-mid); }
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card reveal">
         <div class="team-photo">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/Tobyas_Willson.png" alt="Ángel Bernardo Tovar Martínez" loading="lazy">
         </div>
@@ -1911,7 +1986,7 @@ p { color: var(--text-mid); }
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card reveal delay-1">
         <div class="team-photo">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/El_Adriana_Peque%C3%B1a.jpg" alt="Adrián Jiménez Flores" loading="lazy">
         </div>
@@ -1924,7 +1999,7 @@ p { color: var(--text-mid); }
         </div>
       </div>
 
-      <div class="team-card">
+      <div class="team-card reveal delay-2">
         <div class="team-photo">
           <img src="https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/A_Costilla.jpg" alt="Nicolás Acosta Galaviz" loading="lazy">
         </div>
@@ -1948,7 +2023,7 @@ p { color: var(--text-mid); }
 <main id="page-contacto" class="page">
   <div class="container" style="padding-top: 100px; padding-bottom: 100px;">
 
-    <div class="section-head" style="max-width: 820px;">
+    <div class="section-head reveal" style="max-width: 820px;">
       <div class="eyebrow"><span class="dot"></span>Contacto</div>
       <h1>Información de la empresa</h1>
       <p class="lead" style="margin-top: 20px;">
@@ -1956,7 +2031,7 @@ p { color: var(--text-mid); }
       </p>
     </div>
 
-    <div class="discord-card" style="margin-bottom: 40px;">
+    <div class="discord-card reveal" style="margin-bottom: 40px;">
       <div class="discord-card-info">
         <div class="discord-icon"><i class="fa-brands fa-discord"></i></div>
         <div>
@@ -1967,43 +2042,43 @@ p { color: var(--text-mid); }
       <a href="https://discord.gg/JYf9JdC5T" target="_blank" rel="noopener" class="btn-discord"><i class="fa-brands fa-discord"></i> Unirse al servidor</a>
     </div>
 
-    <div class="content" style="margin-top: 64px;">
+    <div class="content reveal">
       <h2>Datos generales</h2>
       <div class="spec-grid">
         <div class="spec"><div class="spec-label">Razón social</div><div class="spec-value">Cerru de Janeiro Company</div></div>
         <div class="spec"><div class="spec-label">Producto</div><div class="spec-value">Janeiro Music</div></div>
-        <div class="spec"><div class="spec-label">Sitio oficial</div><div class="spec-value">janeiro.music</div></div>
         <div class="spec"><div class="spec-label">Repositorio</div><div class="spec-value">github.com/fujiwarapixel/Janeiro-Music</div></div>
+        <div class="spec"><div class="spec-label">Discord</div><div class="spec-value">discord.gg/JYf9JdC5T</div></div>
         <div class="spec"><div class="spec-label">Contacto técnico</div><div class="spec-value">dev@janeiro.music</div></div>
         <div class="spec"><div class="spec-label">Contacto comercial</div><div class="spec-value">contacto@janeiro.music</div></div>
       </div>
 
       <h2>Redes del equipo</h2>
       <p>Cada integrante mantiene una cuenta pública de Instagram donde comparte avances del proyecto.</p>
-      <div class="team-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 24px;">
-        <div class="team-card" style="padding: 20px;">
-          <h3 style="font-size: 0.95rem; margin-bottom: 4px;">Pedro M. Godínez</h3>
-          <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" rel="noopener" class="instagram" style="color: var(--text-mid); font-size: 12px;"><i class="fa-brands fa-instagram"></i> @fujiwara_pixel</a>
+      <div class="social-grid">
+        <div class="social-card">
+          <h4>Pedro M. Godínez</h4>
+          <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @fujiwara_pixel</a>
         </div>
-        <div class="team-card" style="padding: 20px;">
-          <h3 style="font-size: 0.95rem; margin-bottom: 4px;">Leonardo Martínez</h3>
-          <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" rel="noopener" class="instagram" style="color: var(--text-mid); font-size: 12px;"><i class="fa-brands fa-instagram"></i> @leonardo_mtz_gzz</a>
+        <div class="social-card">
+          <h4>Leonardo Martínez</h4>
+          <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @leonardo_mtz_gzz</a>
         </div>
-        <div class="team-card" style="padding: 20px;">
-          <h3 style="font-size: 0.95rem; margin-bottom: 4px;">Issac R. Ordaz</h3>
-          <a href="https://www.instagram.com/treck23_98/" target="_blank" rel="noopener" class="instagram" style="color: var(--text-mid); font-size: 12px;"><i class="fa-brands fa-instagram"></i> @treck23_98</a>
+        <div class="social-card">
+          <h4>Issac R. Ordaz</h4>
+          <a href="https://www.instagram.com/treck23_98/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @treck23_98</a>
         </div>
-        <div class="team-card" style="padding: 20px;">
-          <h3 style="font-size: 0.95rem; margin-bottom: 4px;">Ángel B. Tovar</h3>
-          <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" rel="noopener" class="instagram" style="color: var(--text-mid); font-size: 12px;"><i class="fa-brands fa-instagram"></i> @angel_tovar1989</a>
+        <div class="social-card">
+          <h4>Ángel B. Tovar</h4>
+          <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @angel_tovar1989</a>
         </div>
-        <div class="team-card" style="padding: 20px;">
-          <h3 style="font-size: 0.95rem; margin-bottom: 4px;">Adrián Jiménez</h3>
-          <a href="https://www.instagram.com/ajf1_5/" target="_blank" rel="noopener" class="instagram" style="color: var(--text-mid); font-size: 12px;"><i class="fa-brands fa-instagram"></i> @ajf1_5</a>
+        <div class="social-card">
+          <h4>Adrián Jiménez</h4>
+          <a href="https://www.instagram.com/ajf1_5/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @ajf1_5</a>
         </div>
-        <div class="team-card" style="padding: 20px;">
-          <h3 style="font-size: 0.95rem; margin-bottom: 4px;">Nicolás Acosta</h3>
-          <a href="https://www.instagram.com/acostanicolasg/" target="_blank" rel="noopener" class="instagram" style="color: var(--text-mid); font-size: 12px;"><i class="fa-brands fa-instagram"></i> @acostanicolasg</a>
+        <div class="social-card">
+          <h4>Nicolás Acosta</h4>
+          <a href="https://www.instagram.com/acostanicolasg/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> @acostanicolasg</a>
         </div>
       </div>
 
@@ -2013,7 +2088,7 @@ p { color: var(--text-mid); }
       </div>
     </div>
 
-    <div class="cta" style="margin-top: 80px;">
+    <div class="cta reveal" style="margin-top: 80px;">
       <h2>Descargar Janeiro Music</h2>
       <p>La aplicación y el servidor están disponibles en la página oficial de descargas.</p>
       <a href="#descargas" class="btn btn-primary btn-lg">Ir a descargas <i class="fa-solid fa-arrow-right"></i></a>
@@ -2052,9 +2127,9 @@ p { color: var(--text-mid); }
       <div class="footer-col">
         <h5>Recursos</h5>
         <ul>
-          <li><a href="#descargas">Verificación SHA-256</a></li>
           <li><a href="https://github.com/fujiwarapixel/Janeiro-Music" target="_blank" rel="noopener">Repositorio</a></li>
           <li><a href="https://discord.gg/JYf9JdC5T" target="_blank" rel="noopener">Discord</a></li>
+          <li><a href="#descargas">Descargas</a></li>
         </ul>
       </div>
     </div>
@@ -2095,6 +2170,8 @@ p { color: var(--text-mid); }
     }
     window.scrollTo({ top: 0, behavior: 'auto' });
     document.title = 'Janeiro Music — ' + name.charAt(0).toUpperCase() + name.slice(1);
+    // Reactivar animaciones en la página visible
+    setTimeout(() => observeReveals(), 50);
   }
 
   function fromHash() {
@@ -2138,7 +2215,26 @@ p { color: var(--text-mid); }
     });
   }
 
+  /* ============================================================
+     OBSERVADOR DE ANIMACIONES
+     ============================================================ */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  function observeReveals() {
+    document.querySelectorAll('.page.active .reveal:not(.visible)').forEach(el => {
+      revealObserver.observe(el);
+    });
+  }
+
   showPage(fromHash(), false);
+  observeReveals();
 
   /* ============================================================
      CARRUSEL APP
