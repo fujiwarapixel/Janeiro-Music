@@ -348,6 +348,125 @@ p { color: var(--text-mid); }
   color: var(--text);
 }
 
+/* ---------- CAROUSEL SECTION ---------- */
+.carousel-section {
+  margin-top: 56px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.carousel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.carousel-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  gap: 24px;
+}
+.carousel-slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+/* Phone Mockup */
+.phone-mockup {
+  width: 260px;
+  height: 520px;
+  background: #0a0a0c;
+  border-radius: 36px;
+  border: 8px solid #1c1c22;
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.03);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone-mockup::before {
+  content: '';
+  position: absolute;
+  top: 10px; left: 50%; transform: translateX(-50%);
+  width: 100px; height: 22px;
+  background: #1c1c22;
+  border-radius: 12px;
+  z-index: 2;
+}
+.phone-mockup img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 28px;
+}
+/* Laptop Mockup */
+.laptop-mockup {
+  width: 100%;
+  max-width: 640px;
+  position: relative;
+  background: #0a0a0c;
+  border-radius: 16px 16px 0 0;
+  border: 12px solid #1c1c22;
+  border-bottom: none;
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+.laptop-mockup::after {
+  content: '';
+  position: absolute;
+  bottom: -16px; left: -5%;
+  width: 110%; height: 16px;
+  background: linear-gradient(to bottom, #1c1c22, #0a0a0c);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+.laptop-mockup img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 4px;
+}
+/* Controls */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.carousel-btn {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  color: var(--text);
+  display: grid; place-items: center;
+  font-size: 16px;
+  transition: all .15s;
+}
+.carousel-btn:hover { background: var(--border-hi); }
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+.carousel-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border-hi);
+  border: none;
+  padding: 0;
+  transition: background .15s, transform .15s;
+}
+.carousel-dot.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
 /* ---------- DOWNLOAD CARDS ---------- */
 .download-section { margin-bottom: 72px; }
 .download-head {
@@ -624,6 +743,9 @@ footer {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
   .download-head { flex-direction: column; gap: 12px; }
+  .carousel-viewport { max-width: 100%; }
+  .phone-mockup { width: 200px; height: 400px; }
+  .laptop-mockup { max-width: 100%; }
 }
 </style>
 </head>
@@ -890,6 +1012,46 @@ footer {
         <div class="spec-item">
           <div class="spec-label">Paso 4</div>
           <div class="spec-value">Streaming bajo demanda + caché en background</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CARRUSELES DE DISPOSITIVOS                                   -->
+    <!-- ============================================================ -->
+    <div class="carousel-section">
+      <div class="eyebrow">Galería de capturas</div>
+      <h2 style="margin-bottom: 12px;">Interfaz en acción</h2>
+      <p style="margin-bottom: 32px; max-width: 640px;">
+        Capturas reales de la aplicación móvil y del servidor en sus tres plataformas
+        compatibles. El carrusel avanza automáticamente y permite navegación manual.
+      </p>
+
+      <!-- App Carousel -->
+      <div class="carousel-container" style="margin-bottom: 48px;">
+        <div class="carousel-viewport" data-carousel="app">
+          <div class="carousel-track" id="appTrack">
+            <!-- Slides will be injected by JS -->
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" data-prev="app"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="carousel-dots" id="appDots"></div>
+          <button class="carousel-btn" data-next="app"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Server Carousel (3 OS) -->
+      <div class="carousel-container">
+        <div class="carousel-viewport" data-carousel="server">
+          <div class="carousel-track" id="serverTrack">
+            <!-- Slides will be injected by JS -->
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" data-prev="server"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="carousel-dots" id="serverDots"></div>
+          <button class="carousel-btn" data-next="server"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
       </div>
     </div>
@@ -1456,7 +1618,6 @@ footer {
   window.addEventListener('hashchange', () => showPage(fromHash(), false));
   window.addEventListener('popstate', () => showPage(fromHash(), false));
 
-  // Intercept internal nav clicks so we control scroll behavior
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -1466,7 +1627,6 @@ footer {
     showPage(h, true);
   });
 
-  // Mobile menu toggle
   const menuBtn = document.getElementById('menuBtn');
   const navLinksBox = document.getElementById('navLinks');
   if (menuBtn) {
@@ -1490,8 +1650,131 @@ footer {
     });
   }
 
-  // Initial page
   showPage(fromHash(), false);
+
+  /* ============================================================
+     CAROUSEL LOGIC
+     ============================================================ */
+  const GH_BASE = 'https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/';
+
+  const appImages = [
+    'app_1.webp','app_2.webp','app_3.webp','app_4.webp','app_5.webp',
+    'app_6.webp','app_7.webp','app_8.webp','app_9.webp','app_10.webp',
+    'app_11.webp','app_12.webp','app_13.webp','app_14.webp'
+  ];
+
+  const serverGroups = {
+    arch:    ['sever_arch-linux_1.webp','sever_arch-linux_2.webp','sever_arch-linux_3.webp','sever_arch-linux_4.webp','sever_arch-linux_5.webp','sever_arch-linux_6.webp'],
+    mac:     ['sever_mac_1.webp','sever_mac_2.webp','sever_mac_3.webp','sever_mac_4.webp','sever_mac_5.webp','sever_mac_6.webp'],
+    windows: ['sever_windows_1.webp','sever_windows_2.webp','sever_windows_3.webp','sever_windows_4.webp','sever_windows_5.webp','sever_windows_6.webp']
+  };
+
+  /* Build app slides */
+  const appTrack = document.getElementById('appTrack');
+  const appDots  = document.getElementById('appDots');
+  appImages.forEach((img, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'carousel-slide';
+    slide.innerHTML = `
+      <div class="phone-mockup">
+        <img src="${GH_BASE}${img}" alt="Captura de la aplicación ${i+1}" loading="lazy">
+      </div>`;
+    appTrack.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir a captura ' + (i+1));
+    dot.addEventListener('click', () => goTo('app', i));
+    appDots.appendChild(dot);
+  });
+
+  /* Build server slides: one per OS (Arch, macOS, Windows), each with 6 images */
+  const serverTrack = document.getElementById('serverTrack');
+  const serverDots  = document.getElementById('serverDots');
+  const osLabels = { arch: 'Arch Linux', mac: 'macOS (AMD)', windows: 'Windows x64' };
+
+  Object.keys(serverGroups).forEach((os, osIndex) => {
+    const slide = document.createElement('div');
+    slide.className = 'carousel-slide';
+    slide.innerHTML = `
+      <div class="laptop-mockup">
+        <img src="${GH_BASE}${serverGroups[os][0]}" alt="Servidor en ${osLabels[os]}" loading="lazy">
+      </div>
+      <div style="text-align:center; margin-top:16px; font-size:13px; color:var(--text-mid); font-family:var(--mono);">
+        ${osLabels[os]}
+      </div>`;
+    serverTrack.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (osIndex === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ver servidor en ' + osLabels[os]);
+    dot.addEventListener('click', () => goTo('server', osIndex));
+    serverDots.appendChild(dot);
+  });
+
+  /* Carousel state */
+  const state = { app: 0, server: 0 };
+  const timers = { app: null, server: null };
+
+  function updateCarousel(kind) {
+    const track = kind === 'app' ? appTrack : serverTrack;
+    const dots  = kind === 'app' ? appDots  : serverDots;
+    const idx   = state[kind];
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+  }
+
+  function goTo(kind, index) {
+    const total = kind === 'app' ? appImages.length : Object.keys(serverGroups).length;
+    state[kind] = (index + total) % total;
+    updateCarousel(kind);
+    resetTimer(kind);
+  }
+
+  function next(kind) { goTo(kind, state[kind] + 1); }
+  function prev(kind) { goTo(kind, state[kind] - 1); }
+
+  function startTimer(kind) {
+    stopTimer(kind);
+    timers[kind] = setInterval(() => {
+      const total = kind === 'app' ? appImages.length : Object.keys(serverGroups).length;
+      state[kind] = (state[kind] + 1) % total;
+      updateCarousel(kind);
+    }, 4500);
+  }
+
+  function stopTimer(kind) {
+    if (timers[kind]) { clearInterval(timers[kind]); timers[kind] = null; }
+  }
+
+  function resetTimer(kind) {
+    stopTimer(kind);
+    startTimer(kind);
+  }
+
+  /* Wire controls */
+  document.querySelectorAll('[data-prev]').forEach(btn => {
+    btn.addEventListener('click', () => prev(btn.dataset.prev));
+  });
+  document.querySelectorAll('[data-next]').forEach(btn => {
+    btn.addEventListener('click', () => next(btn.dataset.next));
+  });
+
+  /* Pause on hover */
+  document.querySelectorAll('.carousel-viewport').forEach(vp => {
+    const kind = vp.dataset.carousel;
+    vp.addEventListener('mouseenter', () => stopTimer(kind));
+    vp.addEventListener('mouseleave', () => startTimer(kind));
+  });
+
+  /* Init timers */
+  startTimer('app');
+  startTimer('server');
+
+  /* Expose for debugging */
+  window.__carousel = { goTo, next, prev, state };
 })();
 </script>
 </body>
