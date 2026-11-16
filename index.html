@@ -863,9 +863,9 @@ p { color: var(--text-mid); }
   display: flex; align-items: center; justify-content: space-between;
   gap: 12px; font-size: 0.78rem; color: var(--text-low);
   font-family: var(--mono); border-top: 1px solid var(--border);
-  padding-top: 16px; margin-top: 8px;
+  padding-top: 16px; margin-top: 8px; flex-wrap: wrap;
 }
-.team-meta .matricula { opacity: 0.75; }
+.team-meta .matricula { opacity: 0.75; word-break: break-word; }
 .team-meta .instagram {
   display: inline-flex; align-items: center; gap: 6px;
   color: var(--text-mid); transition: color .15s; font-size: 11px;
@@ -1065,15 +1065,6 @@ p { color: var(--text-mid); }
 }
 .invest-text h2 { margin-bottom: 16px; color: var(--text); }
 .invest-text p { font-size: 1rem; line-height: 1.75; margin-bottom: 16px; }
-.invest-text .invest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-.invest-tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 12px; background: rgba(168,85,247,0.10);
-  border: 1px solid rgba(168,85,247,0.25);
-  border-radius: 6px; font-size: 11.5px; font-weight: 600;
-  color: var(--text); font-family: var(--mono);
-}
-.invest-tag i { font-size: 11px; color: var(--purple); }
 .invest-cta {
   background: rgba(0,0,0,0.3); border: 1px solid var(--border-hi);
   border-radius: var(--radius-lg); padding: 32px; text-align: center;
@@ -2086,15 +2077,15 @@ p { color: var(--text-mid); }
       <div class="costos-section reveal">
         <div class="costos-header">
           <h2>Costos reales de operación</h2>
-          <p>Janeiro Music no tiene costos fijos de infraestructura. Estos son los únicos costos asociados al proyecto.</p>
+          <p>Janeiro Music se desarrolla de forma independiente. Estos son los costos asociados a la infraestructura y desarrollo del proyecto.</p>
         </div>
         <div class="costos-grid">
           <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-server"></i></div><div class="costo-value">$0</div><div class="costo-label">Servidores centrales</div></div>
           <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-cloud"></i></div><div class="costo-value">$0</div><div class="costo-label">Almacenamiento en la nube</div></div>
-          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-globe"></i></div><div class="costo-value">~$12</div><div class="costo-label">Dominio anual</div></div>
+          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-globe"></i></div><div class="costo-value">~$12</div><div class="costo-label">Dominio web anual</div></div>
           <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-code"></i></div><div class="costo-value">$0</div><div class="costo-label">Licencias de software</div></div>
           <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-megaphone"></i></div><div class="costo-value">$0</div><div class="costo-label">Publicidad pagada</div></div>
-          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-heart"></i></div><div class="costo-value">Donaciones</div><div class="costo-label">Apoyo voluntario</div></div>
+          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-network-wired"></i></div><div class="costo-value">$0</div><div class="costo-label">Infraestructura local</div></div>
         </div>
       </div>
 
@@ -2112,17 +2103,12 @@ p { color: var(--text-mid); }
               No hay presión ni obligación. El software seguirá siendo gratuito para todos,
               independientemente de las donaciones.
             </p>
-            <div class="invest-tags">
-              <span class="invest-tag"><i class="fa-solid fa-heart"></i> Donación</span>
-              <span class="invest-tag"><i class="fa-solid fa-code-branch"></i> Código abierto</span>
-              <span class="invest-tag"><i class="fa-solid fa-share-nodes"></i> Compartir</span>
-            </div>
           </div>
           <div class="invest-cta">
             <div class="invest-cta-icon"><i class="fa-brands fa-discord"></i></div>
             <h4>Únete a la comunidad</h4>
             <p>El canal principal de soporte y discusión es el servidor de Discord. Ahí puedes preguntar, sugerir y compartir tu experiencia.</p>
-            <a href="https://discord.gg/" target="_blank" rel="noopener" class="btn">
+            <a href="https://discord.gg/YsCgGkzrx" target="_blank" rel="noopener" class="btn">
               <i class="fa-brands fa-discord"></i> Unirse al Discord
             </a>
           </div>
@@ -2156,7 +2142,7 @@ p { color: var(--text-mid); }
         <div class="team-role">Desarrollador principal</div>
         <p class="team-desc">Encargado del desarrollo del servidor y la aplicación. Apasionado por el software libre y la música.</p>
         <div class="team-meta">
-          <span class="matricula">Matrícula: 001</span>
+          <span class="matricula">Matrícula: AL07164060</span>
           <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @fujiwara_pixel</a>
         </div>
       </div>
@@ -2169,7 +2155,7 @@ p { color: var(--text-mid); }
         <div class="team-role">Diseñador UI/UX</div>
         <p class="team-desc">Responsable del diseño de la interfaz y la experiencia de usuario. Le gusta que todo se vea bien y funcione mejor.</p>
         <div class="team-meta">
-          <span class="matricula">Matrícula: 002</span>
+          <span class="matricula">Matrícula: AL07184261</span>
           <a href="https://www.instagram.com/leonardo_mtz_gzz/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @leonardo_mtz_gzz</a>
         </div>
       </div>
@@ -2182,7 +2168,7 @@ p { color: var(--text-mid); }
         <div class="team-role">Control de calidad</div>
         <p class="team-desc">Encargado de probar el software y encontrar errores antes de cada lanzamiento. Su lema: "si funciona, no lo toques".</p>
         <div class="team-meta">
-          <span class="matricula">Matrícula: 003</span>
+          <span class="matricula">Matrícula: AL07134283</span>
           <a href="https://www.instagram.com/treck23_98/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @treck23_98</a>
         </div>
       </div>
@@ -2195,7 +2181,7 @@ p { color: var(--text-mid); }
         <div class="team-role">Documentación</div>
         <p class="team-desc">Responsable de escribir la documentación y los manuales de usuario. Cree que un buen software debe ser fácil de entender.</p>
         <div class="team-meta">
-          <span class="matricula">Matrícula: 004</span>
+          <span class="matricula">Matrícula: AL07162353</span>
           <a href="https://www.instagram.com/angel_tovar1989/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @angel_tovar1989</a>
         </div>
       </div>
@@ -2208,7 +2194,7 @@ p { color: var(--text-mid); }
         <div class="team-role">Presentación</div>
         <p class="team-desc">Encargada de las presentaciones del proyecto y la comunicación con el público. Siempre lista para defender el proyecto.</p>
         <div class="team-meta">
-          <span class="matricula">Matrícula: 005</span>
+          <span class="matricula">Matrícula: AL07134668</span>
           <a href="https://www.instagram.com/ajf1_5/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @ajf1_5</a>
         </div>
       </div>
@@ -2221,7 +2207,7 @@ p { color: var(--text-mid); }
         <div class="team-role">Soporte técnico</div>
         <p class="team-desc">Encargado de atender las dudas de los usuarios y resolver problemas técnicos. El primero en responder en el Discord.</p>
         <div class="team-meta">
-          <span class="matricula">Matrícula: 006</span>
+          <span class="matricula">Matrícula: AL07183711</span>
           <a href="https://www.instagram.com/acostanicolasg/" target="_blank" rel="noopener" class="instagram"><i class="fa-brands fa-instagram"></i> @acostanicolasg</a>
         </div>
       </div>
@@ -2250,7 +2236,7 @@ p { color: var(--text-mid); }
           <p>El canal principal de soporte y discusión. Únete para preguntar, sugerir y compartir.</p>
         </div>
       </div>
-      <a href="https://discord.gg/" target="_blank" rel="noopener" class="btn-discord">
+      <a href="https://discord.gg/YsCgGkzrx" target="_blank" rel="noopener" class="btn-discord">
         <i class="fa-brands fa-discord"></i> Unirse al Discord
       </a>
     </div>
@@ -2318,7 +2304,7 @@ p { color: var(--text-mid); }
         <a href="#descargas" class="btn btn-primary btn-lg">
           Descargar software <i class="fa-solid fa-download"></i>
         </a>
-        <a href="https://discord.gg/" target="_blank" rel="noopener" class="btn btn-discord-purple">
+        <a href="https://discord.gg/YsCgGkzrx" target="_blank" rel="noopener" class="btn btn-discord-purple">
           Unirse al Discord <i class="fa-brands fa-discord"></i>
         </a>
       </div>
@@ -2356,7 +2342,7 @@ p { color: var(--text-mid); }
       <div class="footer-col">
         <h5>Recursos</h5>
         <ul>
-          <li><a href="https://discord.gg/" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a></li>
+          <li><a href="https://discord.gg/YsCgGkzrx" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a></li>
           <li><a href="#contacto"><i class="fa-solid fa-circle-question"></i> Soporte</a></li>
         </ul>
       </div>
@@ -2367,7 +2353,7 @@ p { color: var(--text-mid); }
         <span>© 2026 Cerru de Janeiro Company.</span>
       </div>
       <div class="footer-social">
-        <a href="https://discord.gg/" target="_blank" rel="noopener" class="dc" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="https://discord.gg/YsCgGkzrx" target="_blank" rel="noopener" class="dc" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
         <a href="https://www.instagram.com/fujiwara_pixel/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
       </div>
     </div>
