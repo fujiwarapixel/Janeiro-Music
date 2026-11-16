@@ -1307,6 +1307,41 @@ p { color: var(--text-mid); }
   .banner-demo { padding: 32px 20px; }
   .invest-card { padding: 36px 24px; }
 }
+
+/* Ajustes para el bloque de Arch Linux: se adapta al ancho de la pestaña */
+@media (max-width: 1024px) {
+  .dl-grid[style*="grid-template-columns: 1fr;"] > .dl-card {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .dl-grid[style*="grid-template-columns: 1fr;"] .dl-meta .code-block {
+    font-size: 10.5px;
+    padding: 10px 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .dl-grid[style*="grid-template-columns: 1fr;"] .dl-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+}
+@media (max-width: 640px) {
+  .dl-grid[style*="grid-template-columns: 1fr;"] > .dl-card {
+    padding: 16px;
+  }
+  .dl-grid[style*="grid-template-columns: 1fr;"] .dl-meta .code-block {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .dl-grid[style*="grid-template-columns: 1fr;"] .dl-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}
 </style>
 </head>
 <body>
@@ -1721,8 +1756,8 @@ p { color: var(--text-mid); }
     </section>
 
     <section class="producto-section reveal">
-      <div class="producto-header">
-        <div class="producto-header-left">
+      <div class="producto-header" style="grid-template-columns: 1fr; align-items: start;">
+        <div class="producto-header-left" style="max-width: 100%;">
           <div class="eyebrow green"><span class="dot"></span>Aplicación móvil</div>
           <h2>Qué hace la aplicación y cómo se conecta</h2>
           <p>
@@ -1855,7 +1890,7 @@ p { color: var(--text-mid); }
         </div>
       </div>
 
-      <!-- Arch Linux abajo, ancho completo -->
+      <!-- Arch Linux abajo, ancho completo, adaptable -->
       <div class="dl-grid" style="grid-template-columns: 1fr;">
         <div class="dl-card">
           <div class="dl-os arch"><i class="fa-brands fa-linux"></i> Arch Linux</div>
@@ -2329,8 +2364,7 @@ p { color: var(--text-mid); }
 
     <div class="footer-bottom">
       <div class="footer-bottom-left">
-        <span>© 2026 Cerru de Janeiro Company. Todos los derechos reservados.</span>
-        <span>Hecho con <i class="fa-solid fa-heart" style="color: var(--red);"></i> en México.</span>
+        <span>© 2026 Cerru de Janeiro Company.</span>
       </div>
       <div class="footer-social">
         <a href="https://discord.gg/" target="_blank" rel="noopener" class="dc" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
