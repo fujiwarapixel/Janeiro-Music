@@ -1442,32 +1442,32 @@ p { color: var(--text-mid); }
         <div class="feature-card card-red reveal">
           <div class="feature-icon red"><i class="fa-solid fa-server"></i></div>
           <h3>Servidor local</h3>
-          <p>Se instala en tu equipo, ordena tu música y entrega los archivos a la aplicación por la red de tu casa.</p>
+          <p>Se instala directamente en tu computadora y se encarga de organizar, indexar y entregar tu música. Al funcionar por la red de tu casa, no necesitas internet ni servidores externos para escuchar tus canciones.</p>
         </div>
         <div class="feature-card card-green reveal delay-1">
           <div class="feature-icon green"><i class="fa-solid fa-mobile-screen"></i></div>
           <h3>Aplicación móvil</h3>
-          <p>Disponible para Android en formato APK. Se conecta al servidor por dirección IP o escaneando un código QR.</p>
+          <p>Disponible para Android en formato APK. Se conecta al servidor automáticamente por dirección IP o escaneando un código QR. Una vez vinculada, puedes navegar y reproducir toda tu biblioteca desde el teléfono.</p>
         </div>
         <div class="feature-card card-blue reveal delay-2">
           <div class="feature-icon blue"><i class="fa-solid fa-shield-halved"></i></div>
           <h3>Privacidad primero</h3>
-          <p>Sin cuentas, sin anuncios de terceros y sin rastreo. Tu música se queda en tu equipo y nadie más tiene acceso.</p>
+          <p>Sin cuentas, sin anuncios de terceros y sin rastreo de datos. Tu música y tus hábitos de escucha se quedan únicamente en tu equipo. Nadie más tiene acceso a tu biblioteca ni a tu información.</p>
         </div>
         <div class="feature-card card-purple reveal">
           <div class="feature-icon purple"><i class="fa-solid fa-plane"></i></div>
           <h3>Funciona sin internet</h3>
-          <p>Descarga tus canciones al teléfono y escúchalas donde quieras. No depende de la señal móvil.</p>
+          <p>Descarga tus canciones favoritas directamente al teléfono y escúchalas donde quieras: en el transporte, en el campo o en modo avión. No depende de la señal móvil ni del WiFi para reproducir lo que ya descargaste.</p>
         </div>
         <div class="feature-card card-gold reveal delay-1">
           <div class="feature-icon gold"><i class="fa-solid fa-infinity"></i></div>
           <h3>Sin pagos mensuales</h3>
-          <p>El software es gratuito. No hay cobros cada mes ni bloqueos por no pagar.</p>
+          <p>El software es completamente gratuito. No existen cobros mensuales, licencias de pago ni bloqueos por falta de suscripción. Descargas la app, instalas el servidor y empiezas a usar todas las funciones sin pagar nada.</p>
         </div>
         <div class="feature-card card-cyan reveal delay-2">
           <div class="feature-icon cyan"><i class="fa-solid fa-sliders"></i></div>
           <h3>Control total</h3>
-          <p>Tú decides qué guardar, cómo organizarlo y cuándo apagar el servidor. Sin configuraciones complicadas.</p>
+          <p>Tú decides qué archivos guardar, cómo organizarlos y cuándo apagar el servidor. Sin configuraciones complicadas ni dependencias externas. Tu biblioteca, tus reglas, tu ritmo.</p>
         </div>
       </div>
     </div>
@@ -1880,8 +1880,12 @@ p { color: var(--text-mid); }
       <div class="dl-grid" style="grid-template-columns: 1fr;">
         <div class="dl-card">
           <div class="dl-os arch"><i class="fa-brands fa-linux"></i> Arch Linux</div>
-          <div class="dl-arch">x86_64 · ZIP</div>
+          <div class="dl-arch">x86_64 · Script o ZIP</div>
           <div class="dl-meta">
+            <strong>Opción 1 — Script (recomendado):</strong>
+            Copia y pega este comando en tu terminal para instalar automáticamente:
+            <div class="code-block">bash &lt;(curl -fsSL https://github.com/fujiwarapixel/Janeiro-Music/releases/latest/download/install.sh)</div>
+            <strong style="display:block;margin-top:12px;">Opción 2 — ZIP compilado:</strong>
             Descarga el archivo, descomprímelo y ejecuta el binario.
           </div>
           <a href="https://github.com/fujiwarapixel/Janeiro-Music/releases/download/v1.0.0/Music-Server-Linux-Arch.zip" target="_blank" rel="noopener" class="dl-btn primary orange">
@@ -2053,15 +2057,16 @@ p { color: var(--text-mid); }
         <div class="banner-demo-text">
           <h3>Banner del servidor: así funciona</h3>
           <p>
-            El banner es un espacio publicitario que aparece en la aplicación móvil cuando
-            se conecta a un servidor. El dueño del servidor puede configurarlo desde el panel
-            de administración con una imagen, un texto y un enlace. Es completamente opcional
-            y no afecta la reproducción de música.
+            El banner es un espacio promocional que aparece en la aplicación móvil cuando
+            se conecta a un servidor. El dueño del servidor puede configurarlo desde el
+            panel de administración con una imagen, un título y un enlace. Es completamente
+            opcional y no afecta en lo absoluto la reproducción de música.
           </p>
           <p>
-            Este sistema permite que cualquier persona que monte su propio servidor pueda
+            Este sistema le permite a cualquier persona que monte su propio servidor
             promocionar su negocio, su banda, su proyecto o su causa, sin depender de la
-            empresa. Janeiro Music no cobra comisiones ni exige compartir ingresos.
+            empresa ni pagar comisiones. Janeiro Music no cobra por mostrar el banner ni
+            exige compartir ingresos con terceros.
           </p>
         </div>
       </div>
@@ -2072,10 +2077,10 @@ p { color: var(--text-mid); }
           <p>Janeiro Music se desarrolla de forma independiente. Estos son los costos asociados a la infraestructura y desarrollo del proyecto.</p>
         </div>
         <div class="costos-grid">
-          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-server"></i></div><div class="costo-value">$0</div><div class="costo-label">Servidores centrales<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">No se requieren (arquitectura local)</small></div></div>
-          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-cloud"></i></div><div class="costo-value">$0</div><div class="costo-label">Almacenamiento en nube<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">Usa el disco duro del usuario</small></div></div>
-          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-code"></i></div><div class="costo-value">$0</div><div class="costo-label">Licencias de software<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">Herramientas de desarrollo</small></div></div>
-          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-network-wired"></i></div><div class="costo-value">$0</div><div class="costo-label">Infraestructura local<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">El servidor corre en tu equipo</small></div></div>
+          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-server"></i></div><div class="costo-value">$0</div><div class="costo-label">Servidores centrales<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">No se requieren. Toda la arquitectura es local, sin servidores propios.</small></div></div>
+          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-cloud"></i></div><div class="costo-value">$0</div><div class="costo-label">Almacenamiento en nube<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">La música se guarda en el disco duro del propio usuario, no en la nube.</small></div></div>
+          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-code"></i></div><div class="costo-value">$0</div><div class="costo-label">Licencias de software<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">Todas las herramientas de desarrollo son gratuitas o de código abierto.</small></div></div>
+          <div class="costo-card"><div class="costo-icon"><i class="fa-solid fa-network-wired"></i></div><div class="costo-value">$0</div><div class="costo-label">Infraestructura local<br><small style="display:block; font-size:0.72rem; opacity:0.8; margin-top:4px;">El servidor corre en el equipo del usuario, sin costos de hosting.</small></div></div>
         </div>
       </div>
 
@@ -2089,10 +2094,6 @@ p { color: var(--text-mid); }
               contribuir a que siga creciendo, puedes unirte a nuestro Discord. Es el canal
               principal de soporte, contacto y también donde puedes realizar donaciones
               voluntarias para apoyar el proyecto.
-            </p>
-            <p>
-              No hay presión ni obligación. El software seguirá siendo gratuito para todos,
-              independientemente de las donaciones.
             </p>
           </div>
           <div class="invest-cta">
@@ -2304,8 +2305,9 @@ p { color: var(--text-mid); }
     <div class="footer-grid">
       <div class="footer-brand">
         <p>
-          Desarrollado con pasión por Cerru de Janeiro Company. Un proyecto independiente
-          que prioriza tu privacidad y el acceso libre a tu música.
+          Desarrollado con pasión por Cerru de Janeiro Company, un equipo independiente
+          comprometido con la privacidad digital y el acceso libre a la música. Creemos
+          en un modelo donde tú eres el dueño de tus archivos, no las grandes plataformas.
         </p>
       </div>
       <div class="footer-col">
