@@ -516,7 +516,10 @@ p { color: var(--text-mid); }
   object-fit: cover; object-position: center center;
   border-radius: 44px; opacity: 0; z-index: 1;
   transition: opacity .6s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 .frame-img.active { opacity: 1; z-index: 2; }
 .server-frame {
@@ -2428,8 +2431,10 @@ const appImages = [
   'https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/app_13.jpg',
   'https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/app_14.jpg'
 ];
+
 let appIndex = 0;
 let appShowingA = true;
+let appBusy = false;
 
 const appMainA = document.getElementById('appMainA');
 const appMainB = document.getElementById('appMainB');
@@ -2437,28 +2442,58 @@ const appCurrent = document.getElementById('appCurrent');
 const appTotal = document.getElementById('appTotal');
 appTotal.textContent = appImages.length;
 
-function updateAppImage() {
-  const nextImg = appImages[appIndex];
-  if (appShowingA) {
-    appMainB.src = nextImg;
-    appMainB.classList.add('active');
-    appMainA.classList.remove('active');
-  } else {
-    appMainA.src = nextImg;
-    appMainA.classList.add('active');
-    appMainB.classList.remove('active');
-  }
-  appShowingA = !appShowingA;
+const preloadedApp = appImages.map(src => {
+  const img = new Image();
+  img.src = src;
+  return img;
+});
+
+function swapAppImage(newSrc, onDone) {
+  if (appBusy) return;
+  appBusy = true;
+
+  const incoming = appShowingA ? appMainB : appMainA;
+  const outgoing = appShowingA ? appMainA : appMainB;
+
+  const preload = new Image();
+  preload.onload = () => {
+    incoming.src = newSrc;
+    void incoming.offsetWidth;
+    incoming.classList.add('active');
+    outgoing.classList.remove('active');
+
+    const onTransitionEnd = () => {
+      incoming.removeEventListener('transitionend', onTransitionEnd);
+      appBusy = false;
+      appShowingA = !appShowingA;
+      if (onDone) onDone();
+    };
+    incoming.addEventListener('transitionend', onTransitionEnd, { once: true });
+
+    setTimeout(() => {
+      if (appBusy) {
+        appBusy = false;
+        appShowingA = !appShowingA;
+      }
+    }, 700);
+  };
+  preload.onerror = () => {
+    appBusy = false;
+  };
+  preload.src = newSrc;
+}
+
+function goToAppImage(index) {
+  appIndex = (index + appImages.length) % appImages.length;
   appCurrent.textContent = appIndex + 1;
+  swapAppImage(appImages[appIndex]);
 }
 
 document.getElementById('appPrev').addEventListener('click', () => {
-  appIndex = (appIndex - 1 + appImages.length) % appImages.length;
-  updateAppImage();
+  goToAppImage(appIndex - 1);
 });
 document.getElementById('appNext').addEventListener('click', () => {
-  appIndex = (appIndex + 1) % appImages.length;
-  updateAppImage();
+  goToAppImage(appIndex + 1);
 });
 
 // ========== GALERÍA SERVIDOR ==========
@@ -2488,59 +2523,95 @@ const serverImages = {
     'https://raw.githubusercontent.com/fujiwarapixel/Janeiro-Music/main/Files/sever_windows_6.png'
   ]
 };
+
 let currentOS = 'arch';
 let serverIndex = 0;
 let serverShowingA = true;
+let serverBusy = false;
 
 const serverMainA = document.getElementById('serverMainA');
 const serverMainB = document.getElementById('serverMainB');
 const serverCurrent = document.getElementById('serverCurrent');
 const serverTotal = document.getElementById('serverTotal');
 
+const preloadedServer = {};
+Object.keys(serverImages).forEach(os => {
+  preloadedServer[os] = serverImages[os].map(src => {
+    const img = new Image();
+    img.src = src;
+    return img;
+  });
+});
+
 function updateServerTotal() {
   serverTotal.textContent = serverImages[currentOS].length;
 }
 
-function updateServerImage() {
-  const imgs = serverImages[currentOS];
-  const nextImg = imgs[serverIndex];
-  if (serverShowingA) {
-    serverMainB.src = nextImg;
-    serverMainB.classList.add('active');
-    serverMainA.classList.remove('active');
-  } else {
-    serverMainA.src = nextImg;
-    serverMainA.classList.add('active');
-    serverMainB.classList.remove('active');
-  }
-  serverShowingA = !serverShowingA;
+function swapServerImage(newSrc, onDone) {
+  if (serverBusy) return;
+  serverBusy = true;
+
+  const incoming = serverShowingA ? serverMainB : serverMainA;
+  const outgoing = serverShowingA ? serverMainA : serverMainB;
+
+  const preload = new Image();
+  preload.onload = () => {
+    incoming.src = newSrc;
+    void incoming.offsetWidth;
+    incoming.classList.add('active');
+    outgoing.classList.remove('active');
+
+    const onTransitionEnd = () => {
+      incoming.removeEventListener('transitionend', onTransitionEnd);
+      serverBusy = false;
+      serverShowingA = !serverShowingA;
+      if (onDone) onDone();
+    };
+    incoming.addEventListener('transitionend', onTransitionEnd, { once: true });
+
+    setTimeout(() => {
+      if (serverBusy) {
+        serverBusy = false;
+        serverShowingA = !serverShowingA;
+      }
+    }, 700);
+  };
+  preload.onerror = () => {
+    serverBusy = false;
+  };
+  preload.src = newSrc;
+}
+
+function goToServerImage(index) {
+  serverIndex = (index + serverImages[currentOS].length) % serverImages[currentOS].length;
   serverCurrent.textContent = serverIndex + 1;
+  swapServerImage(serverImages[currentOS][serverIndex]);
 }
 
 document.querySelectorAll('.server-tab').forEach(tab => {
   tab.addEventListener('click', () => {
+    if (tab.classList.contains('active')) return;
     document.querySelectorAll('.server-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     currentOS = tab.dataset.os;
     serverIndex = 0;
     serverShowingA = true;
+    serverBusy = false;
     updateServerTotal();
-    serverMainA.src = serverImages[currentOS][0];
+    serverCurrent.textContent = 1;
+
     serverMainA.classList.add('active');
     serverMainB.classList.remove('active');
-    serverCurrent.textContent = 1;
+    serverMainA.src = serverImages[currentOS][0];
+    serverMainB.src = serverImages[currentOS][1] || serverImages[currentOS][0];
   });
 });
 
 document.getElementById('serverPrev').addEventListener('click', () => {
-  const imgs = serverImages[currentOS];
-  serverIndex = (serverIndex - 1 + imgs.length) % imgs.length;
-  updateServerImage();
+  goToServerImage(serverIndex - 1);
 });
 document.getElementById('serverNext').addEventListener('click', () => {
-  const imgs = serverImages[currentOS];
-  serverIndex = (serverIndex + 1) % imgs.length;
-  updateServerImage();
+  goToServerImage(serverIndex + 1);
 });
 
 // ========== INICIALIZACIÓN ==========
@@ -2550,7 +2621,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateServerTotal();
   initReveal();
 
-  // Precargar primera imagen de app y servidor
   appMainA.src = appImages[0];
   serverMainA.src = serverImages[currentOS][0];
 });
